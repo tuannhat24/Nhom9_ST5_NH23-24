@@ -15,7 +15,6 @@
                                 <img src="./assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
                             </a>
                         </div>
-
                     </div>
                 </li>
                 <li class="header__navbar-item">
@@ -113,6 +112,8 @@
                 </li>
             </ul>
         </nav>
+
+        <i id="menu__bar-out" class="fa-solid fa-bars menu__bar-icon"></i>
 
         <!-- Header with search -->
         <div class="header-with-search">

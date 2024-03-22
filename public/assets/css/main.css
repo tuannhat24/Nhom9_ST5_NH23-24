@@ -1,5 +1,9 @@
 .header {
+    position: fixed;
     height: 120px;
+    right: 0;
+    left: 0;
+    z-index: 1;
     background-image: linear-gradient(0, #001f3f, #000);
 }
 
@@ -454,6 +458,88 @@
     color: var(--primary-color);
 }
 
+/* Menubar */
+.menu__bar-icon {
+    position: fixed;
+    z-index: 1;
+    top: 62px;
+    left: 40px;
+    font-size: 2.4rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.sidebar {
+    z-index: 3;
+    position: fixed;
+    /* display: none; */
+}
+
+.hide {
+    display: none;
+}
+
+.sidebar__menu {
+    z-index: 3;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-top: 120px;
+}
+
+.sidebar__menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+    color: var(--white-color);
+    font-size: 1.8rem;
+}
+
+.sidebar__menu-item i {
+    padding: 30px 0;
+}
+
+li.sidebar__menu-item {
+    margin: 20px;
+}
+
+.sidebar__menu-img {
+    position: fixed;
+    width: 150px;
+    top: 58px;
+    left: 98px;
+}
+
+.sub__menu {
+    position: absolute;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin-left: 60px;
+    margin-top: 80px;
+    font-size: 1.8rem;
+}
+
+.sub__menu li {
+    margin-top: 14px;
+}
+
+.sidebar__menu-item.open .sub__menu {
+    display: block;
+}
+
+.sidebar__menu-item .sidebar__icon-up {
+    display: none;
+}
+
+.sidebar__menu-item .sidebar__icon-up,
+.sidebar__menu-item .sidebar__icon-down {
+    margin-right: 10px;
+}
+
 /* Header with search */
 .header-with-search {
     height: var(--header-with-search-height);
@@ -844,7 +930,7 @@
 }
 
 .app__content {
-    padding-top: 36px;
+    padding-top: calc(36px + 120px);
 }
 
 .category {
@@ -862,20 +948,20 @@
     text-transform: uppercase;
 }
 
-.category-list {
+.manager-list {
     padding: 0 0 8px 0;
     list-style: none;
 }
 
-.category-item {
+.manager-item {
     position: relative;
 }
 
-.category-item:first-child::before {
+.manager-item:first-child::before {
     display: none;
 }
 
-.category-item::before {
+.manager-item::before {
     content: "";
     border-top: 1px solid #e1e1e1;
     position: absolute;
@@ -884,11 +970,11 @@
     left: 20px;
 }
 
-.category-item--active .category-item__link {
+.manager-item--active .manager-item__link {
     color: var(--primary-color);
 }
 
-.category-item__link {
+.manager-item__link {
     position: relative;
     font-size: 1.4rem;
     color: var(--text-color);
@@ -897,7 +983,7 @@
     display: block;
 }
 
-.category-item__link:hover {
+.manager-item__link:hover {
     color: var(--primary-color);
 }
 
