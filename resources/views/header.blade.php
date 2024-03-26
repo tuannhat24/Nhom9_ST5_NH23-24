@@ -6,13 +6,13 @@
                     Vào cửa hàng trên ứng dụng GenZ Store
                     <!-- Header qr code -->
                     <div class="header__qr">
-                        <img src="./assets/img/qr_code.png" alt="QR code" class="header__qr-img">
+                        <img src="../assets/img/qr_code.png" alt="QR code" class="header__qr-img">
                         <div class="header__qr-apps">
                             <a href="#" class="header__qr-link">
-                                <img src="./assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
+                                <img src="../assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
                             </a>
                             <a href="#" class="header__qr-link">
-                                <img src="./assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
+                                <img src="../assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
                             </a>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <!-- <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
-                    <img src="assets/img/User.png" alt="" class="header__navbar-user-img">
+                    <img src="../assets/img/User.png" alt="" class="header__navbar-user-img">
                     <span class="header__navbar-user-name">Vũ Linh nè</span>
 
                     <ul class="header__navbar-user-menu">
@@ -113,7 +113,10 @@
             </ul>
         </nav>
 
-        <i id="menu__bar-out" class="fa-solid fa-bars menu__bar-icon"></i>
+        <i id="menu__bar-out" class="fa-solid fa-bars menu__bar-icon">
+            <a href="/cart">
+            </a>
+        </i>
 
         <!-- Header with search -->
         <div class="header-with-search">
@@ -172,7 +175,7 @@
 
                     <!--No cart: header__cart-list--no-cart -->
                     <div class="header__cart-list">
-                        <img src="./assets/img/no-cart.webp" alt="" class="header__cart-no-cart-img">
+                        <img src="../assets/img/no-cart.webp" alt="" class="header__cart-no-cart-img">
                         <h4 class="header__cart-heading">Sản phẩm trong giỏ hàng</h4>
                         <ul class="header__cart-list-item">
                             <!--Cart item-->
@@ -235,7 +238,7 @@
                             </li>
                         </ul>
 
-                        <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                        <a href="{{ route('admin.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                     </div>
 
                 </div>

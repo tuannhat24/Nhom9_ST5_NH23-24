@@ -12,7 +12,7 @@ Route::post('users/login/store', [LoginController::class, 'store']);
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [MainController::class, 'index'])->name('admin');
-        Route::get('main', [MainController::class, 'index']);
+        Route::get('/cart', [MainController::class, 'cart'])->name('admin.cart');
     });
 });
 

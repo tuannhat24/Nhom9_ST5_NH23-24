@@ -5,6 +5,7 @@
 
 <body>
     <div class="app">
+        <!-- sidebar -->
         <div class="app__container">
             <div class="grid sidebar hide">
                 <!-- Model -->
@@ -539,8 +540,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
-    @endsection
+</body>
+@endsection

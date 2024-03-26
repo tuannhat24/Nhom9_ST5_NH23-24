@@ -13,4 +13,10 @@ class MainController extends Controller
             'title' => 'Trang quản trị admin'
         ]);
     }
+    
+    public function cart(){
+        return view('cart', [
+            'title' => 'Trang giỏ hàng'
+        ]);
+    }
 }
