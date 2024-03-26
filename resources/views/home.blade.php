@@ -10,6 +10,7 @@
                 <!-- Model -->
                 <div class="modal" id="sidebarModal">
                     <div class="modal__overlay"></div>
+                    <!-- Sidebar -->
                     <div class="sidebar__menu">
                         <i id="menu__bar-in" class="fa-solid fa-bars menu__bar-icon"></i>
                         <div class="sidebar__menu-img">
@@ -64,10 +65,10 @@
                         <nav class="manager">
                             <h3 class="manager__heading">Trang Sản phẩm</h3>
                             <ul class="manager-list">
-                                <li class="manager-item">
+                                <li class="manager-item manager-item--active">
                                     <a href="#" class="manager-item__link">ADMIN</a>
                                 </li>
-                                <li class="manager-item manager-item--active">
+                                <li class="manager-item">
                                     <a href="#" class="manager-item__link">USER</a>
                                 </li>
                             </ul>

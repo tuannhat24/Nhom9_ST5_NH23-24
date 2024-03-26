@@ -106,7 +106,7 @@
                             <a href="#">Đơn mua</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="#">Đăng xuất</a>
+                            <a href="/logout">Đăng xuất</a>
                         </li>
                     </ul>
                 </li>

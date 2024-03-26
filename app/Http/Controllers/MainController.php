@@ -9,8 +9,8 @@ class MainController extends Controller
 
     public function index()
     {
-        return view('home', [
-            'title' => 'home',
+        return view('admin/users/login', [
+            'title' => 'login',
         ]);
     }
 }
