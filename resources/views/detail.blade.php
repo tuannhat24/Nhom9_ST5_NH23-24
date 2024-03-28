@@ -1,92 +1,53 @@
 @extends('main')
 @section('content')
 
-
-
 <body>
-    <div class="app">
-        <!-- sidebar -->
-        @include('sidebar')
-        <!-- App container -->
-        <div class="app__container">
-            <div class="grid">
-                <div class="grid__row app__content">
-                    <div class="grid__column-2">
-                        <nav class="manager">
-                            <h3 class="manager__heading">Trang Sản phẩm</h3>
-                            <ul class="manager-list">
-                                <li class="manager-item manager-item--active">
-                                    <a href="#" class="manager-item__link">ADMIN</a>
-                                </li>
-                                <li class="manager-item">
-                                    <a href="#" class="manager-item__link">USER</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+    <!-- sidebar -->
+    @include('sidebar')
+    <!-- App container -->
+    <div class="app__container">
+        <div class="grid">
+            <div class="grid__row app__content">
+                <div class="grid__column-2">
+                    <nav class="manager">
+                        <h3 class="manager__heading">Trang giỏ hàng</h3>
+                        <ul class="manager-list">
+                            <li class="manager-item manager-item--active">
+                                <a href="#" class="manager-item__link">ADMIN</a>
+                            </li>
+                            <li class="manager-item">
+                                <a href="#" class="manager-item__link">USER</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
 
-                    <div class="grid__column-10">
-                        <div class="home-filter">
-                            <span class="home-filter__label">Sắp xếp theo</span>
-                            <button class="home-filter__btn btn">Phổ biến</button>
-                            <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                            <button class="home-filter__btn btn">Bán chạy</button>
-
-                            <!-- Price classification -->
-                            <div class="select-input" style="margin-right: 12px;">
-                                <span class="select-input__label">Giá</span>
-                                <i class="select-input__icon fa-solid fa-angle-down"></i>
-
-                                <!-- List options -->
-                                <ul class="select-input__list">
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Giá: Thấp đến cao</a>
-                                    </li>
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Giá: Cao đến thấp</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- Category-->
-                            <div class="select-input">
-                                <span class="select-input__label">Danh mục</span>
-                                <i class="select-input__icon fa-solid fa-angle-down"></i>
-
-                                <!-- List options -->
-                                <ul class="select-input__list">
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Áo hoodie</a>
-                                    </li>
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Áo Unisex</a>
-                                    </li>
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Quần Jean</a>
-                                    </li>
-                                    <li class="select-input__item">
-                                        <a href="" class="select-input__link">Quần Baggy</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="home-filter__page">
-                                <span class="home-filter__page-num">
-                                    <span class="home-filter__page-current">1</span>/14
-                                </span>
-
-                                <div class="home-filter__page-control">
-                                    <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
-                                        <i class="home-filter__page-icon fa-solid fa-angle-left"></i>
-                                    </a>
-                                    <a href="" class="home-filter__page-btn">
-                                        <i class="home-filter__page-icon fa-solid fa-angle-right"></i>
-                                    </a>
+                <div class="grid__column-10">
+                    <!-- content -->
+                    <section class="product-section">
+                        <div class="product-container">
+                            <div class="product-row">
+                                <div class="product-image">
+                                    <img src="https://down-vn.img.susercontent.com/file/4eb6c3e9aad807a8d356f434d50c8116" alt="Product Image">
+                                </div>
+                                <div class="product-details">
+                                    <div class="product-sku">SKU: BST-498</div>
+                                    <h1 class="product-title">Shop item template</h1>
+                                    <div class="product-prices">
+                                        <span class="product-price-old">$45.00</span>
+                                        <span class="product-price-new">$40.00</span>
+                                    </div>
+                                    <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                                    <div class="product-actions">
+                                        <input class="product-quantity" type="num" value="1">
+                                        <button class="btn product-add-to-cart">Add to cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="home-product">
+                    </section>
+                    <section class="related-products">
+                        <div class="container">
+                            <h2 class="related-products__title">Related products</h2>
                             <div class="grid__row">
                                 <!-- Product item -->
                                 <div class="grid__column-2-4">
@@ -449,45 +410,18 @@
                                         </div>
                                     </a>
                                 </div>
-
-
                             </div>
                         </div>
+                    </section>
 
-                        <ul class="pagination home-product__pagination">
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="pagination-item pagination-item--active">
-                                <a href="" class="pagination-item__link">1</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">2</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">3</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">4</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">...</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">14</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
+
+
 </body>
+
 @endsection

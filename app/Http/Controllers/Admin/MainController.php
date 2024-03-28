@@ -19,4 +19,10 @@ class MainController extends Controller
             'title' => 'Trang giỏ hàng'
         ]);
     }
+
+    public function detail(){
+        return view('detail', [
+            'title' => 'Trang chi tiết sản phẩm'
+        ]);
+    }
 }

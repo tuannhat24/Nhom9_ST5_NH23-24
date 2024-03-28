@@ -13,6 +13,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [MainController::class, 'index'])->name('admin');
         Route::get('/cart', [MainController::class, 'cart'])->name('admin.cart');
+        Route::get('/detail', [MainController::class, 'detail'])->name('admin.detail');
     });
 });
 
