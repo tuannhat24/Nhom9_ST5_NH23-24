@@ -510,7 +510,7 @@ li.sidebar__menu-item {
     position: fixed;
     width: 150px;
     top: 58px;
-    left: 98px;
+    left: 108px;
 }
 
 .sub__menu {
@@ -1171,12 +1171,6 @@ i.home-product-item__like-icon-fill {
     font-weight: 300;
 }
 
-.home-product-item__brand {
-}
-
-.home-product-item__origin-name {
-}
-
 .home-product-item__favourite {
     position: absolute;
     top: 10px;
@@ -1351,4 +1345,9 @@ i.home-product-item__like-icon-fill {
     font-size: 1.2rem;
     color: var(--text-color);
     margin: 3px 0 0;
+}
+
+/* orther */
+.opacity-0 {
+    opacity: 0;
 }

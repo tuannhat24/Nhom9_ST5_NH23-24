@@ -120,7 +120,7 @@
 
         <!-- Header with search -->
         <div class="header-with-search">
-            <div class="header__logo-img">
+            <div class="header__logo-img" id="header__logo-out">
                 <a href="#" class="header__logo-link">
                     <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 3em;"></i>
                     <svg class="header__logo-img" viewBox="0 0 200 50">

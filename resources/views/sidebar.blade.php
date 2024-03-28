@@ -1,7 +1,52 @@
-<div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-        <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">BBBootstrap</span> </a>
-            <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
-        </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-    </nav>
+<div class="app__container">
+    <div class="grid sidebar hide">
+        <!-- Model -->
+        <div class="modal" id="sidebarModal">
+            <div class="modal__overlay"></div>
+            <!-- Sidebar -->
+            <div class="sidebar__menu">
+                <i id="menu__bar-in" class="fa-solid fa-bars menu__bar-icon"></i>
+                <div class="sidebar__menu-img">
+                    <a href="#" class="header__logo-link">
+                        <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 3em;"></i>
+                        <svg class="header__logo-img" viewBox="0 0 200 50">
+                            <text x="12" y="40" font-family="Arial, sans-serif" font-size="36" fill="#74C0FC">GenZ Store</text>
+                        </svg>
+                    </a>
+                </div>
+                <ul>
+                    <li class="sidebar__menu-item">
+                        <i class="fa-regular fa-rectangle-list" style="color: #74C0FC;"></i>
+                        Quản Lý Danh Mục
+                        <i class=" sidebar__icon-up fa-solid fa-angle-up"></i>
+                        <i class="sidebar__icon-down fa-solid fa-angle-down"></i>
+                        <ul class="sub__menu">
+                            <li>QL Danh Mục</li>
+                            <li>Danh Sách</li>
+                        </ul>
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <i class="fa-solid fa-users" style="color: #74C0FC;"></i>
+                        Quản Lý Người Dùng
+                        <i class=" sidebar__icon-up fa-solid fa-angle-up"></i>
+                        <i class="sidebar__icon-down fa-solid fa-angle-down"></i>
+                        <ul class="sub__menu">
+                            <li>QL Người Dùng</li>
+                            <li>Danh Sách</li>
+                        </ul>
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <i class="fa-solid fa-box fa-lg" style="color: #74C0FC;"></i>
+                        Quản lý sản phẩm
+                        <i class=" sidebar__icon-up fa-solid fa-angle-up"></i>
+                        <i class="sidebar__icon-down fa-solid fa-angle-down"></i>
+                        <ul class="sub__menu">
+                            <li>QL Sản Phẩm</li>
+                            <li>Danh Sách</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
