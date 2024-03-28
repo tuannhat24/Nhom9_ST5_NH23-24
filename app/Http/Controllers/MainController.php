@@ -9,7 +9,7 @@ class MainController extends Controller
 
     public function index()
     {
-        return view('admin/users/login', [
+        return view('admin.o', [
             'title' => 'login',
         ]);
     }
