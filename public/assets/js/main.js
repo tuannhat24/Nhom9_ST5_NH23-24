@@ -23,37 +23,40 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Menu bar
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var menuBarIn = document.getElementById("menu__bar-in");
     var menuBarOut = document.getElementById("menu__bar-out");
     var sidebar = document.querySelector(".sidebar");
     var sidebarModal = document.getElementById("sidebarModal");
+    var logoOut = document.getElementById("header__logo-out");
 
-    if (menuBarIn && menuBarOut && sidebar && sidebarModal) {
-        menuBarOut.addEventListener("click", function(event) {
+    if (menuBarIn && menuBarOut && sidebar && sidebarModal && logoOut) {
+        menuBarOut.addEventListener("click", function (event) {
             event.stopPropagation();
-            if (sidebar.classList.contains('hide')) {
-                sidebar.classList.remove('hide');
-                sidebarModal.classList.remove('hide');
+            if (sidebar.classList.contains("hide")) {
+                sidebar.classList.remove("hide");
+                sidebarModal.classList.remove("hide");
+                logoOut.classList.add("opacity-0");
             }
         });
 
-        menuBarIn.addEventListener("click", function(event) {
+        menuBarIn.addEventListener("click", function (event) {
             event.stopPropagation();
-            if (!sidebar.classList.contains('hide')) {
-                sidebar.classList.add('hide');
-                sidebarModal.classList.add('hide');
+            if (!sidebar.classList.contains("hide")) {
+                sidebar.classList.add("hide");
+                sidebarModal.classList.add("hide");
+                logoOut.classList.remove("opacity-0");
             }
         });
 
-        sidebar.addEventListener("click", function(event) {
+        sidebar.addEventListener("click", function (event) {
             event.stopPropagation();
         });
 
-        document.addEventListener("click", function() {
-            if (!sidebar.classList.contains('hide')) {
-                sidebar.classList.add('hide');
-                sidebarModal.classList.add('hide');
+        document.addEventListener("click", function () {
+            if (!sidebar.classList.contains("hide")) {
+                sidebar.classList.add("hide");
+                sidebarModal.classList.add("hide");
             }
         });
     }
