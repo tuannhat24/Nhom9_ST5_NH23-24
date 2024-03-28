@@ -19,3 +19,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
+
+
+Route::get('cart', function(){
+    return view('cart');
+});
