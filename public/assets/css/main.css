@@ -509,13 +509,8 @@ li.sidebar__menu-item {
 .sidebar__menu-img {
     position: fixed;
     width: 150px;
-<<<<<<< HEAD
     top: 57.5px;
     left: 98px;
-=======
-    top: 58px;
-    left: 108px;
->>>>>>> 9ddb10dbb7d60b700298f2e2b01b1b9f9fef72d4
 }
 
 .sub__menu {
@@ -1352,7 +1347,6 @@ i.home-product-item__like-icon-fill {
     margin: 3px 0 0;
 }
 
-<<<<<<< HEAD
 /* Cart */
 
 .manager {
@@ -1473,8 +1467,6 @@ i.home-product-item__like-icon-fill {
     background-color: #218838;
 }
 
-=======
->>>>>>> 9ddb10dbb7d60b700298f2e2b01b1b9f9fef72d4
 /* orther */
 .opacity-0 {
     opacity: 0;
