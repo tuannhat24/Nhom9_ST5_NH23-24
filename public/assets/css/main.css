@@ -578,6 +578,10 @@ li.sidebar__menu-item {
     text-align: center;
 }
 
+.header__cart-click {
+    text-decoration: none;
+}
+
 .header__cart-wrap {
     position: relative;
     display: inline-block;
