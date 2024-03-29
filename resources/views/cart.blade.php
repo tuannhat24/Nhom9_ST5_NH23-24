@@ -12,10 +12,10 @@
                     <nav class="manager">
                         <h3 class="manager__heading">Trang giỏ hàng</h3>
                         <ul class="manager-list">
-                            <li class="manager-item manager-item--active">
+                            <li class="manager-item">
                                 <a href="#" class="manager-item__link">ADMIN</a>
                             </li>
-                            <li class="manager-item">
+                            <li class="manager-item manager-item--active">
                                 <a href="#" class="manager-item__link">USER</a>
                             </li>
                         </ul>

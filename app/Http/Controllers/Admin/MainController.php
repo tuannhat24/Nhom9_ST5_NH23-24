@@ -10,7 +10,7 @@ class MainController extends Controller
     public function index()
     {
         return view('home', [
-            'title' => 'Trang quản trị admin'
+            'title' => 'Trang sản phẩm'
         ]);
     }
     
@@ -22,6 +22,12 @@ class MainController extends Controller
 
     public function detail(){
         return view('detail', [
+            'title' => 'Trang chi tiết sản phẩm'
+        ]);
+    }
+
+    public function product(){
+        return view('users/admin/products/product', [
             'title' => 'Trang chi tiết sản phẩm'
         ]);
     }

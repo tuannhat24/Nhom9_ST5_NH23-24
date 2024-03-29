@@ -106,7 +106,7 @@
                             <a href="#">Đơn mua</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="/logout">Đăng xuất</a>
+                            <a href="/signout">Đăng xuất</a>
                         </li>
                     </ul>
                 </li>
@@ -121,7 +121,7 @@
         <!-- Header with search -->
         <div class="header-with-search">
             <div class="header__logo-img" id="header__logo-out">
-                <a href="{{route('admin')}}" class="header__logo-link">
+                <a href="{{route('user')}}" class="header__logo-link">
                     <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 3em;"></i>
                     <svg class="header__logo-img" viewBox="0 0 200 50">
                         <text x="12" y="40" font-family="Arial, sans-serif" font-size="36" fill="#74C0FC">GenZ Store</text>
@@ -169,7 +169,7 @@
 
             <!-- Cart layout -->
             <div class="header__cart">
-                <a class="header__cart-click" href="{{ route('admin.cart') }}">
+                <a class="header__cart-click" href="{{ route('user.cart') }}">
                     <div class="header__cart-wrap">
                         <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
                         <span class="header__cart-notice">3</span>
@@ -239,7 +239,7 @@
                                 </li>
                             </ul>
 
-                            <a href="{{ route('admin.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                         </div>
 
                     </div>

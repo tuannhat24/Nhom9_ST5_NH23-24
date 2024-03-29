@@ -10,12 +10,12 @@
             <div class="grid__row app__content">
                 <div class="grid__column-2">
                     <nav class="manager">
-                        <h3 class="manager__heading">Trang giỏ hàng</h3>
+                        <h3 class="manager__heading">Chi tiết sản phẩm</h3>
                         <ul class="manager-list">
-                            <li class="manager-item manager-item--active">
+                            <li class="manager-item">
                                 <a href="#" class="manager-item__link">ADMIN</a>
                             </li>
-                            <li class="manager-item">
+                            <li class="manager-item manager-item--active">
                                 <a href="#" class="manager-item__link">USER</a>
                             </li>
                         </ul>
@@ -51,7 +51,7 @@
                             <div class="grid__row">
                                 <!-- Product item -->
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -87,7 +87,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -123,7 +123,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -159,7 +159,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -195,7 +195,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -231,7 +231,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -267,7 +267,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -303,7 +303,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -339,7 +339,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
@@ -375,7 +375,7 @@
                                     </a>
                                 </div>
                                 <div class="grid__column-2-4">
-                                    <a class="home-product-item" href="{{ route('admin.detail') }}">
+                                    <a class="home-product-item" href="{{ route('user.detail') }}">
                                         <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
                                         <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                         <div class="home-product-item__price">
