@@ -472,7 +472,6 @@
 .sidebar {
     z-index: 3;
     position: fixed;
-    /* display: none; */
 }
 
 .hide {
@@ -483,7 +482,7 @@
     z-index: 3;
     width: 300px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #111;
     margin-top: 120px;
 }
 
@@ -498,8 +497,20 @@
     font-size: 1.8rem;
 }
 
+.sidebar__menu-item a {
+    position: absolute;
+    margin-left: calc(50% - 70px);
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+.sidebar__menu-item:hover a,
+.sidebar__menu-item:hover i {
+    color: var(--secondary-color);
+}
+
 .sidebar__menu-item i {
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 li.sidebar__menu-item {
@@ -513,7 +524,7 @@ li.sidebar__menu-item {
     left: 98px;
 }
 
-.sub__menu {
+/* .sub__menu {
     position: absolute;
     display: none;
     list-style: none;
@@ -525,11 +536,11 @@ li.sidebar__menu-item {
 
 .sub__menu li {
     margin-top: 14px;
-}
+} */
 
-.sidebar__menu-item.open .sub__menu {
+/* .sidebar__menu-item.open .sub__menu {
     display: block;
-}
+} */
 
 .sidebar__menu-item .sidebar__icon-up {
     display: none;
@@ -1008,7 +1019,7 @@ li.sidebar__menu-item {
 
 .home-filter__btn {
     margin-right: 12px;
-    min-width: 90px;
+    min-width: 140px;
 }
 
 .home-filter__page {
@@ -1224,7 +1235,7 @@ i.home-product-item__like-icon-fill {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px;
+    bottom: -3px;
     border-width: 0 20px 4px;
     border-style: solid;
     border-color: transparent rgba(255, 216, 64, 0.94) transparent

@@ -49,6 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        sidebarModal.addEventListener("click", function (event) {
+            event.stopPropagation();
+            if (!sidebar.classList.contains("hide")) {
+                sidebar.classList.add("hide");
+                sidebarModal.classList.add("hide");
+                logoOut.classList.remove("opacity-0");
+            }
+        });
+
         sidebar.addEventListener("click", function (event) {
             event.stopPropagation();
         });

@@ -28,7 +28,37 @@ class MainController extends Controller
 
     public function product(){
         return view('users/admin/products/product', [
-            'title' => 'Trang chi tiết sản phẩm'
+            'title' => 'Quản lý sản phẩm'
+        ]);
+    }
+
+    public function category(){
+        return view('users/admin/categories/category', [
+            'title' => 'Quản lý danh mục'
+        ]);
+    }
+
+    public function customer(){
+        return view('users/admin/customers/customer', [
+            'title' => 'Quản lý người dùng'
+        ]);
+    }
+
+    public function listproduct(){
+        return view('users/admin/products/listproduct', [
+            'title' => 'Danh sách sản phẩm'
+        ]);
+    }
+
+    public function listcategory(){
+        return view('users/admin/categories/listcategory', [
+            'title' => 'Danh sách danh mục'
+        ]);
+    }
+
+    public function listcustomer(){
+        return view('users/admin/customers/listcustomer', [
+            'title' => 'Danh sách người dùng'
         ]);
     }
 }

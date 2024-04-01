@@ -149,7 +149,7 @@
                 </div>
                 <div class="header__search-select">
                     <span class="header__search-select-label">Trong shop</span>
-                    <i class="header__search-select-icon fa-solid fa-chevron-down"></i>
+                    <i class="header__search-select-icon fa-solid fa-angle-down"></i>
 
                     <ul class="header__search-option">
                         <li class="header__search-option-item header__search-option-item--active">

@@ -15,6 +15,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/cart', [MainController::class, 'cart'])->name('user.cart');
         Route::get('/detail', [MainController::class, 'detail'])->name('user.detail');
         Route::get('/product', [MainController::class, 'product'])->name('user.product');
+        Route::get('/customer', [MainController::class, 'customer'])->name('user.customer');
+        Route::get('/category', [MainController::class, 'category'])->name('user.category');
+        Route::get('/listproduct', [MainController::class, 'listproduct'])->name('user.listproduct');
+        Route::get('/listcustomer', [MainController::class, 'listcustomer'])->name('user.listcustomer');
+        Route::get('/listcategory', [MainController::class, 'listcategory'])->name('user.listcategory');
+
     });
 });
 

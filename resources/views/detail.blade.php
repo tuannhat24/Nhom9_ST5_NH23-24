@@ -10,15 +10,15 @@
             <div class="grid__row app__content">
                 <div class="grid__column-2">
                     <nav class="manager">
-                        <h3 class="manager__heading">Chi tiết sản phẩm</h3>
-                        <ul class="manager-list">
+                        <h3 class="manager__heading">{{ $title }}</h3>
+                        <!-- <ul class="manager-list">
                             <li class="manager-item">
                                 <a href="#" class="manager-item__link">ADMIN</a>
                             </li>
                             <li class="manager-item manager-item--active">
                                 <a href="#" class="manager-item__link">USER</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </nav>
                 </div>
 
