@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SignInController extends Controller
+class SignUpController extends Controller
 {
     public function index()
     {
-        return view('users.signin', ['title' => 'Đăng nhập hệ thống']);
+        return view('users.signup', ['title' => 'Đăng ký hệ thống']);
     }
 
     public function store(Request $request)
@@ -25,14 +25,7 @@ class SignInController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ], $request->input('remember'))) {
-            $role = Auth::user()->role;
-
-            if($role === 2) {
-                return redirect()->route('admin');
-            }
-            elseif ($role === 1){
-                return redirect()->route('user');
-            }
+            return redirect()->route('user');
         }
 
         Session::flash('error', 'Email or Password is incorrect');

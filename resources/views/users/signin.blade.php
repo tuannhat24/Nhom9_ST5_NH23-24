@@ -14,7 +14,7 @@
                 <div class="auth-form__container">
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Đăng nhập</h3>
-                        <span class="auth-form__switch-btn">Đăng ký</span>
+                        <a href="/signup" class="auth-form__switch-btn">Đăng ký</a>
                     </div>
                     <div class="auth-form__form">
                         <div class="auth-form__group">
