@@ -62,11 +62,15 @@
                     </div>
 
                     <div class="home-product">
+                        
                         <div class="grid__row">
+                            
                             <!-- Product item -->
                             <div class="grid__column-2-4">
                                 <a class="home-product-item" href="{{ route('user.detail') }}">
-                                    <div class="home-product-item__img" style="background-image: url(https://cdn.shopify.com/s/files/1/0354/5169/9333/products/Ao-hoodie-2-Black-2-ZiZoou-Store.jpg?v=1640877890);"></div>
+                                    <div class="home-product-item__img">
+                                        <img src="" alt="">
+                                    </div>
                                     <h4 class="home-product-item__name">Áo khoác Hoodie Nam Nữ form rộng - Basic Oversize Zip-Up Hoodie in Black</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">200.000đ</span>

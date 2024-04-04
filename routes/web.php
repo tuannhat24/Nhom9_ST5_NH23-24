@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\Users\SignOutController;
+<<<<<<< HEAD
 
 // Route đăng nhập
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
@@ -13,6 +14,9 @@ Route::post('/signin', [SignInController::class, 'store'])->name('users.signin.s
 // Route đăng ký
 Route::get('/signup', [SignUpController::class, 'index']);
 Route::post('/signup', [SignUpController::class, 'store']);
+=======
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+>>>>>>> ac2d3a3a4d765abe425ffd9eba594fdc5f7b1b2d
 
 // Route đăng xuất
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
@@ -45,3 +49,10 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('users.signin');
     })->where('any', '.*');
 });
+<<<<<<< HEAD
+=======
+
+
+Route::get('/{page?}', [DataCollector::class,'page']);
+Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
+>>>>>>> ac2d3a3a4d765abe425ffd9eba594fdc5f7b1b2d
