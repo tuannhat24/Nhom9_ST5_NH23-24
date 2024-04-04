@@ -5,25 +5,17 @@ use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\Users\SignOutController;
-<<<<<<< HEAD
 
-// Route đăng nhập
+
+
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
-Route::post('/signin', [SignInController::class, 'store'])->name('users.signin.store');
-
-// Route đăng ký
-Route::get('/signup', [SignUpController::class, 'index']);
-Route::post('/signup', [SignUpController::class, 'store']);
-=======
-use Symfony\Component\HttpKernel\DataCollector\DataCollector;
->>>>>>> ac2d3a3a4d765abe425ffd9eba594fdc5f7b1b2d
-
-// Route đăng xuất
+Route::post('users/signin/store', [SignInController::class, 'store']);
+Route::get('/signup', [SignUpController::class, 'index'])->name('signup');
+Route::post('users/signup/store', [SignUpController::class, 'store']);
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
 
-// Route cho người dùng đã đăng nhập
+
 Route::middleware(['auth'])->group(function () {
-    // Route cho vai trò user
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [MainController::class, 'index'])->name('user.home');
@@ -32,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // Route cho vai trò admin
+
     Route::middleware('role:2')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/product', [MainController::class, 'product'])->name('admin.product');
@@ -44,15 +36,8 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // Route bắt các URL không khớp và chuyển hướng về trang đăng nhập
+    // Kiểm tra xem người dùng nhập link khác sẽ chuyển về trang login
     Route::get('/{any}', function () {
         return redirect()->route('users.signin');
     })->where('any', '.*');
 });
-<<<<<<< HEAD
-=======
-
-
-Route::get('/{page?}', [DataCollector::class,'page']);
-Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
->>>>>>> ac2d3a3a4d765abe425ffd9eba594fdc5f7b1b2d

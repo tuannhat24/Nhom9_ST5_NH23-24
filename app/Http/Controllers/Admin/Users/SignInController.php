@@ -19,9 +19,9 @@ class SignInController extends Controller
             // Nếu URL trước đó không tồn tại hoặc trống, chuyển hướng đến trang tương ứng với vai trò của người dùng
             if ($currentUrl === route('users.signin') || $currentUrl === route('signup')) {
                 if (Auth::user()->role === 2) {
-                    return redirect()->route('admin');
+                    return redirect()->route('admin.product');
                 } elseif (Auth::user()->role === 1) {
-                    return redirect()->route('user');
+                    return redirect()->route('user.home');
                 } else {
                     return redirect()->route('users.signin');
                 }
@@ -52,9 +52,9 @@ class SignInController extends Controller
 
             if ($role === 2) {
                 // Lưu URL trước đó nếu có role 
-                return redirect()->route('admin');
+                return redirect()->route('admin.product');
             } elseif ($role === 1) {
-                return redirect()->route('user');
+                return redirect()->route('user.home');
             } else {
                 return redirect()->route('users.signin');
             }
