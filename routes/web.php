@@ -5,8 +5,7 @@ use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\Users\SignOutController;
-
-
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 Route::get('/', [SignInController::class, 'index'])->name('signin');
 Route::get('/signup', [SignUpController::class, 'index'])->name('signup');
@@ -39,5 +38,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
+Route::get('/{page?}', [DataCollector::class,'page']);
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
