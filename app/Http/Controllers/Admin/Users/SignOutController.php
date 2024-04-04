@@ -10,12 +10,19 @@ class SignOutController extends Controller
 {
     public function index(Request $request)
     {
-        Auth::logout(); 
+        if (Auth::check()) {
+            // Gán giá trị null cho vai trò trong session
+            $request->session()->forget('role');
 
-        $request->session()->invalidate(); 
+            // Đăng xuất người dùng
+            Auth::logout();
 
-        $request->session()->regenerateToken();
 
-        return redirect('/'); 
+            // Làm mới session và token
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+        }
+        return redirect()->route('users.signin');
     }
 }

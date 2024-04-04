@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,19 +16,27 @@ class SignUpController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email:filter',
-            'password' => 'required'
+        // Validate dữ liệu đầu vào
+        $validatedData = $request->validate([
+            'email' => 'required|email:filter|unique:users,email',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password'
         ]);
 
-        if (Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
-        ], $request->input('remember'))) {
-            return redirect()->route('user');
-        }
+        // Tạo người dùng mới
+        $user = new User();
+        $user->role = 1;
+        $user->email = $validatedData['email'];
+        $user->password = bcrypt($validatedData['password']);
+        $user->save();
 
-        Session::flash('error', 'Email or Password is incorrect');
-        return redirect()->back();
+        // Đăng nhập người dùng mới tạo
+        Auth::login($user);
+
+        if ($user->role === 1) {
+            return redirect()->route('user');
+        } else {
+            return redirect()->route('users.signin');
+        }
     }
 }

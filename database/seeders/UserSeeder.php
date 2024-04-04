@@ -17,14 +17,16 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'role' => '1',
                 'name' => 'user1',
                 'email' => 'user1@localhost.com',
-                'password' => 'user123'
+                'password' => '$2y$10$b4Vb8vpRo/3rLwmsBzmK8OeNU2nlSKK7bWguY29EeKynhv7mwekyu'
             ],
             [
+                'role' => '2',
                 'name' => 'admin',
                 'email' => 'admin@localhost.com',
-                'password' => '123456'
+                'password' => '$2y$10$b4Vb8vpRo/3rLwmsBzmK8OeNU2nlSKK7bWguY29EeKynhv7mwekyu'
             ],
         ]);
     }
