@@ -24,6 +24,7 @@ class ProductSeeder extends Seeder
                 'content' => 'quan full size',
                 'price' => '140000',
                 'price_sale' => '50000',
+                'quantity_sold' => '2376',
             ],
             [
                 'name' => 'Ao thun full size',
@@ -33,6 +34,7 @@ class ProductSeeder extends Seeder
                 'content' => 'ao nam nu mac deu duoc',
                 'price' => '90000',
                 'price_sale' => '85000',
+                'quantity_sold' => '278',
             ],
             [
                 'name' => 'Ghe gaming',
@@ -42,6 +44,7 @@ class ProductSeeder extends Seeder
                 'content' => 'ghe danh cho gaming',
                 'price' => '1200000',
                 'price_sale' => '999000',
+                'quantity_sold' => '121',
             ],
             [
                 'name' => 'Aula f75',
@@ -51,6 +54,7 @@ class ProductSeeder extends Seeder
                 'content' => 'ban phim co xin',
                 'price' => '1500000',
                 'price_sale' => '1220000',
+                'quantity_sold' => '1098',
             ],
             [
                 'name' => 'Mai mai la bao xa',
@@ -60,6 +64,7 @@ class ProductSeeder extends Seeder
                 'content' => 'sach the loai ngon tinh',
                 'price' => '220000',
                 'price_sale' => '190000',
+                'quantity_sold' => '2045',
             ],
             [
                 'name' => 'Doraemon',
@@ -69,6 +74,7 @@ class ProductSeeder extends Seeder
                 'content' => 'the loai truyen tranh',
                 'price' => '500000',
                 'price_sale' => '450000',
+                'quantity_sold' => '8648',
             ],
             [
                 'name' => 'Vot cau long Yonex',
@@ -78,6 +84,7 @@ class ProductSeeder extends Seeder
                 'content' => 'vot loai hang hieu',
                 'price' => '2000000',
                 'price_sale' => '1999000',
+                'quantity_sold' => '1985',
             ],
             [
                 'name' => 'Gay danh Golf',
@@ -87,6 +94,7 @@ class ProductSeeder extends Seeder
                 'content' => 'gay Golf cho nha giau',
                 'price' => '5000000',
                 'price_sale' => '4450000',
+                'quantity_sold' => '2779',
             ],
             [
                 'name' => 'Nhan ngoc bich',
@@ -96,6 +104,7 @@ class ProductSeeder extends Seeder
                 'content' => 'nhan dinh kem ngoc',
                 'price' => '250000',
                 'price_sale' => '190000',
+                'quantity_sold' => '10829',
             ],
             [
                 'name' => 'day chuyen thanh gia',
@@ -105,6 +114,7 @@ class ProductSeeder extends Seeder
                 'content' => 'the loai theo dao',
                 'price' => '160000',
                 'price_sale' => '100000',
+                'quantity_sold' => '234',
             ],
         ]);
     }

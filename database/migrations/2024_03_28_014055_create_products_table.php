@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('content');
             $table->integer('price');
             $table->integer('price_sale');
+            $table->integer('quantity_sold');
             $table->timestamps();
         });
     }

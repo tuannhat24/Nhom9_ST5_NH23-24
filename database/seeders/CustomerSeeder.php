@@ -18,9 +18,9 @@ class CustomerSeeder extends Seeder
         DB::table('customers')->insert([
             [
                 'name' => 'vulinh',
-                'phone' => '0111111111',
-                'address' => 'Mien Tay',
-                'email' => 'vuling2004@gmail.com',
+                'phone' => '0364704715',
+                'address' => 'Binh Phuoc',
+                'email' => 'linhlg2004@gmail.com',
             ],
             [
                 'name' => 'Quang Dinh',
