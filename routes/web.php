@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\DetailController;
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('users/signin/store', [SignInController::class, 'store']);
@@ -19,7 +20,8 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
             Route::get('/cart', [MainController::class, 'cart'])->name('user.cart');
-            Route::get('/detail', [MainController::class, 'detail'])->name('user.detail');
+            Route::get('/detail', [DetailController::class, 'index'])->name('user.detail');
+            Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });
     });
 
@@ -36,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Kiểm tra xem người dùng nhập link khác sẽ chuyển về trang login
-    Route::get('/{any}', function () {
-        return redirect()->route('users.signin');
-    })->where('any', '.*');
+    // Route::get('/{any}', function () {
+    //     return redirect()->route('users.signin');
+    // })->where('any', '.*');
 });

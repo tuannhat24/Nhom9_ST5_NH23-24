@@ -15,12 +15,6 @@ class MainController extends Controller
         ]);
     }
 
-    public function detail(){
-        return view('detail', [
-            'title' => 'Trang chi tiết sản phẩm'
-        ]);
-    }
-
     public function product(){
         return view('users/admin/products/product', [
             'title' => 'Quản lý sản phẩm'

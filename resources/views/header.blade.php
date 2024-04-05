@@ -6,13 +6,13 @@
                     Vào cửa hàng trên ứng dụng GenZ Store
                     <!-- Header qr code -->
                     <div class="header__qr">
-                        <img src="../assets/img/qr_code.png" alt="QR code" class="header__qr-img">
+                        <img src="{{ asset('assets/img/qr_code.png') }}" alt="QR code" class="header__qr-img">
                         <div class="header__qr-apps">
                             <a href="#" class="header__qr-link">
-                                <img src="../assets/img/google_play.png" alt="Google Play" class="header__qr-download-img">
+                                <img src="{{ asset('assets/img/google_play.png') }}" alt="Google Play" class="header__qr-download-img">
                             </a>
                             <a href="#" class="header__qr-link">
-                                <img src="../assets/img/app_store.png" alt="App Store" class="header__qr-download-img">
+                                <img src="{{ asset('assets/img/app_store.png') }}" alt="App Store" class="header__qr-download-img">
                             </a>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <!-- <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
-                    <img src="../assets/img/User.png" alt="" class="header__navbar-user-img">
+                    <img src="{{ asset('assets/img/User.png') }}" alt="" class="header__navbar-user-img">
                     <span class="header__navbar-user-name">Vũ Linh nè</span>
 
                     <ul class="header__navbar-user-menu">
@@ -113,10 +113,10 @@
             </ul>
         </nav>
 
-        <i id="menu__bar-out" class="fa-solid fa-bars menu__bar-icon">
+        <!-- <i id="menu__bar-out" class="fa-solid fa-bars menu__bar-icon">
             <a href="#">
             </a>
-        </i>
+        </i> -->
 
         <!-- Header with search -->
         <div class="header-with-search">

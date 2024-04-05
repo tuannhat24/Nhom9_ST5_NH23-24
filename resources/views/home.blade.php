@@ -3,7 +3,6 @@
 
 <div class="app">
     <!-- sidebar -->
-    @include('sidebar')
     <!-- App container -->
     <div class="app__container">
         <div class="grid">
@@ -68,7 +67,7 @@
                             @foreach($data as $row)
                             <!-- Product item -->
                             <div class="grid__column-2-4">
-                                <a class="home-product-item" href="{{ route('user.detail') }}">
+                            <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $row->image);
                                     @endphp
