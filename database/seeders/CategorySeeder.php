@@ -17,38 +17,33 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Thoi Trang',
+                'name' => 'Quần',
                 'parent_id' => '0',
-                'description' => 'Thoi trang cho Nam/Nu',
-                'content' => 'Xu huong thoi trang hien dai',
+                'description' => 'Các loại quần',
                 'slug' => '',
             ],
             [
-                'name' => 'Thiet bi dien tu',
+                'name' => 'Áo',
                 'parent_id' => '0',
-                'description' => 'Do cong nghe hien dai',
-                'content' => 'Gear, Ghe gaming, Ban phim, Man hinh',
+                'description' => 'Các loại áo',
                 'slug' => '',
             ],
             [
-                'name' => 'Gen_z book',
+                'name' => 'Giày & dép',
                 'parent_id' => '0',
-                'description' => 'Nha sach',
-                'content' => 'Light Novel, Trinh tham, kinh di, ngon tinh, ...',
+                'description' => 'tất cả giày & dép',
                 'slug' => '',
             ],
             [
-                'name' => 'The Thao',
+                'name' => 'Áo khoác',
                 'parent_id' => '0',
-                'description' => 'Cac do dung the thao',
-                'content' => 'Ao, Vot, cac phu kien, ...',
+                'description' => 'Các loại áo khoác',
                 'slug' => '',
             ],
             [
-                'name' => 'Phu kien & trang suc',
+                'name' => 'Phụ kiện & trang sức',
                 'parent_id' => '0',
-                'description' => 'phu kien treo balo, trang suc deo tay, co,..',
-                'content' => 'Vong tay, day chuyen, nhan, ...',
+                'description' => 'Các loại nón',
                 'slug' => '',
             ],
         ]);

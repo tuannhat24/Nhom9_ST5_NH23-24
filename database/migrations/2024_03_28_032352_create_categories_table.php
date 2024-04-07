@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name', 255);
             $table->integer('parent_id');
             $table->text('description');
-            $table->longText('content');
             $table->string('slug')->nullable();
             $table->timestamps();
         });

@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Kiểm tra xem người dùng nhập link khác sẽ chuyển về trang login
-    // Route::get('/{any}', function () {
-    //     return redirect()->route('users.signin');
-    // })->where('any', '.*');
+    Route::get('/{any}', function () {
+        return redirect()->route('users.signin');
+    })->where('any', '.*');
 });

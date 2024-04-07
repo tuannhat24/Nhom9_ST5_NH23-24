@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('cate_id');
             $table->string('image');
             $table->text('description');
-            $table->longText('content');
             $table->integer('price');
             $table->integer('price_sale');
             $table->integer('quantity_sold');
