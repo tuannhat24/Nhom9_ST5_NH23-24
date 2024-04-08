@@ -1582,3 +1582,27 @@ h1{
 .opacity-0 {
     opacity: 0;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px;
+}
+
+.pagination a {
+    padding: 10px 15px;
+    margin: 0 6px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}

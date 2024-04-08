@@ -19,7 +19,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
-            Route::get('/home', [HomeController::class, 'index'])->name('user.home');
+            // Route::get('/home', [HomeController::class, 'index'])->name('user.home');
+            Route::get('/user/home', [HomeController::class, 'pagination'])->name('user.home');
             Route::get('/cart', [MainController::class, 'cart'])->name('user.cart');
             Route::get('/detail', [DetailController::class, 'index'])->name('user.detail');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');

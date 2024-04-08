@@ -44,20 +44,6 @@
                             </ul>
                         </div>
 
-                        <div class="home-filter__page">
-                            <span class="home-filter__page-num">
-                                <span class="home-filter__page-current">1</span>/14
-                            </span>
-
-                            <div class="home-filter__page-control">
-                                <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
-                                    <i class="home-filter__page-icon fa-solid fa-angle-left"></i>
-                                </a>
-                                <a href="" class="home-filter__page-btn">
-                                    <i class="home-filter__page-icon fa-solid fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="home-product">
@@ -67,7 +53,7 @@
                             @foreach($data as $row)
                             <!-- Product item -->
                             <div class="grid__column-2-4">
-                            <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
+                                <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $row->image);
                                     @endphp
@@ -106,42 +92,13 @@
                                 </a>
                             </div>
                             @endforeach
-
-
-
                         </div>
                     </div>
-
-                    <ul class="pagination home-product__pagination">
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">
-                                <i class="pagination-item__icon fa-solid fa-angle-left"></i>
-                            </a>
-                        </li>
-                        <li class="pagination-item pagination-item--active">
-                            <a href="" class="pagination-item__link">1</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">2</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">3</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">4</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">...</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">14</a>
-                        </li>
-                        <li class="pagination-item">
-                            <a href="" class="pagination-item__link">
-                                <i class="pagination-item__icon fa-solid fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <!-- Hiển thị số trang theo số thứ tự -->
+                    <div class="pagination">
+                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
+                            @endfor
+                    </div>
                 </div>
             </div>
         </div>
