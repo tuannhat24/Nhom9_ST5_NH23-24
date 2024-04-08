@@ -61,4 +61,11 @@ class MainController extends Controller
             'title' => 'Danh sách người dùng'
         ]);
     }
+
+    public function addcategory(){
+        return view('users/admin/categories/addcategory', ['title' => "Thêm danh mục"]);
+    }
+    public function addproduct(){
+        return view('users/admin/products/addproduct', ['title' => "Thêm sản phẩm"]);
+    }
 }

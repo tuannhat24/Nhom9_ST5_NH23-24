@@ -103,8 +103,6 @@
             </div>
         </div>
     </div>
-
-
 </body>
 
 @endsection

@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/listproduct', [MainController::class, 'listproduct'])->name('user.listproduct');
         Route::get('/listcustomer', [MainController::class, 'listcustomer'])->name('user.listcustomer');
         Route::get('/listcategory', [MainController::class, 'listcategory'])->name('user.listcategory');
+        Route::get('/addcategory', [MainController::class, 'addcategory'])->name('user.addcategory');
+        Route::get('/addproduct', [MainController::class, 'addproduct'])->name('user.addproduct');
 
     });
 });
