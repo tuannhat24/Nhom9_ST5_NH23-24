@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->integer('product_id');
-            $table->integer('pty');
+            $table->integer('qty');
             $table->integer('price');
             $table->timestamps();
             $table->foreign('customer_id')
