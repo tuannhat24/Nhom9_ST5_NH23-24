@@ -168,3 +168,60 @@ h1 {
     max-width: 800px;
     margin: 0 auto;
 }
+
+/* Product table */
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+.product-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Category table */
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.category-table th,
+.category-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.category-table th {
+    background-color: #f2f2f2;
+}
+
+.category-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Button styles */
+.btn-edit,
+.btn-delete {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+    color: #000;
+}
