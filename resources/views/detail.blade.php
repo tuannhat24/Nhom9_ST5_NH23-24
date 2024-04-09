@@ -38,9 +38,14 @@
                                     </div>
                                     <p class="product-description">{{ $product->description }}</p>
                                     <div class="product-actions">
-                                        <input class="product-quantity" type="num" value="1">
-                                        <button class="btn product-add-to-cart">Add to cart</button>
+                                        <form method="POST" action="{{ route('user.cart.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input class="product-quantity" type="number" value="1" name="quantity" min="1">
+                                            <button type="submit" class="btn product-add-to-cart">Add to cart</button>
+                                        </form>
                                     </div>
+
                                 </div>
                             </div>
                     </section>

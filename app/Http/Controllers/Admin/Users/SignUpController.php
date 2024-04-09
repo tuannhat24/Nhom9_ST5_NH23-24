@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SignUpController extends Controller
 {
-    public function index()
+    public function Index()
     {
         return view('users.signup', ['title' => 'Đăng ký hệ thống']);
     }
 
-    public function store(Request $request)
+    public function Store(Request $request)
     {
         // Validate dữ liệu đầu vào
         $validatedData = $request->validate([

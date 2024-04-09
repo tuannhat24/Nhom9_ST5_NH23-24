@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SignInController extends Controller
 {
-    public function index()
+    public function Index()
     {
         // Kiểm tra nếu người dùng đã đăng nhập và có vai trò là 1 hoặc 2
         if (Auth::check() && in_array(Auth::user()->role, [1, 2])) {
@@ -33,7 +33,7 @@ class SignInController extends Controller
         return view('users.signin', ['title' => 'Đăng nhập hệ thống']);
     }
 
-    public function store(Request $request)
+    public function Store(Request $request)
     {
 
         // Xử lí validate

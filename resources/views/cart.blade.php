@@ -1,9 +1,6 @@
 @extends('main')
 @section('content')
-
-<body>
     <!-- sidebar -->
-    @include('sidebar')
     <!-- App container -->
     <div class="app__container">
         <div class="grid">
@@ -11,14 +8,6 @@
                 <div class="grid__column-2">
                     <nav class="manager">
                         <h3 class="manager__heading">{{ $title }}</h3>
-                        <!-- <ul class="manager-list">
-                            <li class="manager-item">
-                                <a href="#" class="manager-item__link">ADMIN</a>
-                            </li>
-                            <li class="manager-item manager-item--active">
-                                <a href="#" class="manager-item__link">USER</a>
-                            </li>
-                        </ul> -->
                     </nav>
                 </div>
 
@@ -40,55 +29,36 @@
                                     <th>Total (in $)</th>
                                     <th>Actions</th>
                                 </tr>
-                                <tr>
-                                    <td><img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="Product Image" style="width: 100px;"></td>
-                                    <td>EXP Portable Hard Drive</td>
-                                    <td>USB02</td>
-                                    <td><button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                        <span>1</span>
-                                        <button class="quantity-btn"><i class="fas fa-plus"></i></button>
+                                @php
+                                $totalQuantity = 0;
+                                $totalPrice = 0;
+                                @endphp
+                                @foreach($carts as $cart)
+                                @php
+                                $totalQuantity += $cart->qty;
+                                $totalPrice += $cart->qty * $cart->product->price;
+                                @endphp
+                                <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
+                                    <td><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></td>
+                                    <td>{{ $cart->product->name }}</td>
+                                    <td>{{ $cart->product->code }}</td>
+                                    <td>
+                                        <button class="quantity-btn" onclick="updateQuantity('{{ $cart->id }}', -1)"><i class="fas fa-minus"></i></button>
+                                        <span class="quantity">{{ $cart->quantity }}</span>
+                                        <button class="quantity-btn" onclick="updateQuantity('{{ $cart->id }}', 1)"><i class="fas fa-plus"></i></button>
                                     </td>
-                                    <td>800.00</td>
-                                    <td>800.00</td>
+                                    <td class="price">{{ number_format($cart->product->price) }}</td>
+                                    <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
                                     <td>
                                         <a href="#" class="edit-item"><i class="fas fa-edit"></i></a>
                                         <a href="#" class="remove-item"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="Product Image" style="width: 100px;"></td>
-                                    <td>FinePix Pro2 3D Camera</td>
-                                    <td>3DcAM01</td>
-                                    <td><button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                        <span>1</span>
-                                        <button class="quantity-btn"><i class="fas fa-plus"></i></button>
-                                    </td>
-                                    <td>1500.00</td>
-                                    <td>1,500.00</td>
-                                    <td>
-                                        <a href="#" class="edit-item"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="remove-item"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="Product Image" style="width: 100px;"></td>
-                                    <td>Luxury Ultra thin Wrist Watch</td>
-                                    <td>wristWear03</td>
-                                    <td><button class="quantity-btn"><i class="fas fa-minus"></i></button>
-                                        <span>2</span>
-                                        <button class="quantity-btn"><i class="fas fa-plus"></i></button>
-                                    </td>
-                                    <td>300.00</td>
-                                    <td>600.00</td>
-                                    <td>
-                                        <a href="#" class="edit-item"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="remove-item"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                                @endforeach
                                 <tr>
                                     <td colspan="2" class="text-right">Total:</td>
-                                    <td>4</td>
-                                    <td colspan="2"><strong>2,900.00</strong></td>
+                                    <td id="total-quantity">{{ $totalQuantity }}</td>
+                                    <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                     <td>
                                         <div>
                                             <a class="button checkout-btn" href="#">Mua Hàng</a>

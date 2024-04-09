@@ -25,8 +25,14 @@ class CustomerSeeder extends Seeder
             [
                 'name' => 'Quang Dinh',
                 'phone' => '022222222',
-                'address' => 'binh thuan',
+                'address' => 'Binh Thuan',
                 'email' => 'Dinhdang@gmail.com',
+            ],
+            [
+                'name' => 'Nhat Tuan',
+                'phone' => '0333333333',
+                'address' => 'Sai Gon',
+                'email' => 'NhatTuan@gmail.com',
             ],
         ]);
     }

@@ -8,16 +8,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $products = Product::orderBy('id')->get();
-        return view('home', [
-            'title' => 'Trang sản phẩm',
-            'data' => $products,
-        ]);
-    }
 
-    public function pagination()
+    public function Index()
     {
         // Số phần tử trên mỗi trang
         $perPage = 10;

@@ -7,45 +7,38 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    
-    
-    public function cart(){
-        return view('cart', [
-            'title' => 'Trang giỏ hàng'
-        ]);
-    }
 
-    public function product(){
+    public function Product(){
         return view('users/admin/products/product', [
             'title' => 'Quản lý sản phẩm'
         ]);
     }
 
-    public function category(){
+    public function Category(){
         return view('users/admin/categories/category', [
             'title' => 'Quản lý danh mục'
         ]);
     }
 
-    public function customer(){
+    public function Customer(){
         return view('users/admin/customers/customer', [
             'title' => 'Quản lý người dùng'
         ]);
     }
 
-    public function listproduct(){
+    public function ListProduct(){
         return view('users/admin/products/listproduct', [
             'title' => 'Danh sách sản phẩm'
         ]);
     }
 
-    public function listcategory(){
+    public function ListCategory(){
         return view('users/admin/categories/listcategory', [
             'title' => 'Danh sách danh mục'
         ]);
     }
 
-    public function listcustomer(){
+    public function ListCustomer(){
         return view('users/admin/customers/listcustomer', [
             'title' => 'Danh sách người dùng'
         ]);

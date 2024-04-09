@@ -16,21 +16,21 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('cate_id');
+            $table->unsignedBigInteger('cate_id');
             $table->string('image');
             $table->text('description');
             $table->integer('price');
             $table->integer('price_sale');
             $table->integer('quantity_sold');
             $table->timestamps();
+
+            $table->foreign('cate_id')
+                  ->references('id')
+                  ->on('categories')
+                  ->onDelete('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('products');
