@@ -33,8 +33,8 @@
                                     <div class="product-sku">SKU: {{ $product->sku }}</div>
                                     <h1 class="product-title">{{ $product->name }}</h1>
                                     <div class="product-prices">
-                                        <span class="product-price-old">${{ $product->price }}</span>
-                                        <span class="product-price-new">${{ $product->price_sale }}</span>
+                                        <span class="product-price-old">${{ number_format($product->price) }}</span>
+                                        <span class="product-price-new">${{ number_format($product->price_sale) }}</span>
                                     </div>
                                     <p class="product-description">{{ $product->description }}</p>
                                     <div class="product-actions">
@@ -63,8 +63,8 @@
                                         <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                         <h4 class="home-product-item__name">{{ $row->name }}</h4>
                                         <div class="home-product-item__price">
-                                            <span class="home-product-item__price-old">{{ $row->price }}</span>
-                                            <span class="home-product-item__price-current">{{ $row->price_sale }}</span>
+                                            <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
+                                            <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
                                         </div>
                                         <div class="home-product-item__action">
                                             <span class="home-product-item__like home-product-item__like--liked">
@@ -81,7 +81,7 @@
                                             <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
                                         </div>
                                         <div class="home-product-item__origin">
-                                            <span class="home-product-item__brand">Zizou</span>
+                                            <span class="home-product-item__brand">GenZ</span>
                                             <span class="home-product-item__origin-name">Việt Nam</span>
                                         </div>
                                         <div class="home-product-item__favourite">

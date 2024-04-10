@@ -78,7 +78,7 @@
                                         <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
                                     </div>
                                     <div class="home-product-item__origin">
-                                        <span class="home-product-item__brand">Zizou</span>
+                                        <span class="home-product-item__brand">GenZ</span>
                                         <span class="home-product-item__origin-name">Việt Nam</span>
                                     </div>
                                     <div class="home-product-item__favourite">

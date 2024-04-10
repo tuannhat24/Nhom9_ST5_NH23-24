@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    public function Index()
+    public function index()
     {
         // Số phần tử trên mỗi trang
         $perPage = 10;

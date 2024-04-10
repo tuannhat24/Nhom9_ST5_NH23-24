@@ -1412,6 +1412,7 @@ i.home-product-item__like-icon-fill {
 }
 
 .button {
+    cursor: pointer;
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--primary-color);
@@ -1450,10 +1451,32 @@ i.home-product-item__like-icon-fill {
 
 .remove-item {
     color: #dc3545;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.remove-item:hover{
+    opacity: 0.8;
 }
 
 .empty-cart-btn {
+    background-color: rgb(195, 43, 43);
     float: right;
+    border: none;
+}
+
+.empty-cart-btn:hover {
+    opacity: 0.8;
+}
+
+.empty-cart{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 300px;
 }
 
 .quantity-btn {

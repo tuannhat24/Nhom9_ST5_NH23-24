@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class DetailController extends Controller
 {
-    public function Index()
+    public function index()
     {
         $product = Product::orderBy('id')->get();
         return view('detail', [
@@ -17,7 +17,7 @@ class DetailController extends Controller
         ]);
     }
 
-    public function Detail($id)
+    public function detail($id)
     {
         $product = Product::find($id);
 

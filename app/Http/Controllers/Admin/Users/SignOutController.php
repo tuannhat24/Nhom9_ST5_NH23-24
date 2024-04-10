@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SignOutController extends Controller
 {
-    public function Index(Request $request)
+    public function index(Request $request)
     {
         if (Auth::check()) {
             // Gán giá trị null cho vai trò trong session
