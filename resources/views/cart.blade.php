@@ -21,7 +21,7 @@
                         @else
                         <form action="{{ route('user.cart.clear') }}" method="POST">
                             @csrf
-                            <button type="submit" class="button empty-cart-btn" href="#"><i style="padding-right: 4px;" class="fas fa-trash-alt"></i>Xóa Tất Cả</button>
+                            <button type="submit" class="button empty-cart-btn"><i style="padding-right: 4px;" class="fas fa-trash-alt"></i>Xóa Tất Cả</button>
                         </form>
                         @endif
                     </div>
