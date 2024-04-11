@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,12 @@ class DetailController extends Controller
             ->where('id', '!=', $product->id) // Loại bỏ sản phẩm đang xem
             ->paginate($perPage); // Sử dụng phân trang
 
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
         return view('detail', [
             'product' => $product,
+            'carts' => $carts,
             'relatedProducts' => $relatedProducts,
             'title' => 'Trang chi tiết sản phẩm',
         ]);

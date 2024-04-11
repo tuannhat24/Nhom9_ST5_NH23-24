@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class HomeController extends Controller
 
         $currentPage = request()->input('page', 1);
 
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
@@ -28,6 +32,7 @@ class HomeController extends Controller
         return view('home', [
             'title' => 'Trang sản phẩm',
             'data' => $products,
+            'carts' => $carts,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
         ]);

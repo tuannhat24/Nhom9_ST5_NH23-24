@@ -18,6 +18,11 @@ class CartController extends Controller
         // Truy vấn các sản phẩm khác ngoài giỏ hàng
         $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
 
+        if ($carts->isNotEmpty()) {
+            // Nếu có sản phẩm trong giỏ hàng, thực hiện truy vấn các sản phẩm khác ngoài giỏ hàng
+            $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
+        }
+
         return view('cart', compact('title', 'carts', 'relatedProducts'));
     }
 
