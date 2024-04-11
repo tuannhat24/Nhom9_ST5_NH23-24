@@ -2,28 +2,28 @@
 @section('content')
 <div class="admin-container">
     <div class="container">
-        <h2 style="color: rgb(107, 40, 169)">Thêm danh mục</h2>
+        <h2 style="color: rgb(107, 40, 169)">{{$title}}</h2>
         <div class="container">
-            <form action="../controller/addSinhVien.php" method="POST" enctype="multipart/form-data">
+            <form action="#" method="POST" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="ma">Mã:</label>
-                <input type="text" class="form-control" name="ma" placeholder="nhap ma sinh vien" required="">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" name="id" placeholder="Enter ID" required="">
               </div>
               <div class="form-group">
-                <label for="ten">Tên:</label>
-                <input type="text" class="form-control" name="ten" placeholder="nhap ten" required="">
+                <label for="ten">Category Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter name" required="">
               </div>
               <div class="form-group">
-                <label for="sdt">Số điện thoại:</label>
-                <input type="text" class="form-control" name="sdt" placeholder="nhap so dien thoai" required="">
+                <label for="category">Parent category</label>
+                <select class="form-control" name="parent_category" required="">
+                    <!-- Option để chọn danh mục -->
+                    <option value="">Select a category</option>
+                    <!-- PHP code để lấy danh mục từ cơ sở dữ liệu và tạo các option tương ứng -->
+                </select>
               </div>
               <div class="form-group">
-                <label for="namsinh">Năm sinh:</label>
-                <input type="text" class="form-control" name="namsinh" placeholder="nhap nam sinh" required="">
-              </div>
-              <div class="form-group">
-                <label for="namsinh">Hình ảnh:</label>
-                <input type="file"  name="img" required="">
+                <label for="sdt">Description:</label>
+                <input type="text" class="form-control" name="description" placeholder="Enter description" required="">
               </div>
               <input type="submit" name="submit" class="btn btn-primary" style="float:left;" value="Add">
             </form>

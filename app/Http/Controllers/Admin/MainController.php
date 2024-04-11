@@ -10,13 +10,13 @@ class MainController extends Controller
 
     public function product(){
         return view('users/admin/products/product', [
-            'title' => 'Quản lý sản phẩm'
+            'title' => 'ADD PRODUCT'
         ]);
     }
 
     public function category(){
         return view('users/admin/categories/category', [
-            'title' => 'Quản lý danh mục'
+            'title' => 'ADD CATEGORY'
         ]);
     }
 

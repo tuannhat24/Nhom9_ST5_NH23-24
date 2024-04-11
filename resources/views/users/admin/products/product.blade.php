@@ -8,19 +8,35 @@
             <form action="#" method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="ma">ID</label>
-                <input type="text" class="form-control" name="ma" placeholder="nhap ma san pham " required="">
+                <input type="text" class="form-control" name="id" placeholder="nhap ma san pham " required="">
               </div>
               <div class="form-group">
                 <label for="ten">Product name:</label>
-                <input type="text" class="form-control" name="ten" placeholder="Enter product name" required="">
+                <input type="text" class="form-control" name="name" placeholder="Enter product name" required="">
+              </div>
+              <div class="form-group">
+                <label for="category">Category:</label>
+                <select class="form-control" name="category" required="">
+                    <!-- Option để chọn danh mục -->
+                    <option value="">Select a category</option>
+                    <!-- PHP code để lấy danh mục từ cơ sở dữ liệu và tạo các option tương ứng -->
+                </select>
+            </div>
+              <div class="form-group">
+                <label for="namsinh">Description:</label>
+                <input type="text" class="form-control" name="description" placeholder="nhap description" required="">
               </div>
               <div class="form-group">
                 <label for="sdt">Product price</label>
-                <input type="text" class="form-control" name="sdt" placeholder="nhap product price" required="">
+                <input type="text" class="form-control" name="price" placeholder="nhap product price" required="">
               </div>
               <div class="form-group">
-                <label for="namsinh">Description:</label>
-                <input type="text" class="form-control" name="namsinh" placeholder="nhap description" required="">
+                <label for="sdt">Product price sale</label>
+                <input type="text" class="form-control" name="price_sale" placeholder="nhap product price" required="">
+              </div>
+              <div class="form-group">
+                <label for="sdt">Quantity sold</label>
+                <input type="number" class="form-control" name="qty" required="">
               </div>
               <div class="form-group">
                 <label for="namsinh">Product image:</label>
