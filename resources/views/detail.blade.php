@@ -45,17 +45,18 @@
                                             <button type="submit" class="btn product-add-to-cart">Add to cart</button>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
-                    </section>
+                        </div>
+                    </section>  
                     <section class="related-products">
                         <div class="container">
                             <h2 class="related-products__title">Related products</h2>
-                            <div class="grid__row">
+                            <div class="related-products-slider">
+                                <!-- Danh sách sản phẩm liên quan -->
                                 @foreach($relatedProducts as $row)
-                                <!-- Product item -->
-                                <div class="grid__column-2-4">
+                                <div class="related-product">
+                                    <!-- Nội dung sản phẩm liên quan -->
                                     <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                         @php
                                         $imageUrl = asset('assets/img/' . $row->image);
@@ -95,20 +96,42 @@
                                     </a>
                                 </div>
                                 @endforeach
-
-
-
                             </div>
                         </div>
                     </section>
-
-                    <br>
-                    <br>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Thêm thư viện jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Thêm thư viện Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- JavaScript Custom -->
+    <script>
+    $(document).ready(function(){
+        $('.related-products-slider').slick({
+            infinite: true,
+            slidesToShow: 5, // Số lượng sản phẩm hiển thị trên mỗi slide
+            slidesToScroll: 2, // Số lượng sản phẩm di chuyển khi chuyển slide
+            prevArrow: '<button class="slick-prev">Previous</button>', // Nút điều hướng slide trước
+            nextArrow: '<button class="slick-next">Next</button>', // Nút điều hướng slide tiếp theo
+            responsive: [
+                {
+                    breakpoint: 768, // Điều chỉnh số lượng sản phẩm hiển thị cho các thiết bị có màn hình nhỏ hơn
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    });
+    </script>
 
 </body>
 

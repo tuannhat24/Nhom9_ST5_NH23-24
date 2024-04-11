@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <!-- Hiển thị số trang theo số thứ tự -->
-                    <div class="pagination">
+                    <div class="home-pagination">
                         @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
                             @endfor
                     </div>
