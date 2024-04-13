@@ -1281,9 +1281,9 @@ i.home-product-item__like-icon-fill {
 }
 
 .home-pagination a.active {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: #fff;
-    border-color: #007bff;
+    border-color: var(--primary-color);
 }
 
 .home-pagination a:hover {
@@ -1451,7 +1451,7 @@ i.home-product-item__like-icon-fill {
 
 .cart-table th,
 .cart-table td {
-    padding: 10px;
+    padding: 10px 2px;
     text-align: center;
     font-size: 16px;
 }
@@ -1503,7 +1503,7 @@ i.home-product-item__like-icon-fill {
 }
 
 .quantity-btn {
-    padding: 5px;
+    padding: 5px 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -1616,6 +1616,11 @@ h1{
 }
 
 .product-actions {
+    display: flex;
+    align-items: center;
+}
+
+.product-actions-form{
     display: flex;
     align-items: center;
 }

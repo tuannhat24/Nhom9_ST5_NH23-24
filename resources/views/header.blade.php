@@ -208,7 +208,7 @@
                                 @endforeach
                             </ul>
                             @endif
-                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn-primary">Xem giỏ hàng</a>
                         </div>
 
                     </div>

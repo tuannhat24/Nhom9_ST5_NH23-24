@@ -136,7 +136,7 @@ html {
     padding: 0 8px;
 }
 
-.btn.btn--primary {
+.btn.btn-primary {
     color: var(--white-color);
     background-color: var(--primary-color);
 }
@@ -233,4 +233,9 @@ html {
     line-height: var(--height);
     text-align: center;
     border-radius: 2px;
+}
+
+.active{
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }

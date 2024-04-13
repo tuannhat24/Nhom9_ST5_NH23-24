@@ -25,7 +25,7 @@
                     <div class="home-filter">
                         <span class="home-filter__label">Sắp xếp theo</span>
                         <button class="home-filter__btn btn">Phổ biến</button>
-                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
+                        <button class="home-filter__btn btn btn-primary">Mới nhất</button>
                         <button class="home-filter__btn btn">Bán chạy</button>
 
                         <!-- Price classification -->
@@ -36,15 +36,15 @@
                             <!-- List options -->
                             <ul class="select-input__list">
                                 <li class="select-input__item">
-                                    <a href="" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('user.home', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="{{ route('user.home', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
                                 </li>
                             </ul>
                         </div>
-
                     </div>
+
 
                     <div class="home-product">
 
@@ -96,7 +96,7 @@
                     </div>
                     <!-- Hiển thị số trang theo số thứ tự -->
                     <div class="home-pagination">
-                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
+                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
                             @endfor
                     </div>
                 </div>

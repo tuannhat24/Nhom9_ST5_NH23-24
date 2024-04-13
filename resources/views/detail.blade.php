@@ -38,7 +38,7 @@
                                     </div>
                                     <p class="product-description">{{ $product->description }}</p>
                                     <div class="product-actions">
-                                        <form method="POST" style="display: flex; align-item: center;" action="{{ route('user.cart.store') }}">
+                                        <form method="POST" class="product-actions-form" action="{{ route('user.cart.store') }}">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             <input class="product-quantity" type="num" value="1" name="quantity" min="1">
