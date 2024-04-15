@@ -47,8 +47,8 @@
                             $totalPrice += $cart->quantity * $cart->product->price;
                             @endphp
                             <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
-                                <td><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></td>
-                                <td>{{ $cart->product->name }}</td>
+                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
+                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
                                 <td>{{ $cart->product->id }}</td>
                                 <td class="price">{{ number_format($cart->product->price) }}</td>
                                 <td>

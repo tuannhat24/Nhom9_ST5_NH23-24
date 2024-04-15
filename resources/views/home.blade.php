@@ -25,7 +25,7 @@
                     <div class="home-filter">
                         <span class="home-filter__label">Sắp xếp theo</span>
                         <button class="home-filter__btn btn">Phổ biến</button>
-                        <button class="home-filter__btn btn btn-primary">Mới nhất</button>
+                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
                         <button class="home-filter__btn btn">Bán chạy</button>
 
                         <!-- Price classification -->

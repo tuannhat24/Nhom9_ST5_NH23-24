@@ -14,7 +14,30 @@ class CartController extends Controller
     public function index()
     {
         $title = "Giỏ Hàng";
+
+        // Dữ liệu phân trang
+        $perPage = 20;
+
+        $totalProducts = Product::count();
+
+        $totalPages = ceil($totalProducts / $perPage);
+
+        $currentPage = request()->input('page', 1);
+
+        // Truy vấn giỏ hàng
         $carts = Cart::all();
+
+        if ($currentPage >= $totalPages) {
+            $currentPage = $totalPages;
+        }
+
+        // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
+        $products = Product::orderBy('id')->paginate($perPage);
+
+
+        //Truy vấn dữ liêụ giỏ hàng
+        $carts = Cart::all();
+
         // Truy vấn các sản phẩm khác ngoài giỏ hàng
         $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
 
@@ -23,7 +46,14 @@ class CartController extends Controller
             $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
         }
 
-        return view('cart', compact('title', 'carts', 'relatedProducts'));
+        return view('cart', compact(
+            'title',
+            'carts',
+            'products',
+            'relatedProducts',
+            'totalPages',
+            'currentPage',
+        ));
     }
 
     public function detail($id)

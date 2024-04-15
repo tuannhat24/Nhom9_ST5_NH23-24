@@ -12,6 +12,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        // Dữ liệu phân trang
         $perPage = 20;
 
         $totalProducts = Product::count();

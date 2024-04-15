@@ -185,10 +185,12 @@
                                 <!--Cart item-->
                                 @foreach($carts as $cart)
                                 <li class="header__cart-item">
-                                    <img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="" class="header__cart-img">
+                                    <a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">
+                                        <img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="" class="header__cart-img">
+                                    </a>
                                     <div class="header__cart-item-info">
                                         <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name">{{ $cart->product->name }}</h5>
+                                            <h5 class="header__cart-item-name"><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></h5>
                                             <div class="header__cart-item-price-wrap">
                                                 <span class="header__cart-item-price">{{ number_format($cart->product->price) }}đ</span>
                                                 <span class="header__cart-item-multiply">x</span>
@@ -208,7 +210,7 @@
                                 @endforeach
                             </ul>
                             @endif
-                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn-primary">Xem giỏ hàng</a>
+                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                         </div>
 
                     </div>
