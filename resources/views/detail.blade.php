@@ -33,8 +33,12 @@
                                     <div class="product-sku" style="padding-top: 140px;">SKU: {{ $product->sku }}</div>
                                     <h1 class="product-title">{{ $product->name }}</h1>
                                     <div class="product-prices">
-                                        <span class="product-price-old"><h6>₫</h6>{{ number_format($product->price) }}</span>
-                                        <span class="product-price-new"><h6>₫</h6>{{ number_format($product->price_sale) }}</span>
+                                        <span class="product-price-old">
+                                            <h6>₫</h6>{{ number_format($product->price) }}
+                                        </span>
+                                        <span class="product-price-new">
+                                            <h6>₫</h6>{{ number_format($product->price_sale) }}
+                                        </span>
                                     </div>
                                     <p class="product-description">{{ $product->description }}</p>
                                     <div class="product-actions">
@@ -52,54 +56,54 @@
                     <section class="related-products">
                         <div class="container">
                             <h2 class="related-products__title">Related products</h2>
-                                <div class="related-products-slider">
-                                <!-- Danh sách sản phẩm liên quan -->
-                                    @foreach($relatedProducts as $row)
-                                    <div class="related-product">
-                                        <!-- Nội dung sản phẩm liên quan -->
-                                        <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
-                                            @php
-                                            $imageUrl = asset('assets/img/' . $row->image);
-                                            @endphp
-                                            <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
-                                            <h4 class="home-product-item__name">{{ $row->name }}</h4>
-                                            <div class="home-product-item__price">
-                                                <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                                <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
+                            <div class="grid__row">
+                                @foreach($relatedProducts as $row)
+                                <div class="grid__column-2-4">
+
+                                    <!-- Nội dung sản phẩm liên quan -->
+                                    <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
+                                        @php
+                                        $imageUrl = asset('assets/img/' . $row->image);
+                                        @endphp
+                                        <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
+                                        <h4 class="home-product-item__name">{{ $row->name }}</h4>
+                                        <div class="home-product-item__price">
+                                            <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
+                                            <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
+                                        </div>
+                                        <div class="home-product-item__action">
+                                            <span class="home-product-item__like home-product-item__like--liked">
+                                                <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
+                                                <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
+                                            </span>
+                                            <div class="home-product-item__rating">
+                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
                                             </div>
-                                            <div class="home-product-item__action">
-                                                <span class="home-product-item__like home-product-item__like--liked">
-                                                    <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
-                                                    <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
-                                                </span>
-                                                <div class="home-product-item__rating">
-                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                    <i class="fa-solid fa-star"></i>
-                                                </div>
-                                                <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
-                                            </div>
-                                            <div class="home-product-item__origin">
-                                                <span class="home-product-item__brand">GenZ</span>
-                                                <span class="home-product-item__origin-name">Việt Nam</span>
-                                            </div>
-                                            <div class="home-product-item__favourite">
-                                                <i class="fa-solid fa-check"></i>
-                                                <span>Yêu thích</span>
-                                            </div>
-                                            <div class="home-product-item__sale-off">
-                                                <span class="home-product-item__sale-off-percent">25%</span>
-                                                <span class="home-product-item__sale-off-label">GIẢM</span>
-                                            </div>
-                                            
-                                        </a>
-                                    </div>
-                                    @endforeach
+                                            <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
+                                        </div>
+                                        <div class="home-product-item__origin">
+                                            <span class="home-product-item__brand">GenZ</span>
+                                            <span class="home-product-item__origin-name">Việt Nam</span>
+                                        </div>
+                                        <div class="home-product-item__favourite">
+                                            <i class="fa-solid fa-check"></i>
+                                            <span>Yêu thích</span>
+                                        </div>
+                                        <div class="home-product-item__sale-off">
+                                            <span class="home-product-item__sale-off-percent">25%</span>
+                                            <span class="home-product-item__sale-off-label">GIẢM</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </section>
+                    <br>
                 </div>
             </div>
         </div>
