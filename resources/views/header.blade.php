@@ -94,7 +94,6 @@
                 <li class="header__navbar-item header__navbar-user">
                     <img src="{{ asset('assets/img/' . $currentUser->image) }}" alt="" class="header__navbar-user-img">
                     <span class="header__navbar-user-name">{{ $currentUser->name }}</span>
-
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
                             <a href="#">Tài khoản của tôi</a>

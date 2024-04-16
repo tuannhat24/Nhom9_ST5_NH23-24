@@ -70,27 +70,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-//Pagination detail
-document.addEventListener('DOMContentLoaded', function() {
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const productContainer = document.querySelector('.product-container');
-    let scrollAmount = 0;
 
-    nextBtn.addEventListener('click', function() {
-        scrollAmount += 200; // Điều chỉnh giá trị để phù hợp với kích thước sản phẩm
-        if (scrollAmount > productContainer.scrollWidth - productContainer.clientWidth) {
-            scrollAmount = productContainer.scrollWidth - productContainer.clientWidth;
-        }
-        productContainer.style.transform = `translateX(-${scrollAmount}px)`;
-    });
-
-    prevBtn.addEventListener('click', function() {
-        scrollAmount -= 200; // Điều chỉnh giá trị để phù hợp với kích thước sản phẩm
-        if (scrollAmount < 0) {
-            scrollAmount = 0;
-        }
-        productContainer.style.transform = `translateX(-${scrollAmount}px)`;
+//detail Pagination
+$(document).ready(function () {
+    $('.related-products-slider').slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 2,
+        prevArrow: '<button class="slick-prev"><</button>',
+        nextArrow: '<button class="slick-next">></button>',
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
 });
 

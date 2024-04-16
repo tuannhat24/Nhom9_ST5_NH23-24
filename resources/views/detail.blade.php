@@ -48,54 +48,55 @@
                                 </div>
                             </div>
                         </div>
-                    </section>  
+                    </section>
                     <section class="related-products">
                         <div class="container">
                             <h2 class="related-products__title">Related products</h2>
-                            <div class="related-products-slider">
+                                <div class="related-products-slider">
                                 <!-- Danh sách sản phẩm liên quan -->
-                                @foreach($relatedProducts as $row)
-                                <div class="related-product">
-                                    <!-- Nội dung sản phẩm liên quan -->
-                                    <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
-                                        @php
-                                        $imageUrl = asset('assets/img/' . $row->image);
-                                        @endphp
-                                        <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
-                                        <h4 class="home-product-item__name">{{ $row->name }}</h4>
-                                        <div class="home-product-item__price">
-                                            <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                            <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
-                                        </div>
-                                        <div class="home-product-item__action">
-                                            <span class="home-product-item__like home-product-item__like--liked">
-                                                <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
-                                                <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
-                                            </span>
-                                            <div class="home-product-item__rating">
-                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                <i class="home-product-item__star--gold fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
+                                    @foreach($relatedProducts as $row)
+                                    <div class="related-product">
+                                        <!-- Nội dung sản phẩm liên quan -->
+                                        <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
+                                            @php
+                                            $imageUrl = asset('assets/img/' . $row->image);
+                                            @endphp
+                                            <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
+                                            <h4 class="home-product-item__name">{{ $row->name }}</h4>
+                                            <div class="home-product-item__price">
+                                                <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
+                                                <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
                                             </div>
-                                            <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
-                                        </div>
-                                        <div class="home-product-item__origin">
-                                            <span class="home-product-item__brand">GenZ</span>
-                                            <span class="home-product-item__origin-name">Việt Nam</span>
-                                        </div>
-                                        <div class="home-product-item__favourite">
-                                            <i class="fa-solid fa-check"></i>
-                                            <span>Yêu thích</span>
-                                        </div>
-                                        <div class="home-product-item__sale-off">
-                                            <span class="home-product-item__sale-off-percent">25%</span>
-                                            <span class="home-product-item__sale-off-label">GIẢM</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                @endforeach
+                                            <div class="home-product-item__action">
+                                                <span class="home-product-item__like home-product-item__like--liked">
+                                                    <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
+                                                    <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
+                                                </span>
+                                                <div class="home-product-item__rating">
+                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                    <i class="home-product-item__star--gold fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                </div>
+                                                <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
+                                            </div>
+                                            <div class="home-product-item__origin">
+                                                <span class="home-product-item__brand">GenZ</span>
+                                                <span class="home-product-item__origin-name">Việt Nam</span>
+                                            </div>
+                                            <div class="home-product-item__favourite">
+                                                <i class="fa-solid fa-check"></i>
+                                                <span>Yêu thích</span>
+                                            </div>
+                                            <div class="home-product-item__sale-off">
+                                                <span class="home-product-item__sale-off-percent">25%</span>
+                                                <span class="home-product-item__sale-off-label">GIẢM</span>
+                                            </div>
+                                            
+                                        </a>
+                                    </div>
+                                    @endforeach
                             </div>
                         </div>
                     </section>
@@ -103,35 +104,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Thêm thư viện jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!-- Thêm thư viện Slick Slider -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-    <!-- JavaScript Custom -->
-    <script>
-    $(document).ready(function(){
-        $('.related-products-slider').slick({
-            infinite: true,
-            slidesToShow: 5, // Số lượng sản phẩm hiển thị trên mỗi slide
-            slidesToScroll: 2, // Số lượng sản phẩm di chuyển khi chuyển slide
-            prevArrow: '<button class="slick-prev">Previous</button>', // Nút điều hướng slide trước
-            nextArrow: '<button class="slick-next">Next</button>', // Nút điều hướng slide tiếp theo
-            responsive: [
-                {
-                    breakpoint: 768, // Điều chỉnh số lượng sản phẩm hiển thị cho các thiết bị có màn hình nhỏ hơn
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    });
-    </script>
 
 </body>
 
