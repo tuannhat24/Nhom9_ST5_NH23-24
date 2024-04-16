@@ -93,7 +93,7 @@
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
                     <img src="{{ asset('assets/img/User.png') }}" alt="" class="header__navbar-user-img">
-                    <span class="header__navbar-user-name">Vũ Linh nè</span>
+                    <span src="" class="header__navbar-user-name"></span>
 
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
