@@ -21,18 +21,28 @@ class CustomerSeeder extends Seeder
                 'phone' => '0364704715',
                 'address' => 'Binh Phuoc',
                 'email' => 'linhlg2004@gmail.com',
+                'image' => 'user1.png',
+                'password' => '123456',
+                'role' => 2,
             ],
             [
                 'name' => 'Quang Dinh',
                 'phone' => '022222222',
                 'address' => 'Binh Thuan',
                 'email' => 'Dinhdang@gmail.com',
+                'image' => 'user2.png',
+                'password' => '123456',
+                'role' => 1,
             ],
             [
                 'name' => 'Nhat Tuan',
                 'phone' => '0333333333',
                 'address' => 'Sai Gon',
                 'email' => 'NhatTuan@gmail.com',
+                'image' => 'user3.png',
+                'password' => '1234567',
+                'role' => 1,
+
             ],
         ]);
     }

@@ -24,6 +24,9 @@ class CartController extends Controller
 
         $currentPage = request()->input('page', 1);
 
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+
         // Truy vấn giỏ hàng
         $carts = Cart::all();
 
@@ -53,6 +56,7 @@ class CartController extends Controller
             'relatedProducts',
             'totalPages',
             'currentPage',
+            'currentUser',
         ));
     }
 

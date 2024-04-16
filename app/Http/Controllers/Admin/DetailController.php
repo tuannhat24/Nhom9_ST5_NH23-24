@@ -14,6 +14,9 @@ class DetailController extends Controller
         $perPage = 10; // Số sản phẩm hiển thị trên mỗi trang
         $product = Product::find($id);
 
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+         
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
         }
@@ -30,6 +33,7 @@ class DetailController extends Controller
             'product' => $product,
             'carts' => $carts,
             'relatedProducts' => $relatedProducts,
+            'currentUser' => $currentUser,
             'title' => 'Trang chi tiết sản phẩm',
         ]);
     }

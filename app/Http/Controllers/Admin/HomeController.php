@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,6 +22,9 @@ class HomeController extends Controller
         $totalPages = ceil($totalProducts / $perPage);
 
         $currentPage = request()->input('page', 1);
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
 
         // Truy vấn giỏ hàng
         $carts = Cart::all();
@@ -45,6 +50,7 @@ class HomeController extends Controller
             'title' => 'Trang sản phẩm',
             'data' => $products,
             'carts' => $carts,
+            'currentUser' => $currentUser,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
         ]);
