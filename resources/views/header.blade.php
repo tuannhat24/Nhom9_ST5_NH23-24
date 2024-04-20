@@ -92,9 +92,8 @@
                 <!-- <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
-                    <img src="{{ asset('assets/img/User.png') }}" alt="" class="header__navbar-user-img">
-                    <span class="header__navbar-user-name">Vũ Linh nè</span>
-
+                    <img src="{{ asset('assets/img/' . $currentUser->image) }}" alt="" class="header__navbar-user-img">
+                    <span class="header__navbar-user-name">{{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
                             <a href="#">Tài khoản của tôi</a>
@@ -172,73 +171,44 @@
                 <a class="header__cart-click" href="{{ route('user.cart') }}">
                     <div class="header__cart-wrap">
                         <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
-                        <span class="header__cart-notice">3</span>
+                        <span class="header__cart-notice">{{ $carts->count() }}</span>
 
-                        <!--No cart: header__cart-list--no-cart -->
+                        <!-- No cart: header__cart-list--no-cart -->
                         <div class="header__cart-list">
-                            <img src="../assets/img/no-cart.webp" alt="" class="header__cart-no-cart-img">
+                            @if($carts->isEmpty())
+                            <img src="{{ asset('assets/img/no-cart.webp') }}" alt="" class="header__cart-no-cart-img">
+                            <h4 class="header__cart-heading">Giỏ hàng của bạn đang trống..</h4>
+                            @else
                             <h4 class="header__cart-heading">Sản phẩm trong giỏ hàng</h4>
                             <ul class="header__cart-list-item">
                                 <!--Cart item-->
+                                @foreach($carts as $cart)
                                 <li class="header__cart-item">
-                                    <img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="" class="header__cart-img">
+                                    <a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">
+                                        <img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="" class="header__cart-img">
+                                    </a>
                                     <div class="header__cart-item-info">
                                         <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name">Áo sweater cổ khóa kéo chất bo gân</h5>
+                                            <h5 class="header__cart-item-name"><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></h5>
                                             <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">129.000đ</span>
+                                                <span class="header__cart-item-price">{{ number_format($cart->product->price) }}đ</span>
                                                 <span class="header__cart-item-multiply">x</span>
-                                                <span class="header__cart-item-qnt">2</span>
+                                                <span class="header__cart-item-qnt">{{ $cart->quantity }}</span>
                                             </div>
                                         </div>
                                         <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Đen
-                                            </span>
-                                            <span class="header__cart-item-remove">Xóa</span>
+                                            <span class="header__cart-item-description">Phân loại: {{ $cart->product->category }}</span>
+                                            <!-- Button remove product -->
+                                            <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="header__cart-item-remove">Xóa</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="header__cart-item">
-                                    <img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="" class="header__cart-img">
-                                    <div class="header__cart-item-info">
-                                        <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name">Áo sweater cổ khóa kéo chất bo gân</h5>
-                                            <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">129.000đ</span>
-                                                <span class="header__cart-item-multiply">x</span>
-                                                <span class="header__cart-item-qnt">2</span>
-                                            </div>
-                                        </div>
-                                        <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Đen
-                                            </span>
-                                            <span class="header__cart-item-remove">Xóa</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="header__cart-item">
-                                    <img src="https://cf.shopee.vn/file/sg-11134201-22100-m5u5z5rz5siv4a" alt="" class="header__cart-img">
-                                    <div class="header__cart-item-info">
-                                        <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name">Áo sweater cổ khóa kéo chất bo gân</h5>
-                                            <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">129.000đ</span>
-                                                <span class="header__cart-item-multiply">x</span>
-                                                <span class="header__cart-item-qnt">2</span>
-                                            </div>
-                                        </div>
-                                        <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">
-                                                Phân loại: Đen
-                                            </span>
-                                            <span class="header__cart-item-remove">Xóa</span>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
-
+                            @endif
                             <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                         </div>
 

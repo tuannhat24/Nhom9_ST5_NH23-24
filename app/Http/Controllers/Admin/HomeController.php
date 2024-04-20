@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,30 +14,43 @@ class HomeController extends Controller
 
     public function index()
     {
-        // Số phần tử trên mỗi trang
-        $perPage = 10;
+        // Dữ liệu phân trang
+        $perPage = 20;
 
-        // Lấy tổng số sản phẩm từ database
         $totalProducts = Product::count();
 
-        // Tính toán tổng số trang dựa trên số lượng sản phẩm và số phần tử trên mỗi trang
         $totalPages = ceil($totalProducts / $perPage);
 
-        // Lấy trang hiện tại từ request hoặc sử dụng trang mặc định là 1
         $currentPage = request()->input('page', 1);
 
-        // Nếu trang hiện tại lớn hơn hoặc bằng tổng số trang, đặt trang hiện tại là trang cuối cùng
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
 
-        // Lấy dữ liệu từ database và phân trang
+        // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
         $products = Product::orderBy('id')->paginate($perPage);
 
-        // Trả về view với dữ liệu cần thiết
+        // Nếu có yêu cầu sắp xếp theo giá từ thấp đến cao
+        if (request()->has('sort') && request()->input('sort') == 'price_asc') {
+            $products = Product::orderBy('price_sale')->paginate($perPage);
+        }
+
+        // Nếu có yêu cầu sắp xếp theo giá từ cao đến thấp
+        if (request()->has('sort') && request()->input('sort') == 'price_desc') {
+            $products = Product::orderByDesc('price_sale')->paginate($perPage);
+        }
+
         return view('home', [
             'title' => 'Trang sản phẩm',
             'data' => $products,
+            'carts' => $carts,
+            'currentUser' => $currentUser,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
         ]);

@@ -235,3 +235,10 @@ html {
     border-radius: 2px;
 }
 
+<<<<<<< HEAD
+=======
+.active{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+>>>>>>> 772f6c3d307980df720f1f32aaf3fa95ad4e9e4f

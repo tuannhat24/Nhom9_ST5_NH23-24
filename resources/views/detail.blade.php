@@ -30,32 +30,37 @@
                                     <img src="{{ asset('assets/img/' . $product->image) }}" alt="Product Image">
                                 </div>
                                 <div class="product-details">
-                                    <div class="product-sku">SKU: {{ $product->sku }}</div>
+                                    <div class="product-sku" style="padding-top: 140px;">SKU: {{ $product->sku }}</div>
                                     <h1 class="product-title">{{ $product->name }}</h1>
                                     <div class="product-prices">
-                                        <span class="product-price-old">${{ number_format($product->price) }}</span>
-                                        <span class="product-price-new">${{ number_format($product->price_sale) }}</span>
+                                        <span class="product-price-old">
+                                            <h6>₫</h6>{{ number_format($product->price) }}
+                                        </span>
+                                        <span class="product-price-new">
+                                            <h6>₫</h6>{{ number_format($product->price_sale) }}
+                                        </span>
                                     </div>
                                     <p class="product-description">{{ $product->description }}</p>
                                     <div class="product-actions">
-                                        <form method="POST" action="{{ route('user.cart.store') }}">
+                                        <form method="POST" class="product-actions-form" action="{{ route('user.cart.store') }}">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <input class="product-quantity" type="number" value="1" name="quantity" min="1">
-                                            <button type="submit" class="btn product-add-to-cart">Add to cart</button>
+                                            <input class="product-quantity" type="num" value="1" name="quantity" min="1">
+                                            <button type="submit" class="btn product-add-to-cart">Thêm Vào Giỏ Hàng</button>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
+                        </div>
                     </section>
                     <section class="related-products">
                         <div class="container">
                             <h2 class="related-products__title">Related products</h2>
                             <div class="grid__row">
                                 @foreach($relatedProducts as $row)
-                                <!-- Product item -->
                                 <div class="grid__column-2-4">
+
+                                    <!-- Nội dung sản phẩm liên quan -->
                                     <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                         @php
                                         $imageUrl = asset('assets/img/' . $row->image);
@@ -95,20 +100,14 @@
                                     </a>
                                 </div>
                                 @endforeach
-
-
-
                             </div>
                         </div>
                     </section>
-
-                    <br>
                     <br>
                 </div>
             </div>
         </div>
     </div>
-
 
 </body>
 

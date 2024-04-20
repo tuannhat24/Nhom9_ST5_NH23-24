@@ -29,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
             Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('user.cart.checkout');
-            Route::get('/detail', [DetailController::class, 'index'])->name('user.detail');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });
     });

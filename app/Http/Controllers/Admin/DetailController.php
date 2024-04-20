@@ -3,24 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DetailController extends Controller
 {
-    public function index()
-    {
-        $product = Product::orderBy('id')->get();
-        return view('detail', [
-            'title' => 'Trang chi tiết sản phẩm',
-            'product' => $product,
-        ]);
-    }
-
     public function detail($id)
     {
+        $perPage = 10; // Số sản phẩm hiển thị trên mỗi trang
         $product = Product::find($id);
 
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+         
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
         }
@@ -28,12 +24,16 @@ class DetailController extends Controller
         // Truy vấn các sản phẩm liên quan
         $relatedProducts = Product::where('cate_id', $product->cate_id)
             ->where('id', '!=', $product->id) // Loại bỏ sản phẩm đang xem
-            ->limit(10) // Giới hạn số lượng sản phẩm liên quan
-            ->get();
+            ->paginate($perPage); // Sử dụng phân trang
+
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
 
         return view('detail', [
             'product' => $product,
+            'carts' => $carts,
             'relatedProducts' => $relatedProducts,
+            'currentUser' => $currentUser,
             'title' => 'Trang chi tiết sản phẩm',
         ]);
     }

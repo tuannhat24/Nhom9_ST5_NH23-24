@@ -31,8 +31,8 @@
                                 <th>Hình Ảnh</th>
                                 <th>Tên</th>
                                 <th>Mã Sản Phẩm</th>
-                                <th>Số Lượng</th>
                                 <th>Đơn Giá (VND)</th>
+                                <th>Số Lượng</th>
                                 <th>Số Tiền (VND)</th>
                                 <th></th>
                                 <th>Thao Tác</th>
@@ -47,9 +47,10 @@
                             $totalPrice += $cart->quantity * $cart->product->price;
                             @endphp
                             <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
-                                <td><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></td>
-                                <td>{{ $cart->product->name }}</td>
+                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
+                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
                                 <td>{{ $cart->product->id }}</td>
+                                <td class="price">{{ number_format($cart->product->price) }}</td>
                                 <td>
                                     <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
                                         @csrf
@@ -58,7 +59,6 @@
                                         <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
                                     </form>
                                 </td>
-                                <td class="price">{{ number_format($cart->product->price) }}</td>
                                 <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
                                 <td></td>
                                 <td>
@@ -133,9 +133,6 @@
                                 </a>
                             </div>
                             @endforeach
-
-
-
                         </div>
                     </div>
                 </section>

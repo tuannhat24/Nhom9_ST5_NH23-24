@@ -2,34 +2,31 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\DB;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'role' => '1',
-                'name' => 'user1',
-                'role' => '1',
-                'email' => 'user1@localhost.com',
-                'password' => '$2y$10$b4Vb8vpRo/3rLwmsBzmK8OeNU2nlSKK7bWguY29EeKynhv7mwekyu',
-            ],
-            [
-                'role' => '2',
-                'name' => 'admin',
-                'role' => '2',
-                'email' => 'admin@localhost.com',
-                'password' => '$2y$10$b4Vb8vpRo/3rLwmsBzmK8OeNU2nlSKK7bWguY29EeKynhv7mwekyu',
-            ],
-        ]);
+        // Lấy danh sách khách hàng từ bảng 'customers'
+        $customers = Customer::all();
+
+        // Duyệt qua mỗi khách hàng và tạo người dùng tương ứng trong bảng 'users'
+        foreach ($customers as $customer) {
+            // Tạo một người dùng mới
+            $user = new User();
+
+            // Gán thông tin từ khách hàng vào người dùng
+            $user->role = $customer->role;
+            $user->name = $customer->name;
+            $user->email = $customer->email;
+            $user->image = $customer->image;
+            $user->password = bcrypt($customer->password);
+            $user->customer_id = $customer->id;
+            $user->save();
+        }
     }
 }

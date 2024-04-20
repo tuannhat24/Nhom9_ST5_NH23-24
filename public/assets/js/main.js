@@ -70,3 +70,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+//detail Pagination
+$(document).ready(function () {
+    $('.related-products-slider').slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 2,
+        prevArrow: '<button class="slick-prev"><</button>',
+        nextArrow: '<button class="slick-next">></button>',
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+});
+
+
