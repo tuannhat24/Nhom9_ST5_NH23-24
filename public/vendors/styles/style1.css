@@ -1,0 +1,69 @@
+/* CSS for Category List */
+.admin-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 950px;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.category-table th, .category-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.category-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.category-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.category-table a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.category-table a:hover {
+    color: #007bff;
+}
+
+.fa-square-plus, .fa-edit, .fa-trash-alt {
+    font-size: 16px;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.pagination a {
+    color: #007bff !important;
+    text-decoration: none !important;
+    margin-left: 10px !important;
+}
+
+.pagination a:hover {
+    text-decoration: underline !important;
+}
+

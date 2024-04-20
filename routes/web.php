@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\Authr\CategoryController;
+use App\Http\Controllers\Admin\Authr\ManageController;
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('users/signin/store', [SignInController::class, 'store']);
@@ -35,12 +37,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:2')->group(function () {
         Route::prefix('admin')->group(function () {
-            Route::get('/product', [MainController::class, 'product'])->name('admin.product');
-            Route::get('/customer', [MainController::class, 'customer'])->name('admin.customer');
-            Route::get('/category', [MainController::class, 'category'])->name('admin.category');
-            Route::get('/listproduct', [MainController::class, 'listProduct'])->name('admin.listproduct');
-            Route::get('/listcustomer', [MainController::class, 'listCustomer'])->name('admin.listcustomer');
-            Route::get('/listcategory', [MainController::class, 'listCategory'])->name('admin.listcategory');
+            Route::get('/', [ManageController::class, 'index'])->name('admin.home');
+            Route::prefix('category')->group(function(){
+                Route::get('/', [CategoryController::class, 'index'])->name('admin.category.index');
+                Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');
+                Route::post('/store', [CategoryController::class, 'store'])->name('admin.category.store');
+                Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+                Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+                Route::get('/delete{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+            });
+           
+            //Route::get('/product', [MainController::class, 'product'])->name('admin.product');
+            // Route::get('/customer', [MainController::class, 'customer'])->name('admin.customer');
+            // Route::get('/listproduct', [MainController::class, 'listProduct'])->name('admin.listproduct');
+            // Route::get('/listcustomer', [MainController::class, 'listCustomer'])->name('admin.listcustomer');
         });
     });
 
@@ -49,3 +59,4 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('users.signin');
     })->where('any', '.*');
 });
+
