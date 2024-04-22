@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\DetailController;
-use App\Http\Controllers\Admin\Authr\CategoryController;
-use App\Http\Controllers\Admin\Authr\ManageController;
+use App\Http\Controllers\Admin\Author\CategoryController;
+use App\Http\Controllers\Admin\Author\ManageController;
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('users/signin/store', [SignInController::class, 'store']);
