@@ -56,7 +56,8 @@
                     <section class="related-products">
                         <div class="container">
                             <h2 class="related-products__title">Related products</h2>
-                            <div class="grid__row">
+
+                            <div class="related-products-slider">
                                 @foreach($relatedProducts as $row)
                                 <div class="grid__column-2-4">
 
