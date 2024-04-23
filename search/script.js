@@ -1,11 +1,5 @@
 const data = [
-    "Apple",
-    "Banana",
-    "Orange",
-    "Pineapple",
-    "Grapes",
-    "Mango",
-    "Peach"
+    
 ];
 
 const searchInput = document.getElementById('searchInput');
