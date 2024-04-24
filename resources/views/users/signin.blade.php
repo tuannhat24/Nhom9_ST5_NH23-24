@@ -48,7 +48,7 @@
                     </a>
                     <a href="" class="auth-form__socials--google btn btn--size-s btn btn--with-icon">
                         <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title">
+                        <span class="auth-form__socials-title auth-form__socials-title--google">
                             Kết nối với Google
                         </span>
                     </a>

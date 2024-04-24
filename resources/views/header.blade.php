@@ -177,7 +177,6 @@
                         <div class="header__cart-list">
                             @if($carts->isEmpty())
                             <img src="{{ asset('assets/img/no-cart.webp') }}" alt="" class="header__cart-no-cart-img">
-                            <h4 class="header__cart-heading">Giỏ hàng của bạn đang trống..</h4>
                             @else
                             <h4 class="header__cart-heading">Sản phẩm trong giỏ hàng</h4>
                             <ul class="header__cart-list-item">
@@ -207,9 +206,9 @@
                                     </div>
                                 </li>
                                 @endforeach
+                                <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                             </ul>
                             @endif
-                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                         </div>
 
                     </div>
