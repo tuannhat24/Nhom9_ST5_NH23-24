@@ -9,6 +9,6 @@ use App\Components\Recusive;
 class ManageController extends Controller
 {
     public function index(){
-        return view('users/admin/home-category');
+        return view('users/admin/home');
     }
 }

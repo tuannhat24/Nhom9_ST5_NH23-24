@@ -67,3 +67,6 @@ h2 {
     text-decoration: underline !important;
 }
 
+.form-group label{
+    font-weight: bold;
+}

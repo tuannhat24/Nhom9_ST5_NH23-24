@@ -2,6 +2,7 @@
 <html>
 	<head>
 		@include('users.admin.partials.head')	
+		@yield('css')
 	</head>
 	<body>
 		@include('users.admin.partials.header')
@@ -13,6 +14,8 @@
 		<!--Container-->
 		<div class="main-container">
 			@yield('content')
-		</div>				
+		</div>	
+		
+		@yield('js')
 	</body>
 </html>

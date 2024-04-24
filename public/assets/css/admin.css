@@ -8,15 +8,13 @@ body {
 
 .admin-container {
     min-height: 100vh;
-    padding-top: 100px;
-    margin-left: 50px;
+    padding-top: 40px;
 }
 
 .container {
     margin: auto;
     max-width: 800px;
     background-color: #fff;
-    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

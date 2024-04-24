@@ -1,6 +1,6 @@
 <!-- Basic Page Info -->
 <meta charset="utf-8" />
-<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+<title>Quản Lý</title>
 <!-- Mobile Specific Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 

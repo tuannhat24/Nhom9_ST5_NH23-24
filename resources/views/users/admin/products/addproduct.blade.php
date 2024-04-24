@@ -1,5 +1,6 @@
 
-@extends('users/admin.main')
+@extends('users.admin.layout.admin')
+
 @section('content')
 <div class="admin-container">
     <div class="container">
@@ -20,11 +21,12 @@
                     <!-- Option để chọn danh mục -->
                     <option value="">Select a category</option>
                     <!-- PHP code để lấy danh mục từ cơ sở dữ liệu và tạo các option tương ứng -->
+                    {!!$option!!}
                 </select>
             </div>
               <div class="form-group">
                 <label for="namsinh">Description:</label>
-                <input type="text" class="form-control" name="description" placeholder="nhap description" required="">
+                <textarea class="form-control editor" name="description" id="" cols="30" rows="10" placeholder="Enter description"></textarea>
               </div>
               <div class="form-group">
                 <label for="sdt">Product price</label>
@@ -40,11 +42,16 @@
               </div>
               <div class="form-group">
                 <label for="namsinh">Product image:</label>
-                <input type="file"  name="img" required="">
+                <input type="file"  name="img" required="" class="form-control-file">
               </div>
               <input type="submit" name="submit" class="btn btn-primary" style="float:left;" value="Add">
             </form>
           </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('admin/product/add.js')}}"></script>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 @endsection
