@@ -53,9 +53,9 @@
                     data-toggle="dropdown"
                 >
                     <span class="user-icon">
-                        <img src="" alt="" />
+                        <img src="{{asset('assets\img\User.png')}}" alt="" />
                     </span>
-                    <span class="user-name">Ross C. Lopez</span>
+                    <span class="user-name">Admin</span>
                 </a>
                 <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"

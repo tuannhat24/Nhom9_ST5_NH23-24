@@ -10,14 +10,14 @@
                 <div class="grid__column-2">
                     <nav class="manager">
                         <h3 class="manager__heading">{{ $title }}</h3>
-                        <!-- <ul class="manager-list">
+                        <ul class="manager-list">
                             <li class="manager-item">
                                 <a href="/signin" class="manager-item__link">ĐÃ ĐĂNG NHẬP</a>
                             </li>
                             <li class="manager-item manager-item--active">
-                                <a href="/signout" class="manager-item__link">USER</a>
+                                <a href="#" class="manager-item__link">USER</a>
                             </li>
-                        </ul> -->
+                        </ul>
                         
                     </nav>
                 </div>

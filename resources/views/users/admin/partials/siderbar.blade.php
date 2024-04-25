@@ -45,10 +45,10 @@
 
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="http://127.0.0.1:8000/user/home" style="width: 150px">											
+        <a href="http://127.0.0.1:8000/user/home">											
                     <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 1em;"></i>
                     <svg class="header__logo-img" viewBox="0 0 200 50">
-                        <text x="12" y="40" font-family="Arial, sans-serif" font-size="35px" fill="#74C0FC">GenZ Store</text>
+                        <text x="12" y="40" font-family="Arial, sans-serif" font-size="34px" fill="#74C0FC">GenZ Store</text>
                     </svg>					
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -59,7 +59,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li class="dropdown">
-                    <a href="{{route('admin.home')}}" class="dropdown-toggle">
+                    <a href="{{route('admin.home')}}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-house"></span
                         ><span class="mtext">Home</span>
                     </a>
