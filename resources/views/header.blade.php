@@ -132,7 +132,8 @@
             <div class="header__search">
                 <div class="header__search-input-wrap">
                     <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
-
+                    <ul id="results"></ul>
+                   
                     <!-- Search history -->
                     <div class="header__search-history">
                         <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
@@ -145,6 +146,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
                 <div class="header__search-select">
                     <span class="header__search-select-label">Trong shop</span>
@@ -210,11 +212,14 @@
                             </ul>
                             @endif
                         </div>
+                        
 
                     </div>
+                    <script src="scrip.js" defer></script>
                 </a>
             </div>
 
         </div>
     </div>
+    
 </header>
