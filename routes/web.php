@@ -10,12 +10,15 @@ use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ManageController;
+use App\Http\Controllers\Admin\Users\ForgotPasswordController;
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
-Route::post('users/signin/store', [SignInController::class, 'store']);
-Route::get('/signup', [SignUpController::class, 'index'])->name('signup');
-Route::post('users/signup/store', [SignUpController::class, 'store']);
+Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
+Route::get('/signup', [SignUpController::class, 'index'])->name('users.signup');
+Route::post('/signup', [SignUpController::class, 'store'])->name('users.register');
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
+Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('users.forgot_password');
+Route::post('/forgot_password/send', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot_password.send');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -45,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
                 Route::get('/delete{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
             });
-           
+
             //Route::get('/product', [MainController::class, 'product'])->name('admin.product');
             // Route::get('/customer', [MainController::class, 'customer'])->name('admin.customer');
             // Route::get('/listproduct', [MainController::class, 'listProduct'])->name('admin.listproduct');

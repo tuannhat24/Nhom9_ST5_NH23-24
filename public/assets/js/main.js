@@ -91,3 +91,9 @@ $(document).ready(function () {
 });
 
 
+// close in sign in sign up
+
+function closeAlert() {
+    var alert = document.querySelector('.alert');
+    alert.style.display = 'none';
+}

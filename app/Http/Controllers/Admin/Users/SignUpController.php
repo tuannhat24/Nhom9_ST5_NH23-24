@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
@@ -20,23 +21,31 @@ class SignUpController extends Controller
         $validatedData = $request->validate([
             'email' => 'required|email:filter|unique:users,email',
             'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password'
+            'password_confirmation' => 'required|same:password'
+        ],
+        [
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Địa chỉ email không hợp lệ.',
+            'email.unique' => 'Email đã tồn tại.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất :min kí tự.',
+            'password_confirmation.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'password_confirmation.same' => 'Mật khẩu xác nhận không trùng khớp với mật khẩu đã nhập.'
         ]);
-
         // Tạo người dùng mới
         $user = new User();
         $user->role = 1;
+        $user->image = 'User.png';
         $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']);
+        $user->password = Hash::make($validatedData['password']);
         $user->save();
 
-        // Đăng nhập người dùng mới tạo
-        Auth::login($user);
-
-        if ($user->role === 1) {
-            return redirect()->route('user');
+        if ($user->save()) {
+            // Thành công
+            return redirect()->route('users.signin')->with('success', 'Tài khoản đã được đăng ký thành công!');
         } else {
-            return redirect()->route('users.signin');
+            // Thất bại
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi, vui lòng thử lại sau.');
         }
     }
 }

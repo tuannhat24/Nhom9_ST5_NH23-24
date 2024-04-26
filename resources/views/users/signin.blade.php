@@ -10,14 +10,29 @@
         <div class="modal__overlay"></div>
         <div class="modal__body">
             <!-- Đăng nhập -->
-            <form method="post" action="/users/signin/store" class="auth-form">
-                @csrf
+            <form method="post" action="{{ route('users.signin') }}" class="auth-form">
                 <div class="auth-form__container">
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Đăng nhập</h3>
                         <a href="/signup" class="auth-form__switch-btn">Đăng ký</a>
                     </div>
                     <div class="auth-form__form">
+                        @csrf
+                        @if(Session::has('error'))
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{{ Session::get('error') }}</li>
+                            </ul>
+                            <button class="close" onclick="closeAlert()">&times;</button>
+                        </div>
+                        @endif
+
+                        @if(Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                            <button class="close" onclick="closeAlert()">&times;</button>
+                        </div>
+                        @endif
                         <div class="auth-form__group">
                             <input type="email" name="email" class="auth-form__input" placeholder="Email">
                         </div>
@@ -27,14 +42,13 @@
                     </div>
                     <div class="auth-form__aside">
                         <div class="auth-form__help">
-                            <a href="#" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                            <a href="{{ route('users.forgot_password') }}" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
                             <span class="auth-form__help-separate"></span>
                             <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
 
                         </div>
                     </div>
                     <div class="auth-form__controls">
-                        <button class="btn btn--normal auth-form__controls-back ">TRỞ LẠI</button>
                         <button type="submit" class="btn btn--primary">ĐĂNG NHẬP</button>
                     </div>
                 </div>

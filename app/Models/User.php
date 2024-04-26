@@ -22,7 +22,13 @@ class User extends Authenticatable
         'role',
         'email',
         'password',
+        'customer_id',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,9 +48,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
 }

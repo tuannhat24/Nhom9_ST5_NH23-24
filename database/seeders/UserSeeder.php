@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
 
             // Gán thông tin từ khách hàng vào người dùng
             $user->role = $customer->role;
-            $user->name = $customer->name;
             $user->email = $customer->email;
             $user->image = $customer->image;
             $user->password = bcrypt($customer->password);
