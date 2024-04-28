@@ -12,7 +12,7 @@
                     <div class="cart-actions">
                         @if($carts->isEmpty())
                         <img src="{{ asset('assets/img/no-cart.webp') }}" alt="No-cart">
-                        <a href="{{route('user.home')}}" class="button buy-now-btn">Mua Ngay</a>
+                        <a href="{{route('user.product')}}" class="button buy-now-btn">Mua Ngay</a>
                         @else
                     </div>
 

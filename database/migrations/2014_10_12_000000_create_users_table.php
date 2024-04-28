@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->string('name')->default('');
             $table->integer('role');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

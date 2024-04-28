@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,19 @@ class SignUpController extends Controller
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
         $user->save();
+        $user->customer_id = $user->id;
+
+        // Tạo thông tin khách hàng tương ứng
+        $customer = new Customer();
+        $customer->name = ''; // Tùy chỉnh tên khách hàng nếu cần
+        $customer->phone = ''; // Tùy chỉnh số điện thoại khách hàng nếu cần
+        $customer->address = ''; // Tùy chỉnh địa chỉ khách hàng nếu cần
+        $customer->email = $validatedData['email']; // Sử dụng email từ người dùng
+        $customer->password = $user->password; // Sử dụng mật khẩu đã được mã hóa của người dùng
+        $customer->role = $user->role;
+        $customer->image = $user->image;
+        $customer->id = $user->id; // Sử dụng id của người dùng
+        $customer->save();
 
         if ($user->save()) {
             // Thành công

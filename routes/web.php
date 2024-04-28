@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\DetailController;
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
+            Route::get('/product', [ProductController::class, 'index'])->name('user.product');
             Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
             Route::post('/cart', [CartController::class, 'store'])->name('user.cart.store');
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');

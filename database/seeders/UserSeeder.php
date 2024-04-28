@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Psy\Readline\Hoa\Console;
 
 class UserSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             $user->image = $customer->image;
             $user->password = bcrypt($customer->password);
             $user->customer_id = $customer->id;
+            $user->name = $customer->name;
             $user->save();
         }
     }
