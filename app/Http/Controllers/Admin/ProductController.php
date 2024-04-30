@@ -55,4 +55,38 @@ class ProductController extends Controller
             'currentPage' => $currentPage,
         ]);
     }
+
+    public function allProducts()
+    {
+        // Dữ liệu phân trang
+        $perPage = 20;
+
+        $totalProducts = Product::count();
+
+        $totalPages = ceil($totalProducts / $perPage);
+
+        $currentPage = request()->input('page', 1);
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
+        if ($currentPage >= $totalPages) {
+            $currentPage = $totalPages;
+        }
+
+        // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
+        $products = Product::orderBy('id')->paginate($perPage);
+
+        return view('all', [
+            'title' => 'Trang tất cả sản phẩm',
+            'data' => $products,
+            'carts' => $carts,
+            'currentUser' => $currentUser,
+            'totalPages' => $totalPages,
+            'currentPage' => $currentPage,
+        ], compact('products'));
+    }
 }

@@ -93,7 +93,7 @@
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
                     <img src="{{ asset('assets/img/' . $currentUser->image) }}" alt="" class="header__navbar-user-img">
-                    <span class="header__navbar-user-name"> $currentUser->name</span>
+                    <span class="header__navbar-user-name"> {{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
                             <a href="#">Tài khoản của tôi</a>
@@ -120,7 +120,7 @@
         <!-- Header with search -->
         <div class="header-with-search">
             <div class="header__logo-img" id="header__logo-out">
-                <a href="{{route('user.product')}}" class="header__logo-link">
+                <a href="{{route('user.home')}}" class="header__logo-link">
                     <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 3em;"></i>
                     <svg class="header__logo-img" viewBox="0 0 200 50">
                         <text x="12" y="40" font-family="Arial, sans-serif" font-size="36" fill="#74C0FC">GenZ Store</text>

@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //detail Pagination
 $(document).ready(function () {
-    $('.related-products-slider').slick({
+    $(".related-products-slider").slick({
         infinite: true,
         slidesToShow: 5,
         slidesToScroll: 2,
@@ -83,17 +83,83 @@ $(document).ready(function () {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
+                    slidesToShow: 1,
+                },
+            },
+        ],
     });
 });
-
 
 // close in sign in sign up
 
 function closeAlert() {
-    var alert = document.querySelector('.alert');
-    alert.style.display = 'none';
+    var alert = document.querySelector(".alert");
+    alert.style.display = "none";
 }
+
+// banner
+document.addEventListener("DOMContentLoaded", function () {
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+
+    let carouselItems = $$(".full-home-banners__main-item");
+    let carouselIndicators = $$(".full-home-banners__main-dot");
+    let carouselBtnLeft = $(".carosel-btn-left");
+    let carouselBtnRight = $(".carosel-btn-right");
+    let i = 0,
+        lengthCarousel = carouselItems.length;
+
+    function removeActiveCarousel() {
+        const activeItem = $(".full-home-banners__main-item.active");
+        const activeDot = $(".full-home-banners__main-dot.active");
+        if (activeItem) {
+            activeItem.classList.remove("active");
+        }
+        if (activeDot) {
+            activeDot.classList.remove("active");
+        }
+    }
+
+    function addActiveCarousel(i) {
+        carouselItems[i].classList.add("active");
+        carouselIndicators[i].classList.add("active");
+    }
+
+    let arrIndicators = Array.from(carouselIndicators);
+    arrIndicators.forEach((indicator, index) => {
+        const carouselItem = carouselItems[index];
+        indicator.onclick = function () {
+            i = index;
+            removeActiveCarousel();
+            carouselItem.classList.add("active");
+            this.classList.add("active");
+        };
+    });
+
+    carouselBtnLeft.onclick = function () {
+        i--;
+        if (i < 0) {
+            i = lengthCarousel - 1;
+        }
+        removeActiveCarousel();
+        addActiveCarousel(i);
+    };
+
+    carouselBtnRight.onclick = function () {
+        i++;
+        if (i >= lengthCarousel) {
+            i = 0;
+        }
+        removeActiveCarousel();
+        addActiveCarousel(i);
+    };
+
+    setInterval(() => {
+        if (i === lengthCarousel - 1) {
+            i -= lengthCarousel;
+        }
+        i++;
+        removeActiveCarousel();
+        addActiveCarousel(i);
+    }, 5000);
+});

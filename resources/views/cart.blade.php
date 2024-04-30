@@ -85,7 +85,10 @@
                 <!-- Relate products -->
                 <section class="related-products">
                     <div class="container">
-                        <h2 class="related-products__title"> Có thể bạn sẽ thích </h2>
+                        <div class="more">
+                            <h2 class="related-products__title"> Có thể bạn sẽ thích </h2>
+                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem thêm -></a>
+                        </div>
                         <div class="grid__row">
                             @foreach($relatedProducts as $row)
                             <!-- Product item -->
