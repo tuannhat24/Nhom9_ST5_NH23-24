@@ -82,7 +82,7 @@
                     </form>
                     @endif
                 </section>
-                <!-- Relate products -->
+                <!-- Relate products -->    
                 <section class="related-products">
                     <div class="container">
                         <div class="more">
