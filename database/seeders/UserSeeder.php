@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Psy\Readline\Hoa\Console;
 
 class UserSeeder extends Seeder
 {
@@ -21,11 +22,11 @@ class UserSeeder extends Seeder
 
             // Gán thông tin từ khách hàng vào người dùng
             $user->role = $customer->role;
-            $user->name = $customer->name;
             $user->email = $customer->email;
             $user->image = $customer->image;
             $user->password = bcrypt($customer->password);
             $user->customer_id = $customer->id;
+            $user->name = $customer->name;
             $user->save();
         }
     }

@@ -5,26 +5,17 @@
 <div class="app__container">
     <div class="grid">
         <div class="grid__row app__content">
-            <div class="grid__column-2">
-                <nav class="manager">
-                    <h3 class="manager__heading">{{ $title }}</h3>
-                </nav>
-            </div>
-
-            <div class="grid__column-10">
+            <div class="grid__column">
                 <!-- content -->
                 <section class="shopping-cart">
                     <h2>Giỏ Hàng</h2>
                     <div class="cart-actions">
                         @if($carts->isEmpty())
-                        <div class="empty-cart">Giỏ hàng của bạn đang trống.</div>
+                        <img src="{{ asset('assets/img/no-cart.webp') }}" alt="No-cart">
+                        <a href="{{route('user.product')}}" class="button buy-now-btn">Mua Ngay</a>
                         @else
-                        <form action="{{ route('user.cart.clear') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="button empty-cart-btn"><i style="padding-right: 4px;" class="fas fa-trash-alt"></i>Xóa Tất Cả</button>
-                        </form>
-                        @endif
                     </div>
+
                     <table class="cart-table">
                         <tbody>
                             <tr>
@@ -85,11 +76,19 @@
                             </tr>
                         </tbody>
                     </table>
+                    <form style="float: right;" action="{{ route('user.cart.clear') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button empty-cart-btn"><i style="padding-right: 4px;" class="fas fa-trash-alt"></i>Xóa Tất Cả</button>
+                    </form>
+                    @endif
                 </section>
-                <!-- Relate products -->
+                <!-- Relate products -->    
                 <section class="related-products">
                     <div class="container">
-                        <h2 class="related-products__title">Related products</h2>
+                        <div class="more">
+                            <h2 class="related-products__title"> Có thể bạn sẽ thích </h2>
+                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem thêm -></a>
+                        </div>
                         <div class="grid__row">
                             @foreach($relatedProducts as $row)
                             <!-- Product item -->

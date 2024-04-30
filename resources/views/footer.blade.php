@@ -36,7 +36,7 @@
                             <i class="footer-item__icon fa-brands fa-instagram"></i>
                             Instagram
                         </a>
-                        <a href="#" class="footer-item__link">
+                        <a href="https://www.linkedin.com/in/linh-v%C5%A9-9856a2305/" class="footer-item__link">
                             <i class="footer-item__icon fa-brands fa-linkedin"></i>
                             Linkedin
                         </a>

@@ -93,7 +93,7 @@
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
                     <img src="{{ asset('assets/img/' . $currentUser->image) }}" alt="" class="header__navbar-user-img">
-                    <span class="header__navbar-user-name">{{ $currentUser->name }}</span>
+                    <span class="header__navbar-user-name"> {{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
                             <a href="#">Tài khoản của tôi</a>
@@ -132,6 +132,8 @@
             <div class="header__search">
                 <div class="header__search-input-wrap">
                     <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+                    <ul id="results"></ul>
+
 
                     <!-- Search history -->
                     <div class="header__search-history">
@@ -145,6 +147,7 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
                 <div class="header__search-select">
                     <span class="header__search-select-label">Trong shop</span>
@@ -177,7 +180,6 @@
                         <div class="header__cart-list">
                             @if($carts->isEmpty())
                             <img src="{{ asset('assets/img/no-cart.webp') }}" alt="" class="header__cart-no-cart-img">
-                            <h4 class="header__cart-heading">Giỏ hàng của bạn đang trống..</h4>
                             @else
                             <h4 class="header__cart-heading">Sản phẩm trong giỏ hàng</h4>
                             <ul class="header__cart-list-item">
@@ -207,15 +209,18 @@
                                     </div>
                                 </li>
                                 @endforeach
+                                <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                             </ul>
                             @endif
-                            <a href="{{ route('user.cart') }}" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                         </div>
 
+
                     </div>
+
                 </a>
             </div>
 
         </div>
     </div>
+
 </header>

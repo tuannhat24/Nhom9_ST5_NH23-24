@@ -1,32 +1,17 @@
-<!-- Basic Page Info -->
-<meta charset="utf-8" />
-<<<<<<< HEAD
-<title>Quản Lý</title>
-=======
-<title>Trang quản lý</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
-<!-- Mobile Specific Metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-<!-- CSS -->
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css')}}" />
-
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css')}}" />
-<link rel="stylesheet" href="{{ asset('vendors/styles/style1.css')}}">
-
-<!-- js -->
-<<<<<<< HEAD
-=======
-<link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1/fontawesome-free-6.2.1-web/css/all.min.css">
-<script src="{{ asset('vendors/scripts/core.js')}}"></script>
-<script src="{{ asset('vendors/scripts/script.min.js')}}"></script>
-<script src="{{ asset('vendors/scripts/layout-settings.js')}}"></script>
-<script>
-                                let backenAPI = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+</head>
+<body>
+    <div>
+        <input id="searchbar" type="text" placeholder = "Nhập để tìm kiếm sản phẩm">
+        <ul id="results"></ul>
+    </div>
+    <script>
+        let backenAPI = [
             {id: 1, name:"Quần áo"},
             {id: 2, name:"Áo Khoác"},
             {id: 3, name:"Áo Thun"},
@@ -65,7 +50,7 @@
 
             .map(
                 (v) => 
-                '<li> ${v.name} </li>'
+                <li> ${v.name} </li>
                                 
             )
 
@@ -96,5 +81,6 @@
         });
          builder.imit();
          builder.indtall();
-                    </script>
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
+    </script>
+</body>
+</html>

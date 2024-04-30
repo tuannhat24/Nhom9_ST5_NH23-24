@@ -51,7 +51,7 @@ class SignInController extends Controller
             $role = Auth::user()->role;
 
             if ($role === 2) {
-                // Lưu URL trước đó nếu có role 
+                // Lưu URL trước đó nếu có role
                 return redirect()->route('admin.home');
             } elseif ($role === 1) {
                 return redirect()->route('user.home');
@@ -60,7 +60,7 @@ class SignInController extends Controller
             }
         }
 
-        Session::flash('error', 'Email or Password is incorrect');
+        Session::flash('error', 'Email hoặc mật khẩu không đúng');
         return redirect()->back();
     }
 }

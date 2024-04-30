@@ -4,18 +4,31 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Authr\CategoryController;
 use App\Http\Controllers\Admin\Authr\ManageController;
 use App\Http\Controllers\Admin\Authr\ProductController;
+=======
+use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\Author\CategoryController;
+use App\Http\Controllers\Admin\Author\ManageController;
+use App\Http\Controllers\Admin\Users\ForgotPasswordController;
+>>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
-Route::post('users/signin/store', [SignInController::class, 'store']);
-Route::get('/signup', [SignUpController::class, 'index'])->name('signup');
-Route::post('users/signup/store', [SignUpController::class, 'store']);
+Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
+Route::get('/signup', [SignUpController::class, 'index'])->name('users.signup');
+Route::post('/signup', [SignUpController::class, 'store'])->name('users.register');
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
+Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('users.forgot_password');
+Route::post('/forgot_password/send', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot_password.send');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -23,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
+            Route::get('/product', [ProductController::class, 'index'])->name('user.product');
+            Route::get('/all-products', [ProductController::class, 'allProducts'])->name('user.all-products');
             Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
             Route::post('/cart', [CartController::class, 'store'])->name('user.cart.store');
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');
@@ -45,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
                 Route::get('/delete{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
             });
+<<<<<<< HEAD
             Route::prefix('product')->group(function(){
                 Route::get('/listproduct', [ProductController::class, 'index'])->name('admin.product.index');
                 Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -54,6 +70,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
             });                     
+=======
+
+            //Route::get('/product', [MainController::class, 'product'])->name('admin.product');
+            // Route::get('/customer', [MainController::class, 'customer'])->name('admin.customer');
+            // Route::get('/listproduct', [MainController::class, 'listProduct'])->name('admin.listproduct');
+            // Route::get('/listcustomer', [MainController::class, 'listCustomer'])->name('admin.listcustomer');
+>>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
         });
     });
 

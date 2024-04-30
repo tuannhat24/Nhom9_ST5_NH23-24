@@ -12,7 +12,9 @@
 .container {
     padding: 20px;
 }
-
+.brand-logo{
+    width: 180px;   
+}
 h2 {
     margin-bottom: 20px;
     color: #333;
