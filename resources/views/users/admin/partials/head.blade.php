@@ -14,7 +14,3 @@
 <link rel="stylesheet" href="{{ asset('vendors/styles/style1.css')}}">
 
 <!-- js -->
-<link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1/fontawesome-free-6.2.1-web/css/all.min.css">
-<script src="{{ asset('vendors/scripts/core.js')}}"></script>
-<script src="{{ asset('vendors/scripts/script.min.js')}}"></script>
-<script src="{{ asset('vendors/scripts/layout-settings.js')}}"></script>

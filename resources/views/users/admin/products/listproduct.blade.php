@@ -1,67 +1,157 @@
-
 @extends('users.admin.layout.admin')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('adnmins/product/index/list.css') }}">
+@endsection
+
+@section('js')
+    <script src="{{ asset('/adnmins/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('adnmins/product/index/list.js') }}"></script>
+@endsection
 <!--Container-->
 @section('content')
-<div class="pd-20 card-box mb-30">
-	<div class="clearfix mb-20">
-		<div class="pull-left">
-			<h4 class="text-blue h4">{{$title}}</h4>			
-		</div>		
-	</div>
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">{{ $title }}</h4>
+            </div>
 
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Name</th>
-					<th scope="col">Price</th>
-					<th scope="col">Image</th>
-					<th scope="col">Description</th>
-					<th scope="col">Price sale</th>
-					<th scope="col">Quantity sold</th>
-					<th scope="col">Active</th>
+            @if (session('success'))
+                <div class='alert alert-success alert-dismissible'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    {{ session('success') }}
+                </div>
+            @endif
+			
+            <div class="pull-right mt-5">
+                <a href="{{ route('admin.product.create') }}" class="add_product"><i class="fa-solid fa-square-plus"></i>
+                    ADD</a>
+            </div>
+        </div>
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td><span class="badge badge-primary">Primary</span></td>
-					<td></td>
-					<td></td>
-					<td>
-                        <a href="{{ route('admin.product.create') }}"><i class="fa-solid fa-square-plus"></i></a>
-                        <a href="" class="btn-edit"><i class="fas fa-edit"></i></a>
-                        <a href="" class="btn-delete"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-				</tr>
-				
-			</tbody>
-		</table>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12 col-md-5">
-	</div>
-	<div class="col-sm-12 col-md-7">
-		<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-			<ul class="pagination">
-				<li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#"
-						aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link"><i
-							class="ion-chevron-left"></i></a></li>
-				<li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0"
-						data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-				<li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2"
-						tabindex="0" class="page-link">2</a></li>
-				<li class="paginate_button page-item next" id="DataTables_Table_0_next"><a href="#"
-						aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link"><i
-							class="ion-chevron-right"></i></a></li>
-			</ul>
-		</div>
-	</div>
-</div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price sale</th>
+                        <th scope="col">Quantity sold</th>
+                        <th scope="col">Active</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $productItem)
+                        <tr>
+                            <th scope="row">{{ $productItem->id }}</th>
+                            <td>{{ $productItem->name }}</td>
+                            <td>{{ number_format($productItem->price) }}</td>
+                            <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
+                            <td>{{ optional($productItem->categories)->name }}</td>
+                            <td>{{ $productItem->description }}</td>
+                            <td>{{ number_format($productItem->price_sale) }}</td>
+                            <td>{{ $productItem->quantity_sold }}</td>
+                            <td>
+                                <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}" class="btn-edit"><i
+                                        class="fas fa-edit"></i></a>
+                                <a href="" class="btn-delete"
+                                    data-url="{{ route('admin.product.delete', ['id' => $productItem->id]) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <!-- You can add content here if needed -->
+        </div>
+        <div class="col-sm-12 col-md-7">
+            @php
+                $total_pages = $products->lastPage(); // Tổng số trang
+                $current_page = $products->currentPage(); // Trang hiện tại
+
+                // Xác định phạm vi trang hiển thị
+                $start_page = max(1, $current_page - 2); // Trang bắt đầu
+                $end_page = min($total_pages, $current_page + 2); // Trang kết thúc
+
+                // Điều chỉnh nếu phạm vi quá hẹp
+                if ($end_page - $start_page < 4) {
+                    if ($start_page > 1) {
+                        $start_page = max(1, $end_page - 4); // Đảm bảo có ít nhất 5 trang
+                    }
+                    if ($end_page < $total_pages) {
+                        $end_page = min($total_pages, $start_page + 4);
+                    }
+                }
+            @endphp
+
+            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                @if ($products->hasPages())
+                    <ul class="pagination">
+                        <!-- Previous Page Link -->
+                        @if ($products->onFirstPage())
+                            <li class="paginate_button page-item previous disabled"><span class="page-link"><i
+                                        class="ion-chevron-left"></i></span></li>
+                        @else
+                            <li class="paginate_button page-item previous"><a href="{{ $products->previousPageUrl() }}"
+                                    aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link"><i
+                                        class="ion-chevron-left"></i></a></li>
+                        @endif
+
+                        <!-- First page ellipsis -->
+                        @if ($start_page > 1)
+                            <li class="paginate_button page-item"><a href="{{ $products->url(1) }}"
+                                    aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
+                                    class="page-link">1</a></li>
+                            @if ($start_page > 2)
+                                <li class="paginate_button page-item"><span class="page-link">...</span></li>
+                            @endif
+                        @endif
+
+                        <!-- Pagination Elements -->
+                        @for ($page = $start_page; $page <= $end_page; $page++)
+                            @if ($page == $current_page)
+                                <li class="paginate_button page-item active"><span
+                                        class="page-link">{{ $page }}</span></li>
+                            @else
+                                <li class="paginate_button page-item"><a href="{{ $products->url($page) }}"
+                                        aria-controls="DataTables_Table_0" data-dt-idx="{{ $page }}" tabindex="0"
+                                        class="page-link">{{ $page }}</a></li>
+                            @endif
+                        @endfor
+
+                        <!-- Last page ellipsis -->
+                        @if ($end_page < $total_pages)
+                            @if ($end_page < $total_pages - 1)
+                                <li class="paginate_button page-item"><span class="page-link">...</span></li>
+                            @endif
+                            <li class="paginate_button page-item"><a href="{{ $products->url($total_pages) }}"
+                                    aria-controls="DataTables_Table_0" data-dt-idx="{{ $total_pages }}" tabindex="0"
+                                    class="page-link">{{ $total_pages }}</a></li>
+                        @endif
+
+                        <!-- Next Page Link -->
+                        @if ($products->hasMorePages())
+                            <li class="paginate_button page-item next"><a href="{{ $products->nextPageUrl() }}"
+                                    aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link"><i
+                                        class="ion-chevron-right"></i></a></li>
+                        @else
+                            <li class="paginate_button page-item next disabled"><span class="page-link"><i
+                                        class="ion-chevron-right"></i></span></li>
+                        @endif
+                    </ul>
+                @endif
+            </div>
+
+        </div>
+    </div>
+
 @endsection

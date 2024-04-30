@@ -70,3 +70,9 @@ h2 {
 .form-group label{
     font-weight: bold;
 }
+
+.product_img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}

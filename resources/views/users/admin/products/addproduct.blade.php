@@ -1,57 +1,68 @@
-
 @extends('users.admin.layout.admin')
-
+<!--Container-->
 @section('content')
-<div class="admin-container">
-    <div class="container">
-        <h2 style="color: rgb(107, 40, 169)">{{ $title }}</h2>
-        <div class="container">
-            <form action="#" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="ma">ID</label>
-                <input type="text" class="form-control" name="id" placeholder="nhap ma san pham " required="">
-              </div>
-              <div class="form-group">
-                <label for="ten">Product name:</label>
-                <input type="text" class="form-control" name="name" placeholder="Enter product name" required="">
-              </div>
-              <div class="form-group">
-                <label for="category">Category:</label>
-                <select class="form-control" name="category" required="">
-                    <!-- Option để chọn danh mục -->
-                    <option value="">Select a category</option>
-                    <!-- PHP code để lấy danh mục từ cơ sở dữ liệu và tạo các option tương ứng -->
-                    {!!$option!!}
-                </select>
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">{{ $title }}</h4>
             </div>
-              <div class="form-group">
-                <label for="namsinh">Description:</label>
-                <textarea class="form-control editor" name="description" id="" cols="30" rows="10" placeholder="Enter description"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="sdt">Product price</label>
-                <input type="text" class="form-control" name="price" placeholder="nhap product price" required="">
-              </div>
-              <div class="form-group">
-                <label for="sdt">Product price sale</label>
-                <input type="text" class="form-control" name="price_sale" placeholder="nhap product price" required="">
-              </div>
-              <div class="form-group">
-                <label for="sdt">Quantity sold</label>
-                <input type="number" class="form-control" name="qty" required="">
-              </div>
-              <div class="form-group">
-                <label for="namsinh">Product image:</label>
-                <input type="file"  name="img" required="" class="form-control-file">
-              </div>
-              <input type="submit" name="submit" class="btn btn-primary" style="float:left;" value="Add">
-            </form>
-          </div>
-    </div>
-</div>
-@endsection
+        </div>
 
-@section('js')
-<script src="{{ asset('admin/product/add.js')}}"></script>
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="ten">Tên sản phẩm:</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                    placeholder="Nhập tên sản phẩm" required="" value="{{ old('name') }}">
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="category">Danh mục:</label>
+                <select class="form-control @error('category') is-invalid @enderror" name="category" required="">
+                    <!-- Option để chọn danh mục -->
+                    <option value="">Chọn tên danh mục sản phẩm</option>
+                    <!-- PHP code để lấy danh mục từ cơ sở dữ liệu và tạo các option tương ứng -->
+                    {!! $option !!}
+                </select>
+                @error('category')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="namsinh">Mô tả:</label>
+                <textarea class="form-control my-editor @error('description') is-invalid @enderror" name="description" id=""
+                    cols="30" rows="10" placeholder="Nhập mô tả sảm phẩm" required="">{{ old('name') }}</textarea>
+                @error('description')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="price">Giá:</label>
+                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price"
+                    placeholder="Nhập giá sản phẩm" required="" value="{{ old('price') }}">
+                @error('price')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="sdt">Giảm giá</label>
+                <input type="text" class="form-control @error('price_sale') is-invalid @enderror" name="price_sale"
+                    placeholder="Nhập giá giảm" value="{{ old('price_sale') }}" required="">
+                @error('price_sale')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="soluong">Số lượng</label>
+                <input type="number" class="form-control" name="qty" value="{{ old('qty') }}" required="">
+            </div>
+            <div class="form-group">
+                <label for="namsinh">Hình ảnh sản phẩm:</label>
+                <input type="file" name="img" class="form-control-file" required="">
+            </div>
+            <input type="submit" name="submit" class="btn btn-primary" value="ADD">
+        </form>
+    </div>
 @endsection
