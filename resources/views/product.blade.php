@@ -11,14 +11,12 @@
                     <nav class="manager">
                         <h3 class="manager__heading">{{ $title }}</h3>
                         <ul class="manager-list">
+                            @foreach ($categories as $category)
                             <li class="manager-item">
-                                <a href="/signin" class="manager-item__link">ĐÃ ĐĂNG NHẬP</a>
+                                <a href="/signin" class="manager-item__link">{{ $category->name }}</a>
                             </li>
-                            <li class="manager-item manager-item--active">
-                                <a href="#" class="manager-item__link">USER</a>
-                            </li>
+                            @endforeach
                         </ul>
-
                     </nav>
                 </div>
 

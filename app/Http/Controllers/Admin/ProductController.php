@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\User;
@@ -29,6 +30,9 @@ class ProductController extends Controller
         // Truy vấn giỏ hàng
         $carts = Cart::all();
 
+        // Truy vấn danh mục
+        $categories = Category::all();
+
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
@@ -53,6 +57,7 @@ class ProductController extends Controller
             'currentUser' => $currentUser,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
+            'categories' => $categories,
         ]);
     }
 

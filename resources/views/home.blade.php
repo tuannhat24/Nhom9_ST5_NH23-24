@@ -44,46 +44,10 @@
     <div class="app__container">
         <div class="grid">
             <div class="grid__row app__content">
-                <div class="grid__column-2">
-                    <nav class="manager">
-                        <h3 class="manager__heading">{{ $title }}</h3>
-                        <ul class="manager-list">
-                            <li class="manager-item">
-                                <a href="/signin" class="manager-item__link">ĐÃ ĐĂNG NHẬP</a>
-                            </li>
-                            <li class="manager-item manager-item--active">
-                                <a href="#" class="manager-item__link">USER</a>
-                            </li>
-                        </ul>
 
-                    </nav>
-                </div>
-
-                <div class="grid__column-10">
-                    <div class="home-filter">
-                        <span class="home-filter__label">Sắp xếp theo</span>
-                        <button class="home-filter__btn btn">Phổ biến</button>
-                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                        <button class="home-filter__btn btn">Bán chạy</button>
-
-                        <!-- Price classification -->
-                        <div class="select-input">
-                            <span class="select-input__label">Giá</span>
-                            <i class="select-input__icon fa-solid fa-angle-down"></i>
-
-                            <!-- List options -->
-                            <ul class="select-input__list">
-                                <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
-                                </li>
-                                <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
+                <div class="grid__column">
+                    <div style="color: var(--primary-color); font-size: 3rem; text-align: center; height: 50px;" >Gợi ý hôm nay</div>
+                    <hr style="background-color: var(--primary-color); border: 0; height: 10px;">
                     <div class="home-product">
 
                         <div class="grid__row">
