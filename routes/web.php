@@ -4,12 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
+
 use App\Http\Controllers\Admin\MainController;
+
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\CheckOutController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
+use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
 
@@ -34,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
-            Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('user.cart.checkout');
+            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });
     });
@@ -52,12 +56,12 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/delete{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
             });
             Route::prefix('product')->group(function(){
-                Route::get('/listproduct', [ProductController::class, 'index'])->name('admin.product.index');
-                Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
-                Route::post('/store', [ProductController::class, 'store'])->name('admin.product.store');
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
-                Route::post('/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-                Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
+                Route::get('/listproduct', [ProductControllers::class, 'index'])->name('admin.product.index');
+                Route::get('/create', [ProductControllers::class, 'create'])->name('admin.product.create');
+                Route::post('/store', [ProductControllers::class, 'store'])->name('admin.product.store');
+                Route::get('/edit/{id}', [ProductControllers::class, 'edit'])->name('admin.product.edit');
+                Route::post('/update/{id}', [ProductControllers::class, 'update'])->name('admin.product.update');
+                Route::get('/delete/{id}', [ProductControllers::class, 'delete'])->name('admin.product.delete');
 
             });
         });

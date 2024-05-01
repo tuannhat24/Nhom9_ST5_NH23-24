@@ -1522,7 +1522,6 @@ i.home-product-item__like-icon-fill {
 .empty-cart-btn {
     background-color: rgb(195, 43, 43);
     border: none;
-    margin-top: 20px;
 }
 
 .empty-cart-btn:hover {

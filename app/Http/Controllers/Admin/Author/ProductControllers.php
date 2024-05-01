@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\admin\Author;
+
+namespace App\Http\Controllers\Admin\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
@@ -15,7 +16,7 @@ use Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductController extends Controller
+class ProductControllers extends Controller
 {
     use StorageImageTrait;
     private $category;

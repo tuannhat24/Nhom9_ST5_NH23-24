@@ -88,7 +88,7 @@ class CartController extends Controller
         //Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
         $existingCartItem = Cart::where('product_id', $request->input('product_id'))->first();
 
-        // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng 
+        // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
         if ($existingCartItem) {
             $existingCartItem->update([
                 'quantity' => $existingCartItem->quantity + $request->input('quantity')
@@ -132,12 +132,5 @@ class CartController extends Controller
         $cart = Cart::findOrFail($cartId);
         $cart->delete();
         return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
-    }
-
-
-    public function checkout()
-    {
-        // Thực hiện xử lý thanh toán ở đây
-        return redirect()->route('checkout');
     }
 }
