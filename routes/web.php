@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\CheckOutController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ManageController;
@@ -34,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
-            Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('user.cart.checkout');
+            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });
     });
