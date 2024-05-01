@@ -19,37 +19,37 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Quần',
                 'parent_id' => '0',
+                'image' => 'logoquan.png',
                 'description' => 'Các loại quần',
                 'slug' => '',
-                'image' => '',
             ],
             [
                 'name' => 'Áo',
                 'parent_id' => '0',
+                'image' => 'logoao.png',
                 'description' => 'Các loại áo',
                 'slug' => '',
-                'image' => '',
             ],
             [
                 'name' => 'Giày & dép',
                 'parent_id' => '0',
+                'image' => 'logogiay.png',
                 'description' => 'tất cả giày & dép',
                 'slug' => '',
-                'image' => '',
             ],
             [
                 'name' => 'Áo khoác',
                 'parent_id' => '0',
+                'image' => 'logoaokhoac.png',
                 'description' => 'Các loại áo khoác',
                 'slug' => '',
-                'image' => '',
             ],
             [
                 'name' => 'Phụ kiện & trang sức',
                 'parent_id' => '0',
+                'image' => 'logophukien.png',
                 'description' => 'Các loại nón',
                 'slug' => '',
-                'image' => '',
             ],
         ]);
     }
