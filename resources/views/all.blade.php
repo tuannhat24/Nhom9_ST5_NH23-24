@@ -55,17 +55,17 @@
                      <div class="home-pagination">
                         <!-- Nút Trước -->
                         @if ($currentPage > 1)
-                        <a href="{{ route('user.home', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">
+                        <a href="{{ route('user.all-products', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">
                             < </a>
                                 @endif
 
                                 <!-- Hiển thị số trang -->
-                                @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}
+                                @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.all-products', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}
                         </a>
                         @endfor
 
                         <!-- Nút Sau -->
-                        @if ($currentPage < $totalPages) <a href="{{ route('user.home', ['page' => $currentPage + 1, 'sort' => request()->input('sort')]) }}"> > </a>
+                        @if ($currentPage < $totalPages) <a href="{{ route('user.all-products', ['page' => $currentPage + 1, 'sort' => request()->input('sort')]) }}"> > </a>
                             @endif
                     </div>
                 </div>

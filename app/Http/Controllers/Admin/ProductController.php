@@ -64,7 +64,7 @@ class ProductController extends Controller
     public function allProducts()
     {
         // Dữ liệu phân trang
-        $perPage = 20;
+        $perPage = 30;
 
         $totalProducts = Product::count();
 
