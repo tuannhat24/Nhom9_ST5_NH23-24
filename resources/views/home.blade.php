@@ -41,7 +41,7 @@
     </div>
 
 
-    
+
 
     <!-- App container -->
     <div class="app__container">
@@ -49,7 +49,7 @@
             <div class="grid__row app__content">
 
                 <div class="grid__column">
-                    <div style="color: var(--primary-color); font-size: 3rem; text-align: center; height: 50px;" >Gợi ý hôm nay</div>
+                    <div style="color: var(--primary-color); font-size: 3rem; text-align: center; height: 50px;">Gợi ý hôm nay</div>
                     <hr style="background-color: var(--primary-color); border: 0; height: 10px;">
                     <div class="home-product">
 
@@ -101,8 +101,20 @@
                     </div>
                     <!-- Hiển thị số trang theo số thứ tự -->
                     <div class="home-pagination">
-                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
-                            @endfor
+                        <!-- Nút Trước -->
+                        @if ($currentPage > 1)
+                        <a href="{{ route('user.home', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">
+                            < </a>
+                                @endif
+
+                                <!-- Hiển thị số trang -->
+                                @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}
+                        </a>
+                        @endfor
+
+                        <!-- Nút Sau -->
+                        @if ($currentPage < $totalPages) <a href="{{ route('user.home', ['page' => $currentPage + 1, 'sort' => request()->input('sort')]) }}"> > </a>
+                            @endif
                     </div>
                 </div>
             </div>

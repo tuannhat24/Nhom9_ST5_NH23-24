@@ -11,7 +11,7 @@ class DetailController extends Controller
 {
     public function detail($id)
     {
-        $perPage = 10; // Số sản phẩm hiển thị trên mỗi trang
+        $perPage = 16; // Số sản phẩm hiển thị trên mỗi trang
         $product = Product::find($id);
 
          // Truy vấn thông tin của người dùng hiện tại

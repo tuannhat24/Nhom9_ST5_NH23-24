@@ -76,7 +76,7 @@ $(document).ready(function () {
     $(".related-products-slider").slick({
         infinite: true,
         slidesToShow: 5,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         prevArrow: '<button class="slick-prev"><</button>',
         nextArrow: '<button class="slick-next">></button>',
         responsive: [
