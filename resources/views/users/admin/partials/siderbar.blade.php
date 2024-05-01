@@ -45,15 +45,11 @@
 
 <div class="left-side-bar">
     <div class="brand-logo">
-<<<<<<< HEAD
-        <a href="{{route('admin.home')}}" style="width: 150px">											
-=======
-        <a href="http://127.0.0.1:8000/user/home">											
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
+        <a href="{{route('admin.home')}}" style="width: 150px">
                     <i class="fa-brands fa-shopify fa-2xl" style="color: #74C0FC; font-size: 1em;"></i>
                     <svg class="header__logo-img" viewBox="0 0 200 50">
                         <text x="12" y="40" font-family="Arial, sans-serif" font-size="34px" fill="#74C0FC">GenZ Store</text>
-                    </svg>					
+                    </svg>
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -62,17 +58,13 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-<<<<<<< HEAD
-                <li>
-=======
                 <li class="dropdown">
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
                     <a href="{{route('admin.home')}}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-house"></span
                         ><span class="mtext">Home</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{{route ('admin.category.index')}}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-calendar4-week"></span><span class="mtext">Category</span>

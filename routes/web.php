@@ -4,14 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
-<<<<<<< HEAD
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\CartController;
-use App\Http\Controllers\Admin\DetailController;
-use App\Http\Controllers\Admin\Authr\CategoryController;
-use App\Http\Controllers\Admin\Authr\ManageController;
-use App\Http\Controllers\Admin\Authr\ProductController;
-=======
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
@@ -20,7 +12,6 @@ use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
@@ -60,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
                 Route::get('/delete{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
             });
-<<<<<<< HEAD
             Route::prefix('product')->group(function(){
                 Route::get('/listproduct', [ProductController::class, 'index'])->name('admin.product.index');
                 Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -69,14 +59,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
                 Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
-            });                     
-=======
-
-            //Route::get('/product', [MainController::class, 'product'])->name('admin.product');
-            // Route::get('/customer', [MainController::class, 'customer'])->name('admin.customer');
-            // Route::get('/listproduct', [MainController::class, 'listProduct'])->name('admin.listproduct');
-            // Route::get('/listcustomer', [MainController::class, 'listCustomer'])->name('admin.listcustomer');
->>>>>>> c2cfa6fff0bd826f97f2155b1d19cdbb699cad62
+            });
         });
     });
 

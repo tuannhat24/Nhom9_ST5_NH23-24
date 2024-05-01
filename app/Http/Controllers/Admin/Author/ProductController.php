@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\Authr;
+namespace App\Http\Controllers\admin\Author;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Components\Recusive;
 use Storage;
-use DB;
-use Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -56,7 +56,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'price' => $request->price,
                 'price_sale' => $request->price_sale,
-                'quantity_sold' => $request->qty,        
+                'quantity_sold' => $request->qty,
             ];
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');
             if(!empty($dataUploadImg)){
@@ -65,11 +65,11 @@ class ProductController extends Controller
             }
             $product = $this->product->create($dataProductCreate);
             DB::commit();
-            return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được thêm thành công.');;          
+            return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được thêm thành công.');;
         }catch (\Exception $exception){
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . '   Liene: ' .$exception->getLine());
-        }       
+        }
     }
 
     public function edit($id){
@@ -91,7 +91,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'price' => $request->price,
                 'price_sale' => $request->price_sale,
-                'quantity_sold' => $request->qty,        
+                'quantity_sold' => $request->qty,
             ];
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');
             if(!empty($dataUploadImg)){
@@ -101,11 +101,11 @@ class ProductController extends Controller
             $product = $this->product->find($id)->update($dataProductUpdate);
             DB::commit();
             return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được update thành công.');
-            
+
         }catch (\Exception $exception){
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . '   Liene: ' .$exception->getLine());
-        }   
+        }
     }
 
     public function delete($id){
@@ -116,11 +116,11 @@ class ProductController extends Controller
                 'message' => 'succes'
             ], status: 200);
         }catch (\Exception $exception){
-            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' .$exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
             return response()->json([
                 'code' => 500,
                 'message' => 'fail'
             ], status: 500);
-        }  
+        }
     }
 }

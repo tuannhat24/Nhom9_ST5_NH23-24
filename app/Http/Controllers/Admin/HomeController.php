@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use App\Models\Customer;
 use App\Models\Product;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -47,7 +44,7 @@ class HomeController extends Controller
         }
 
         return view('home', [
-            'title' => 'Trang sản phẩm',
+            'title' => 'Trang chủ',
             'data' => $products,
             'carts' => $carts,
             'currentUser' => $currentUser,
