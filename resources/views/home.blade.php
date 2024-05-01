@@ -40,6 +40,9 @@
         </div>
     </div>
 
+
+    
+
     <!-- App container -->
     <div class="app__container">
         <div class="grid">
@@ -98,7 +101,7 @@
                     </div>
                     <!-- Hiển thị số trang theo số thứ tự -->
                     <div class="home-pagination">
-                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.product', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
+                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
                             @endfor
                     </div>
                 </div>

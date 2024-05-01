@@ -63,12 +63,21 @@
                             </tr>
                             @endforeach
                             <tr>
+                                <td colspan="6"></td>
+                                <td colspan="2">
+                                    <form action="{{ route('user.cart.clear') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="button empty-cart-btn">Xóa Tất Cả<i style="padding-left: 10px;" class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
                                 <td colspan="2" id="total-quantity" style="padding-left: 156px;">{{ $totalQuantity }}</td>
                                 <td colspan="1">Tổng Số Tiền:</td>
                                 <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                 <td>
-                                    <form method="POST" action="{{ route('user.cart.checkout') }}">
+                                    <form method="POST" action="{{ route('user.checkout') }}">
                                         @csrf
                                         <button type="submit" class="button checkout-btn">Mua Hàng</button>
                                     </form>
@@ -76,18 +85,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <form style="float: right;" action="{{ route('user.cart.clear') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="button empty-cart-btn"><i style="padding-right: 4px;" class="fas fa-trash-alt"></i>Xóa Tất Cả</button>
-                    </form>
                     @endif
                 </section>
-                <!-- Relate products -->    
+                <!-- Relate products -->
                 <section class="related-products">
                     <div class="container">
                         <div class="more">
                             <h2 class="related-products__title"> Có thể bạn sẽ thích </h2>
-                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem thêm -></a>
+                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem Thêm<i  style="padding-left: 6px;" class="fa-solid fa-arrow-right"></i></a>
                         </div>
                         <div class="grid__row">
                             @foreach($relatedProducts as $row)
@@ -140,6 +145,5 @@
         </div>
     </div>
 </div>
-</body>
 
 @endsection

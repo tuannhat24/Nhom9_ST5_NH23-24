@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Components\Recusive;
-use DB;
-use Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' . $exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' . $exception->getLine());
         }
     }
 
@@ -107,6 +107,6 @@ class CategoryController extends Controller
                 'code' => 500,
                 'message' => 'fail'
             ], status: 500);
-        }  
+        }
     }
 }
