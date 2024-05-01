@@ -163,3 +163,5 @@ document.addEventListener("DOMContentLoaded", function () {
         addActiveCarousel(i);
     }, 5000);
 });
+
+// Danh muc home

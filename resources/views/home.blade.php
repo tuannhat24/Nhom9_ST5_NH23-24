@@ -40,8 +40,6 @@
         </div>
     </div>
 
-  
-
 
     <!-- App container -->
     <div class="app__container">
