@@ -35,12 +35,13 @@
                             <!-- List options -->
                             <ul class="select-input__list">
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('product.search', ['sort' => 'price_asc', 'query' => request()->input('query')]) }}" class="select-input__link">Giá: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="{{ route('product.search', ['sort' => 'price_desc', 'query' => request()->input('query')]) }}" class="select-input__link">Giá: Cao đến thấp</a>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
 
@@ -96,7 +97,6 @@
                     <!-- Hiển thị số trang theo số thứ tự -->
                     <div class="home-pagination">
                         @for ($i = 1; $i <= $totalPages; $i++)<a href="{{ route('product.search', ['query' => request()->input('query'), 'page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
-
                             @endfor
                     </div>
                 </div>
