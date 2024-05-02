@@ -80,6 +80,7 @@ class ProductController extends Controller
 
     public function allProducts()
     {
+        $title = "Tất cả sản phẩm";
         $perPage = 30;
         $totalProducts = Product::count();
         $totalPages = ceil($totalProducts / $perPage);
@@ -94,6 +95,6 @@ class ProductController extends Controller
 
         $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
 
-        return view('all', compact('products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
+        return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
     }
 }
