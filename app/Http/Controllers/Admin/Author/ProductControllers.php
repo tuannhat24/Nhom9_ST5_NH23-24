@@ -69,7 +69,7 @@ class ProductControllers extends Controller
             return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được thêm thành công.');;
         }catch (\Exception $exception){
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' .$exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
         }
     }
 

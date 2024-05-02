@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
             Route::get('/product', [ProductController::class, 'index'])->name('user.product');
+            Route::get('/search', [ProductController::class, 'search'])->name('product.search');
             Route::get('/all-products', [ProductController::class, 'allProducts'])->name('user.all-products');
             Route::get('/cart', [CartController::class, 'index'])->name('user.cart');
             Route::post('/cart', [CartController::class, 'store'])->name('user.cart.store');

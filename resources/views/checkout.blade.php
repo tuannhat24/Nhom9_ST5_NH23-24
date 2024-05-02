@@ -63,10 +63,10 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td colspan="1" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
-                                                <td colspan="1" id="total-quantity" style="padding-left: 156px;">{{ $totalQuantity }}</td>
+                                                <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
+                                                <td colspan="1" id="total-quantity">{{ $totalQuantity }}</td>
                                                 <td colspan="2">Tổng Số Tiền:</td>
-                                                <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
+                                                <td colspan="1"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                                 <td>
                                                     <form method="POST" action="{{ route('user.checkout') }}">
                                                         @csrf

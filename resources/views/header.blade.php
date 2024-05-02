@@ -131,9 +131,9 @@
 
             <div class="header__search">
                 <div class="header__search-input-wrap">
-                    <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
-                    <ul id="results"></ul>
-
+                    <form action="{{ route('product.search') }}" method="GET">
+                        <input type="text" name="query" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
+                    </form>
 
                     <!-- Search history -->
                     <div class="header__search-history">
@@ -164,7 +164,7 @@
                         </li>
                     </ul>
                 </div>
-                <button class="header__search-btn">
+                <button type="submit" class="header__search-btn">
                     <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
