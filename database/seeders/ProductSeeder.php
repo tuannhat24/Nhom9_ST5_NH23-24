@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
+use App\Models\Size;
+use App\Models\Color;
 
 class ProductSeeder extends Seeder
 {
@@ -14,6 +17,12 @@ class ProductSeeder extends Seeder
      * @return void
      */
     public function run()
+    {
+        $this->seedProducts();
+        $this->associateSizesAndColors();
+    }
+
+    private function seedProducts()
     {
         DB::table('products')->insert([
             [
@@ -34,7 +43,7 @@ class ProductSeeder extends Seeder
                 'price_sale' => '85000',
                 'quantity_sold' => '278',
             ],
-            [
+            [   
                 'name' => 'Áo thun simon skeleten',
                 'cate_id' => '2',
                 'image' => 'aothunskeleten.png',
@@ -737,5 +746,37 @@ class ProductSeeder extends Seeder
                 'quantity_sold' => '13995',
             ],
         ]);
+    }
+
+    private function associateSizesAndColors()
+    {
+        $sizes = [
+            ['name' => '39'], ['name' => '40'], ['name' => '41'], ['name' => '42'], ['name' => '43'], // For shoes
+            ['name' => 'S'], ['name' => 'M'], ['name' => 'L'], ['name' => 'XL'] // For clothes
+        ];
+        $colors = [
+            ['name' => 'Xanh'], ['name' => 'Đen'], ['name' => 'Trắng'],
+            ['name' => 'Lam'], ['name' => 'Lục']
+        ];
+
+        Size::insert($sizes);
+        Color::insert($colors);
+
+        $shoeSizesIds = Size::whereIn('name', ['39', '40', '41', '42', '43'])->pluck('id');
+        $clothingSizesIds = Size::whereIn('name', ['S', 'M', 'L', 'XL'])->pluck('id');
+        $colorsIds = Color::pluck('id');
+
+        // Lấy tất cả sản phẩm đã tạo
+        $products = Product::all();
+
+        foreach ($products as $product) {
+            if ($product->cate_id == 3) { // Giả sử cate_id = 3 là danh mục giày dép
+                $product->sizes()->attach($shoeSizesIds);
+                $product->colors()->attach($colorsIds->random(rand(1, 3)));
+            } else { // Ngược lại là quần áo
+                $product->sizes()->attach($clothingSizesIds);
+                $product->colors()->attach($colorsIds->random(rand(1, 3)));
+            }
+        }
     }
 }

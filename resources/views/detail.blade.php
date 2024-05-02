@@ -30,7 +30,7 @@
                                         <img src="{{ asset('assets/img/' . $product->image) }}" alt="Product Image">
                                     </div>
                                     <div class="product-details">
-                                        <div class="product-sku" style="padding-top: 140px;">SKU: {{ $product->sku }}</div>
+                                        <!-- <div class="product-sku" style="padding-top: 40px;">{{ $product->sku }}</div> -->
                                         <h1 class="product-title">{{ $product->name }}</h1>
                                         <div class="product-prices">
                                             <span class="product-price-old">
@@ -45,7 +45,26 @@
                                             <form method="POST" class="product-actions-form" action="{{ route('user.cart.store') }}">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <input class="product-quantity" type="num" value="1" name="quantity" min="1">
+                                                <div class="quantity-input">
+                                                    <button type="button" class="quantity-decrement" onclick="decrementQuantity()">-</button>
+                                                    <input class="product-quantity" type="text" value="1" name="quantity" min="1" id="product-quantity">
+                                                    <button type="button" class="quantity-increment" onclick="incrementQuantity()">+</button>
+                                                </div>
+
+                                                <!-- Size Buttons -->
+                                                <div class="size-options">
+                                                    @foreach($product->sizes as $size)
+                                                    <button type="button" class="size-btn" data-size="{{ $size->id }}">{{ $size->name }}</button>
+                                                    @endforeach
+                                                </div>
+
+                                                <!-- Color Buttons -->
+                                                <div class="color-options">
+                                                    @foreach($product->colors as $color)
+                                                    <button type="button" class="color-btn" data-color="{{ $color->id }}">{{ $color->name }}</button>
+                                                    @endforeach
+                                                </div>
+
                                                 <button type="submit" class="btn product-add-to-cart">Thêm Vào Giỏ Hàng</button>
                                             </form>
                                         </div>

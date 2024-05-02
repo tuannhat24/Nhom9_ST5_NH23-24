@@ -164,4 +164,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 5000);
 });
 
+//tăng giảm số lượng sản phẩm trong detail
+function incrementQuantity() {
+    var quantityInput = document.getElementById("product-quantity");
+    var currentQuantity = parseInt(quantityInput.value, 10);
+    quantityInput.value = currentQuantity + 1;
+}
+
+function decrementQuantity() {
+    var quantityInput = document.getElementById("product-quantity");
+    var currentQuantity = parseInt(quantityInput.value, 10);
+    if (currentQuantity > 1) {
+        quantityInput.value = currentQuantity - 1;
+    }
+}
+
 // Danh muc home
