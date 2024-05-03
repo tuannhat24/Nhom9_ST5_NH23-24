@@ -74,12 +74,12 @@
                             <tr>
                                 <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
                                 <td colspan="2" id="total-quantity" style="padding-left: 156px;">{{ $totalQuantity }}</td>
-                                <td colspan="1">Tổng Số Tiền:</td>
+                                <td style="white-space: nowrap;" colspan="1">Tổng Số Tiền:</td>
                                 <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                 <td>
                                     <form method="POST" action="{{ route('user.checkout') }}">
                                         @csrf
-                                        <button type="submit" class="button checkout-btn">Mua Hàng</button>
+                                        <div type="submit" class="button checkout-btn">Mua Hàng</div>
                                     </form>
                                 </td>
                             </tr>

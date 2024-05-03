@@ -15,149 +15,49 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendors/styles/style1.css') }}">
+let backenAPI = [{
+id: 1,
+name: "Quần áo"
+},
+{
+id: 2,
+name: "Áo Khoác"
+},
+{
+id: 3,
+name: "Áo Thun"
+},
+{
+id: 4,
+name: "Hoodi"
+},
+{
+id: 5,
+name: "Giày"
+},
+{
+id: 6,
+name: "Quần jear"
+},
+{
+id: 7,
+name: "Dép"
+},
+];
 
-<!-- js -->
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
-{{-- <script>
-    let backenAPI = [{
-            id: 1,
-            name: "Quần áo"
-        },
-        {
-            id: 2,
-            name: "Áo Khoác"
-        },
-        {
-            id: 3,
-            name: "Áo Thun"
-        },
-        {
-            id: 4,
-            name: "Hoodi"
-        },
-        {
-            id: 5,
-            name: "Giày"
-        },
-        {
-            id: 6,
-            name: "Quần jear"
-        },
-        {
-            id: 7,
-            name: "Dép"
-        },
-    ];
+function debounce(fn, ms, event = null) {
+let times;
+return (...arguments) => {
+clearTimeout(timer);
 
-    const $ = document.querySelector.bind(document);
-    const $$ = document.querySelectorAll.bind(document);
+timer = setTimeout(() => {
+fn.apply(this, arguments);
 
-    function debounce(fn, ms, event = null) {
-        let times;
-        return (...arguments) => {
-            clearTimeout(timer);
 
-            timer = setTimeout(() => {
-                fn.apply(this, arguments);
-
-=======
 <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1/fontawesome-free-6.2.1-web/css/all.min.css">
 <script src="{{ asset('vendors/scripts/core.js')}}"></script>
 <script src="{{ asset('vendors/scripts/script.min.js')}}"></script>
 <script src="{{ asset('vendors/scripts/layout-settings.js')}}"></script>
-<script>
-    let backenAPI = [{
-            id: 1,
-            name: "Quần áo"
-        },
-        {
-            id: 2,
-            name: "Áo Khoác"
-        },
-        {
-            id: 3,
-            name: "Áo Thun"
-        },
-        {
-            id: 4,
-            name: "Hoodi"
-        },
-        {
-            id: 5,
-            name: "Giày"
-        },
-        {
-            id: 6,
-            name: "Quần jear"
-        },
-        {
-            id: 7,
-            name: "Dép"
-        },
-    ];
-
-    const $ = document.querySelector.bind(document);
-    const $$ = document.querySelectorAll.bind(document);
-
-    function debounce(fn, ms, event = null) {
-        let times;
-        return (...arguments) => {
-            clearTimeout(timer);
-
-            timer = setTimeout(() => {
-                fn.apply(this, arguments);
-
->>>>>>> a5c0a2158f4315c26d4ce3c23250ecdd2576edb6
-                console.log(
-                    "Call debounce after" + ms + "ms",
-                    ",typing typing total" + timer + "ms"
-                );
-            }, ms);
-        };
-    }
-
-    function render(content = []) {
-        if (content.length - 0) {
-            $("#results").innerHTML = "Không có dữ liệu khớp";
-            return;
-        }
-
-        $("#results").innerHTML = content
-
-            .map(
-                (v) =>
-                '<li> ${v.name} </li>'
-
-            )
-
-            .join("");
-    }
-
-    const builder = (() => {
-        return {
-            init: () => render(blackendAPI),
-            install: () => {
-
-                $("#searchbar").addEnentListener(
-                    "keyup",
-                    debounce(function(e) {
-                        let value = e.target.value;
-
-                        let results = backendAPI.filter((v) => {
-                            if (v.name.indexOF(value) - 1) {
-                                return v;
-                            }
-                        });
-                        render(results);
-                    }, 500)
-
-                );
-            },
-        };
-    });
-    builder.imit();
-    builder.indtall();
-
-</script> --}}
-
-

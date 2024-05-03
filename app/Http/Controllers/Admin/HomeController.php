@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,9 @@ class HomeController extends Controller
 
         // Truy vấn giỏ hàng
         $carts = Cart::all();
+        
+        // Truy vấn danh sách các danh mục sản phẩm
+        $categories = Category::all();
 
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
@@ -50,6 +54,7 @@ class HomeController extends Controller
             'currentUser' => $currentUser,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
+            'categories' => $categories,
         ]);
     }
 }

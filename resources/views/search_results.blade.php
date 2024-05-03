@@ -21,6 +21,7 @@
                 </div>
 
                 <div class="grid__column-10">
+                    @if(!$products->isEmpty())
                     <div class="home-filter">
                         <span class="home-filter__label">Sắp xếp theo</span>
                         <button class="home-filter__btn btn">Phổ biến</button>
@@ -41,17 +42,20 @@
                                     <a href="{{ route('product.search', ['sort' => 'price_desc', 'query' => request()->input('query')]) }}" class="select-input__link">Giá: Cao đến thấp</a>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
+                    @endif
 
 
                     <div class="home-product">
 
                         <div class="grid__row">
+                            @if($products->isEmpty())
+                            <h1 style="padding: 0px 100px 100px;">Không tìm thấy sản phẩm nào!</h1>
+                            @else
 
-                            @foreach($products as $product)
                             <!-- Product item -->
+                            @foreach($products as $product)
                             <div class="grid__column-2-4">
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $product->id]) }}">
                                     @php
@@ -92,6 +96,7 @@
                                 </a>
                             </div>
                             @endforeach
+                            @endif
                         </div>
                     </div>
                     <!-- Hiển thị số trang theo số thứ tự -->

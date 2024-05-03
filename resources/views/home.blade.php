@@ -45,8 +45,25 @@
     <div class="app__container">
         <div class="grid">
             <div class="grid__row app__content">
-
                 <div class="grid__column">
+                    <div style="color: var(--primary-color); font-size: 3rem; text-align: center; height: 50px;">Danh Mục</div>
+                    <div class="home__category">
+                        <div class="home__category-item-list">
+                            @foreach($categories as $category)
+                            <div class="home__category-item">
+                                @php
+                                $imageUrl = asset('assets/img/' . $category->image);
+                                @endphp
+                                <div class="home__category-image" style="background-image: url('{{ $imageUrl }}');" alt="Product Image"></div>
+                                <div class="home__category-name">
+                                    <!-- Hiển thị tên của danh mục -->
+                                    <a href="{{ route('products.by.category', ['category' => $category->id]) }}">{{ $category->name }}</a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                     <div style="color: var(--primary-color); font-size: 3rem; text-align: center; height: 50px;">Gợi ý hôm nay</div>
                     <hr style="background-color: var(--primary-color); border: 0; height: 10px;">
                     <div class="home-product">

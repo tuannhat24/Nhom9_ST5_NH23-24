@@ -53,7 +53,7 @@ class ProductController extends Controller
 
         return view('product', [
             'title' => 'Trang sản phẩm',
-            'data' => $products,
+            'products' => $products,
             'carts' => $carts,
             'currentUser' => $currentUser,
             'totalPages' => $totalPages,
@@ -109,6 +109,39 @@ class ProductController extends Controller
     }
 
 
+    public function productsByCategory(Category $category)
+    {
+        $title = "Sản phẩm thuộc danh mục: " . $category->name;
+        $perPage = 20;
+
+        $totalProducts = $category->products()->count();
+        $totalPages = ceil($totalProducts / $perPage);
+        $currentPage = request()->input('page', 1);
+
+        if ($currentPage > $totalPages) {
+            $currentPage = $totalPages;
+        }
+
+        $currentUser = Auth::user();
+        $carts = Cart::all();
+        $categories = Category::all();
+
+        $products = $category->products()->paginate($perPage);
+
+        return view('product', compact(
+            'title',
+            'products',
+            'category',
+            'currentUser',
+            'totalPages',
+            'currentPage',
+            'carts',
+            'categories',
+        ));
+    }
+
+
+
     public function allProducts()
     {
         $title = "Tất cả sản phẩm";
@@ -129,4 +162,3 @@ class ProductController extends Controller
         return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
     }
 }
-

@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                 'price_sale' => '85000',
                 'quantity_sold' => '278',
             ],
-            [   
+            [
                 'name' => 'Áo thun simon skeleten',
                 'cate_id' => '2',
                 'image' => 'aothunskeleten.png',
@@ -608,7 +608,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Da Pu là một loại da nhân tạo có độ bền cao, dễ lau chùi và không bị nứt nẻ khi sử dụng lâu dài',
                 'price' => '275000',
                 'price_sale' => '169000',
-                'quantity_sold' => '436',  
+                'quantity_sold' => '436',
             ],
             [
                 'name' => 'Giày thể thao NiKe Zion Williamson cổ thấp bản cao cấp da lộn',

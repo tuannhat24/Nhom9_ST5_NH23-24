@@ -13,7 +13,7 @@
                         <ul class="manager-list">
                             @foreach ($categories as $category)
                             <li class="manager-item">
-                                <a href="/signin" class="manager-item__link">{{ $category->name }}</a>
+                                <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link">{{ $category->name }}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -49,18 +49,18 @@
 
                         <div class="grid__row">
 
-                            @foreach($data as $row)
+                            @foreach($products as $product)
                             <!-- Product item -->
                             <div class="grid__column-2-4">
-                                <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
+                                <a class="home-product-item" href="{{ route('user.detail', ['id' => $product->id]) }}">
                                     @php
-                                    $imageUrl = asset('assets/img/' . $row->image);
+                                    $imageUrl = asset('assets/img/' . $product->image);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
-                                    <h4 class="home-product-item__name">{{ $row->name }}</h4>
+                                    <h4 class="home-product-item__name">{{ $product->name }}</h4>
                                     <div class="home-product-item__price">
-                                        <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                        <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
+                                        <span class="home-product-item__price-old">{{ number_format($product->price) }}</span>
+                                        <span class="home-product-item__price-current">{{ number_format($product->price_sale) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
                                         <span class="home-product-item__like home-product-item__like--liked">
@@ -74,7 +74,7 @@
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
                                             <i class="fa-solid fa-star"></i>
                                         </div>
-                                        <span class="home-product-item__sold">{{ $row->quantity_sold }} Đã bán</span>
+                                        <span class="home-product-item__sold">{{ $product->quantity_sold }} Đã bán</span>
                                     </div>
                                     <div class="home-product-item__origin">
                                         <span class="home-product-item__brand">GenZ</span>
