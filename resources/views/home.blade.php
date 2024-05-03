@@ -50,16 +50,15 @@
                     <div class="home__category">
                         <div class="home__category-item-list">
                             @foreach($categories as $category)
-                            <div class="home__category-item">
+                            <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="home__category-item">
                                 @php
                                 $imageUrl = asset('assets/img/' . $category->image);
                                 @endphp
                                 <div class="home__category-image" style="background-image: url('{{ $imageUrl }}');" alt="Product Image"></div>
                                 <div class="home__category-name">
-                                    <!-- Hiển thị tên của danh mục -->
-                                    <a href="{{ route('products.by.category', ['category' => $category->id]) }}">{{ $category->name }}</a>
+                                    {{ $category->name }}
                                 </div>
-                            </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>

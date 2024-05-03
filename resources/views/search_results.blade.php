@@ -13,7 +13,7 @@
                         <ul class="manager-list">
                             @foreach ($categories as $category)
                             <li class="manager-item">
-                                <a href="/signin" class="manager-item__link">{{ $category->name }}</a>
+                                <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link">{{ $category->name }}</a>
                             </li>
                             @endforeach
                         </ul>
