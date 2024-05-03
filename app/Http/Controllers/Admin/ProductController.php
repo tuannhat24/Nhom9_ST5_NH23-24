@@ -109,10 +109,13 @@ class ProductController extends Controller
     }
 
 
-    public function productsByCategory(Category $category)
+    public function productsByCategory(Category $category, Request $request)
     {
         $title = "Sản phẩm thuộc danh mục: " . $category->name;
         $perPage = 20;
+
+        // Lấy danh sách sản phẩm thuộc danh mục và phân trang
+        $productsQuery = $category->products();
 
         $totalProducts = $category->products()->count();
         $totalPages = ceil($totalProducts / $perPage);
@@ -126,7 +129,20 @@ class ProductController extends Controller
         $carts = Cart::all();
         $categories = Category::all();
 
-        $products = $category->products()->paginate($perPage);
+        // Áp dụng sắp xếp theo giá nếu được yêu cầu
+        if ($request->has('sort')) {
+            if ($request->input('sort') == 'price_asc') {
+                $productsQuery->orderBy('price_sale');
+            } elseif ($request->input('sort') == 'price_desc') {
+                $productsQuery->orderByDesc('price_sale');
+            }
+        }
+
+        $products = $productsQuery->paginate($perPage);
+
+        // Truyền biến selectedCategory vào view
+        $selectedCategory = $category->id;
+
 
         return view('product', compact(
             'title',
@@ -137,6 +153,7 @@ class ProductController extends Controller
             'currentPage',
             'carts',
             'categories',
+            'selectedCategory'
         ));
     }
 

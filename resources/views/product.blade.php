@@ -16,6 +16,11 @@
                                 <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link">{{ $category->name }}</a>
                             </li>
                             @endforeach
+                            @if(request()->has('selected_category'))
+                            @php
+                            $selectedCategory = request()->input('selected_category');
+                            @endphp
+                            @endif
                         </ul>
                     </nav>
                 </div>
@@ -35,10 +40,10 @@
                             <!-- List options -->
                             <ul class="select-input__list">
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
                                 </li>
                             </ul>
                         </div>
