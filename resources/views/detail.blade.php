@@ -53,15 +53,15 @@
 
                                                 <!-- Size Buttons -->
                                                 <div class="size-options">
-                                                    @foreach($product->sizes as $size)
-                                                    <button type="button" class="size-btn" data-size="{{ $size->id }}">{{ $size->name }}</button>
+                                                    @foreach($product->size as $size)
+                                                    <button type="button" class="size-btn">{{ $size }}</button>
                                                     @endforeach
                                                 </div>
 
                                                 <!-- Color Buttons -->
                                                 <div class="color-options">
-                                                    @foreach($product->colors as $color)
-                                                    <button type="button" class="color-btn" data-color="{{ $color->id }}">{{ $color->name }}</button>
+                                                    @foreach($product->color as $color)
+                                                    <button type="button" class="color-btn">{{ $color }}</button>
                                                     @endforeach
                                                 </div>
 

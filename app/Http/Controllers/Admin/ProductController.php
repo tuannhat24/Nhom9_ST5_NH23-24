@@ -39,7 +39,7 @@ class ProductController extends Controller
         }
 
         // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
-        $products = Product::orderBy('id')->paginate($perPage);
+        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
 
         // Nếu có yêu cầu sắp xếp theo giá từ thấp đến cao
         if (request()->has('sort') && request()->input('sort') == 'price_asc') {
