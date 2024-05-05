@@ -12,8 +12,8 @@ class Product extends Model
     protected $guarded = [];
     use HasFactory;
     protected $casts = [
-        'size' => 'array',  
-        'color' => 'array',  
+        'size' => 'array',
+        'color' => 'array',
     ];
     public function categories()
     {

@@ -1,6 +1,7 @@
     @extends('main')
     @section('content')
 
+
     <body>
         <!-- sidebar -->
         <!-- App container -->
@@ -53,17 +54,18 @@
 
                                                 <!-- Size Buttons -->
                                                 <div class="size-options">
-                                                    @foreach($product->size as $size)
+                                                    @foreach($product->size ?? [] as $size)
                                                     <button type="button" class="size-btn">{{ $size }}</button>
                                                     @endforeach
                                                 </div>
 
                                                 <!-- Color Buttons -->
                                                 <div class="color-options">
-                                                    @foreach($product->color as $color)
+                                                    @foreach($product->color ?? [] as $color)
                                                     <button type="button" class="color-btn">{{ $color }}</button>
                                                     @endforeach
                                                 </div>
+
 
                                                 <button type="submit" class="btn product-add-to-cart">Thêm Vào Giỏ Hàng</button>
                                             </form>
