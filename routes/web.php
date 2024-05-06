@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
             Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
+            Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });

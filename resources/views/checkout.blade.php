@@ -6,6 +6,12 @@
         <div class="grid__row app__content">
             <div class="grid__column">
                 <div class="container">
+                    <!-- Kiểm tra và hiển thị thông báo -->
+                    @if(session('success_message'))
+                    <div class="alert alert-success">
+                        {{ session('success_message') }}
+                    </div>
+                    @endif
                     <!-- content -->
                     <section class="shopping-cart">
                         <div class="container">
@@ -67,6 +73,7 @@
                                                 <td>
                                                     <form action="{{route('user.checkout.vnpay')}}" method="post">
                                                         @csrf
+                                                        <input type="hidden" name="amount" value="{{ $totalPrice }}">
                                                         <button type="submit" class="btn btn--success">Thanh toán vnpay</button>
                                                     </form>
                                                 </td>
