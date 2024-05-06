@@ -588,6 +588,16 @@ li.sidebar__menu-item {
     align-items: center;
 }
 
+.header__search-history-remove {
+    float: right;
+    margin-left: 5px;
+}
+
+.header__search-history-remove:hover {
+    color: red;
+    cursor: pointer;
+}
+
 .header__cart {
     width: 150px;
     text-align: center;
@@ -934,12 +944,14 @@ li.sidebar__menu-item {
 }
 
 .header__search-history-item {
+    display: flex;
+    align-items: center;
     height: 38px;
     padding: 0 12px;
 }
 
 .header__search-history-item:hover {
-    background-color: #fafafa;
+    background-color: #dfdfdf;
 }
 
 .header__search-history-item a {
@@ -948,6 +960,16 @@ li.sidebar__menu-item {
     line-height: 38px;
     color: var(--text-color);
     display: block;
+    flex-grow: 1;
+}
+
+.header__search-history-item button {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 /* App container */

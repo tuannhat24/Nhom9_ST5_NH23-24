@@ -137,15 +137,18 @@
                         <!-- Search history -->
                         <div class="header__search-history">
                             <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
-                        <ul class="header__search-history-list">
-                            <li class="header__search-history-item">
-                                <a href="#">Áo khoác</a>
+                            <ul class="header__search-history-list">
+                                @if(session()->has('search_history') && !empty(session('search_history')))
+                                @foreach(session('search_history') as $query)
+                                <li class="header__search-history-item"><a href="#">{{ $query }}</a>
+                                <button class="header__search-history-remove">X</button>
                             </li>
-                            <li class="header__search-history-item">
-                                <a href="#">Hoodie</a>
-                            </li>
-                        </ul>
-                    </div>
+                                @endforeach
+                                @else
+                                <li class="header__search-history-item">Không có lịch sử tìm kiếm.</li>
+                                @endif
+                            </ul>
+                        </div>
 
                 </div>
                 <div class="header__search-select">
@@ -166,7 +169,7 @@
                 <button type="submit" class="header__search-btn">
                     <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                 </button>
-            </form>
+                </form>
             </div>
 
             <!-- Cart layout -->
