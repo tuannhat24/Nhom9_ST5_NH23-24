@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('cate_id');
             $table->string('image');
+            $table->json('size')->nullable();
+            $table->json('color')->nullable();
             $table->text('description');
             $table->integer('price');
             $table->integer('price_sale');
@@ -25,12 +27,12 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('cate_id')
-                  ->references('id')
-                  ->on('categories')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('products');

@@ -1,6 +1,8 @@
 :root {
     --primary-color: #205992;
     --secondary-color: #82e0ff;
+    --success-color: #28a745;
+    --success-hover-color: #43f96d;
     --white-color: #fff;
     --black-color: #000;
     --text-color: #333;
@@ -148,6 +150,21 @@ html {
 .btn.btn--primary {
     color: var(--white-color);
     background-color: var(--primary-color);
+}
+
+.btn.btn--primary:hover {
+    color: var(--white-color);
+    background-color: var(--secondary-color);
+}
+
+.btn.btn--success {
+    color: var(--white-color);
+    background-color: var(--success-color);
+}
+
+.btn.btn--success:hover {
+    color: var(--white-color);
+    background-color: var(--success-hover-color);
 }
 
 .btn.btn--disabled {

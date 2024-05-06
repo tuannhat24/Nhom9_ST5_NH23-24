@@ -11,6 +11,9 @@
                     <nav class="manager">
                         <h3 class="manager__heading">{{ $title }}</h3>
                         <ul class="manager-list">
+                            <li class="manager-item">
+                                <a href="{{ route('user.product') }}" class="manager-item__link">Tất cả sản phẩm</a>
+                            </li>
                             @foreach ($categories as $category)
                             <li class="manager-item">
                                 <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link">{{ $category->name }}</a>

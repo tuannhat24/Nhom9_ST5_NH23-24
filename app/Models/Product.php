@@ -11,6 +11,10 @@ class Product extends Model
     use SoftDeletes;
     protected $guarded = [];
     use HasFactory;
+    protected $casts = [
+        'size' => 'array',
+        'color' => 'array',
+    ];
     public function categories()
     {
         return $this->belongsTo(Category::class, 'cate_id');

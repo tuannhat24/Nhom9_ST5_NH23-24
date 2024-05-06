@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,8 +39,11 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
+        // Lấy giá trị của selectedCategory từ URL
+        $selectedCategory = request()->input('category');
+
         // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
-        $products = Product::orderBy('id')->paginate($perPage);
+        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
 
         // Nếu có yêu cầu sắp xếp theo giá từ thấp đến cao
         if (request()->has('sort') && request()->input('sort') == 'price_asc') {
@@ -59,6 +63,7 @@ class ProductController extends Controller
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
@@ -95,6 +100,27 @@ class ProductController extends Controller
 
         $products = $products->paginate($perPage);
 
+        // Xử lí lịch sử tìm kiếm
+        if (request()->isMethod('get') && request()->has('query')) {
+            $query = request()->input('query');
+
+            // Lấy lịch sử tìm kiếm từ session, hoặc khởi tạo nếu chưa tồn tại
+            $searchHistory = session('search_history', []);
+
+            // Kiểm tra xem từ khóa đã tồn tại trong lịch sử tìm kiếm chưa
+            if (!in_array($query, $searchHistory)) {
+                // Thêm từ khóa tìm kiếm mới vào đầu mảng lịch sử
+                array_unshift($searchHistory, $query);
+
+                // Giới hạn số lượng mục trong lịch sử tìm kiếm
+                if (count($searchHistory) > 5) {
+                    array_pop($searchHistory);
+                }
+            }
+
+            session(['search_history' => $searchHistory]);
+        }
+
 
         return view('search_results', compact(
             'title',
@@ -105,9 +131,9 @@ class ProductController extends Controller
             'currentPage',
             'carts',
             'categories',
+            // 'searchHistory',
         ));
     }
-
 
     public function productsByCategory(Category $category, Request $request)
     {

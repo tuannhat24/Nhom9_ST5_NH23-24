@@ -1,6 +1,7 @@
 @extends('main')
 @section('content')
 
+
 <div class="app">
     <!-- sidebar -->
 

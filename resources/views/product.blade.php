@@ -11,9 +11,12 @@
                     <nav class="manager">
                         <h3 class="manager__heading">{{ $title }}</h3>
                         <ul class="manager-list">
+                            <li class="manager-item">
+                                <a href="{{ route('user.product') }}" class="manager-item__link">Tất cả sản phẩm</a>
+                            </li>
                             @foreach ($categories as $category)
                             <li class="manager-item">
-                                <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link">{{ $category->name }}</a>
+                                <a href="{{ route('products.by.category', ['category' => $category->id]) }}" class="manager-item__link ">{{ $category->name }}</a>
                             </li>
                             @endforeach
                             @if(request()->has('selected_category'))
@@ -39,12 +42,23 @@
 
                             <!-- List options -->
                             <ul class="select-input__list">
+                                @if(isset($selectedCategory))
+                                <!-- Có category id -->
                                 <li class="select-input__item">
                                     <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
                                     <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
                                 </li>
+                                @else
+                                <!-- Không có category id -->
+                                <li class="select-input__item">
+                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

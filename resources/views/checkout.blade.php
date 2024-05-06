@@ -63,6 +63,15 @@
                                             </tr>
                                             @endforeach
                                             <tr>
+
+                                                <td>
+                                                    <form action="{{route('user.checkout.vnpay')}}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn--success">Thanh toán vnpay</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
                                                 <td colspan="1" id="total-quantity">{{ $totalQuantity }}</td>
                                                 <td colspan="2">Tổng Số Tiền:</td>
