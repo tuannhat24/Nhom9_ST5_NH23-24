@@ -15,49 +15,9 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendors/styles/style1.css') }}">
-let backenAPI = [{
-id: 1,
-name: "Quần áo"
-},
-{
-id: 2,
-name: "Áo Khoác"
-},
-{
-id: 3,
-name: "Áo Thun"
-},
-{
-id: 4,
-name: "Hoodi"
-},
-{
-id: 5,
-name: "Giày"
-},
-{
-id: 6,
-name: "Quần jear"
-},
-{
-id: 7,
-name: "Dép"
-},
-];
-
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
-function debounce(fn, ms, event = null) {
-let times;
-return (...arguments) => {
-clearTimeout(timer);
-
-timer = setTimeout(() => {
-fn.apply(this, arguments);
 
 
 <link rel="stylesheet" href="/assets/font/fontawesome-free-6.2.1/fontawesome-free-6.2.1-web/css/all.min.css">
-<script src="{{ asset('vendors/scripts/core.js')}}"></script>
-<script src="{{ asset('vendors/scripts/script.min.js')}}"></script>
-<script src="{{ asset('vendors/scripts/layout-settings.js')}}"></script>
+<script src="{{ asset('vendors/scripts/core.js') }}"></script>
+<script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+<script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>

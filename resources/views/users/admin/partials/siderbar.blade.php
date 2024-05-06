@@ -60,6 +60,12 @@
                             class="mtext">Product</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.slider.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon"> <i class="fa-solid fa-sliders"></i></span><span
+                            class="mtext">Sidler</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

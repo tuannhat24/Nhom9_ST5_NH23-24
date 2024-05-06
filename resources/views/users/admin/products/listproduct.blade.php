@@ -1,11 +1,12 @@
 @extends('users.admin.layout.admin')
+
 @section('css')
-    <link rel="stylesheet" href="{{ asset('adnmins/product/index/list.css') }}">
+    <link rel="stylesheet" href="{{ asset('admins/product/index/list.css') }}">
 @endsection
 
 @section('js')
-    <script src="{{ asset('/adnmins/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('adnmins/product/index/list.js') }}"></script>
+    <script src="{{ asset('admins/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('admins/product/index/list.js') }}"></script>
 @endsection
 <!--Container-->
 @section('content')
@@ -153,5 +154,4 @@
 
         </div>
     </div>
-
 @endsection

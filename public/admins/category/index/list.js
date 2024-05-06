@@ -7,8 +7,7 @@ btn_delete.forEach(function(element){
         let that = $(this);
         console.log(that.parent().parent());
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Bạn có chắc muốn xóa không?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -24,7 +23,7 @@ btn_delete.forEach(function(element){
                             that.parent().parent().remove();
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Xóa thành công",
                                 icon: "success"
                               });
                        }

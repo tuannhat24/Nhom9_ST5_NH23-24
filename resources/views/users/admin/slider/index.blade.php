@@ -1,12 +1,13 @@
 @extends('users.admin.layout.admin')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admins/category/index/list.css') }}">
+    <link rel="stylesheet" href="{{ asset('admins/slider/index/list.css') }}">
 @endsection
 
 @section('js')
     <script src="{{ asset('/admins/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('admins/category/index/list.js') }}"></script>
+    <script src="{{ asset('admins/slider/index/list.js') }}"></script>
 @endsection
+
 <!--Container-->
 @section('content')
     <div class="pd-20 card-box mb-30">
@@ -22,39 +23,43 @@
                 </div>
             @endif
 
-
             <div class="pull-right mt-5">
-                <a href="{{ route('admin.category.create') }}" class="add_category"><i class="fa-solid fa-square-plus"></i>
+                <a href="{{ route('admin.slider.create') }}" class="add_product"><i class="fa-solid fa-square-plus"></i>
                     ADD</a>
             </div>
         </div>
 
-        <table class="category-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên Danh Mục</th>
-                    <th>Mô tả</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($categories as $category)
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->description }}</td>
-                        <td>
-                            <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn-edit"><i
-                                    class="fas fa-edit"></i></a>
-                            <a href="" data-url="{{ route('admin.category.delete', ['id' => $category->id]) }}"
-                                class="btn-delete"><i class="fas fa-trash-alt"></i></a>
-                        </td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên Slider</th>
+                        <th scope="col">Mô Tả Slider</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
                     </tr>
-                @endforeach
-                <!-- Add more category rows here -->
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($sliders as $slider)
+                        <tr>
+                            <th scope="row">{{ $slider->id }}</th>
+                            <td>{{ $slider->name }}</td>
+                            <td>{{ $slider->description }}</td>
+                            <td><img class="product_img" src="{{ $slider->img_path }}" alt=""></td>
+                            <td>
+                                <a href="{{ route('admin.slider.edit', ['id' => $slider->id]) }}" class="btn-edit"><i
+                                        class="fas fa-edit"></i></a>
+                                <a href="" class="btn-delete"
+                                    data-url="{{ route('admin.slider.delete', ['id' => $slider->id]) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-5">
@@ -62,8 +67,8 @@
         </div>
         <div class="col-sm-12 col-md-7">
             @php
-                $total_pages = $categories->lastPage(); // Tổng số trang
-                $current_page = $categories->currentPage(); // Trang hiện tại
+                $total_pages = $sliders->lastPage(); // Tổng số trang
+                $current_page = $sliders->currentPage(); // Trang hiện tại
 
                 // Xác định phạm vi trang hiển thị
                 $start_page = max(1, $current_page - 2); // Trang bắt đầu
@@ -81,21 +86,21 @@
             @endphp
 
             <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                @if ($categories->hasPages())
+                @if ($sliders->hasPages())
                     <ul class="pagination">
                         <!-- Previous Page Link -->
-                        @if ($categories->onFirstPage())
+                        @if ($sliders->onFirstPage())
                             <li class="paginate_button page-item previous disabled"><span class="page-link"><i
                                         class="ion-chevron-left"></i></span></li>
                         @else
-                            <li class="paginate_button page-item previous"><a href="{{ $categories->previousPageUrl() }}"
+                            <li class="paginate_button page-item previous"><a href="{{ $sliders->previousPageUrl() }}"
                                     aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link"><i
                                         class="ion-chevron-left"></i></a></li>
                         @endif
 
                         <!-- First page ellipsis -->
                         @if ($start_page > 1)
-                            <li class="paginate_button page-item"><a href="{{ $categories->url(1) }}"
+                            <li class="paginate_button page-item"><a href="{{ $sliders->url(1) }}"
                                     aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
                                     class="page-link">1</a></li>
                             @if ($start_page > 2)
@@ -109,7 +114,7 @@
                                 <li class="paginate_button page-item active"><span
                                         class="page-link">{{ $page }}</span></li>
                             @else
-                                <li class="paginate_button page-item"><a href="{{ $categories->url($page) }}"
+                                <li class="paginate_button page-item"><a href="{{ $sliders->url($page) }}"
                                         aria-controls="DataTables_Table_0" data-dt-idx="{{ $page }}" tabindex="0"
                                         class="page-link">{{ $page }}</a></li>
                             @endif
@@ -120,14 +125,14 @@
                             @if ($end_page < $total_pages - 1)
                                 <li class="paginate_button page-item"><span class="page-link">...</span></li>
                             @endif
-                            <li class="paginate_button page-item"><a href="{{ $categories->url($total_pages) }}"
+                            <li class="paginate_button page-item"><a href="{{ $sliders->url($total_pages) }}"
                                     aria-controls="DataTables_Table_0" data-dt-idx="{{ $total_pages }}" tabindex="0"
                                     class="page-link">{{ $total_pages }}</a></li>
                         @endif
 
                         <!-- Next Page Link -->
-                        @if ($categories->hasMorePages())
-                            <li class="paginate_button page-item next"><a href="{{ $categories->nextPageUrl() }}"
+                        @if ($products->hasMorePages())
+                            <li class="paginate_button page-item next"><a href="{{ $sliders->nextPageUrl() }}"
                                     aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link"><i
                                         class="ion-chevron-right"></i></a></li>
                         @else
@@ -140,5 +145,5 @@
 
         </div>
     </div>
-
 @endsection
+
