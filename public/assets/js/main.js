@@ -179,4 +179,57 @@ function decrementQuantity() {
     }
 }
 
-// Danh muc home
+// active cho danh mục và các thẻ sắp xếp
+document.addEventListener("DOMContentLoaded", function () {
+    var sortLinks = document.querySelectorAll(".select-input__link");
+    var categoryLinks = document.querySelectorAll(".manager-item__link");
+
+    sortLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            // Xóa class "active" từ tất cả các thẻ sắp xếp
+            sortLinks.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            // Thêm class "active" cho thẻ sắp xếp được chọn
+            this.classList.add("active");
+
+            // Lưu trạng thái active vào local storage
+            localStorage.setItem('selectedSort', this.getAttribute('href'));
+        });
+    });
+    var selectedSort = localStorage.getItem("selectedSort");
+    if (selectedSort) {
+        var activeLinkSort = document.querySelector(
+            '.select-input__link[href="' + selectedSort + '"]'
+        );
+        if (activeLinkSort) {
+            activeLinkSort.classList.add("active");
+        }
+    }
+
+    categoryLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            // Xóa class "active" từ tất cả các thẻ danh mục
+            categoryLinks.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            // Thêm class "active" cho thẻ danh mục được chọn
+            this.classList.add("active");
+
+            // Lưu trạng thái active vào local storage
+            localStorage.setItem("selectedCategory", this.getAttribute("href"));
+        });
+    });
+
+    var selectedCategory = localStorage.getItem("selectedCategory");
+    if (selectedCategory) {
+        var activeLink = document.querySelector(
+            '.manager-item__link[href="' + selectedCategory + '"]'
+        );
+        if (activeLink) {
+            activeLink.classList.add("active");
+        }
+    }
+});

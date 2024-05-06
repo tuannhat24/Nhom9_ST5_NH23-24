@@ -79,7 +79,7 @@
                                 <td>
                                     <form method="POST" action="{{ route('user.checkout') }}">
                                         @csrf
-                                        <div type="submit" class="button checkout-btn">Mua Hàng</div>
+                                        <button type="submit" class="button checkout-btn">Mua Hàng</button>
                                     </form>
                                 </td>
                             </tr>

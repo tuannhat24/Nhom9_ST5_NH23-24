@@ -133,11 +133,10 @@
                 <div class="header__search-input-wrap">
                     <form action="{{ route('product.search') }}" method="GET">
                         <input type="text" name="query" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm">
-                    </form>
 
-                    <!-- Search history -->
-                    <div class="header__search-history">
-                        <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                        <!-- Search history -->
+                        <div class="header__search-history">
+                            <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
                         <ul class="header__search-history-list">
                             <li class="header__search-history-item">
                                 <a href="#">Áo khoác</a>
@@ -167,6 +166,7 @@
                 <button type="submit" class="header__search-btn">
                     <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                 </button>
+            </form>
             </div>
 
             <!-- Cart layout -->

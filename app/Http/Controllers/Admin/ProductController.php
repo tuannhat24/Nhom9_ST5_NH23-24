@@ -38,6 +38,9 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
+        // Lấy giá trị của selectedCategory từ URL
+        $selectedCategory = request()->input('category');
+
         // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
         $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
 
@@ -59,6 +62,7 @@ class ProductController extends Controller
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
