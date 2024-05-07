@@ -12,28 +12,15 @@
                 <div class="col l-8 m-12 c-12">
                     <div class="full-home-banners__main">
                         <div class="full-home-banners__main-inner">
-                            <a href="" class="full-home-banners__main-item active">
-                                <img src="{{ asset('assets/img/banner1.jpg') }}" alt="">
-                            </a>
-                            <a href="" class="full-home-banners__main-item">
-                                <img src="{{ asset('assets/img/banner2.jpg') }}" alt="">
-                            </a>
-                            <a href="" class="full-home-banners__main-item">
-                                <img src="{{ asset('assets/img/banner3.jpg') }}" alt="">
-                            </a>
-                            <a href="" class="full-home-banners__main-item">
-                                <img src="{{ asset('assets/img/banner4.jpg') }}" alt="">
-                            </a>
+                            @foreach($sliders as $key => $slider)
+                                <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
+                                    <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
+                                </a>
+                            @endforeach
                         </div>
                         <div class="full-home-banners__main-controls">
                             <i class="carosel-btn-left fa-solid fa-angle-left"></i>
                             <i class="carosel-btn-right fa-solid fa-angle-right"></i>
-                        </div>
-                        <div class="full-home-banners__main-indicators">
-                            <div class="full-home-banners__main-dot active"></div>
-                            <div class="full-home-banners__main-dot"></div>
-                            <div class="full-home-banners__main-dot"></div>
-                            <div class="full-home-banners__main-dot"></div>
                         </div>
                     </div>
                 </div>

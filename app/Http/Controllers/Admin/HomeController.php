@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Silder;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,8 @@ class HomeController extends Controller
         // Truy vấn danh sách các danh mục sản phẩm
         $categories = Category::all();
 
+        //Truy vấn danh sách slider
+        $sliders = Silder::latest()->get();
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
@@ -47,6 +50,7 @@ class HomeController extends Controller
             $products = Product::orderByDesc('price_sale')->paginate($perPage);
         }
 
+        
         return view('home', [
             'title' => 'Trang chủ',
             'data' => $products,
@@ -55,6 +59,7 @@ class HomeController extends Controller
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'categories' => $categories,
+            'sliders' => $sliders,
         ]);
     }
 }
