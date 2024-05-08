@@ -178,6 +178,49 @@ function decrementQuantity() {
         quantityInput.value = currentQuantity - 1;
     }
 }
+// size color
+document.addEventListener('DOMContentLoaded', function () {
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    const colorButtons = document.querySelectorAll('.color-btn');
+
+    sizeButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            sizeButtons.forEach(b => b.classList.remove('active')); // Xóa active khỏi tất cả các nút kích cỡ
+            this.classList.add('active'); // Thêm active vào nút được nhấn
+        });
+    });
+
+    colorButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            colorButtons.forEach(b => b.classList.remove('active')); // Xóa active khỏi tất cả các nút màu sắc
+            this.classList.add('active'); // Thêm active vào nút được nhấn
+        });
+    });
+});
+
+// thêm size and color vào cart
+document.addEventListener('DOMContentLoaded', function () {
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    const colorButtons = document.querySelectorAll('.color-btn');
+    const sizeInput = document.getElementById('selected_size');
+    const colorInput = document.getElementById('selected_color');
+
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            sizeButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            sizeInput.value = this.getAttribute('data-size');
+        });
+    });
+
+    colorButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            colorButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            colorInput.value = this.getAttribute('data-color');
+        });
+    });
+});
 
 // active cho danh mục và các thẻ sắp xếp
 document.addEventListener("DOMContentLoaded", function () {
@@ -233,3 +276,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+

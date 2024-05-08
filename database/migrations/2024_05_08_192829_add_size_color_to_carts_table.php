@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sizes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('carts', function (Blueprint $table) {
+            $table->string('size')->nullable();  // Kích thước có thể null
+            $table->string('color')->nullable(); // Màu sắc có thể null
         });
     }
 
@@ -27,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sizes');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropColumn(['size', 'color']);
+        });
     }
 };

@@ -55,16 +55,18 @@
                                                 <!-- Size Buttons -->
                                                 <div class="size-options">
                                                     @foreach($product->size ?? [] as $size)
-                                                    <button type="button" class="size-btn">{{ $size }}</button>
+                                                    <button type="button" class="size-btn" data-size="{{ $size }}">{{ $size }}</button>
                                                     @endforeach
                                                 </div>
+                                                <input type="hidden" name="selected_size" id="selected_size">
 
                                                 <!-- Color Buttons -->
                                                 <div class="color-options">
                                                     @foreach($product->color ?? [] as $color)
-                                                    <button type="button" class="color-btn">{{ $color }}</button>
+                                                    <button type="button" class="color-btn" data-color="{{ $color }}">{{ $color }}</button>
                                                     @endforeach
                                                 </div>
+                                                <input type="hidden" name="selected_color" id="selected_color">
 
 
                                                 <button type="submit" class="btn product-add-to-cart">Thêm Vào Giỏ Hàng</button>

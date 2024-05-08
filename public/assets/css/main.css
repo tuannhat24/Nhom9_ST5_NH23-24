@@ -1735,6 +1735,24 @@ h1 {
     background-color: #e2e2e2;
 }
 
+.size-btn, .color-btn {
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.size-btn:hover, .color-btn:hover {
+    background-color: #ddd;
+}
+
+.size-btn.active, .color-btn.active {
+    border-color: #007bff;
+    background-color: #e7f0ff;
+    color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+}
+
+
 /* Nút 'Thêm vào giỏ hàng' */
 .product-add-to-cart {
     background-color: var(--primary-color);

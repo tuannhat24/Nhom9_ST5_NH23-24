@@ -24,8 +24,8 @@ class CartController extends Controller
 
         $currentPage = request()->input('page', 1);
 
-         // Truy vấn thông tin của người dùng hiện tại
-         $currentUser = auth()->user();
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
 
         // Truy vấn giỏ hàng
         $carts = Cart::all();
@@ -83,28 +83,44 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        // Lấy ID của người dùng đang đăng nhập
         $customerId = auth()->user()->id;
-        //Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
-        $existingCartItem = Cart::where('product_id', $request->input('product_id'))->first();
-
-        // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+    
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
+        $size = $request->input('selected_size');
+        $color = $request->input('selected_color');
+    
+        // Kiểm tra size và color có null không
+        if (empty($size) || empty($color)) {
+            return back()->with('error', 'Bạn cần chọn size và màu sắc của sản phẩm.');
+        }
+    
+        // Tìm giỏ hàng hiện tại với sản phẩm, size và màu sắc tương ứng
+        $existingCartItem = Cart::where([
+            ['product_id', $product_id],
+            ['customer_id', $customerId],
+            ['size', $size],
+            ['color', $color]
+        ])->first();
+    
         if ($existingCartItem) {
-            $existingCartItem->update([
-                'quantity' => $existingCartItem->quantity + $request->input('quantity')
-            ]);
+            // Cập nhật số lượng của sản phẩm nếu đã có trong giỏ
+            $existingCartItem->increment('quantity', $quantity);
         } else {
-            // Nếu sản phẩm chưa tồn tại trong giỏ hàng, tạo mới một bản ghi
+            // Thêm mới sản phẩm vào giỏ hàng nếu chưa có
             Cart::create([
                 'customer_id' => $customerId,
-                'product_id' => $request->input('product_id'),
-                'quantity' => $request->input('quantity')
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+                'size' => $size,
+                'color' => $color
             ]);
         }
-
-        // Chuyển hướng trở lại trang giỏ hàng sau khi thêm sản phẩm thành công
+    
         return redirect()->route('user.cart')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
     }
+    
+    
 
     // Xóa toàn bộ sản phẩm trong giỏ hàng
     public function clearCart()

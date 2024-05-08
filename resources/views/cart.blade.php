@@ -14,85 +14,82 @@
                         <img src="{{ asset('assets/img/no-cart.webp') }}" alt="No-cart">
                         <a href="{{route('user.product')}}" class="button buy-now-btn">Mua Ngay</a>
                         @else
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Hình Ảnh</th>
+                                    <th>Tên</th>
+                                    <th>Mã Sản Phẩm</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Đơn Giá (VND)</th>
+                                    <th>Số Lượng</th>
+                                    <th>Số Tiền (VND)</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                $totalQuantity = 0;
+                                $totalPrice = 0;
+                                @endphp
+                                @foreach($carts as $cart)
+                                @php
+                                $totalQuantity += $cart->quantity;
+                                $totalPrice += $cart->quantity * $cart->product->price;
+                                @endphp
+                                <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
+                                    <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
+                                    <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
+                                    <td>{{ $cart->product->id }}</td>
+                                    <td>{{ $cart->size }}</td>
+                                    <td>{{ $cart->color }}</td>
+                                    <td class="price">{{ number_format($cart->product->price) }}</td>
+                                    <td>
+                                        <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
+                                            @csrf
+                                            <button class="quantity-btn" type="submit" name="change" value="-1"><i class="fas fa-minus"></i></button>
+                                            <span class="quantity">{{ $cart->quantity }}</span>
+                                            <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
+                                        </form>
+                                    </td>
+                                    <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
+                                    <td>
+                                        <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="remove-item">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="7" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
+                                    <td><strong>{{ $totalQuantity }}</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="text-right">Tổng Số Tiền:</td>
+                                    <td><strong>{{ number_format($totalPrice) }}</strong></td>
+                                    <td>
+                                        <form method="POST" action="{{ route('user.checkout') }}">
+                                            @csrf
+                                            <button type="submit" class="button checkout-btn">Mua Hàng</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @endif
                     </div>
-
-                    <table class="cart-table">
-                        <tbody>
-                            <tr>
-                                <th>Hình Ảnh</th>
-                                <th>Tên</th>
-                                <th>Mã Sản Phẩm</th>
-                                <th>Đơn Giá (VND)</th>
-                                <th>Số Lượng</th>
-                                <th>Số Tiền (VND)</th>
-                                <th></th>
-                                <th>Thao Tác</th>
-                            </tr>
-                            @php
-                            $totalQuantity = 0;
-                            $totalPrice = 0;
-                            @endphp
-                            @foreach($carts as $cart)
-                            @php
-                            $totalQuantity += $cart->quantity;
-                            $totalPrice += $cart->quantity * $cart->product->price;
-                            @endphp
-                            <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
-                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
-                                <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
-                                <td>{{ $cart->product->id }}</td>
-                                <td class="price">{{ number_format($cart->product->price) }}</td>
-                                <td>
-                                    <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
-                                        @csrf
-                                        <button class="quantity-btn" type="submit" name="change" value="-1"><i class="fas fa-minus"></i></button>
-                                        <span class="quantity">{{ $cart->quantity }}</span>
-                                        <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
-                                    </form>
-                                </td>
-                                <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
-                                <td></td>
-                                <td>
-                                    <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="remove-item">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="6"></td>
-                                <td colspan="2">
-                                    <form action="{{ route('user.cart.clear') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="button empty-cart-btn">Xóa Tất Cả<i style="padding-left: 10px;" class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
-                                <td colspan="2" id="total-quantity" style="padding-left: 156px;">{{ $totalQuantity }}</td>
-                                <td style="white-space: nowrap;" colspan="1">Tổng Số Tiền:</td>
-                                <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
-                                <td>
-                                    <form method="POST" action="{{ route('user.checkout') }}">
-                                        @csrf
-                                        <button type="submit" class="button checkout-btn">Mua Hàng</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    @endif
                 </section>
                 <!-- Relate products -->
                 <section class="related-products">
                     <div class="container">
                         <div class="more">
                             <h2 class="related-products__title"> Có thể bạn sẽ thích </h2>
-                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem Thêm<i  style="padding-left: 6px;" class="fa-solid fa-arrow-right"></i></a>
+                            <a href="{{ route('user.all-products') }}" class="btn-more">Xem Thêm<i style="padding-left: 6px;" class="fa-solid fa-arrow-right"></i></a>
                         </div>
                         <div class="grid__row">
                             @foreach($relatedProducts as $row)
