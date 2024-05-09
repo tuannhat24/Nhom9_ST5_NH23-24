@@ -22,7 +22,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-			
+
             <div class="pull-right mt-5">
                 <a href="{{ route('admin.product.create') }}" class="add_product"><i class="fa-solid fa-square-plus"></i>
                     ADD</a>
@@ -39,7 +39,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Category</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Price sale</th>
+                        <th scope="col">Percent Discount</th>
                         <th scope="col">Quantity sold</th>
                         <th scope="col">Active</th>
 
@@ -54,7 +54,7 @@
                             <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
                             <td>{{ optional($productItem->categories)->name }}</td>
                             <td>{{ $productItem->description }}</td>
-                            <td>{{ number_format($productItem->price_sale) }}</td>
+                            <td>{{ number_format($productItem->percent_discount)}}%</td>
                             <td>{{ $productItem->quantity_sold }}</td>
                             <td>
                                 <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}" class="btn-edit"><i

@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
+            Route::get('/purchase', [CheckOutController::class, 'purchase'])->name('user.purchase');
+            Route::get('/purchase/order', [CheckOutController::class, 'purchase_order'])->name('user.purchase_order');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
         });
     });

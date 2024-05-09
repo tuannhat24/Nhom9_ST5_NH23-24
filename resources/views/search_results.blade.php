@@ -93,10 +93,12 @@
                                         <i class="fa-solid fa-check"></i>
                                         <span>Yêu thích</span>
                                     </div>
+                                    @if( $product->percent_discount > 0 )
                                     <div class="home-product-item__sale-off">
                                         <span class="home-product-item__sale-off-percent">{{ number_format($product->percent_discount) }}%</span>
                                         <span class="home-product-item__sale-off-label">GIẢM</span>
                                     </div>
+                                    @endif
                                 </a>
                             </div>
                             @endforeach
