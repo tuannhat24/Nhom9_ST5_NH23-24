@@ -43,16 +43,16 @@ class ProductController extends Controller
         $selectedCategory = request()->input('category');
 
         // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
-        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
+        $products = Product::orderBy('id')->paginate($perPage);
 
         // Nếu có yêu cầu sắp xếp theo giá từ thấp đến cao
         if (request()->has('sort') && request()->input('sort') == 'price_asc') {
-            $products = Product::orderBy('price_sale')->paginate($perPage);
+            $products = Product::orderBy('percent_discount')->paginate($perPage);
         }
 
         // Nếu có yêu cầu sắp xếp theo giá từ cao đến thấp
         if (request()->has('sort') && request()->input('sort') == 'price_desc') {
-            $products = Product::orderByDesc('price_sale')->paginate($perPage);
+            $products = Product::orderByDesc('percent_discount')->paginate($perPage);
         }
 
         return view('product', [
@@ -92,9 +92,9 @@ class ProductController extends Controller
         // Áp dụng sắp xếp theo giá nếu được yêu cầu
         if ($request->has('sort')) {
             if ($request->input('sort') == 'price_asc') {
-                $products = $products->orderBy('price_sale');
+                $products = $products->orderBy('percent_discount');
             } elseif ($request->input('sort') == 'price_desc') {
-                $products = $products->orderByDesc('price_sale');
+                $products = $products->orderByDesc('percent_discount');
             }
         }
 
@@ -158,9 +158,9 @@ class ProductController extends Controller
         // Áp dụng sắp xếp theo giá nếu được yêu cầu
         if ($request->has('sort')) {
             if ($request->input('sort') == 'price_asc') {
-                $productsQuery->orderBy('price_sale');
+                $productsQuery->orderBy('percent_discount');
             } elseif ($request->input('sort') == 'price_desc') {
-                $productsQuery->orderByDesc('price_sale');
+                $productsQuery->orderByDesc('percent_discount');
             }
         }
 
@@ -200,7 +200,7 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
-        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
+        $products = Product::orderBy('id')->paginate($perPage);
 
         return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
     }

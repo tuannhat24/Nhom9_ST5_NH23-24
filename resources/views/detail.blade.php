@@ -38,7 +38,7 @@
                                                 <h6>₫</h6>{{ number_format($product->price) }}
                                             </span>
                                             <span class="product-price-new">
-                                                <h6>₫</h6>{{ number_format($product->price_sale) }}
+                                                <h6>₫</h6>
                                             </span>
                                         </div>
                                         <p class="product-description">{{ $product->description }}</p>
@@ -118,7 +118,7 @@
                                                 <span>Yêu thích</span>
                                             </div>
                                             <div class="home-product-item__sale-off">
-                                                <span class="home-product-item__sale-off-percent">25%</span>
+                                                <span class="home-product-item__sale-off-percent">{{ number_format($row->percent_discount) }}%</span>
                                                 <span class="home-product-item__sale-off-label">GIẢM</span>
                                             </div>
                                         </a>

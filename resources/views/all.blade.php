@@ -19,7 +19,7 @@
                                 <h4 class="home-product-item__name">{{ $product->name }}</h4>
                                 <div class="home-product-item__price">
                                     <span class="home-product-item__price-old">{{ number_format($product->price) }}</span>
-                                    <span class="home-product-item__price-current">{{ number_format($product->price_sale) }}</span>
+                                    <span class="home-product-item__price-current"></span>
                                 </div>
                                 <div class="home-product-item__action">
                                     <span class="home-product-item__like home-product-item__like--liked">
@@ -44,7 +44,7 @@
                                     <span>Yêu thích</span>
                                 </div>
                                 <div class="home-product-item__sale-off">
-                                    <span class="home-product-item__sale-off-percent">25%</span>
+                                    <span class="home-product-item__sale-off-percent">{{ number_format($product->percent_discount) }}%</span>
                                     <span class="home-product-item__sale-off-label">GIẢM</span>
                                 </div>
                             </a>

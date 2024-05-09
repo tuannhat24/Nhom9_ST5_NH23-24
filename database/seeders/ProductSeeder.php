@@ -33,7 +33,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần tây nam ống rộng',
                 'price' => '140000',
-                'price_sale' => '50000',
+                'percent_discount' => '20',
                 'quantity_sold' => '2376',
             ],
             [
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần jean',
                 'price' => '90000',
-                'price_sale' => '85000',
+                'percent_discount' => '30',
                 'quantity_sold' => '278',
             ],
             [
@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'ao thun in hình',
                 'price' => '1200000',
-                'price_sale' => '999000',
+                'percent_discount' => '15',
                 'quantity_sold' => '121',
             ],
             [
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'ao thun unisex cổ tròn',
                 'price' => '1500000',
-                'price_sale' => '1220000',
+                'percent_discount' => '0',
                 'quantity_sold' => '1098',
             ],
             [
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'giày thể thao AF1_nike',
                 'price' => '220000',
-                'price_sale' => '190000',
+                'percent_discount' => '5',
                 'quantity_sold' => '2045',
             ],
             [
@@ -88,7 +88,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'giày cũng là thể thao',
                 'price' => '500000',
-                'price_sale' => '450000',
+                'percent_discount' => '12',
                 'quantity_sold' => '8648',
             ],
             [
@@ -99,7 +99,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác gió',
                 'price' => '2000000',
-                'price_sale' => '1999000',
+                'percent_discount' => '20',
                 'quantity_sold' => '1985',
             ],
             [
@@ -110,7 +110,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác dù vải dày',
                 'price' => '5000000',
-                'price_sale' => '4450000',
+                'percent_discount' => '10',
                 'quantity_sold' => '2779',
             ],
             [
@@ -121,7 +121,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['black', 'silver']),
                 'description' => 'nhẫn unisex đẹp',
                 'price' => '250000',
-                'price_sale' => '190000',
+                'percent_discount' => '12',
                 'quantity_sold' => '10829',
             ],
             [
@@ -132,7 +132,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['black', 'silver']),
                 'description' => 'nhẫn titan đơn giản',
                 'price' => '160000',
-                'price_sale' => '100000',
+                'percent_discount' => '15',
                 'quantity_sold' => '9854',
             ],
             [
@@ -143,7 +143,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần 2 sọc',
                 'price' => '160000',
-                'price_sale' => '100000',
+                'percent_discount' => '40',
                 'quantity_sold' => '6854',
             ],
             [
@@ -154,7 +154,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần kaki ngắn',
                 'price' => '160000',
-                'price_sale' => '100000',
+                'percent_discount' => '10',
                 'quantity_sold' => '2784',
             ],
             [
@@ -165,7 +165,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi basic',
                 'price' => '60000',
-                'price_sale' => '100000',
+                'percent_discount' => '10',
                 'quantity_sold' => '2184',
             ],
             [
@@ -176,7 +176,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'thun nữ cộc tay',
                 'price' => '60000',
-                'price_sale' => '35000',
+                'percent_discount' => '0',
                 'quantity_sold' => '4184',
             ],
             [
@@ -187,7 +187,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'dép sandal eva',
                 'price' => '49000',
-                'price_sale' => '100000',
+                'percent_discount' => '0',
                 'quantity_sold' => '5947',
             ],
             [
@@ -198,7 +198,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'dép hai quai',
                 'price' => '117000',
-                'price_sale' => '100000',
+                'percent_discount' => '10',
                 'quantity_sold' => '2825',
             ],
             [
@@ -209,7 +209,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'hoodie Nỉ',
                 'price' => '220000',
-                'price_sale' => '160600',
+                'percent_discount' => '12',
                 'quantity_sold' => '29834',
             ],
             [
@@ -220,18 +220,18 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác jean Vesast',
                 'price' => '249000',
-                'price_sale' => '189000',
+                'percent_discount' => '15',
                 'quantity_sold' => '81184',
             ],
             [
                 'name' => 'Bông Tai Titan Khuyên Tai nam nữ tròn dạng kẹp hoặc gài xỏ Karin Accessories màu bạc đen đơn giản đẹp',
                 'cate_id' => '5',
                 'image' => 'bongtai.png',
-                'size' => json_encode(['HT kẹp tam giác', 'HT tròn', 'HT Small Chain', 'HT tia chớp', 'HT 2T', 'HT lông vũ']), 
+                'size' => json_encode(['HT kẹp tam giác', 'HT tròn', 'HT Small Chain', 'HT tia chớp', 'HT 2T', 'HT lông vũ']),
                 'color' => json_encode(['silver', 'black']),
                 'description' => 'bông tai đơn giản đẹp',
                 'price' => '41000',
-                'price_sale' => '29000',
+                'percent_discount' => '20',
                 'quantity_sold' => '241524',
             ],
             [
@@ -242,7 +242,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['silver', 'black']),
                 'description' => 'khuyên titan không gỉ',
                 'price' => '32000',
-                'price_sale' => '29000',
+                'percent_discount' => '20',
                 'quantity_sold' => '89944',
             ],
             [
@@ -253,7 +253,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'jeans nữ ống loe',
                 'price' => '210000',
-                'price_sale' => '89000',
+                'percent_discount' => '30',
                 'quantity_sold' => '25854',
             ],
             [
@@ -264,7 +264,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần caro',
                 'price' => '110000',
-                'price_sale' => '89250',
+                'percent_discount' => '50',
                 'quantity_sold' => '4744',
             ],
             [
@@ -275,7 +275,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo chất liệu cotton',
                 'price' => '70000',
-                'price_sale' => '59000',
+                'percent_discount' => '10',
                 'quantity_sold' => '7789',
             ],
             [
@@ -286,7 +286,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'thun tay lỡ',
                 'price' => '100000',
-                'price_sale' => '85000',
+                'percent_discount' => '10',
                 'quantity_sold' => '4894',
             ],
             [
@@ -297,7 +297,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Converse',
                 'price' => '790000',
-                'price_sale' => '399000',
+                'percent_discount' => '10',
                 'quantity_sold' => '1024455',
             ],
             [
@@ -308,7 +308,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'giày chạy bộ',
                 'price' => '220000',
-                'price_sale' => '124000',
+                'percent_discount' => '20',
                 'quantity_sold' => '28414',
             ],
             [
@@ -319,7 +319,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác gió chống nước',
                 'price' => '249000',
-                'price_sale' => '99000',
+                'percent_discount' => '15',
                 'quantity_sold' => '544',
             ],
             [
@@ -330,7 +330,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'hoodie form to',
                 'price' => '280000',
-                'price_sale' => '99000',
+                'percent_discount' => '15',
                 'quantity_sold' => '9849',
             ],
             [
@@ -341,7 +341,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['blue', 'orange', 'pink', 'red', 'green', 'purple']),
                 'description' => 'cú bac mắt xanh',
                 'price' => '20000',
-                'price_sale' => '18500',
+                'percent_discount' => '20',
                 'quantity_sold' => '2484',
             ],
             [
@@ -352,7 +352,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['silver', 'black']),
                 'description' => 'rồng màu bạc',
                 'price' => '20000',
-                'price_sale' => '18000',
+                'percent_discount' => '15',
                 'quantity_sold' => '8934',
             ],
             [
@@ -363,7 +363,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần ống côn',
                 'price' => '198000',
-                'price_sale' => '125000',
+                'percent_discount' => '20',
                 'quantity_sold' => '486',
             ],
             [
@@ -374,7 +374,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần túi hộp',
                 'price' => '280000',
-                'price_sale' => '179000',
+                'percent_discount' => '10',
                 'quantity_sold' => '3589',
             ],
             [
@@ -385,7 +385,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo polo local brand',
                 'price' => '190000',
-                'price_sale' => '80000',
+                'percent_discount' => '15',
                 'quantity_sold' => '254',
             ],
             [
@@ -396,7 +396,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'somi tay dài',
                 'price' => '300000',
-                'price_sale' => '179000',
+                'percent_discount' => '20',
                 'quantity_sold' => '6594',
             ],
             [
@@ -407,7 +407,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sneaker cổ cao',
                 'price' => '700000',
-                'price_sale' => '539000',
+                'percent_discount' => '10',
                 'quantity_sold' => '7834',
             ],
             [
@@ -418,7 +418,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'dép da',
                 'price' => '308000',
-                'price_sale' => '218900',
+                'percent_discount' => '20',
                 'quantity_sold' => '4134',
             ],
             [
@@ -429,7 +429,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác giả da',
                 'price' => '872000',
-                'price_sale' => '436000',
+                'percent_discount' => '20',
                 'quantity_sold' => '258',
             ],
             [
@@ -440,7 +440,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo như áo phao hàn',
                 'price' => '350000',
-                'price_sale' => '259000',
+                'percent_discount' => '10',
                 'quantity_sold' => '2474',
             ],
             [
@@ -451,7 +451,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['gold', 'silver']),
                 'description' => 'dây chuyền mặt quỷ',
                 'price' => '20088',
-                'price_sale' => '16000',
+                'percent_discount' => '0',
                 'quantity_sold' => '204',
             ],
             [
@@ -462,7 +462,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['black', 'silver']),
                 'description' => 'dây chuyền hình ngôi sao',
                 'price' => '20000',
-                'price_sale' => '15000',
+                'percent_discount' => '0',
                 'quantity_sold' => '2324',
             ],
             [
@@ -473,7 +473,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần đũi',
                 'price' => '160000',
-                'price_sale' => '85000',
+                'percent_discount' => '20',
                 'quantity_sold' => '14814',
             ],
             [
@@ -484,7 +484,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần jogger ',
                 'price' => '215000',
-                'price_sale' => '145000',
+                'percent_discount' => '20',
                 'quantity_sold' => '14855',
             ],
             [
@@ -495,7 +495,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi phong cách trung hoa',
                 'price' => '305000',
-                'price_sale' => '175000',
+                'percent_discount' => '50',
                 'quantity_sold' => '1489',
             ],
             [
@@ -506,7 +506,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi retro',
                 'price' => '263000',
-                'price_sale' => '158000',
+                'percent_discount' => '15',
                 'quantity_sold' => '945',
             ],
             [
@@ -517,7 +517,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'dép 3 quai',
                 'price' => '200000',
-                'price_sale' => '99000',
+                'percent_discount' => '20',
                 'quantity_sold' => '884',
             ],
             [
@@ -528,7 +528,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => ' giày jordan',
                 'price' => '285000',
-                'price_sale' => '270000',
+                'percent_discount' => '10',
                 'quantity_sold' => '248',
             ],
             [
@@ -539,7 +539,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác dạ',
                 'price' => '380000',
-                'price_sale' => '199000',
+                'percent_discount' => '20',
                 'quantity_sold' => '1474',
             ],
             [
@@ -550,7 +550,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo khoác dáng dài',
                 'price' => '548333',
-                'price_sale' => '405000',
+                'percent_discount' => '10',
                 'quantity_sold' => '1414',
             ],
             [
@@ -561,7 +561,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black', 'gold']),
                 'description' => 'vòng tay đẹp',
                 'price' => '57000',
-                'price_sale' => '32000',
+                'percent_discount' => '20',
                 'quantity_sold' => '4781',
             ],
             [
@@ -572,8 +572,8 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['blue', 'black', 'kaki']),
                 'description' => 'vòng tay đuôi cá voi',
                 'price' => '41000',
-                'price_sale' => '35000',
-                'quantity_sold' => '415',   
+                'percent_discount' => '20',
+                'quantity_sold' => '415',
             ],
             [
                 'name' => 'Quần Đùi Nam Thể Thao Big Size Cao Cấp Bóng Rổ Màu Sắc Trơn Thời Trang Mùa Hè Quần Short Nam',
@@ -583,7 +583,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần đùi big size ',
                 'price' => '108000',
-                'price_sale' => '56800',
+                'percent_discount' => '0',
                 'quantity_sold' => '16855',
             ],
             [
@@ -594,7 +594,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần jogger phối line',
                 'price' => '108000',
-                'price_sale' => '99000',
+                'percent_discount' => '0',
                 'quantity_sold' => '2255',
             ],
             [
@@ -605,7 +605,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần jogger ',
                 'price' => '360000',
-                'price_sale' => '255000',
+                'percent_discount' => '15',
                 'quantity_sold' => '655',
             ],
             [
@@ -616,7 +616,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần ống rộng',
                 'price' => '150000',
-                'price_sale' => '90000',
+                'percent_discount' => '20',
                 'quantity_sold' => '840',
             ],
             [
@@ -627,7 +627,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần thể thao đường phố ',
                 'price' => '192000',
-                'price_sale' => '115000',
+                'percent_discount' => '15',
                 'quantity_sold' => '14855',
             ],
             [
@@ -638,7 +638,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'quần hiphop ',
                 'price' => '180000',
-                'price_sale' => '119000',
+                'percent_discount' => '10',
                 'quantity_sold' => '45855',
             ],
             [
@@ -649,7 +649,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi phong cách Hàn',
                 'price' => '150230',
-                'price_sale' => '120000',
+                'percent_discount' => '0',
                 'quantity_sold' => '774',
             ],
             [
@@ -660,7 +660,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi họa tiết giấy báo',
                 'price' => '200000',
-                'price_sale' => '130000',
+                'percent_discount' => '20',
                 'quantity_sold' => '350',
             ],
             [
@@ -671,7 +671,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi hàn lá cây',
                 'price' => '300000',
-                'price_sale' => '285000',
+                'percent_discount' => '0',
                 'quantity_sold' => '1585',
             ],
             [
@@ -682,7 +682,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'áo thun in hình',
                 'price' => '238000',
-                'price_sale' => '239000',
+                'percent_discount' => '5',
                 'quantity_sold' => '350',
             ],
             [
@@ -693,7 +693,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Polo Polo',
                 'price' => '345000',
-                'price_sale' => '207000',
+                'percent_discount' => '50',
                 'quantity_sold' => '851',
             ],
             [
@@ -704,7 +704,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'sơ mi phong cách nhật bản',
                 'price' => '168000',
-                'price_sale' => '100800',
+                'percent_discount' => '10',
                 'quantity_sold' => '453',
             ],
             [
@@ -715,7 +715,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'thiết kế đơn giản nhưng đầy tinh tế gồm 3 quai chéo ôm gọn bàn chân, đế giày từ chất liệu cao su siêu bền',
                 'price' => '435000',
-                'price_sale' => '269700',
+                'percent_discount' => '5',
                 'quantity_sold' => '1925',
             ],
             [
@@ -726,7 +726,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Giày nhựa siêu thoáng khí',
                 'price' => '85000',
-                'price_sale' => '80000',
+                'percent_discount' => '10',
                 'quantity_sold' => '385',
             ],
             [
@@ -737,7 +737,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Da Pu là một loại da nhân tạo có độ bền cao, dễ lau chùi và không bị nứt nẻ khi sử dụng lâu dài',
                 'price' => '275000',
-                'price_sale' => '169000',
+                'percent_discount' => '5',
                 'quantity_sold' => '436',
             ],
             [
@@ -748,7 +748,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Giày Ni.ke',
                 'price' => '580000',
-                'price_sale' => '480000',
+                'percent_discount' => '10',
                 'quantity_sold' => '366',
             ],
             [
@@ -759,7 +759,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'thoáng khí, chống trượt, chống mài mòn, lau sàn, hấp thụ sốc',
                 'price' => '520000',
-                'price_sale' => '19000',
+                'percent_discount' => '50',
                 'quantity_sold' => '1469',
             ],
             [
@@ -770,7 +770,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Sản phẩm có thể đeo lâu và rất thoải mái.',
                 'price' => '221000',
-                'price_sale' => '133000',
+                'percent_discount' => '50',
                 'quantity_sold' => '419',
             ],
             [
@@ -781,7 +781,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Yohji Yamamoto',
                 'price' => '509434',
-                'price_sale' => '371304',
+                'percent_discount' => '10',
                 'quantity_sold' => '855',
             ],
             [
@@ -792,7 +792,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Style: youth and fashion.',
                 'price' => '685328',
-                'price_sale' => '557590',
+                'percent_discount' => '0',
                 'quantity_sold' => '120',
             ],
             [
@@ -803,7 +803,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Áo khoác bomber',
                 'price' => '500000',
-                'price_sale' => '257000',
+                'percent_discount' => '20',
                 'quantity_sold' => '32581',
             ],
             [
@@ -814,7 +814,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'kaki/jean dày dặn co giãn nhẹ thoải mái',
                 'price' => '260000',
-                'price_sale' => '199000',
+                'percent_discount' => '50',
                 'quantity_sold' => '71255',
             ],
             [
@@ -825,7 +825,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Jeans ở thân áo chất mềm mịn không xù, dày dặn',
                 'price' => '260000',
-                'price_sale' => '208000',
+                'percent_discount' => '10',
                 'quantity_sold' => '132',
             ],
             [
@@ -836,7 +836,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['white', 'black']),
                 'description' => 'Local Brand - Unisex',
                 'price' => '450000',
-                'price_sale' => '299500',
+                'percent_discount' => '50',
                 'quantity_sold' => '236',
             ],
             [
@@ -847,7 +847,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['silver', 'black']),
                 'description' => 'Nhẫn đen retro',
                 'price' => '152000',
-                'price_sale' => '89000',
+                'percent_discount' => '20',
                 'quantity_sold' => '155',
             ],
             [
@@ -858,7 +858,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['Chữ ký Midori', 'Xanh Navi', 'Midori OFFicial', 'Signature đen']),
                 'description' => 'MIDORI FOR MAN',
                 'price' => '150000',
-                'price_sale' => '79000',
+                'percent_discount' => '0',
                 'quantity_sold' => '1258',
             ],
             [
@@ -869,7 +869,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['Đen', 'Nâu', 'Caro']),
                 'description' => 'Túi đeo chéo',
                 'price' => '169000',
-                'price_sale' => '70000',
+                'percent_discount' => '0',
                 'quantity_sold' => '7458',
             ],
             [
@@ -880,7 +880,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['APEHLIC-M1', 'APEHLIC-M2', 'APEHLIC-M3', 'APEHLIC-M4', 'MK-KHUNGLONG']),
                 'description' => 'Kiểu dáng Túi Chéo nhỏ gọn là món phụ kiện thời trang trẻ trung, sành điệu dành cho bạn mỗi khi dạo phố hay du lịch cùng bạn bè',
                 'price' => '135000',
-                'price_sale' => '91000',
+                'percent_discount' => '10',
                 'quantity_sold' => '1245',
             ],
             [
@@ -891,7 +891,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['Đen', 'Nâu', 'Xám']),
                 'description' => 'Da cao cấp mềm mại, sang trọng và có thời gian sử dụng lâu dài.',
                 'price' => '49000',
-                'price_sale' => '32000',
+                'percent_discount' => '20',
                 'quantity_sold' => '12185',
             ],
             [
@@ -902,7 +902,7 @@ class ProductSeeder extends Seeder
                 'color' => json_encode(['Đen', 'Nâu', 'Ghi', 'Xanh dương', 'Xanh rêu', ]),
                 'description' => 'Túi đeo chéo nam, nữ thời trang với kích thước phù hợp mang, đựng các vật dụng, sách, bút, vở, pin ,sạc dự phòng, thẻ ATM, các đồ dùng cá nhân...',
                 'price' => '119000',
-                'price_sale' => '79000',
+                'percent_discount' => '30',
                 'quantity_sold' => '13995',
             ],
         ]);

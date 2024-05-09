@@ -128,7 +128,7 @@
                                         <span>Yêu thích</span>
                                     </div>
                                     <div class="home-product-item__sale-off">
-                                        <span class="home-product-item__sale-off-percent">25%</span>
+                                        <span class="home-product-item__sale-off-percent">{{ number_format($row->percent_discount) }}%</span>
                                         <span class="home-product-item__sale-off-label">GIẢM</span>
                                     </div>
                                 </a>
