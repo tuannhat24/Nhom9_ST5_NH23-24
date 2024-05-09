@@ -13,9 +13,9 @@
                     <div class="full-home-banners__main">
                         <div class="full-home-banners__main-inner">
                             @foreach($sliders as $key => $slider)
-                                <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
-                                    <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
-                                </a>
+                            <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
+                                <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
+                            </a>
                             @endforeach
                         </div>
                         <div class="full-home-banners__main-controls">
@@ -58,6 +58,9 @@
                         <div class="grid__row">
 
                             @foreach($data as $row)
+                            @php
+                            $newPrice = $row->price - ($row->price * $row->percent_discount / 100);
+                            @endphp
                             <!-- Product item -->
                             <div class="grid__column-2-4">
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
@@ -68,7 +71,7 @@
                                     <h4 class="home-product-item__name">{{ $row->name }}</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                        <span class="home-product-item__price-current"></span>
+                                        <span class="home-product-item__price-current">{{ number_format($newPrice) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
                                         <span class="home-product-item__like home-product-item__like--liked">

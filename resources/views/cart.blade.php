@@ -37,6 +37,7 @@
                                 @php
                                 $totalQuantity += $cart->quantity;
                                 $totalPrice += $cart->quantity * $cart->product->price;
+                                $newPrice = $cart->product->price - ($cart->product->price * $cart->product->percent_discount / 100);
                                 @endphp
                                 <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
                                     <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
@@ -44,7 +45,7 @@
                                     <td>{{ $cart->product->id }}</td>
                                     <td>{{ $cart->size }}</td>
                                     <td>{{ $cart->color }}</td>
-                                    <td class="price">{{ number_format($cart->product->price) }}</td>
+                                    <td class="price">{{ number_format($newPrice) }}</td>
                                     <td>
                                         <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
                                             @csrf
@@ -53,7 +54,7 @@
                                             <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
                                         </form>
                                     </td>
-                                    <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
+                                    <td class="total">{{ number_format($cart->quantity * $newPrice) }}</td>
                                     <td>
                                         <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
                                             @csrf
@@ -98,12 +99,13 @@
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $row->image);
+                                    $newPrice = $row->price - ($row->price * $row->percent_discount / 100);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $row->name }}</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                        <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
+                                        <span class="home-product-item__price-current">{{ number_format($newPrice) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
                                         <span class="home-product-item__like home-product-item__like--liked">

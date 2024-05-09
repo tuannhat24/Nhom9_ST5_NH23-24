@@ -63,12 +63,13 @@
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $product->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $product->image);
+                                    $newPrice = $product->price - ($product->price * $product->percent_discount / 100);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $product->name }}</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">{{ number_format($product->price) }}</span>
-                                        <span class="home-product-item__price-current"></span>
+                                        <span class="home-product-item__price-current">{{ number_format($newPrice) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
                                         <span class="home-product-item__like home-product-item__like--liked">
