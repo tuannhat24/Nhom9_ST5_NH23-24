@@ -16,7 +16,7 @@ class DetailController extends Controller
 
          // Truy vấn thông tin của người dùng hiện tại
          $currentUser = auth()->user();
-         
+
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
         }
@@ -26,8 +26,8 @@ class DetailController extends Controller
             ->where('id', '!=', $product->id) // Loại bỏ sản phẩm đang xem
             ->paginate($perPage); // Sử dụng phân trang
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         return view('detail', [
             'product' => $product,

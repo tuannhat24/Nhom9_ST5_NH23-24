@@ -29,8 +29,8 @@ class ProductController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         // Truy vấn danh mục
         $categories = Category::all();
@@ -82,9 +82,14 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
-        $currentUser = Auth::user();
-        $carts = Cart::all();
-        $categories = Category::all();
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+
+         // Truy vấn giỏ hàng của người dùng hiện tại
+         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+         // Truy vấn danh mục
+         $categories = Category::all();
 
         $products = Product::where('name', 'LIKE BINARY', "%$query%")
             ->orWhere('description', 'LIKE BINARY', "%$query%");
@@ -151,9 +156,14 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
-        $currentUser = Auth::user();
-        $carts = Cart::all();
-        $categories = Category::all();
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+
+         // Truy vấn giỏ hàng của người dùng hiện tại
+         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+         // Truy vấn danh mục
+         $categories = Category::all();
 
         // Áp dụng sắp xếp theo giá nếu được yêu cầu
         if ($request->has('sort')) {
@@ -193,8 +203,11 @@ class ProductController extends Controller
         $totalPages = ceil($totalProducts / $perPage);
         $currentPage = request()->input('page', 1);
 
-        $currentUser = Auth::user();
-        $carts = Cart::all();
+         // Truy vấn thông tin của người dùng hiện tại
+         $currentUser = auth()->user();
+
+         // Truy vấn giỏ hàng của người dùng hiện tại
+         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         if ($currentPage > $totalPages) {
             $currentPage = $totalPages;

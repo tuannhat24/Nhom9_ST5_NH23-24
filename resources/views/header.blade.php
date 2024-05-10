@@ -99,10 +99,7 @@
                             <a href="#">Tài khoản của tôi</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="#">Địa chỉ của tôi</a>
-                        </li>
-                        <li class="header__navbar-user-item">
-                            <a href="#">Đơn mua</a>
+                            <a href="{{route('user.purchase')}}">Đơn mua</a>
                         </li>
                         <li class="header__navbar-user-item">
                             <a href="/signout">Đăng xuất</a>

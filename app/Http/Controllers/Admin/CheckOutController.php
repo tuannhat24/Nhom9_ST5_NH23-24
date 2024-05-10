@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,6 +21,9 @@ class CheckOutController extends Controller
 
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
+
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         return view('checkout', compact(
             'title',
@@ -93,5 +97,70 @@ class CheckOutController extends Controller
         }
         header('Location: ' . $vnp_Url);
         die();
+    }
+
+    public function purchase()
+    {
+        $title = "Đơn Mua";
+
+        // Truy vấn dữ liệu sản phẩm từ database
+        $products = Product::orderBy('id');
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+        return view('purchase', compact(
+            'title',
+            'carts',
+            'currentUser',
+        ));
+    }
+
+    public function account()
+    {
+        $title = "Tài Khoản";
+
+        // Truy vấn người dùng
+        $users = User::all();
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+        return view('account', compact(
+            'title',
+            'users',
+            'carts',
+            'currentUser',
+        ));
+    }
+
+    public function voucher()
+    {
+        $title = "Tài Khoản";
+
+        // Truy vấn người dùng
+        $users = User::all();
+
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+        return view('voucher', compact(
+            'title',
+            'users',
+            'carts',
+            'currentUser',
+        ));
     }
 }

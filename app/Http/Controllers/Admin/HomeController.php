@@ -25,9 +25,9 @@ class HomeController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
-        
+       // Lấy giỏ hàng của người dùng hiện tại
+       $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
         // Truy vấn danh sách các danh mục sản phẩm
         $categories = Category::all();
 
@@ -50,7 +50,7 @@ class HomeController extends Controller
             $products = Product::orderByDesc('price_sale')->paginate($perPage);
         }
 
-        
+
         return view('home', [
             'title' => 'Trang chủ',
             'data' => $products,
