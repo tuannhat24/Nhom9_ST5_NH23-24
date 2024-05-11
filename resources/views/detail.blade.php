@@ -72,7 +72,7 @@
                                     </form>
                                     <hr>
                                     <div class="favorite">
-                                        <form id="toggleFavoriteBtn" class="favorite__btn" action="{{route('user.toggleFavorite', ['id' => $product->id])}}" method="POST">
+                                        <form id="toggleFavoriteBtn" class="favorite_form" action="{{route('user.toggleFavorite', ['id' => $product->id])}}" method="POST">
                                             @csrf
                                             @if($favorite?->is_favorite)
                                             <button type="submit" class="favorite__btn">
@@ -80,16 +80,16 @@
                                                     <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="#FF424F" fill-rule="evenodd" stroke-linejoin="round"></path>
                                                 </svg>
                                             </button>
+                                            <div class="favorite__qty">Đã Thích</div>
                                             @else
                                             <button type="submit" class="favorite__btn">
                                                 <svg width="25" height="20" class="vgMiJB">
                                                     <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linejoin="round"></path>
                                                 </svg>
                                             </button>
+                                            <div class="favorite__qty"> Thích</div>
                                             @endif
                                         </form>
-
-                                        <div class="favorite__qty">Đã thích</div>
                                     </div>
                                 </div>
                             </div>

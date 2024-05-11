@@ -4,25 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use App\Models\Product;
+use App\Models\User;
 
-class PurchaseController extends Controller
+class VoucherController extends Controller
 {
     public function index()
     {
-        $title = "Đơn Mua";
-
-        // Truy vấn dữ liệu sản phẩm từ database
-        $products = Product::orderBy('id');
+        $title = "Tài Khoản";
 
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
+        // Truy vấn giỏ hàng
+        $carts = Cart::all();
+
         // Lấy giỏ hàng của người dùng hiện tại
         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
-        return view('purchase', compact(
+        return view('voucher', compact(
             'title',
+            'currentUser',
             'carts',
             'currentUser',
         ));

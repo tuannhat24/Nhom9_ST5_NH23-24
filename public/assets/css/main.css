@@ -2034,7 +2034,7 @@ h1 {
     font-weight: bold;
 }
 
-.favorite {
+.favorite_form {
     display: flex;
     justify-content: center;
     align-items: center;
