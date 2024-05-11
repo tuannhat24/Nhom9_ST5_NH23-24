@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Users\SignOutController;
 
 use App\Http\Controllers\Admin\MainController;
 
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SilderController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
+
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
@@ -45,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
+            Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
         });
     });
 

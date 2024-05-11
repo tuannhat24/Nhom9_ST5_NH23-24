@@ -44,16 +44,6 @@ class CustomerSeeder extends Seeder
                 'role' => 1,
 
             ],
-            [
-                'name' => 'Nguyen Nguyen',
-                'phone' => '0444444444',
-                'address' => 'Sai Gon',
-                'email' => 'NguyenNguyen@gmail.com',
-                'image' => 'user4.png',
-                'password' => '12345678',
-                'role' => 1,
-
-            ],
         ]);
     }
 }
