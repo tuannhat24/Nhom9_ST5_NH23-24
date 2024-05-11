@@ -22,9 +22,6 @@ class CheckOutController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Lấy giỏ hàng của người dùng hiện tại
-        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
-
         return view('checkout', compact(
             'title',
             'carts',
@@ -109,9 +106,6 @@ class CheckOutController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Lấy giỏ hàng của người dùng hiện tại
-        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
-
         return view('purchase', compact(
             'title',
             'carts',
@@ -125,12 +119,13 @@ class CheckOutController extends Controller
 
         // Truy vấn người dùng
         $users = User::all();
-
+        
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
         // Lấy giỏ hàng của người dùng hiện tại
         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
 
         return view('account', compact(
             'title',
@@ -152,9 +147,6 @@ class CheckOutController extends Controller
 
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
-
-        // Lấy giỏ hàng của người dùng hiện tại
-        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         return view('voucher', compact(
             'title',

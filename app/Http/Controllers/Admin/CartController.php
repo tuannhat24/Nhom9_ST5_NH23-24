@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,8 @@ class CartController extends Controller
             $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
+
         return view('cart', compact(
             'title',
             'carts',
@@ -53,6 +56,7 @@ class CartController extends Controller
             'totalPages',
             'currentPage',
             'currentUser',
+            'favoriteProducts',
         ));
     }
 

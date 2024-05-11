@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Silder;
 
 class HomeController extends Controller
@@ -50,6 +51,7 @@ class HomeController extends Controller
             $products = Product::orderByDesc('price_sale')->paginate($perPage);
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
         return view('home', [
             'title' => 'Trang chủ',
@@ -60,6 +62,7 @@ class HomeController extends Controller
             'currentPage' => $currentPage,
             'categories' => $categories,
             'sliders' => $sliders,
+            'favoriteProducts' => $favoriteProducts,
         ]);
     }
 }

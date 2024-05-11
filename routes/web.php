@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SilderController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/account', [CheckOutController::class, 'account'])->name('user.account');
             Route::get('/voucher', [CheckOutController::class, 'voucher'])->name('user.voucher');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
+            Route::post('/detail/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
         });
     });
 

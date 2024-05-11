@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -55,6 +56,8 @@ class ProductController extends Controller
             $products = Product::orderByDesc('percent_discount')->paginate($perPage);
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
+
         return view('product', [
             'title' => 'Trang sản phẩm',
             'products' => $products,
@@ -64,6 +67,7 @@ class ProductController extends Controller
             'currentPage' => $currentPage,
             'categories' => $categories,
             'selectedCategory' => $selectedCategory,
+            'favoriteProducts' => $favoriteProducts,
         ]);
     }
 
@@ -126,6 +130,7 @@ class ProductController extends Controller
             session(['search_history' => $searchHistory]);
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
         return view('search_results', compact(
             'title',
@@ -136,7 +141,7 @@ class ProductController extends Controller
             'currentPage',
             'carts',
             'categories',
-            // 'searchHistory',
+            'favoriteProducts',
         ));
     }
 
@@ -179,6 +184,7 @@ class ProductController extends Controller
         // Truyền biến selectedCategory vào view
         $selectedCategory = $category->id;
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
         return view('product', compact(
             'title',
@@ -189,7 +195,8 @@ class ProductController extends Controller
             'currentPage',
             'carts',
             'categories',
-            'selectedCategory'
+            'selectedCategory',
+            'favoriteProducts',
         ));
     }
 
@@ -213,8 +220,10 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
+
         $products = Product::orderBy('id')->paginate($perPage);
 
-        return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
+        return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage', 'favoriteProducts'));
     }
 }

@@ -66,6 +66,8 @@
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $row->image);
+                                    $favoriteProductIds = $favoriteProducts->pluck('product_id');
+                                    $isFavorited = $favoriteProductIds->contains($row->id);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $row->name }}</h4>
@@ -74,10 +76,12 @@
                                         <span class="home-product-item__price-current">{{ number_format($newPrice) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
+                                        @if($isFavorited)
                                         <span class="home-product-item__like home-product-item__like--liked">
                                             <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
                                             <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
                                         </span>
+                                        @endif
                                         <div class="home-product-item__rating">
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
