@@ -99,10 +99,7 @@
                             <a href="#">Tài khoản của tôi</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="#">Địa chỉ của tôi</a>
-                        </li>
-                        <li class="header__navbar-user-item">
-                            <a href="#">Đơn mua</a>
+                            <a href="{{route('user.purchase')}}">Đơn mua</a>
                         </li>
                         <li class="header__navbar-user-item">
                             <a href="/signout">Đăng xuất</a>
@@ -141,8 +138,8 @@
                                 @if(session()->has('search_history') && !empty(session('search_history')))
                                 @foreach(session('search_history') as $query)
                                 <li class="header__search-history-item"><a href="#">{{ $query }}</a>
-                                <button class="header__search-history-remove">X</button>
-                            </li>
+                                    <button class="header__search-history-remove">X</button>
+                                </li>
                                 @endforeach
                                 @else
                                 <li class="header__search-history-item">Không có lịch sử tìm kiếm.</li>
@@ -188,6 +185,9 @@
                             <ul class="header__cart-list-item">
                                 <!--Cart item-->
                                 @foreach($carts as $cart)
+                                @php
+                                $newPrice = $cart->product->price - ($cart->product->price * $cart->product->percent_discount / 100);
+                                @endphp
                                 <li class="header__cart-item">
                                     <a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">
                                         <img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="" class="header__cart-img">
@@ -196,7 +196,7 @@
                                         <div class="header__cart-item-head">
                                             <h5 class="header__cart-item-name"><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></h5>
                                             <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">{{ number_format($cart->product->price) }}đ</span>
+                                                <span class="header__cart-item-price">{{ number_format($newPrice) }}đ</span>
                                                 <span class="header__cart-item-multiply">x</span>
                                                 <span class="header__cart-item-qnt">{{ $cart->quantity }}</span>
                                             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Silder;
 
 class HomeController extends Controller
@@ -25,9 +26,9 @@ class HomeController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
-        
+       // Lấy giỏ hàng của người dùng hiện tại
+       $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
         // Truy vấn danh sách các danh mục sản phẩm
         $categories = Category::all();
 
@@ -50,7 +51,8 @@ class HomeController extends Controller
             $products = Product::orderByDesc('price_sale')->paginate($perPage);
         }
 
-        
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
+
         return view('home', [
             'title' => 'Trang chủ',
             'data' => $products,
@@ -60,6 +62,7 @@ class HomeController extends Controller
             'currentPage' => $currentPage,
             'categories' => $categories,
             'sliders' => $sliders,
+            'favoriteProducts' => $favoriteProducts,
         ]);
     }
 }

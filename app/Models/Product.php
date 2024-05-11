@@ -30,6 +30,11 @@ class Product extends Model
         return $this->belongsToMany(Color::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

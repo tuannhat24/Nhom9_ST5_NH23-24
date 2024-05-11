@@ -30,6 +30,8 @@
                                                 <th>Hình Ảnh</th>
                                                 <th>Tên</th>
                                                 <th>Mã Sản Phẩm</th>
+                                                <th style="padding-left: 10px; padding-right: 10px;">Size</th>
+                                                <th style="padding-left: 10px; padding-right: 10px;">Color</th>
                                                 <th>Đơn Giá (VND)</th>
                                                 <th>Số Lượng</th>
                                                 <th>Số Tiền (VND)</th>
@@ -42,13 +44,16 @@
                                             @foreach($carts as $cart)
                                             @php
                                             $totalQuantity += $cart->quantity;
-                                            $totalPrice += $cart->quantity * $cart->product->price;
+                                            $newPrice = $cart->product->price - ($cart->product->price * $cart->product->percent_discount / 100);
+                                            $totalPrice += $cart->quantity * $newPrice;
                                             @endphp
                                             <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
                                                 <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
                                                 <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
                                                 <td>{{ $cart->product->id }}</td>
-                                                <td class="price">{{ number_format($cart->product->price) }}</td>
+                                                <td style="padding-left: 10px; padding-right: 10px;">{{ $cart->size }}</td>
+                                                <td style="padding-left: 10px; padding-right: 10px;">{{ $cart->color }}</td>
+                                                <td class="price">{{ number_format($newPrice) }}</td>
                                                 <td>
                                                     <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
                                                         @csrf
@@ -57,7 +62,7 @@
                                                         <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
                                                     </form>
                                                 </td>
-                                                <td class="total">{{ number_format($cart->quantity * $cart->product->price) }}</td>
+                                                <td class="total">{{ number_format($cart->quantity * $newPrice) }}</td>
                                                 <td>
                                                     <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
                                                         @csrf
@@ -69,7 +74,6 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-
                                                 <td>
                                                     <form action="{{route('user.checkout.vnpay')}}" method="post">
                                                         @csrf
@@ -80,9 +84,9 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
-                                                <td colspan="1" id="total-quantity">{{ $totalQuantity }}</td>
+                                                <td colspan="2" id="total-quantity">{{ $totalQuantity }}</td>
                                                 <td colspan="2">Tổng Số Tiền:</td>
-                                                <td colspan="1"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
+                                                <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                                 <td>
                                                     <form method="POST" action="{{ route('user.checkout') }}">
                                                         @csrf

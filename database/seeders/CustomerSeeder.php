@@ -44,6 +44,15 @@ class CustomerSeeder extends Seeder
                 'role' => 1,
 
             ],
+            [
+                'name' => 'Vũ Linh',
+                'phone' => '0364704715',
+                'address' => 'Binh Phuoc',
+                'email' => 'linhlg042004@gmail.com',
+                'image' => 'user1.png',
+                'password' => '123456',
+                'role' => 1,
+            ],
         ]);
     }
 }

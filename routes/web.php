@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
@@ -17,7 +18,10 @@ use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SilderController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
+use App\Http\Controllers\Admin\VoucherController;
+use App\Http\Controllers\FavoriteController;
 
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
@@ -46,7 +50,11 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
+            Route::get('/purchase', [PurchaseController::class, 'index'])->name('user.purchase');
+            Route::get('/account', [AccountController::class, 'index'])->name('user.account');
+            Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
+            Route::post('/detail/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
         });
     });

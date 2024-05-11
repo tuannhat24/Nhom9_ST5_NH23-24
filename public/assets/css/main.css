@@ -1442,6 +1442,7 @@ i.home-product-item__like-icon-fill {
 
 .manager-item {
     margin-bottom: 10px;
+    padding-top: 2px;
 }
 
 .manager-item__link {
@@ -1485,6 +1486,10 @@ i.home-product-item__like-icon-fill {
     color: var(--white-color);
     text-decoration: none;
     border-radius: 4px;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
 }
 
 .buy-now-btn {
@@ -2027,8 +2032,28 @@ h1 {
 .manager-item__link.active,
 .select-input__link.active {
     color: var(--primary-color);
-    background-color: var(--white-color);
+    background-color: #f5f5f5;
     font-weight: bold;
+}
+
+.favorite_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite svg{
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.favorite .favorite__qty {
+    font-size: 2rem;
+}
+
+.favorite__btn {
+    border: none;
+    background-color: #f5f5f5;
 }
 
 /* Comment Section */
