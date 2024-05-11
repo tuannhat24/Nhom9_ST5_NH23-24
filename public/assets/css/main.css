@@ -2059,6 +2059,7 @@ h1 {
 /* Comment Section */
 .comment-section {
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .comment-section .bg-white {
@@ -2144,3 +2145,4 @@ h1 {
     width: 5em;
     height: 5em;
 }
+

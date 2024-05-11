@@ -221,6 +221,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+//thông báo khi chưa chọn size color
+function addToCart() {
+    var selectedSize = document.getElementById('selected_size').value;
+    var selectedColor = document.getElementById('selected_color').value;
+
+    if (!selectedSize || !selectedColor) {
+        alert("Vui lòng chọn size và color trước khi thêm vào giỏ hàng.");
+        return false; // Ngăn chặn gửi yêu cầu nếu chưa chọn size hoặc color
+    }
+
+}
 
 // active cho danh mục và các thẻ sắp xếp
 document.addEventListener("DOMContentLoaded", function () {
