@@ -96,7 +96,7 @@
                     <span class="header__navbar-user-name"> {{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
-                            <a href="#">Tài khoản của tôi</a>
+                            <a href="{{route('user.account')}}">Tài khoản của tôi</a>
                         </li>
                         <li class="header__navbar-user-item">
                             <a href="{{route('user.purchase')}}">Đơn mua</a>

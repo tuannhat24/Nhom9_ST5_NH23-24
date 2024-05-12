@@ -16,11 +16,11 @@ class CheckOutController extends Controller
     {
         $title = "Thanh Toán";
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
-
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
+
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         return view('checkout', compact(
             'title',

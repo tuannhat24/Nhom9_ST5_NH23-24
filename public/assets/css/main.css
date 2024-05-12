@@ -2042,7 +2042,7 @@ h1 {
     align-items: center;
 }
 
-.favorite svg{
+.favorite svg {
     cursor: pointer;
     margin-top: 5px;
 }
@@ -2054,6 +2054,8 @@ h1 {
 .favorite__btn {
     border: none;
     background-color: #f5f5f5;
+    display: none;
+    width: 100px;
 }
 
 /* Comment Section */
@@ -2077,7 +2079,7 @@ h1 {
 .comment-section .user-info img {
     border-radius: 50%;
     overflow: hidden;
-    width: 45px; 
+    width: 45px;
     height: 45px;
 }
 
@@ -2101,6 +2103,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 15px;
 }
 
 .comment-section .bg-light textarea {
@@ -2141,8 +2144,19 @@ h1 {
     background-color: #f0f0f0;
 }
 
-.rounded-circle1{
+.rounded-circle1 {
     width: 5em;
     height: 5em;
 }
 
+/* Account info */
+/*
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+} */

@@ -24,8 +24,32 @@
             </div>
             <div class="grid__column-10">
                 <!-- content -->
-                
-                <br>
+                <h1>Thông Tin Tài Khoản</h1>
+                <form action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Họ và Tên:</label>
+                        <input type="text" id="name" name="name" value="{{ $currentUser->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ $currentUser->email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số Điện Thoại:</label>
+                        <input type="text" id="phone" name="phone" value="{{ $currentUser->customer->phone }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa Chỉ:</label>
+                        <input type="text" id="address" name="address" value="{{ $currentUser->customer->address }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Ảnh Đại Diện:</label>
+                        <input type="file" id="image" name="image">
+                    </div>
+                    <button type="submit">Cập Nhật Thông Tin</button>
+                </form>
             </div>
         </div>
     </div>

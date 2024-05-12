@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/account', [AccountController::class, 'index'])->name('user.account');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
-            Route::post('/detail/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
+            Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
         });
     });

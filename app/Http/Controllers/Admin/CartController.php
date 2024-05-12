@@ -115,11 +115,8 @@ class CartController extends Controller
                 'color' => $color
             ]);
         }
-
         return redirect()->route('user.cart')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
     }
-
-
 
     // Xóa toàn bộ sản phẩm trong giỏ hàng
     public function clearCart()
@@ -137,8 +134,14 @@ class CartController extends Controller
         } else if ($change < 0 && $cart->quantity > 1) {
             $cart->quantity += $change;
         }
-        $cart->save();
-        return redirect()->back();
+
+        $cart->update();
+        $newQuantity = $cart->quantity;
+        $totalPrice = $cart->product->price * $newQuantity;
+        return response()->json([
+            'newQuantity' => $newQuantity,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 
     public function removeItem($cartId)
@@ -146,6 +149,12 @@ class CartController extends Controller
         // Xóa một sản phẩm khỏi giỏ hàng
         $cart = Cart::findOrFail($cartId);
         $cart->delete();
-        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+        $newQuantity = $cart->quantity;
+        $totalPrice = $cart->product->price * $newQuantity;
+        return response()->json([
+            'success' => true,
+            'newQuantity' => $newQuantity,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 }

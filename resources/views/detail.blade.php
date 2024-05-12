@@ -64,24 +64,18 @@
                                     </form>
                                     <hr>
                                     <div class="favorite">
-                                        <form id="toggleFavoriteBtn" class="favorite_form" action="{{route('user.toggleFavorite', ['id' => $product->id])}}" method="POST">
-                                            @csrf
-                                            @if($favorite?->is_favorite)
-                                            <button type="submit" class="favorite__btn">
-                                                <svg width="25" height="20" class="vgMiJB">
-                                                    <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="#FF424F" fill-rule="evenodd" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
+                                        <button type="submit" class="favorite__btn" id="favorited">
+                                            <svg width="25" height="20" class="vgMiJB">
+                                                <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="#FF424F" fill-rule="evenodd" stroke-linejoin="round"></path>
+                                            </svg>
                                             <div class="favorite__qty">Đã Thích</div>
-                                            @else
-                                            <button type="submit" class="favorite__btn">
-                                                <svg width="25" height="20" class="vgMiJB">
-                                                    <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
+                                        </button>
+                                        <button type="submit" class="favorite__btn" id="not_favorited">
+                                            <svg width="25" height="20" class="vgMiJB">
+                                                <path d="M19.469 1.262c-5.284-1.53-7.47 4.142-7.47 4.142S9.815-.269 4.532 1.262C-1.937 3.138.44 13.832 12 19.333c11.559-5.501 13.938-16.195 7.469-18.07z" stroke="#FF424F" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linejoin="round"></path>
+                                            </svg>
                                             <div class="favorite__qty"> Thích</div>
-                                            @endif
-                                        </form>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +149,7 @@
                             <div class="d-flex flex-column comment-section">
 
                                 @auth
-                                <div class="bg-light p-2">
+                                <div class="bg-light p-2 mb-2">
                                     <form action="{{ route('products.comments', $product) }}" method="POST">
                                         @csrf
                                         <div class="d-flex flex-row align-items-start">
@@ -188,11 +182,46 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-</div>
+
+
+<!-- Ajax (Favorite) -->
+<script>
+    $(document).ready(function() {
+        if ("{{ $favorite?->is_favorite }}" === '1') {
+            $("#favorited").show();
+        } else {
+            $("#not_favorited").show();
+        }
+
+        function onToggle() {
+            $.ajax({
+                url: "/user/detail/toggleFavorite/{{$product->id}}",
+                type: "post",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(res) {
+                    if (res.isFav) {
+                        $("#favorited").show();
+                        $("#not_favorited").hide();
+                    } else {
+                        $("#favorited").hide();
+                        $("#not_favorited").show();
+                    }
+                },
+
+            })
+        }
+
+        $("#favorited").click(onToggle)
+        $("#not_favorited").click(onToggle)
+
+    })
+</script>
 
 @endsection

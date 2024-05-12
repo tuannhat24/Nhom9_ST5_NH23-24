@@ -223,14 +223,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //thông báo khi chưa chọn size color
 function addToCart() {
-    var selectedSize = document.getElementById('selected_size').value;
-    var selectedColor = document.getElementById('selected_color').value;
+    var selectedSize = document.getElementById("selected_size").value;
+    var selectedColor = document.getElementById("selected_color").value;
 
     if (!selectedSize || !selectedColor) {
         alert("Vui lòng chọn size và color trước khi thêm vào giỏ hàng.");
         return false; // Ngăn chặn gửi yêu cầu nếu chưa chọn size hoặc color
     }
-
 }
 
 // active cho danh mục và các thẻ sắp xếp
@@ -287,31 +286,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-
-document
-    .getElementById("toggleFavoriteBtn")
-    .addEventListener("click", function () {
-        var productId = this.getAttribute("data-product-id");
-
-        fetch("{{ route('user.toggle-favorite', ['id' => $product->id]) }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-Token": "{{ csrf_token() }}",
-            },
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data.message);
-                // Cập nhật giao diện người dùng tùy theo trạng thái thích hoặc không thích
-                // Ví dụ: Thay đổi biểu tượng, cập nhật thông báo, vv.
-            })
-            .catch((error) => {
-                console.error("There was an error!", error);
-            });
-    });

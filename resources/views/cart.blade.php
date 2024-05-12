@@ -39,7 +39,7 @@
                                 $newPrice = $cart->product->price - ($cart->product->price * $cart->product->percent_discount / 100);
                                 $totalPrice += $cart->quantity * $newPrice;
                                 @endphp
-                                <tr class="cart-item" data-product-id="{{ $cart->product->id }}">
+                                <tr class="cart-item" id="cart-item-{{ $cart->id }}">
                                     <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}"><img src="{{ asset('assets/img/' . $cart->product->image) }}" alt="Product Image" style="width: 100px;"></a></td>
                                     <td><a href="{{ route('user.detail', ['id' => $cart->product->id]) }}">{{ $cart->product->name }}</a></td>
                                     <td>{{ $cart->product->id }}</td>
@@ -47,21 +47,15 @@
                                     <td style="padding-left: 10px; padding-right: 10px;">{{ $cart->color }}</td>
                                     <td class="price">{{ number_format($newPrice) }}</td>
                                     <td>
-                                        <form action="{{ route('user.cart.update', ['cartId' => $cart->id]) }}" method="POST">
-                                            @csrf
-                                            <button class="quantity-btn" type="submit" name="change" value="-1"><i class="fas fa-minus"></i></button>
-                                            <span class="quantity">{{ $cart->quantity }}</span>
-                                            <button class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
-                                        </form>
+                                        <button id="reduce-{{$cart->id}}" class="quantity-btn" type="submit" name="change" value="-1"><i class="fas fa-minus"></i></button>
+                                        <span id="product_qty-{{ $cart->id }}" class="quantity">{{ $cart->quantity }}</span>
+                                        <button id="increase-{{$cart->id}}" class="quantity-btn" type="submit" name="change" value="1"><i class="fas fa-plus"></i></button>
                                     </td>
-                                    <td class="total">{{ number_format($cart->quantity * $newPrice) }}</td>
+                                    <td class="total item-total">{{ number_format($cart->quantity * $newPrice) }}</td>
                                     <td>
-                                        <form action="{{ route('user.cart.remove', ['cartId' => $cart->id]) }}" method="post">
-                                            @csrf
-                                            <button type="submit" class="remove-item">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <button id="remove-{{$cart->id}}" class="remove-item">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -148,4 +142,99 @@
     </div>
 </div>
 
+
+<!-- Ajax (Minus & Plus) -->
+<script>
+    $(document).ready(function() {
+
+        function updateTotal() {
+            var totalQuantity = 0;
+            var totalPrice = 0;
+
+            // Duyệt qua từng dòng trong bảng giỏ hàng
+            $('.cart-item').each(function() {
+                var quantity = parseInt($(this).find('.quantity').text());
+                var price = parseInt($(this).find('.price').text().replace(/\D/g, '')); // Loại bỏ ký tự không phải số
+                var total = quantity * price;
+                totalQuantity += quantity;
+                totalPrice += quantity * price;
+
+                // Cập nhật giá trị mới cho từng mặt hàng
+                $(this).find('.item-total').text(numberWithCommas(total));
+            });
+
+            // Cập nhật tổng số tiền và tổng số lượng sản phẩm trên trang
+            $('#total-price').text(numberWithCommas(totalPrice));
+            $('#total-quantity').text(totalQuantity);
+        }
+
+        function onTogglePlus() {
+            var cartId = $(this).attr('id').split('-')[1];
+            $.ajax({
+                url: "/user/cart/update/" + cartId,
+                type: "post",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    change: 1
+                },
+                success: function() {
+                    var $quantity = $("#product_qty-" + cartId);
+                    var newQuantity = parseInt($quantity.text()) + 1;
+                    $quantity.text(newQuantity);
+                    updateTotal();
+                },
+            })
+        }
+
+        function onToggleMinus() {
+            var cartId = $(this).attr('id').split('-')[1];
+            $.ajax({
+                url: "/user/cart/update/" + cartId,
+                type: "post",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    change: -1
+                },
+                success: function() {
+                    var $quantity = $("#product_qty-" + cartId);
+                    var newQuantity = parseInt($quantity.text()) - 1;
+                    $quantity.text(newQuantity >= 1 ? newQuantity : 1);
+                    updateTotal();
+                },
+
+            })
+        }
+        $(".quantity-btn").click(function() {
+            var action = $(this).val();
+            if (action == "1") {
+                onTogglePlus.call(this);
+            } else if (action == "-1") {
+                onToggleMinus.call(this);
+            }
+        });
+        $(".remove-item").click(function() {
+            var cartId = $(this).attr('id').split('-')[1];
+            $.ajax({
+                url: "/user/cart/remove/" + cartId,
+                type: "post",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    // Xóa dòng sản phẩm khỏi bảng giỏ hàng
+                    $("#cart-item-" + cartId).remove();
+                    // Cập nhật tổng số tiền và tổng số lượng sản phẩm trên trang
+                    updateTotal();
+                }
+            });
+        });
+    })
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
 @endsection

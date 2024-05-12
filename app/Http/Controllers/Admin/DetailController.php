@@ -54,21 +54,32 @@ class DetailController extends Controller
     {
         $user = auth()->user();
 
-        $favorite = Favorite::where('customer_id', $user->customer_id)
-            ->where('product_id', $id)
-            ->first();
+        $result = Favorite::where('customer_id', $user->customer_id)
+            ->where('product_id', $id)->first();
 
-        if ($favorite) {
-            // Nếu đã yêu thích, bỏ yêu thích và xóa từ cơ sở dữ liệu
-            $favorite->delete();
-        } else {
-            // Nếu chưa yêu thích, thêm vào yêu thích và lưu vào cơ sở dữ liệu
+        $is_fav = false;
+
+        if (!$result) {
             Favorite::create([
                 'customer_id' => $user->customer_id,
                 'product_id' => $id,
                 'is_favorite' => true,
             ]);
+            $is_fav = true;
+        } else {
+            if ($result->is_favorite) {
+                $result->update([
+                    'is_favorite' => false
+                ]);
+                $is_fav = false;
+            } else {
+                $result->update([
+                    'is_favorite' => true
+                ]);
+                $is_fav = true;
+            }
         }
-        return redirect()->back();
+
+        return response(["isFav" => $is_fav], 200);
     }
 }
