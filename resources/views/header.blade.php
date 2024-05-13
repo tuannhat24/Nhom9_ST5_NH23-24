@@ -92,11 +92,14 @@
                 <!-- <li class="header__navbar-item header__navbar-item--strong header__navbar-item--separate">Đăng ký</li>
                 <li class="header__navbar-item header__navbar-item--strong">Đăng nhập</li> -->
                 <li class="header__navbar-item header__navbar-user">
-                    <img src="{{ asset('assets/img/' . $currentUser->image) }}" alt="" class="header__navbar-user-img">
+                    @php
+                    $imageUrl = asset('assets/img/' . $currentUser->customer->image);
+                    @endphp
+                    <div class="header__navbar-user-img" style="background-image: url('{{ $imageUrl }}');"></div>
                     <span class="header__navbar-user-name"> {{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
-                            <a href="{{route('user.account')}}">Tài khoản của tôi</a>
+                            <a href="{{route('user.profile', ['id' => $currentUser->id])}}">Tài khoản của tôi</a>
                         </li>
                         <li class="header__navbar-user-item">
                             <a href="{{route('user.purchase')}}">Đơn mua</a>

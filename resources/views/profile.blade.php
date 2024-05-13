@@ -11,7 +11,7 @@
                     <h3 class="manager__heading">{{ $title }}</h3>
                     <ul class="manager-list">
                         <li class="manager-item">
-                            <a href="#" class="manager-item__link">Tài Khoản Của Tôi</a>
+                            <a href="#" class="manager-item__link active">Tài Khoản Của Tôi</a>
                         </li>
                         <li class="manager-item">
                             <a href="{{ route('user.purchase') }}" class="manager-item__link">Đơn Mua</a>
@@ -24,10 +24,9 @@
             </div>
             <div class="grid__column-10">
                 <!-- content -->
-                <h1>Thông Tin Tài Khoản</h1>
-                <form action="" method="POST">
+                <form class="profile" action="{{ route('user.profile', ['id' => $currentUser->id]) }}" method="POST" enctype="multipart/form-data">
+                    <h1>Thông Tin Tài Khoản</h1>
                     @csrf
-                    @method('PUT')
                     <div class="form-group">
                         <label for="name">Họ và Tên:</label>
                         <input type="text" id="name" name="name" value="{{ $currentUser->name }}" required>
@@ -46,9 +45,16 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Ảnh Đại Diện:</label>
+                        @php
+                        $imageUrl = asset('assets/img/' . $currentUser->customer->image);
+                        @endphp
+                        @if ($currentUser->customer->image)
+                        <div class="profile__avatar" style="background-image: url('{{ $imageUrl }}');"></div>
+                        @else
+                        <p>Không có ảnh đại diện</p>
+                        @endif
                         <input type="file" id="image" name="image">
-                    </div>
-                    <button type="submit">Cập Nhật Thông Tin</button>
+                        <button class="btn btn--primary" type="submit">Cập Nhật Thông Tin</button>
                 </form>
             </div>
         </div>

@@ -11,10 +11,10 @@
                     <h3 class="manager__heading">{{ $title }}</h3>
                     <ul class="manager-list">
                         <li class="manager-item">
-                            <a href="{{ route('user.account') }}" class="manager-item__link">Tài Khoản Của Tôi</a>
+                            <a href="{{route('user.profile', ['id' => $currentUser->id])}}" class="manager-item__link">Tài khoản của tôi</a>
                         </li>
                         <li class="manager-item">
-                            <a href="#" class="manager-item__link">Đơn Mua</a>
+                            <a href="#" class="manager-item__link active">Đơn Mua</a>
                         </li>
                         <li class="manager-item">
                             <a href="{{ route('user.voucher') }}" class="manager-item__link">Voucher</a>

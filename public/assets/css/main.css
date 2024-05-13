@@ -34,6 +34,8 @@
 .header__navbar-user-img {
     width: 22px;
     height: 22px;
+    background-size: cover;
+    background-position: center;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -2150,13 +2152,39 @@ h1 {
 }
 
 /* Account info */
-/*
-input[type="text"],
-input[type="email"],
-input[type="file"] {
+
+.profile input[type="text"],
+.profile input[type="email"],
+.profile input[type="file"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-} */
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.profile {
+    margin-left: 40px;
+}
+
+.profile button{
+    margin-bottom: 10px;
+}
+
+.profile .profile__avatar {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+.profile p {
+    margin-top: 5px;
+    color: #888;
+}
+
+
