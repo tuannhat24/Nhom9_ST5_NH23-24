@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('percent_discount');
             $table->integer('quantity_sold');
+            $table->unsignedBigInteger('favorite_count')->default(0);
             $table->timestamps();
 
             $table->foreign('cate_id')

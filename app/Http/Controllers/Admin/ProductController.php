@@ -66,6 +66,15 @@ class ProductController extends Controller
                 case 'percent_desc':
                     $productsQuery->orderBy('percent_discount', 'desc');
                     break;
+                case 'popular':
+                    $productsQuery->orderByDesc('favorite_count');
+                    break;
+                case 'newest':
+                    $productsQuery->orderByDesc('created_at'); // Sắp xếp theo sản phẩm mới nhất
+                    break;
+                case 'best_selling':
+                    $productsQuery->orderByDesc('quantity_sold');
+                    break;
                 default:
                     $productsQuery->orderBy('id');
                     break;
@@ -192,6 +201,15 @@ class ProductController extends Controller
                     break;
                 case 'percent_desc':
                     $productsQuery->orderBy('percent_discount', 'desc');
+                    break;
+                case 'popular':
+                    $productsQuery->orderByDesc('favorite_count');
+                    break;
+                case 'newest':
+                    $productsQuery->orderByDesc('created_at');
+                    break;
+                case 'best_selling':
+                    $productsQuery->orderByDesc('quantity_sold');
                     break;
                 default:
                     $productsQuery->orderBy('id');

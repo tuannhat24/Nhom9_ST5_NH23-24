@@ -1057,6 +1057,10 @@ li.sidebar__menu-item {
     min-width: 140px;
 }
 
+.home-filter__btn .active {
+    background-color: var(--primary-color);
+}
+
 .home-filter__page {
     display: flex;
     align-items: center;

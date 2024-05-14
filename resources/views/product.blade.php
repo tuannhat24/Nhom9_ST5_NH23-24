@@ -30,10 +30,27 @@
 
                 <div class="grid__column-10">
                     <div class="home-filter">
+                        @if(isset($selectedCategory))
+                        @php
+                        $popularUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'popular']);
+                        $newestUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'newest']);
+                        $bestSellingUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'best_selling']);
+                        @endphp
                         <span class="home-filter__label">Sắp xếp theo</span>
-                        <button class="home-filter__btn btn">Phổ biến</button>
-                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                        <button class="home-filter__btn btn">Bán chạy</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $popularUrl }}')">Yêu Thích</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $newestUrl }}')">Mới nhất</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $bestSellingUrl }}')">Bán chạy</button>
+                        @else
+                        @php
+                        $popularUrl = route('user.product', ['sort' => 'popular']);
+                        $newestUrl = route('user.product', ['sort' => 'newest']);
+                        $bestSellingUrl = route('user.product', ['sort' => 'best_selling'])
+                        @endphp
+                        <span class="home-filter__label">Sắp xếp theo</span>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $popularUrl }}')">Yêu Thích</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $newestUrl }}')">Mới Nhất</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $bestSellingUrl }}')">Bán Chạy</button>
+                        @endif
 
                         <!-- Price classification -->
                         <div class="select-input">
