@@ -14,6 +14,9 @@
                             <a href="#" class="manager-item__link active">Tài Khoản Của Tôi</a>
                         </li>
                         <li class="manager-item">
+                            <a href="{{ route('user.password', ['id' => $currentUser->id])}}" class="manager-item__link">Mật Khẩu</a>
+                        </li>
+                        <li class="manager-item">
                             <a href="{{ route('user.purchase') }}" class="manager-item__link">Đơn Mua</a>
                         </li>
                         <li class="manager-item">
@@ -28,12 +31,12 @@
                     <h1>Thông Tin Tài Khoản</h1>
                     @csrf
                     <div class="form-group">
-                        <label for="name">Họ và Tên:</label>
-                        <input type="text" id="name" name="name" value="{{ $currentUser->name }}" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ $currentUser->email }}" disabled required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" value="{{ $currentUser->email }}" required>
+                        <label for="name">Họ và Tên:</label>
+                        <input type="text" id="name" name="name" value="{{ $currentUser->name }}" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Số Điện Thoại:</label>
@@ -55,6 +58,7 @@
                         @endif
                         <input type="file" id="image" name="image">
                         <button class="btn btn--primary" type="submit">Cập Nhật Thông Tin</button>
+                    </div>
                 </form>
             </div>
         </div>

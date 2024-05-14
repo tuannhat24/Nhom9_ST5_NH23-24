@@ -99,13 +99,19 @@
                     <span class="header__navbar-user-name"> {{ $currentUser->name }}</span>
                     <ul class="header__navbar-user-menu">
                         <li class="header__navbar-user-item">
-                            <a href="{{route('user.profile', ['id' => $currentUser->id])}}">Tài khoản của tôi</a>
+                            <a href="{{route('user.profile', ['id' => $currentUser->id])}}">Tài Khoản Của Tôi</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="{{route('user.purchase')}}">Đơn mua</a>
+                            <a href="{{route('user.password', ['id' => $currentUser->id])}}">Mật Khẩu</a>
                         </li>
                         <li class="header__navbar-user-item">
-                            <a href="/signout">Đăng xuất</a>
+                            <a href="{{route('user.purchase')}}">Đơn Mua</a>
+                        </li>
+                        <li class="header__navbar-user-item">
+                            <a href="{{route('user.voucher')}}">Mã Giảm Giá</a>
+                        </li>
+                        <li class="header__navbar-user-item">
+                            <a href="/signout">Đăng Xuất</a>
                         </li>
                     </ul>
                 </li>

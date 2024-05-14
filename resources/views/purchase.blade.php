@@ -14,6 +14,9 @@
                             <a href="{{route('user.profile', ['id' => $currentUser->id])}}" class="manager-item__link">Tài khoản của tôi</a>
                         </li>
                         <li class="manager-item">
+                            <a href="{{ route('user.password', ['id' => $currentUser->id])}}" class="manager-item__link">Mật Khẩu</a>
+                        </li>
+                        <li class="manager-item">
                             <a href="#" class="manager-item__link active">Đơn Mua</a>
                         </li>
                         <li class="manager-item">

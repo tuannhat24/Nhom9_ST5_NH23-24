@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SilderController;
+use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
 use App\Http\Controllers\Admin\VoucherController;
@@ -30,6 +31,9 @@ Route::post('/signup', [SignUpController::class, 'store'])->name('users.register
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
 Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('users.forgot_password');
 Route::post('/forgot_password/send', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot_password.send');
+Route::post('/forgot_password/verify', [ForgotPasswordController::class, 'verifyOtp'])->name('forgot_password.verify');
+Route::get('/reset_password', [ForgotPasswordController::class, 'showResetForm'])->name('users.reset_password');
+Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword'])->name('reset_password');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -53,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
+            Route::get('/password/{id}', [PasswordController::class, 'index'])->name('user.password');
+            Route::post('/password/{id}', [PasswordController::class, 'changePassword'])->name('user.password');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
             Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');

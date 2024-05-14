@@ -2187,4 +2187,27 @@ h1 {
     color: #888;
 }
 
+/* Password  */
+
+.password input[type="password"],
+.password input[type="old_password"],
+.password input[type="email"],
+.password input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.password {
+    margin-left: 40px;
+}
+
+.password button{
+    margin-bottom: 10px;
+}
+
 
