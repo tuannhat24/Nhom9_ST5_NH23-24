@@ -45,31 +45,31 @@
                                 @if(isset($selectedCategory))
                                 <!-- Có category id -->
                                 <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'percent_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
-                                </li>
-                                <!-- <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'discounted_price_asc']) }}" class="select-input__link">Giá đã giảm: Thấp đến cao</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'percent_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'discounted_price_desc']) }}" class="select-input__link">Giá đã giảm: Cao đến thấp</a>
-                                </li> -->
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Giá đã giảm: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Giá đã giảm: Cao đến thấp</a>
+                                </li>
                                 @else
                                 <!-- Không có category id -->
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
+                                    <a href="{{ route('user.product', ['sort' => 'percent_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
-                                </li>
-                                <!-- <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'discounted_price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('user.product', ['sort' => 'percent_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'discounted_price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
-                                </li> -->
+                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá đã giảm: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá đã giảm: Cao đến thấp</a>
+                                </li>
                                 @endif
                             </ul>
                         </div>
