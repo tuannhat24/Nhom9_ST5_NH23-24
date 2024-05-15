@@ -21,7 +21,7 @@ class SignUpController extends Controller
         // Validate dữ liệu đầu vào
         $validatedData = $request->validate([
             'email' => 'required|email:filter|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|regex:/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/',
             'password_confirmation' => 'required|same:password'
         ],
         [
@@ -30,6 +30,7 @@ class SignUpController extends Controller
             'email.unique' => 'Email đã tồn tại.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất :min kí tự.',
+            'password.regex' => 'Mật khẩu chỉ được chứa các ký tự chữ cái, số và các ký tự đặc biệt như !@#$%^&*()+=._-',
             'password_confirmation.required' => 'Vui lòng nhập mật khẩu xác nhận.',
             'password_confirmation.same' => 'Mật khẩu xác nhận không trùng khớp với mật khẩu đã nhập.'
         ]);

@@ -1,3 +1,4 @@
+<!-- Trang nhập OTP (forgot_password_verify.blade.php) -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +10,7 @@
     <div class="modal">
         <div class="modal__overlay"></div>
         <div class="modal__body">
-            <!-- Show error from controller -->
-            <form method="post" action="{{ route('reset_password') }}" class="auth-form">
+            <form method="post" action="{{ route('users.forgot_password_verify') }}" class="auth-form">
                 @csrf
                 <div class="auth-form__container">
                     <div class="auth-form__header">
@@ -18,28 +18,21 @@
                         <a href="{{ route('users.signin') }}" class="auth-form__switch-btn">Đăng nhập</a>
                     </div>
                     @if ($errors->any())
-                    <div class="alert alert-danger" style="max-height: 100px; display: flex; align-items: center;">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                    <div class="alert alert-danger" style="max-height: 50px; display: flex; align-items: center;">
+                        @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                        @endforeach
                         <button class="close" onclick="closeAlert()">&times;</button>
                     </div>
                     @endif
-                    <input type="hidden" name="email" value="{{ request()->query('email') }}">
-                    <input type="hidden" name="otp" value="{{ request()->query('otp') }}">
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input type="password" name="password" class="auth-form__input" placeholder="Mật khẩu mới" required>
-                        </div>
-                        <div class="auth-form__group">
-                            <input type="password" name="password_confirmation" class="auth-form__input" placeholder="Xác nhận mật khẩu" required>
+                            <input type="text" class="auth-form__input" id="otp" name="otp" placeholder="Nhập OTP" required>
                         </div>
                     </div>
                     <div class="auth-form__controls" style="margin-bottom: 24px;">
                         <a href="{{ route('users.signin') }}" class="btn btn--normal auth-form__controls-back">TRỞ LẠI</a>
-                        <button type="submit" class="btn btn--primary">ĐẶT LẠI MẬT KHẨU</button>
+                        <button type="submit" class="btn btn--primary">Xác thực OTP</button>
                     </div>
                 </div>
             </form>

@@ -31,7 +31,8 @@ Route::post('/signup', [SignUpController::class, 'store'])->name('users.register
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
 Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('users.forgot_password');
 Route::post('/forgot_password/send', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot_password.send');
-Route::post('/forgot_password/verify', [ForgotPasswordController::class, 'verifyOtp'])->name('forgot_password.verify');
+Route::get('/forgot_password_verify', [ForgotPasswordController::class, 'showVerifyOTPForm'])->name('forgot_password_verify.verify');
+Route::post('/forgot_password_verify', [ForgotPasswordController::class, 'verifyOtp'])->name('users.forgot_password_verify');
 Route::get('/reset_password', [ForgotPasswordController::class, 'showResetForm'])->name('users.reset_password');
 Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword'])->name('reset_password');
 

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include("head")
 </head>
+
 <body>
     <div class="modal">
         <div class="modal__overlay"></div>
@@ -14,6 +16,14 @@
                         <h3 class="auth-form__heading">Quên mật khẩu</h3>
                         <a href="{{ route('users.signin') }}" class="auth-form__switch-btn">Đăng nhập</a>
                     </div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger" style="max-height: 50px; display: flex; align-items: center;">
+                        @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                        @endforeach
+                        <button class="close" onclick="closeAlert()">&times;</button>
+                    </div>
+                    @endif
                     <div class="auth-form__form">
                         <div class="auth-form__group">
                             <input type="email" name="email" class="auth-form__input" placeholder="Email" required>
@@ -28,4 +38,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -30,51 +30,71 @@ class ForgotPasswordController extends Controller
             ['email' => $email],
             [
                 'email' => $email,
-                'token' => $otp,
+                'token' =>  Hash::make($otp),
                 'created_at' => Carbon::now()
             ]
         );
 
-        Mail::to($email)->send((new OtpMail($otp))->from('sender@example.com', 'Sender Name'));
+        Mail::to($email)->send(new OtpMail($otp));
 
-        return redirect()->back()->with('status', 'OTP đã được gửi đến email của bạn.');
+        // Lưu giá trị của biến $email vào session
+        $request->session()->put('reset_password_email', $email);
+
+        return redirect()->route('forgot_password_verify.verify');
     }
 
     public function verifyOtp(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users,email',
             'otp' => 'required'
         ]);
 
-        $record = DB::table('password_resets')
-                    ->where('email', $request->email)
-                    ->where('token', $request->otp)
-                    ->first();
+        // Lấy email từ session
+        $email = $request->session()->get('reset_password_email');
 
-        if (!$record) {
+        $otp = $request->input('otp');
+
+        $record = DB::table('password_resets')
+            ->where('email', $email)
+            ->first();
+
+        if (!$record || !Hash::check($otp, $record->token)) {
             return redirect()->back()->withErrors(['otp' => 'OTP không hợp lệ.']);
         }
 
-        return redirect()->route('users.reset_password', ['email' => $request->email, 'otp' => $request->otp]);
+        // Chuyển hướng đến trang đặt lại mật khẩu với email và mã OTP
+        return redirect()->route('users.reset_password', ['email' => $email, 'otp' => $otp, 'title' => 'Đặt lại mật khẩu']);
+    }
+
+    public function showVerifyOTPForm()
+    {
+        return view('users.forgot_password_verify', ['title' => 'Xác nhận OTP']);
+    }
+
+    public function showResetForm(Request $request)
+    {
+        return view('users.reset_password', [
+            'email' => $request->query('email'),
+            'otp' => $request->query('otp'),
+            'title' => 'Đặt lại mật khẩu'
+        ]);
     }
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'otp' => 'required',
-            'password' => 'required|confirmed|min:8'
-        ]);
-
-        $record = DB::table('password_resets')
-                    ->where('email', $request->email)
-                    ->where('token', $request->otp)
-                    ->first();
-
-        if (!$record) {
-            return redirect()->back()->withErrors(['otp' => 'OTP không hợp lệ.']);
-        }
+        $request->validate(
+            [
+                'email' => 'required|email|exists:users,email',
+                'otp' => 'required',
+                'password' => 'required|confirmed|min:6|regex:/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/',
+                'password_confirmation' => 'required',
+            ],
+            [
+                'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
+                'password.min' => 'Mật khẩu phải có ít nhất 6 kí tự.',
+                'password.regex' => 'Mật khẩu chỉ được chứa các ký tự chữ cái, số và các ký tự đặc biệt như !@#$%^&*()+=._-',
+            ]
+        );
 
         $user = User::where('email', $request->email)->first();
         $user->password = Hash::make($request->password);
