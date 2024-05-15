@@ -14,8 +14,8 @@
                 @csrf
                 <div class="auth-form__container">
                     <div class="auth-form__header">
-                        <h3 class="auth-form__heading">Đặt lại mật khẩu</h3>
-                        <a href="{{ route('users.signin') }}" class="auth-form__switch-btn">Đăng nhập</a>
+                        <h3 class="auth-form__heading">Xác thực OTP</h3>
+                        <a href="{{ route('users.signin') }}" class="auth-form__switch-btn">ĐĂNG NHẬP</a>
                     </div>
                     @if ($errors->any())
                     <div class="alert alert-danger" style="max-height: 50px; display: flex; align-items: center;">
@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="auth-form__controls" style="margin-bottom: 24px;">
-                        <a href="{{ route('users.signin') }}" class="btn btn--normal auth-form__controls-back">TRỞ LẠI</a>
-                        <button type="submit" class="btn btn--primary">Xác thực OTP</button>
+                        <a href="{{ route('users.forgot_password') }}" class="btn btn--normal auth-form__controls-back">TRỞ LẠI</a>
+                        <button type="submit" class="btn btn--primary">XÁC THỰC OTP</button>
                     </div>
                 </div>
             </form>

@@ -58,8 +58,7 @@ class ProfileController extends Controller
             // Cập nhật tên hình ảnh trong database
             $user->image = $imageName;
             $user->customer->image = $imageName;
-        }
-        else {
+        } else {
             // Nếu hình ảnh chưa được chọn, gán hình ảnh bằng hình ảnh hiện tại
             $imageName = $user->image;
             $user->image = $imageName;
@@ -72,6 +71,10 @@ class ProfileController extends Controller
 
         // $imageUrl = asset('uploads/' . $user->image);
 
-        return redirect()->route('user.profile', ['id' => $currentUser->id])->with('success', 'Cập nhật thông tin thành công');
+        if ($user->wasChanged() || $user->customer->wasChanged()) {
+            return redirect()->route('user.profile', ['id' => $currentUser->id])->with('success', 'Cập nhật thông tin thành công');
+        } else {
+            return redirect()->route('user.profile', ['id' => $currentUser->id])->with('error', 'Không có thay đổi nào được thực hiện');
+        }
     }
 }
