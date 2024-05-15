@@ -3,6 +3,13 @@
 	<head>
 		@include('users.admin.partials.head')	
 		@yield('css')
+		<style>
+			.header-left .header-search {
+				width: 100% !important;
+				background: #fff;
+				padding-left: 0 !important; 
+			}
+		</style>
 	</head>
 
 	<body>
@@ -14,6 +21,7 @@
 
 		<!--Container-->
 		<div class="main-container">
+			@yield('search')
 			@yield('content')
 		</div>	
 		

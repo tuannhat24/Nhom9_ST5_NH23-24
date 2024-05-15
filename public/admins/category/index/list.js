@@ -15,9 +15,9 @@ btn_delete.forEach(function(element){
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-                $.ajax({
+                $.ajax({                   
                     type: 'GET',
-                    url: urlRequest,
+                    url: urlRequest,                   
                     success: function(data){
                        if (data.code == 200){
                             that.parent().parent().remove();
@@ -29,8 +29,11 @@ btn_delete.forEach(function(element){
                        }
                     },
                     error: function(){
-    
-                    }
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Không thể xóa vì còn sản phẩm trong danh mục",
+                            icon: "success"
+                          });                    }
                 });
            
             }

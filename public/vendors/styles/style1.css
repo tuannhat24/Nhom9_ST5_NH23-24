@@ -19,7 +19,7 @@
 .brand-logo a {
     position: absolute !important;
 }
-svg {
+.header__logo-img {
     overflow: hidden;
     width: 140px;
 }

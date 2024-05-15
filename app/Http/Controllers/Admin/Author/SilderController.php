@@ -16,13 +16,31 @@ class SilderController extends Controller
     public function __construct(Silder $slider){
         $this->slider = $slider;
     }
-    public function index(){
-        $slider = $this->slider->latest()->paginate(5);
-        return view('users/admin/slider/index', [
-            'title' => 'SILDER',
-            'sliders' => $slider
-        ]);
+    // public function index(){
+    //     $slider = $this->slider->latest()->paginate(5);
+    //     return view('users/admin/slider/index', [
+    //         'title' => 'SILDER',
+    //         'sliders' => $slider
+    //     ]);
+    // }
+
+    public function index(Request $request) {
+        // Lấy từ khóa tìm kiếm từ yêu cầu
+        $keyword = $request->input('keyword', '');
+    
+        // Nếu có từ khóa, tìm kiếm theo tên danh mục hoặc mô tả
+        if (!empty($keyword)) {
+            $sliders = $this->slider->where('name', 'LIKE', '%' . $keyword . '%')
+                                  ->orWhere('description', 'LIKE', '%' . $keyword . '%')
+                                  ->latest()->paginate(10); // Thực hiện phân trang
+        } else {
+            $sliders = $this->slider->latest()->paginate(10); // Trường hợp không có từ khóa, trả về tất cả
+        }
+        $title = 'DANH SÁCH CÁC DANH MỤC';
+        // Trả về view với dữ liệu danh mục đã tìm kiếm
+        return view('users/admin/slider/index', compact('sliders', 'keyword', 'title'));
     }
+    
 
     public function create(){
         return view('users/admin/slider/add', [

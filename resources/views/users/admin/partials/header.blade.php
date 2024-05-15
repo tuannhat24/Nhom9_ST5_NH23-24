@@ -2,15 +2,6 @@
     <div class="header-left">
         <div class="menu-icon bi bi-list"></div>
         <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
-        <div class="header-search">
-            <form>
-                <div class="form-group mb-0">
-                    <i class="dw dw-search2 search-icon"></i>
-                    <input type="text" class="form-control search-input" placeholder="Search Here" />
-
-                </div>
-            </form>
-        </div>
     </div>
     <div class="header-right">
         <div class="dashboard-setting user-notification">

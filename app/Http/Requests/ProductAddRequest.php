@@ -29,17 +29,22 @@ class ProductAddRequest extends FormRequest
             'description' => 'required',
             'price' => 'numeric',
             'price_sale' => 'numeric',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // Kiểm tra tệp ảnh, kích thước tối đa 5MB
         ];
     }
 
     public function messages()
-{
-    return [
-        'name.unique' => 'Tên sản phẩm đã tồn tại',
-        'category.required' => 'Vui lòng chọn danh mục',
-        'description.required' => 'Vui lòng nhập mô tả',
-        'price.numeric' => 'Nhập không chính xác. Vui lòng nhập số',
-        'price_sale.numeric' => 'Nhập không chính xác. Vui lòng nhập số',
-    ];
-}
+    {
+        return [
+            'name.unique' => 'Tên sản phẩm đã tồn tại',
+            'category.required' => 'Vui lòng chọn danh mục',
+            'description.required' => 'Vui lòng nhập mô tả',
+            'price.numeric' => 'Nhập không chính xác. Vui lòng nhập số',
+            'price_sale.numeric' => 'Nhập không chính xác. Vui lòng nhập số',
+            'img.required' => 'Vui lòng chọn một tệp hình ảnh',
+            'img.image' => 'Tệp tải lên phải là một tệp hình ảnh',
+            'img.mimes' => 'Chỉ chấp nhận tệp hình ảnh định dạng JPEG, PNG hoặc GIF',
+            'img.max' => 'Kích thước tệp quá lớn. Vui lòng chọn một tệp nhỏ hơn 5MB',
+        ];
+    }
 }

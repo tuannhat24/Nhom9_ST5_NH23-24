@@ -9,6 +9,18 @@
     <script src="{{ asset('admins/product/index/list.js') }}"></script>
 @endsection
 <!--Container-->
+@section('search')
+    <div class="header-left mb-5">
+        <div class="header-search">
+            <form action="{{ route('admin.product.index') }}" method="GET">
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}" placeholder="Tìm kiếm"/>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="pd-20 card-box mb-30">
         <div class="clearfix mb-20">
@@ -22,7 +34,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-			
+
             <div class="pull-right mt-5">
                 <a href="{{ route('admin.product.create') }}" class="add_product"><i class="fa-solid fa-square-plus"></i>
                     ADD</a>
@@ -46,26 +58,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $productItem)
+                    @if ($products->isEmpty())
                         <tr>
-                            <th scope="row">{{ $productItem->id }}</th>
-                            <td>{{ $productItem->name }}</td>
-                            <td>{{ number_format($productItem->price) }}</td>
-                            <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
-                            <td>{{ optional($productItem->categories)->name }}</td>
-                            <td>{{ $productItem->description }}</td>
-                            <td>{{ number_format($productItem->price_sale) }}</td>
-                            <td>{{ $productItem->quantity_sold }}</td>
-                            <td>
-                                <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}" class="btn-edit"><i
-                                        class="fas fa-edit"></i></a>
-                                <a href="" class="btn-delete"
-                                    data-url="{{ route('admin.product.delete', ['id' => $productItem->id]) }}">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
+                            <td colspan="4">Không có sản phẩm nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach ($products as $productItem)
+                            <tr>
+                                <th scope="row">{{ $productItem->id }}</th>
+                                <td>{{ $productItem->name }}</td>
+                                <td>{{ number_format($productItem->price) }}</td>
+                                <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
+                                <td>{{ optional($productItem->categories)->name }}</td>
+                                <td>{!! $productItem->description !!}</td>
+                                <td>{{ number_format($productItem->price_sale) }}</td>
+                                <td>{{ $productItem->quantity_sold }}</td>
+                                <td>
+                                    <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}"
+                                        class="btn-edit"><i class="fas fa-edit"></i></a>
+                                    <a href="" class="btn-delete"
+                                        data-url="{{ route('admin.product.delete', ['id' => $productItem->id]) }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

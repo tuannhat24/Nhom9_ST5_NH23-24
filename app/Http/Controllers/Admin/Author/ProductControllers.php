@@ -25,12 +25,30 @@ class ProductControllers extends Controller
         $this->category = $category;
         $this->product = $product;
     }
-    public function index(){
-        $products = $this->product->latest()->paginate(5);
-        return view('users/admin/products/listproduct', [
-            'title' => 'DANH SÁCH SẢN PHẨM',
-            'products' => $products
-        ]);
+    // public function index(){
+    //     $products = $this->product->latest()->paginate(5);
+    //     return view('users/admin/products/listproduct', [
+    //         'title' => 'DANH SÁCH SẢN PHẨM',
+    //         'products' => $products
+    //     ]);
+    // }
+
+    public function index(Request $request) {
+        // Lấy từ khóa tìm kiếm từ yêu cầu
+        $keyword = $request->input('keyword', '');
+    
+        // Nếu có từ khóa, tìm kiếm theo tên danh mục hoặc mô tả
+        if (!empty($keyword)) {
+            $products = $this->product->where('name', 'LIKE', '%' . $keyword . '%')
+                                  ->orWhere('description', 'LIKE', '%' . $keyword . '%')
+                                //   ->orWhere('price', 'LIKE', '%' . $keyword . '%')
+                                  ->latest()->paginate(5); // Thực hiện phân trang
+        } else {
+            $products = $this->product->latest()->paginate(5); // Trường hợp không có từ khóa, trả về tất cả
+        }
+        $title = 'DANH SÁCH SẢN PHẨM';
+        // Trả về view với dữ liệu danh mục đã tìm kiếm
+        return view('users/admin/products/listproduct', compact('products', 'keyword', 'title'));
     }
 
     public function getCategory($parent_id){
@@ -70,6 +88,7 @@ class ProductControllers extends Controller
         }catch (\Exception $exception){
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
+            return redirect()->route('admin.product.index')->with('error', 'Thêm sản phẩm không thành công.');
         }
     }
 

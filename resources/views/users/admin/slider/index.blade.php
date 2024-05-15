@@ -9,6 +9,19 @@
 @endsection
 
 <!--Container-->
+@section('search')
+    <div class="header-left mb-5">
+        <div class="header-search">
+            <form action="{{ route('admin.slider.index') }}" method="GET">
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}"
+                        placeholder="Tìm kiếm" />
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="pd-20 card-box mb-30">
         <div class="clearfix mb-20">
@@ -41,22 +54,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($sliders as $slider)
+                    @if ($sliders->isEmpty())
                         <tr>
-                            <th scope="row">{{ $slider->id }}</th>
-                            <td>{{ $slider->name }}</td>
-                            <td>{{ $slider->description }}</td>
-                            <td><img class="product_img" src="{{ $slider->img_path }}" alt=""></td>
-                            <td>
-                                <a href="{{ route('admin.slider.edit', ['id' => $slider->id]) }}" class="btn-edit"><i
-                                        class="fas fa-edit"></i></a>
-                                <a href="" class="btn-delete"
-                                    data-url="{{ route('admin.slider.delete', ['id' => $slider->id]) }}">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
+                            <td colspan="4">Không có slider nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach ($sliders as $slider)
+                            <tr>
+                                <th scope="row">{{ $slider->id }}</th>
+                                <td>{{ $slider->name }}</td>
+                                <td>{!!$slider->description !!}</td>
+                                <td><img class="product_img" src="{{ $slider->img_path }}" alt=""></td>
+                                <td>
+                                    <a href="{{ route('admin.slider.edit', ['id' => $slider->id]) }}" class="btn-edit"><i
+                                            class="fas fa-edit"></i></a>
+                                    <a href="" class="btn-delete"
+                                        data-url="{{ route('admin.slider.delete', ['id' => $slider->id]) }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -146,4 +165,3 @@
         </div>
     </div>
 @endsection
-
