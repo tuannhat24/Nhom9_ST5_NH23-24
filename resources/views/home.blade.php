@@ -13,9 +13,9 @@
                     <div class="full-home-banners__main">
                         <div class="full-home-banners__main-inner">
                             @foreach($sliders as $key => $slider)
-                                <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
-                                    <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
-                                </a>
+                            <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
+                                <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
+                            </a>
                             @endforeach
                         </div>
                         <div class="full-home-banners__main-controls">
@@ -58,23 +58,30 @@
                         <div class="grid__row">
 
                             @foreach($data as $row)
+                            @php
+                            $newPrice = $row->price - ($row->price * $row->percent_discount / 100);
+                            @endphp
                             <!-- Product item -->
                             <div class="grid__column-2-4">
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $row->image);
+                                    $favoriteProductIds = $favoriteProducts->pluck('product_id');
+                                    $isFavorited = $favoriteProductIds->contains($row->id);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $row->name }}</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">{{ number_format($row->price) }}</span>
-                                        <span class="home-product-item__price-current">{{ number_format($row->price_sale) }}</span>
+                                        <span class="home-product-item__price-current">{{ number_format($newPrice) }}</span>
                                     </div>
                                     <div class="home-product-item__action">
+                                        @if($isFavorited)
                                         <span class="home-product-item__like home-product-item__like--liked">
                                             <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
                                             <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
                                         </span>
+                                        @endif
                                         <div class="home-product-item__rating">
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
@@ -92,10 +99,12 @@
                                         <i class="fa-solid fa-check"></i>
                                         <span>Yêu thích</span>
                                     </div>
+                                    @if( $row->percent_discount > 0 )
                                     <div class="home-product-item__sale-off">
-                                        <span class="home-product-item__sale-off-percent">25%</span>
+                                        <span class="home-product-item__sale-off-percent">{{ number_format($row->percent_discount) }}%</span>
                                         <span class="home-product-item__sale-off-label">GIẢM</span>
                                     </div>
+                                    @endif
                                 </a>
                             </div>
                             @endforeach

@@ -9,7 +9,6 @@
     <div class="modal">
         <div class="modal__overlay"></div>
         <div class="modal__body">
-            <!-- Quên mật khẩu -->
             <form method="post" action="{{ route('forgot_password.send') }}" class="auth-form">
                 @csrf
                 <div class="auth-form__container">
@@ -17,13 +16,21 @@
                         <h3 class="auth-form__heading">Quên mật khẩu</h3>
                         <a href="{{ route('users.signin') }}" class="auth-form__switch-btn">Đăng nhập</a>
                     </div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger" style="max-height: 50px; display: flex; align-items: center;">
+                        @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                        @endforeach
+                        <button class="close" onclick="closeAlert()">&times;</button>
+                    </div>
+                    @endif
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input type="email" name="email" class="auth-form__input" placeholder="Email">
+                            <input type="email" name="email" class="auth-form__input" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="auth-form__controls" style="margin-bottom: 24px;">
-                    <a href="{{ route('users.signin') }}" class="btn btn--normal auth-form__controls-back ">TRỞ LẠI</a>
+                        <a href="{{ route('users.signin') }}" class="btn btn--normal auth-form__controls-back">TRỞ LẠI</a>
                         <button type="submit" class="btn btn--primary">GỬI YÊU CẦU</button>
                     </div>
                 </div>

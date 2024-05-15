@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -27,19 +28,15 @@ class CartController extends Controller
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
+        // Lấy giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
 
-        // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
-        $products = Product::orderBy('id')->paginate($perPage);
-
-
-        //Truy vấn dữ liêụ giỏ hàng
-        $carts = Cart::all();
+        // Truy vấn dữ liệu sản phẩm từ database
+        $products = Product::orderBy('id');
 
         // Truy vấn các sản phẩm khác ngoài giỏ hàng
         $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
@@ -49,6 +46,8 @@ class CartController extends Controller
             $relatedProducts = Product::whereNotIn('id', $carts->pluck('product_id'))->limit(10)->get();
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
+
         return view('cart', compact(
             'title',
             'carts',
@@ -57,6 +56,7 @@ class CartController extends Controller
             'totalPages',
             'currentPage',
             'currentUser',
+            'favoriteProducts',
         ));
     }
 
@@ -83,18 +83,17 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $customerId = auth()->user()->id;
-    
+        $customerId = auth()->user()->customer_id;
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
         $size = $request->input('selected_size');
         $color = $request->input('selected_color');
-    
+
         // Kiểm tra size và color có null không
         if (empty($size) || empty($color)) {
             return back()->with('error', 'Bạn cần chọn size và màu sắc của sản phẩm.');
         }
-    
+
         // Tìm giỏ hàng hiện tại với sản phẩm, size và màu sắc tương ứng
         $existingCartItem = Cart::where([
             ['product_id', $product_id],
@@ -102,7 +101,7 @@ class CartController extends Controller
             ['size', $size],
             ['color', $color]
         ])->first();
-    
+
         if ($existingCartItem) {
             // Cập nhật số lượng của sản phẩm nếu đã có trong giỏ
             $existingCartItem->increment('quantity', $quantity);
@@ -116,11 +115,8 @@ class CartController extends Controller
                 'color' => $color
             ]);
         }
-    
         return redirect()->route('user.cart')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
     }
-    
-    
 
     // Xóa toàn bộ sản phẩm trong giỏ hàng
     public function clearCart()
@@ -138,8 +134,14 @@ class CartController extends Controller
         } else if ($change < 0 && $cart->quantity > 1) {
             $cart->quantity += $change;
         }
-        $cart->save();
-        return redirect()->back();
+
+        $cart->update();
+        $newQuantity = $cart->quantity;
+        $totalPrice = $cart->product->price * $newQuantity;
+        return response()->json([
+            'newQuantity' => $newQuantity,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 
     public function removeItem($cartId)
@@ -147,6 +149,12 @@ class CartController extends Controller
         // Xóa một sản phẩm khỏi giỏ hàng
         $cart = Cart::findOrFail($cartId);
         $cart->delete();
-        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+        $newQuantity = $cart->quantity;
+        $totalPrice = $cart->product->price * $newQuantity;
+        return response()->json([
+            'success' => true,
+            'newQuantity' => $newQuantity,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 }

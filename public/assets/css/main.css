@@ -34,6 +34,8 @@
 .header__navbar-user-img {
     width: 22px;
     height: 22px;
+    background-size: cover;
+    background-position: center;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -1055,6 +1057,10 @@ li.sidebar__menu-item {
     min-width: 140px;
 }
 
+.home-filter__btn .active {
+    background-color: var(--primary-color);
+}
+
 .home-filter__page {
     display: flex;
     align-items: center;
@@ -1442,6 +1448,7 @@ i.home-product-item__like-icon-fill {
 
 .manager-item {
     margin-bottom: 10px;
+    padding-top: 2px;
 }
 
 .manager-item__link {
@@ -1485,6 +1492,10 @@ i.home-product-item__like-icon-fill {
     color: var(--white-color);
     text-decoration: none;
     border-radius: 4px;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
 }
 
 .buy-now-btn {
@@ -1735,23 +1746,25 @@ h1 {
     background-color: #e2e2e2;
 }
 
-.size-btn, .color-btn {
+.size-btn,
+.color-btn {
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.size-btn:hover, .color-btn:hover {
+.size-btn:hover,
+.color-btn:hover {
     background-color: #ddd;
 }
 
-.size-btn.active, .color-btn.active {
+.size-btn.active,
+.color-btn.active {
     border-color: #007bff;
     background-color: #e7f0ff;
     color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
 }
-
 
 /* Nút 'Thêm vào giỏ hàng' */
 .product-add-to-cart {
@@ -2025,7 +2038,180 @@ h1 {
 .manager-item__link.active,
 .select-input__link.active {
     color: var(--primary-color);
-    background-color: var(--white-color);
+    background-color: #f5f5f5;
     font-weight: bold;
 }
+
+.favorite_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favorite svg {
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.favorite .favorite__qty {
+    font-size: 2rem;
+}
+
+.favorite__btn {
+    border: none;
+    background-color: #f5f5f5;
+    display: none;
+    width: 100px;
+}
+
+/* Comment Section */
+.comment-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.comment-section .bg-white {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.comment-section .user-info {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.comment-section .user-info img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 45px;
+    height: 45px;
+}
+
+.user-info .justify-content-start {
+    flex-grow: 1; /* Giãn ra toàn bộ khoảng trống còn lại */
+    margin-left: 1%;
+    font-size: 16px;
+    font-weight: bold;
+}
+.comment-section .user-info .date {
+    font-size: 14px; /* Chữ to ra */
+    color: #666; /* Màu chữ */
+}
+
+.comment-section .comment-text {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.comment-section .bg-light {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-section .bg-light textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-size: 10px;
+}
+
+.comment-section .bg-light button {
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-section .bg-light button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.comment-section .bg-light button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.comment-section .bg-light button[type="button"] {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.comment-section .bg-light button[type="button"]:hover {
+    background-color: #f0f0f0;
+}
+
+.rounded-circle1 {
+    width: 5em;
+    height: 5em;
+}
+
+/* Account info */
+
+.profile input[type="text"],
+.profile input[type="email"],
+.profile input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.profile {
+    margin-left: 40px;
+}
+
+.profile button{
+    margin-bottom: 10px;
+}
+
+.profile .profile__avatar {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+.profile p {
+    margin-top: 5px;
+    color: #888;
+}
+
+/* Password  */
+
+.password input[type="password"],
+.password input[type="old_password"],
+.password input[type="email"],
+.password input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.password {
+    margin-left: 40px;
+}
+
+.password button{
+    margin-bottom: 10px;
+}
+
 

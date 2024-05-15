@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('image');
             $table->json('size')->nullable();
             $table->json('color')->nullable();
-            $table->text('description');
             $table->integer('price');
-            $table->integer('price_sale');
+            $table->text('description');
+            $table->integer('percent_discount');
             $table->integer('quantity_sold');
+            $table->unsignedBigInteger('favorite_count')->default(0);
             $table->timestamps();
 
             $table->foreign('cate_id')

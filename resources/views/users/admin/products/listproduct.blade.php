@@ -51,7 +51,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Category</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Price sale</th>
+                        <th scope="col">Percent Discount</th>
                         <th scope="col">Quantity sold</th>
                         <th scope="col">Active</th>
 
@@ -60,7 +60,26 @@
                 <tbody>
                     @if ($products->isEmpty())
                         <tr>
+<<<<<<< HEAD
                             <td colspan="4">Không có sản phẩm nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
+=======
+                            <th scope="row">{{ $productItem->id }}</th>
+                            <td>{{ $productItem->name }}</td>
+                            <td>{{ number_format($productItem->price) }}</td>
+                            <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
+                            <td>{{ optional($productItem->categories)->name }}</td>
+                            <td>{{ $productItem->description }}</td>
+                            <td>{{ number_format($productItem->percent_discount)}}%</td>
+                            <td>{{ $productItem->quantity_sold }}</td>
+                            <td>
+                                <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}" class="btn-edit"><i
+                                        class="fas fa-edit"></i></a>
+                                <a href="" class="btn-delete"
+                                    data-url="{{ route('admin.product.delete', ['id' => $productItem->id]) }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+>>>>>>> 8e2610b85f3cae6f7af5190ffeabe31d4351c64b
                         </tr>
                     @else
                         @foreach ($products as $productItem)

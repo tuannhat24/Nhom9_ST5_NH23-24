@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\Users\SignOutController;
 
 use App\Http\Controllers\Admin\MainController;
 
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
@@ -16,15 +18,27 @@ use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SilderController;
+use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
+use App\Http\Controllers\Admin\VoucherController;
+
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
 Route::post('/signin', [SignInController::class, 'store'])->name(('users.signin'));
 Route::get('/signup', [SignUpController::class, 'index'])->name('users.signup');
-Route::post('/signup', [SignUpController::class, 'store'])->name('users.register');
+Route::post('/signup/send', [SignUpController::class, 'sendCreateLinkEmail'])->name('signup.send');
+Route::get('/signup_verify/verify', [SignUpController::class, 'showVerifyOTPForm'])->name('signup_verify.verify');
+Route::post('/signup_verify/verify', [SignUpController::class, 'verifyOtp'])->name('users.signup_verify');
+Route::get('/signup_create_password', [SignUpController::class, 'showCreateForm'])->name('users.signup_create_password');
+Route::post('/signup_create_password', [SignUpController::class, 'createPassword'])->name('signup_create_password');
 Route::get('/signout', [SignOutController::class, 'index'])->name('signout');
 Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('users.forgot_password');
 Route::post('/forgot_password/send', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot_password.send');
+Route::get('/forgot_password_verify', [ForgotPasswordController::class, 'showVerifyOTPForm'])->name('forgot_password_verify.verify');
+Route::post('/forgot_password_verify', [ForgotPasswordController::class, 'verifyOtp'])->name('users.forgot_password_verify');
+Route::get('/reset_password', [ForgotPasswordController::class, 'showResetForm'])->name('users.reset_password');
+Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword'])->name('reset_password');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -44,7 +58,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
+            Route::get('/purchase', [PurchaseController::class, 'index'])->name('user.purchase');
+            Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
+            Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
+            Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
+            Route::get('/password/{id}', [PasswordController::class, 'index'])->name('user.password');
+            Route::post('/password/{id}', [PasswordController::class, 'changePassword'])->name('user.password');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
+            Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
+            Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
         });
     });
 

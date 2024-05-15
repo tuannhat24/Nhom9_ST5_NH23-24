@@ -179,54 +179,129 @@ function decrementQuantity() {
     }
 }
 // size color
-document.addEventListener('DOMContentLoaded', function () {
-    const sizeButtons = document.querySelectorAll('.size-btn');
-    const colorButtons = document.querySelectorAll('.color-btn');
+document.addEventListener("DOMContentLoaded", function () {
+    const sizeButtons = document.querySelectorAll(".size-btn");
+    const colorButtons = document.querySelectorAll(".color-btn");
 
-    sizeButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            sizeButtons.forEach(b => b.classList.remove('active')); // Xóa active khỏi tất cả các nút kích cỡ
-            this.classList.add('active'); // Thêm active vào nút được nhấn
+    sizeButtons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            sizeButtons.forEach((b) => b.classList.remove("active")); // Xóa active khỏi tất cả các nút kích cỡ
+            this.classList.add("active"); // Thêm active vào nút được nhấn
         });
     });
 
-    colorButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            colorButtons.forEach(b => b.classList.remove('active')); // Xóa active khỏi tất cả các nút màu sắc
-            this.classList.add('active'); // Thêm active vào nút được nhấn
+    colorButtons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            colorButtons.forEach((b) => b.classList.remove("active")); // Xóa active khỏi tất cả các nút màu sắc
+            this.classList.add("active"); // Thêm active vào nút được nhấn
         });
     });
 });
 
 // thêm size and color vào cart
-document.addEventListener('DOMContentLoaded', function () {
-    const sizeButtons = document.querySelectorAll('.size-btn');
-    const colorButtons = document.querySelectorAll('.color-btn');
-    const sizeInput = document.getElementById('selected_size');
-    const colorInput = document.getElementById('selected_color');
+document.addEventListener("DOMContentLoaded", function () {
+    const sizeButtons = document.querySelectorAll(".size-btn");
+    const colorButtons = document.querySelectorAll(".color-btn");
+    const sizeInput = document.getElementById("selected_size");
+    const colorInput = document.getElementById("selected_color");
 
-    sizeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            sizeButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            sizeInput.value = this.getAttribute('data-size');
+    sizeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            sizeButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+            sizeInput.value = this.getAttribute("data-size");
         });
     });
 
-    colorButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            colorButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            colorInput.value = this.getAttribute('data-color');
+    colorButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            colorButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+            colorInput.value = this.getAttribute("data-color");
         });
     });
 });
+//thông báo khi chưa chọn size color
+function addToCart() {
+    var selectedSize = document.getElementById("selected_size").value;
+    var selectedColor = document.getElementById("selected_color").value;
 
-// active cho danh mục và các thẻ sắp xếp
+    if (!selectedSize || !selectedColor) {
+        alert("Vui lòng chọn size và color trước khi thêm vào giỏ hàng.");
+        return false; // Ngăn chặn gửi yêu cầu nếu chưa chọn size hoặc color
+    }
+}
+
+// Hàm để điều hướng đến URL mới và lưu trạng thái active
+function navigateTo(url) {
+    setActiveSort(url);
+    window.location.href = url;
+}
+
+// Hàm để đặt trạng thái active vào localStorage
+function setActiveSort(sortUrl) {
+    localStorage.setItem("activeSort", sortUrl);
+}
+
+// Xử lý active cho các nút sắp xếp
 document.addEventListener("DOMContentLoaded", function () {
     var sortLinks = document.querySelectorAll(".select-input__link");
     var categoryLinks = document.querySelectorAll(".manager-item__link");
+    var sortButtons = document.querySelectorAll(".home-filter__btn");
+    var activeSort = localStorage.getItem("activeSort");
 
+    // Kiểm tra và áp dụng trạng thái active cho nút sắp xếp
+    if (activeSort) {
+        var activeBtn = document.querySelector(
+            ".home-filter__btn[onclick=\"navigateTo('" + activeSort + "')\"]"
+        );
+        if (activeBtn) {
+            activeBtn.classList.add("active");
+        }
+    } else {
+        // Nếu không có trạng thái active trong localStorage, mặc định chọn "Mới nhất"
+        var newestBtn = document.querySelector(
+            ".home-filter__btn[onclick=\"navigateTo('{{ $newestUrl }}')\"]"
+        );
+        if (newestBtn) {
+            newestBtn.classList.add("active");
+        }
+    }
+
+    // Thêm sự kiện click cho các nút sắp xếp
+    sortButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            // Xóa trạng thái active khỏi tất cả các nút sắp xếp
+            sortButtons.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            sortLinks.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            // Thêm trạng thái active cho nút được click
+            this.classList.add("active");
+
+            // Lưu trạng thái active vào localStorage
+            var sortUrl = this.getAttribute("onclick").match(
+                /navigateTo\('([^']+)'\)/
+            )[1];
+            localStorage.setItem("activeSort", sortUrl);
+        });
+    });
+
+    // Loại bỏ trạng thái active của các nút sắp xếp khi các liên kết sắp xếp theo giá được nhấp
+    sortLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            sortButtons.forEach(function (item) {
+                item.classList.remove("active");
+            });
+            localStorage.removeItem("activeSort");
+        });
+    });
+
+    // Xử lý active cho các thẻ sắp xếp theo giá
     sortLinks.forEach(function (link) {
         link.addEventListener("click", function () {
             // Xóa class "active" từ tất cả các thẻ sắp xếp
@@ -238,9 +313,10 @@ document.addEventListener("DOMContentLoaded", function () {
             this.classList.add("active");
 
             // Lưu trạng thái active vào local storage
-            localStorage.setItem('selectedSort', this.getAttribute('href'));
+            localStorage.setItem("selectedSort", this.getAttribute("href"));
         });
     });
+
     var selectedSort = localStorage.getItem("selectedSort");
     if (selectedSort) {
         var activeLinkSort = document.querySelector(
@@ -251,6 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Xử lý active cho các thẻ danh mục
     categoryLinks.forEach(function (link) {
         link.addEventListener("click", function () {
             // Xóa class "active" từ tất cả các thẻ danh mục
@@ -276,4 +353,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-

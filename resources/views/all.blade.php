@@ -14,18 +14,23 @@
                             <a class="home-product-item" href="{{ route('user.detail', ['id' => $product->id]) }}">
                                 @php
                                 $imageUrl = asset('assets/img/' . $product->image);
+                                $newPrice = $product->price - ($product->price * $product->percent_discount / 100);
+                                $favoriteProductIds = $favoriteProducts->pluck('product_id');
+                                $isFavorited = $favoriteProductIds->contains($product->id);
                                 @endphp
                                 <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                 <h4 class="home-product-item__name">{{ $product->name }}</h4>
                                 <div class="home-product-item__price">
                                     <span class="home-product-item__price-old">{{ number_format($product->price) }}</span>
-                                    <span class="home-product-item__price-current">{{ number_format($product->price_sale) }}</span>
+                                    <span class="home-product-item__price-current"></span>
                                 </div>
                                 <div class="home-product-item__action">
+                                    @if($isFavorited)
                                     <span class="home-product-item__like home-product-item__like--liked">
                                         <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
                                         <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
                                     </span>
+                                    @endif
                                     <div class="home-product-item__rating">
                                         <i class="home-product-item__star--gold fa-solid fa-star"></i>
                                         <i class="home-product-item__star--gold fa-solid fa-star"></i>
@@ -43,16 +48,18 @@
                                     <i class="fa-solid fa-check"></i>
                                     <span>Yêu thích</span>
                                 </div>
+                                @if( $product->percent_discount > 0 )
                                 <div class="home-product-item__sale-off">
-                                    <span class="home-product-item__sale-off-percent">25%</span>
+                                    <span class="home-product-item__sale-off-percent">{{ number_format($product->percent_discount) }}%</span>
                                     <span class="home-product-item__sale-off-label">GIẢM</span>
                                 </div>
+                                @endif
                             </a>
                         </div>
                         @endforeach
                     </div>
-                     <!-- Hiển thị số trang theo số thứ tự -->
-                     <div class="home-pagination">
+                    <!-- Hiển thị số trang theo số thứ tự -->
+                    <div class="home-pagination">
                         <!-- Nút Trước -->
                         @if ($currentPage > 1)
                         <a href="{{ route('user.all-products', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">

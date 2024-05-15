@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -15,45 +16,77 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         // Dữ liệu phân trang
         $perPage = 20;
-
-        $totalProducts = Product::count();
-
-        $totalPages = ceil($totalProducts / $perPage);
-
         $currentPage = request()->input('page', 1);
 
         // Truy vấn thông tin của người dùng hiện tại
         $currentUser = auth()->user();
 
-        // Truy vấn giỏ hàng
-        $carts = Cart::all();
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         // Truy vấn danh mục
         $categories = Category::all();
+
+        $totalProducts = Product::count();
+        $totalPages = ceil($totalProducts / $perPage);
+
+        // Lấy giá trị của selectedCategory từ URL
+        $selectedCategory = request()->input('category');
 
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
 
-        // Lấy giá trị của selectedCategory từ URL
-        $selectedCategory = request()->input('category');
-
         // Truy vấn dữ liệu sản phẩm từ database và sắp xếp theo giá mặc định (id)
-        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
+        $products = Product::orderBy('id')->paginate($perPage);
 
-        // Nếu có yêu cầu sắp xếp theo giá từ thấp đến cao
-        if (request()->has('sort') && request()->input('sort') == 'price_asc') {
-            $products = Product::orderBy('price_sale')->paginate($perPage);
+        $sort = $request->input('sort');
+
+        $productsQuery = Product::query();
+
+        if ($selectedCategory) {
+            $productsQuery->where('cate_id', $selectedCategory);
         }
 
-        // Nếu có yêu cầu sắp xếp theo giá từ cao đến thấp
-        if (request()->has('sort') && request()->input('sort') == 'price_desc') {
-            $products = Product::orderByDesc('price_sale')->paginate($perPage);
+        if ($sort) {
+            switch ($sort) {
+                case 'price_asc':
+                    $productsQuery->orderByRaw('price - (price * percent_discount / 100) ASC');
+                    break;
+                case 'price_desc':
+                    $productsQuery->orderByRaw('price - (price * percent_discount / 100) DESC');
+                    break;
+                case 'percent_asc':
+                    $productsQuery->orderBy('percent_discount', 'asc');
+                    break;
+                case 'percent_desc':
+                    $productsQuery->orderBy('percent_discount', 'desc');
+                    break;
+                case 'popular':
+                    $productsQuery->orderByDesc('favorite_count');
+                    break;
+                case 'newest':
+                    $productsQuery->orderByDesc('created_at'); // Sắp xếp theo sản phẩm mới nhất
+                    break;
+                case 'best_selling':
+                    $productsQuery->orderByDesc('quantity_sold');
+                    break;
+                default:
+                    $productsQuery->orderBy('id');
+                    break;
+            }
+        } else {
+            $productsQuery->orderBy('id');
         }
+
+        $products = $productsQuery->paginate($perPage);
+        $totalPages = $products->lastPage();
+
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
         return view('product', [
             'title' => 'Trang sản phẩm',
@@ -64,6 +97,7 @@ class ProductController extends Controller
             'currentPage' => $currentPage,
             'categories' => $categories,
             'selectedCategory' => $selectedCategory,
+            'favoriteProducts' => $favoriteProducts,
         ]);
     }
 
@@ -82,8 +116,13 @@ class ProductController extends Controller
             $currentPage = $totalPages;
         }
 
-        $currentUser = Auth::user();
-        $carts = Cart::all();
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+        // Truy vấn danh mục
         $categories = Category::all();
 
         $products = Product::where('name', 'LIKE BINARY', "%$query%")
@@ -92,9 +131,9 @@ class ProductController extends Controller
         // Áp dụng sắp xếp theo giá nếu được yêu cầu
         if ($request->has('sort')) {
             if ($request->input('sort') == 'price_asc') {
-                $products = $products->orderBy('price_sale');
+                $products = $products->orderBy('percent_discount');
             } elseif ($request->input('sort') == 'price_desc') {
-                $products = $products->orderByDesc('price_sale');
+                $products = $products->orderByDesc('percent_discount');
             }
         }
 
@@ -121,6 +160,7 @@ class ProductController extends Controller
             session(['search_history' => $searchHistory]);
         }
 
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
         return view('search_results', compact(
             'title',
@@ -131,59 +171,71 @@ class ProductController extends Controller
             'currentPage',
             'carts',
             'categories',
-            // 'searchHistory',
+            'favoriteProducts',
         ));
     }
 
-    public function productsByCategory(Category $category, Request $request)
+    public function productsByCategory(Request $request, $categoryId)
     {
-        $title = "Sản phẩm thuộc danh mục: " . $category->name;
         $perPage = 20;
+        $currentPage = $request->input('page', 1);
 
-        // Lấy danh sách sản phẩm thuộc danh mục và phân trang
-        $productsQuery = $category->products();
-
-        $totalProducts = $category->products()->count();
-        $totalPages = ceil($totalProducts / $perPage);
-        $currentPage = request()->input('page', 1);
-
-        if ($currentPage > $totalPages) {
-            $currentPage = $totalPages;
-        }
-
-        $currentUser = Auth::user();
-        $carts = Cart::all();
+        $currentUser = auth()->user();
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
         $categories = Category::all();
 
-        // Áp dụng sắp xếp theo giá nếu được yêu cầu
-        if ($request->has('sort')) {
-            if ($request->input('sort') == 'price_asc') {
-                $productsQuery->orderBy('price_sale');
-            } elseif ($request->input('sort') == 'price_desc') {
-                $productsQuery->orderByDesc('price_sale');
+        $sort = $request->input('sort');
+
+        $productsQuery = Product::where('cate_id', $categoryId);
+
+        if ($sort) {
+            switch ($sort) {
+                case 'price_asc':
+                    $productsQuery->orderByRaw('price - (price * percent_discount / 100) ASC');
+                    break;
+                case 'price_desc':
+                    $productsQuery->orderByRaw('price - (price * percent_discount / 100) DESC');
+                    break;
+                case 'percent_asc':
+                    $productsQuery->orderBy('percent_discount', 'asc');
+                    break;
+                case 'percent_desc':
+                    $productsQuery->orderBy('percent_discount', 'desc');
+                    break;
+                case 'popular':
+                    $productsQuery->orderByDesc('favorite_count');
+                    break;
+                case 'newest':
+                    $productsQuery->orderByDesc('created_at');
+                    break;
+                case 'best_selling':
+                    $productsQuery->orderByDesc('quantity_sold');
+                    break;
+                default:
+                    $productsQuery->orderBy('id');
+                    break;
             }
+        } else {
+            $productsQuery->orderBy('id');
         }
 
         $products = $productsQuery->paginate($perPage);
+        $totalPages = $products->lastPage();
 
-        // Truyền biến selectedCategory vào view
-        $selectedCategory = $category->id;
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
-
-        return view('product', compact(
-            'title',
-            'products',
-            'category',
-            'currentUser',
-            'totalPages',
-            'currentPage',
-            'carts',
-            'categories',
-            'selectedCategory'
-        ));
+        return view('product', [
+            'title' => 'Trang sản phẩm',
+            'products' => $products,
+            'carts' => $carts,
+            'currentUser' => $currentUser,
+            'totalPages' => $totalPages,
+            'currentPage' => $currentPage,
+            'categories' => $categories,
+            'selectedCategory' => $categoryId,
+            'favoriteProducts' => $favoriteProducts,
+        ]);
     }
-
-
 
     public function allProducts()
     {
@@ -193,15 +245,20 @@ class ProductController extends Controller
         $totalPages = ceil($totalProducts / $perPage);
         $currentPage = request()->input('page', 1);
 
-        $currentUser = Auth::user();
-        $carts = Cart::all();
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
         if ($currentPage > $totalPages) {
             $currentPage = $totalPages;
         }
 
-        $products = Product::with(['sizes', 'colors'])->orderBy('id')->paginate($perPage);
+        $favoriteProducts = Favorite::where('customer_id', $currentUser->customer_id)->get();
 
-        return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage'));
+        $products = Product::orderBy('id')->paginate($perPage);
+
+        return view('all', compact('title', 'products', 'carts', 'currentUser', 'totalPages', 'currentPage', 'favoriteProducts'));
     }
 }

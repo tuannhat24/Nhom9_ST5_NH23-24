@@ -30,10 +30,27 @@
 
                 <div class="grid__column-10">
                     <div class="home-filter">
+                        @if(isset($selectedCategory))
+                        @php
+                        $popularUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'popular']);
+                        $newestUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'newest']);
+                        $bestSellingUrl = route('products.by.category', ['category' => $selectedCategory, 'sort' => 'best_selling']);
+                        @endphp
                         <span class="home-filter__label">Sắp xếp theo</span>
-                        <button class="home-filter__btn btn">Phổ biến</button>
-                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
-                        <button class="home-filter__btn btn">Bán chạy</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $popularUrl }}')">Yêu Thích</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $newestUrl }}')">Mới nhất</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $bestSellingUrl }}')">Bán chạy</button>
+                        @else
+                        @php
+                        $popularUrl = route('user.product', ['sort' => 'popular']);
+                        $newestUrl = route('user.product', ['sort' => 'newest']);
+                        $bestSellingUrl = route('user.product', ['sort' => 'best_selling'])
+                        @endphp
+                        <span class="home-filter__label">Sắp xếp theo</span>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $popularUrl }}')">Yêu Thích</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $newestUrl }}')">Mới Nhất</button>
+                        <button class="home-filter__btn btn" onclick="navigateTo('{{ $bestSellingUrl }}')">Bán Chạy</button>
+                        @endif
 
                         <!-- Price classification -->
                         <div class="select-input">
@@ -45,18 +62,30 @@
                                 @if(isset($selectedCategory))
                                 <!-- Có category id -->
                                 <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'percent_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'percent_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_asc']) }}" class="select-input__link">Giá đã giảm: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('products.by.category', ['category' => $selectedCategory, 'sort' => 'price_desc']) }}" class="select-input__link">Giá đã giảm: Cao đến thấp</a>
                                 </li>
                                 @else
                                 <!-- Không có category id -->
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="{{ route('user.product', ['sort' => 'percent_asc']) }}" class="select-input__link">Phần trăm giảm: Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="{{ route('user.product', ['sort' => 'percent_desc']) }}" class="select-input__link">Phần trăm giảm: Cao đến thấp</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('user.product', ['sort' => 'price_asc']) }}" class="select-input__link">Giá đã giảm: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="{{ route('user.product', ['sort' => 'price_desc']) }}" class="select-input__link">Giá đã giảm: Cao đến thấp</a>
                                 </li>
                                 @endif
                             </ul>
@@ -74,18 +103,23 @@
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $product->id]) }}">
                                     @php
                                     $imageUrl = asset('assets/img/' . $product->image);
+                                    $newPrice = $product->price - ($product->price * $product->percent_discount / 100);
+                                    $favoriteProductIds = $favoriteProducts->pluck('product_id');
+                                    $isFavorited = $favoriteProductIds->contains($product->id);
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $product->name }}</h4>
                                     <div class="home-product-item__price">
                                         <span class="home-product-item__price-old">{{ number_format($product->price) }}</span>
-                                        <span class="home-product-item__price-current">{{ number_format($product->price_sale) }}</span>
+                                        <span class="home-product-item__price-current">{{number_format($newPrice)}}</span>
                                     </div>
                                     <div class="home-product-item__action">
+                                        @if($isFavorited)
                                         <span class="home-product-item__like home-product-item__like--liked">
                                             <i class="home-product-item__like-icon-empty fa-regular fa-heart"></i>
                                             <i class="home-product-item__like-icon-fill fa-solid fa-heart"></i>
                                         </span>
+                                        @endif
                                         <div class="home-product-item__rating">
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
                                             <i class="home-product-item__star--gold fa-solid fa-star"></i>
@@ -103,10 +137,12 @@
                                         <i class="fa-solid fa-check"></i>
                                         <span>Yêu thích</span>
                                     </div>
+                                    @if( $product->percent_discount > 0 )
                                     <div class="home-product-item__sale-off">
-                                        <span class="home-product-item__sale-off-percent">25%</span>
+                                        <span class="home-product-item__sale-off-percent">{{ number_format($product->percent_discount) }}%</span>
                                         <span class="home-product-item__sale-off-label">GIẢM</span>
                                     </div>
+                                    @endif
                                 </a>
                             </div>
                             @endforeach
