@@ -3,7 +3,7 @@
     height: 120px;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     background-image: linear-gradient(0, #001f3f, #000);
 }
 
@@ -1821,7 +1821,7 @@ h1 {
     width: 21px;
     height: 21px;
     cursor: pointer;
-    z-index: 25;
+    z-index: 1;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -2121,7 +2121,7 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    font-size: 10px;
+    font-size: 16px;
 }
 
 .comment-section .bg-light button {
@@ -2155,6 +2155,52 @@ h1 {
     height: 5em;
 }
 
+/* CSS cho các nút trong phần bình luận */
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Đảm bảo các nút có khoảng cách phù hợp */
+.comment-section .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
 /* Account info */
 
 .profile input[type="text"],

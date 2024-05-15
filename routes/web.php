@@ -67,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
             Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
+            Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+            Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.delete');
         });
     });
 

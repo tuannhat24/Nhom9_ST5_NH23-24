@@ -147,25 +147,24 @@
                     <div class="d-flex justify-content-center row">
                         <div class="col-md-8">
                             <div class="d-flex flex-column comment-section">
-
                                 @auth
                                 <div class="bg-light p-2 mb-2">
-                                    <form action="{{ route('products.comments', $product) }}" method="POST">
+                                    <form id="commentForm" action="{{ route('products.comments', ['product' => $product]) }}" method="POST">
                                         @csrf
                                         <div class="d-flex flex-row align-items-start">
                                             <!-- <img class="rounded-circle1" src="{{ auth()->user()->image }}"> -->
-                                            <textarea class="form-control ml-1 shadow-none textarea" name="body" placeholder="Viết bình luận của bạn..."></textarea>
+                                            <textarea class="form-control ml-1 shadow-none textarea" name="body" id="commentBody" placeholder="Viết bình luận của bạn..."></textarea>
                                         </div>
                                         <div class="mt-2 text-right">
                                             <button class="btn btn-primary btn-sm shadow-none" type="submit">Bình luận</button>
-                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Hủy</button>
+                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="cancelComment()">Hủy</button>
                                         </div>
                                     </form>
                                 </div>
                                 @endauth
 
                                 @foreach ($product->comments as $comment)
-                                <div class="bg-white p-2">
+                                <div class="bg-white p-2" id="comment-{{ $comment->id }}">
                                     <div class="d-flex flex-row user-info">
                                         <img class="rounded-circle" src="{{ $comment->image }}" width="40">
                                         <div class="d-flex flex-column justify-content-start">
@@ -174,8 +173,21 @@
                                         </div>
                                     </div>
                                     <div class="mt-2">
-                                        <p class="comment-text">{{ $comment->body }}</p>
+                                        <p id="comment-text-{{ $comment->id }}" class="comment-text">{{ $comment->body }}</p>
                                     </div>
+
+                                    @auth
+                                    @if(Auth::id() === $comment->user_id)
+                                    <!-- Nút chỉnh sửa -->
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="editComment('{{ $comment->id }}', '{{ $comment->body }}')">Chỉnh sửa</button>
+                                    <!-- Nút xóa -->
+                                    <form id="deleteForm-{{ $comment->id }}" action="{{ route('comments.delete', $comment) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment('{{ $comment->id }}')">Xóa</button>
+                                    </form>
+                                    @endif
+                                    @endauth
                                 </div>
                                 @endforeach
                             </div>

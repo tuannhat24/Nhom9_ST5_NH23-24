@@ -353,3 +353,73 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+// Comment
+// Xử lý khi click nút chỉnh sửa bình luận
+function editComment(commentId, commentBody) {
+    var commentTextElement = document.getElementById('comment-text-' + commentId);
+    
+    // Tạo một textarea element để chỉnh sửa nội dung bình luận
+    var inputElement = document.createElement('textarea');
+    inputElement.className = 'form-control ml-1 shadow-none textarea';
+    inputElement.id = 'comment-edit-' + commentId;
+    inputElement.value = commentBody;
+
+    // Tạo một button để lưu thay đổi
+    var saveButton = document.createElement('button');
+    saveButton.className = 'btn btn-primary btn-sm';
+    saveButton.textContent = 'Lưu';
+    saveButton.onclick = function () {
+        saveEditedComment(commentId);
+    };
+
+    // Tạo một button để hủy thao tác chỉnh sửa
+    var cancelButton = document.createElement('button');
+    cancelButton.className = 'btn btn-outline-primary btn-sm ml-1 shadow-none';
+    cancelButton.textContent = 'Hủy';
+    cancelButton.onclick = function () {
+        cancelEdit(commentId, commentBody);
+    };
+
+    // Thay thế nội dung bình luận bằng form chỉnh sửa
+    commentTextElement.innerHTML = '';
+    commentTextElement.appendChild(inputElement);
+    commentTextElement.appendChild(saveButton);
+    commentTextElement.appendChild(cancelButton);
+}
+window.cancelEdit = function(commentId, commentBody) {
+    var commentTextElement = document.getElementById('comment-text-' + commentId);
+    commentTextElement.innerHTML = commentBody;
+};
+// Xử lý khi click nút lưu sau khi chỉnh sửa bình luận
+function saveEditedComment(commentId) {
+    var editedComment = document.getElementById('comment-edit-' + commentId).value;
+
+    // Gửi yêu cầu cập nhật bình luận qua Ajax
+    fetch(`/comments/${commentId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ body: editedComment })
+    }).then(response => response.json()).then(data => {
+        // Hiển thị thông báo thành công hoặc thất bại
+        if (data.success) {
+            document.getElementById('comment-text-' + commentId).innerHTML = editedComment;
+        } else {
+            alert(data.error || 'Có lỗi xảy ra.');
+        }
+    });
+}
+
+// Xử lý khi click nút xóa bình luận
+function deleteComment(commentId) {
+    if (confirm('Bạn có chắc chắn muốn xóa bình luận này không?')) {
+        document.getElementById('deleteForm-' + commentId).submit();
+    }
+}
+
+function cancelComment() {
+    document.getElementById("commentForm").reset();
+}
