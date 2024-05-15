@@ -102,6 +102,6 @@ class ForgotPasswordController extends Controller
 
         DB::table('password_resets')->where('email', $request->email)->delete();
 
-        return redirect()->route('users.signin')->with('status', 'Đặt lại mật khẩu thành công.');
+        return redirect()->route('users.signin')->with('success', 'Đặt lại mật khẩu thành công.');
     }
 }

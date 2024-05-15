@@ -15,3 +15,21 @@ pass: 1234567
 User 2: Dinhdang@gmail.com
 pass: 123456
 
+
+---Cấu Hình-----------------------------------
+<!-- env -->
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=linhlg2004@gmail.com
+MAIL_PASSWORD="xspi bfhl mcyk povm"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=linhlg2004@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+<!-- Chạy lại lệnh -->
+php artisan config:cache
