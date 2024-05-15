@@ -8,7 +8,8 @@
             <div class="modal__overlay"></div>
             <div class="modal__body">
                 <!-- Đăng kí -->
-                <form method="post" action="{{ route('users.signup') }}" class="auth-form">
+                <form method="post" action="{{ route('signup.send') }}" class="auth-form">
+                    @csrf
                     <div class="auth-form__container">
                         <div class="auth-form__header">
                             <h3 class="auth-form__heading">Đăng ký</h3>
@@ -16,7 +17,6 @@
                         </div>
                         <div class="auth-form__form">
                             <!-- Hiển thị thông báo lỗi -->
-                            @csrf
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -30,13 +30,7 @@
                             </div>
                             @endif
                             <div class="auth-form__group">
-                                <input type="email" id="email" name="email" class="auth-form__input" placeholder="Email" required>
-                            </div>
-                            <div class="auth-form__group">
-                                <input type="password" id="password" name="password" class="auth-form__input" placeholder="Mật khẩu" required>
-                            </div>
-                            <div class="auth-form__group">
-                                <input type="password" id="password_confirmation" name="password_confirmation" class="auth-form__input" placeholder="Nhập lại mật khẩu" required>
+                                <input type="email" name="email" class="auth-form__input" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="auth-form__aside">
