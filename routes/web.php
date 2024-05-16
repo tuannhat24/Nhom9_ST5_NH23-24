@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
-use App\Http\Controllers\Admin\Author\SilderController;
+use App\Http\Controllers\Admin\Author\SliderController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
@@ -98,13 +98,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [ProductControllers::class, 'update'])->name('admin.product.update');
                 Route::get('/delete/{id}', [ProductControllers::class, 'delete'])->name('admin.product.delete');
             });
-            Route::prefix('/silder')->group(function () {
-                Route::get('/index', [SilderController::class, 'index'])->name('admin.slider.index');
-                Route::get('/create', [SilderController::class, 'create'])->name('admin.slider.create');
-                Route::post('/store', [SilderController::class, 'store'])->name('admin.slider.store');
-                Route::get('/edit/{id}', [SilderController::class, 'edit'])->name('admin.slider.edit');
-                Route::post('/update/{id}', [SilderController::class, 'update'])->name('admin.slider.update');
-                Route::get('/delete/{id}', [SilderController::class, 'delete'])->name('admin.slider.delete');
+            Route::prefix('/slider')->group(function () {
+                Route::get('/index', [SliderController::class, 'index'])->name('admin.slider.index');
+                Route::get('/create', [SliderController::class, 'create'])->name('admin.slider.create');
+                Route::post('/store', [SliderController::class, 'store'])->name('admin.slider.store');
+                Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
+                Route::post('/update/{id}', [SliderController::class, 'update'])->name('admin.slider.update');
+                Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('admin.slider.delete');
             });
         });
     });

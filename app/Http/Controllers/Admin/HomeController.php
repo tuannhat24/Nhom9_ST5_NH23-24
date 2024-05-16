@@ -32,7 +32,7 @@ class HomeController extends Controller
         $categories = Category::all();
 
         //Truy vấn danh sách slider
-        // $sliders = Slider::latest()->get();
+        $sliders = Slider::latest()->get();
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
@@ -60,7 +60,7 @@ class HomeController extends Controller
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'categories' => $categories,
-            // 'sliders' => $sliders,
+            'sliders' => $sliders,
             'favoriteProducts' => $favoriteProducts,
         ]);
     }
@@ -80,7 +80,7 @@ class HomeController extends Controller
         $categories = Category::all();
 
         //Truy vấn danh sách slider
-        // $sliders = Slider::latest()->get();
+        $sliders = Slider::latest()->get();
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }
@@ -110,7 +110,7 @@ class HomeController extends Controller
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'categories' => $categories,
-            // 'sliders' => $sliders,
+            'sliders' => $sliders,
             'currentUser' => $currentUser,
             'favoriteProducts' => $favoriteProducts,
         ]);

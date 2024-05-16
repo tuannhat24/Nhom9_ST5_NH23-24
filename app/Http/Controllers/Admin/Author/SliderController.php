@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Admin\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\Silder;
+use App\Models\Slider;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
-use Log;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
-class SilderController extends Controller
+class SliderController extends Controller
 {
     use StorageImageTrait;
     private $slider;
-    public function __construct(Silder $slider){
+    public function __construct(Slider $slider){
         $this->slider = $slider;
     }
     // public function index(){
     //     $slider = $this->slider->latest()->paginate(5);
     //     return view('users/admin/slider/index', [
-    //         'title' => 'SILDER',
+    //         'title' => 'SLIDER',
     //         'sliders' => $slider
     //     ]);
     // }

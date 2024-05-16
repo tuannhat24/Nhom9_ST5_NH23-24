@@ -56,7 +56,7 @@
                 <tbody>
                     @if ($sliders->isEmpty())
                         <tr>
-                            <td colspan="4">Không có slider nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
+                            <td colspan="5">Không có slider nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
                         </tr>
                     @else
                         @foreach ($sliders as $slider)
