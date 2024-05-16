@@ -29,8 +29,10 @@ class SignInController extends Controller
             return redirect()->to($defaultUrl);
         }
 
+        $currentUser = false;
+
         // Nếu không, hiển thị trang đăng nhập
-        return view('users.signin', ['title' => 'Đăng nhập hệ thống']);
+        return view('users.signin', ['title' => 'Đăng nhập hệ thống', 'currentUser' => $currentUser]);
     }
 
     public function store(Request $request)

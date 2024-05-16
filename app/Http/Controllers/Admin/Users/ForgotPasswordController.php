@@ -16,7 +16,8 @@ class ForgotPasswordController extends Controller
 {
     public function index()
     {
-        return view('users.forgot_password', ['title' => 'Quên mật khẩu']);
+        $currentUser = false;
+        return view('users.forgot_password', ['title' => 'Quên mật khẩu', 'currentUser' => $currentUser]);
     }
 
     public function sendResetLinkEmail(Request $request)

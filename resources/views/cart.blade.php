@@ -89,10 +89,15 @@
                             <div class="grid__column-2-4">
                                 <a class="home-product-item" href="{{ route('user.detail', ['id' => $row->id]) }}">
                                     @php
+                                    $isFavorited = false;
                                     $imageUrl = asset('assets/img/' . $row->image);
                                     $newPrice = $row->price - ($row->price * $row->percent_discount / 100);
-                                    $favoriteProductIds = $favoriteProducts->pluck('product_id');
-                                    $isFavorited = $favoriteProductIds->contains($row->id);
+                                    foreach ($favoriteProducts as $favoriteProduct) {
+                                    if ($favoriteProduct->product_id === $row->id && $favoriteProduct->is_favorite) {
+                                    $isFavorited = true;
+                                    break;
+                                    }
+                                    }
                                     @endphp
                                     <div class="home-product-item__img" style="background-image: url('{{ $imageUrl }}');"></div>
                                     <h4 class="home-product-item__name">{{ $row->name }}</h4>

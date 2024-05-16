@@ -5,9 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
-
-use App\Http\Controllers\Admin\MainController;
-
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
@@ -40,9 +37,15 @@ Route::post('/forgot_password_verify', [ForgotPasswordController::class, 'verify
 Route::get('/reset_password', [ForgotPasswordController::class, 'showResetForm'])->name('users.reset_password');
 Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword'])->name('reset_password');
 
+// Guest
+Route::get('/', [HomeController::class, 'guest'])->name('guest.home');
+Route::get('/product', [ProductController::class, 'guest'])->name('guest.product');
+Route::get('/product/category/{category}', [ProductController::class, 'guestProductsByCategory'])->name('guest.products.by.category');
+Route::get('/detail/{id}', [DetailController::class, 'guest'])->name('guest.detail');
+Route::get('/search_results', [ProductController::class, 'guestSearch'])->name('guest.product.search');
+
 
 Route::middleware(['auth'])->group(function () {
-
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
@@ -55,10 +58,11 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
-            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
+            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
             Route::get('/purchase', [PurchaseController::class, 'index'])->name('user.purchase');
+            Route::get('/checkout/return', [CheckOutController::class, 'vnpayReturn'])->name('user.checkout.return');
             Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
@@ -71,7 +75,6 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.delete');
         });
     });
-
 
     Route::middleware('role:2')->group(function () {
         Route::prefix('admin')->group(function () {

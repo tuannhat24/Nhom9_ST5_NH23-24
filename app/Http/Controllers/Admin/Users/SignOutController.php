@@ -23,6 +23,6 @@ class SignOutController extends Controller
 
             $request->session()->regenerateToken();
         }
-        return redirect()->route('users.signin');
+        return redirect()->route('guest.home');
     }
 }

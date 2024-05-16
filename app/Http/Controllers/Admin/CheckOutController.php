@@ -95,4 +95,35 @@ class CheckOutController extends Controller
         header('Location: ' . $vnp_Url);
         die();
     }
+
+    public function vnpayReturn(Request $request)
+    {
+        $vnp_HashSecret = "2VGORAO3TE3E0JTIUB8S62NOLO8X5R2R"; // Chuỗi bí mật
+        $inputData = $request->all();
+        $vnp_SecureHash = $inputData['vnp_SecureHash'];
+        unset($inputData['vnp_SecureHash']);
+
+        ksort($inputData);
+        $hashData = "";
+        foreach ($inputData as $key => $value) {
+            $hashData .= '&' . urlencode($key) . "=" . urlencode($value);
+        }
+        $hashData = ltrim($hashData, '&');
+
+        $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+        if ($secureHash == $vnp_SecureHash) {
+            if ($inputData['vnp_ResponseCode'] == '00') {
+                // Payment successful
+                $currentUser = auth()->user();
+                Cart::where('customer_id', $currentUser->customer_id)->delete(); // Clear the cart
+                return redirect()->route('admin.orders.view')->with('success', 'Payment successful!');
+            } else {
+                // Payment failed
+                return redirect(session('url_prev'))->with('error', 'Payment failed!');
+            }
+        } else {
+            // Invalid signature
+            return redirect(session('url_prev'))->with('error', 'Invalid payment signature!');
+        }
+    }
 }
