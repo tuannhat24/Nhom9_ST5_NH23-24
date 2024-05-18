@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('img_path');
             $table->string('img_name');
             $table->timestamps();
-            
+
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('silders');
+        Schema::dropIfExists('sliders');
     }
 };

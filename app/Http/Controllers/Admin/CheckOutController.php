@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +47,7 @@ class CheckOutController extends Controller
         $vnp_TmnCode = "FYH82R22"; //Mã website tại VNPAY
         $vnp_HashSecret = "2VGORAO3TE3E0JTIUB8S62NOLO8X5R2R"; //Chuỗi bí mật
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://127.0.0.1:8000/user/checkout";
+        $vnp_Returnurl = "http://127.0.0.1:8000/user/checkout/return";
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = 'billpayment';
         $vnp_TxnRef = rand(1, 10000); //Mã giao dịch thanh toán tham chiếu của merchant
@@ -92,8 +94,8 @@ class CheckOutController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        header('Location: ' . $vnp_Url);
-        die();
+
+        return redirect($vnp_Url);
     }
 
     public function vnpayReturn(Request $request)
@@ -115,15 +117,63 @@ class CheckOutController extends Controller
             if ($inputData['vnp_ResponseCode'] == '00') {
                 // Payment successful
                 $currentUser = auth()->user();
-                Cart::where('customer_id', $currentUser->customer_id)->delete(); // Clear the cart
-                return redirect()->route('admin.orders.view')->with('success', 'Payment successful!');
+                $cartItems = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+                // Create order
+                $order = Order::create([
+                    'user_id' => $currentUser->id,
+                    'total_amount' => $inputData['vnp_Amount'] / 100,
+                    'status' => 'Đã thanh toán',
+                ]);
+
+                // Create order items
+                foreach ($cartItems as $item) {
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'price' => $item->product->price,
+                    ]);
+                }
+
+                // Clear cart
+                Cart::where('customer_id', $currentUser->customer_id)->delete();
+
+                return redirect()->route('user.order', ['order' => $order->id])->with('success', 'Thanh Toán Thành Công!');
             } else {
                 // Payment failed
-                return redirect(session('url_prev'))->with('error', 'Payment failed!');
+                return redirect(session('user.checkout'))->with('error', 'Thanh toán thất bại!');
             }
         } else {
             // Invalid signature
-            return redirect(session('url_prev'))->with('error', 'Invalid payment signature!');
+            return redirect(session('user.checkout'))->with('error', 'Chữ ký thanh toán không hợp lệ!');
         }
+    }
+
+    public function orderSummary(Order $order)
+    {
+        $title = 'Đơn hàng';
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+        return view('order', compact('order', 'title', 'currentUser', 'carts'));
+    }
+
+    public function allOrders()
+    {
+        $title = "Đơn Hàng";
+
+        // Truy vấn thông tin của người dùng hiện tại
+        $currentUser = auth()->user();
+
+        // Truy vấn đơn hàng của người dùng đó
+        $orders = Order::where('user_id', $currentUser->id)->get();
+
+        // Truy vấn giỏ hàng của người dùng hiện tại
+        $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
+
+        return view('purchase', compact('orders', 'title', 'currentUser', 'carts'));
     }
 }

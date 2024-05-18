@@ -61,8 +61,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
-            Route::get('/purchase', [PurchaseController::class, 'index'])->name('user.purchase');
             Route::get('/checkout/return', [CheckOutController::class, 'vnpayReturn'])->name('user.checkout.return');
+            Route::get('/purchase', [CheckOutController::class, 'allOrders'])->name('user.purchase');
+            Route::get('/order/{order}', [CheckOutController::class, 'orderSummary'])->name('user.order');
             Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
@@ -111,6 +112,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Kiểm tra xem người dùng nhập link khác sẽ chuyển về trang login
     Route::get('/{any}', function () {
-        return redirect()->route('users.signin');
+        return redirect()->route('user.home');
     })->where('any', '.*');
 });

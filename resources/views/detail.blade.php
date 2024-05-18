@@ -169,7 +169,7 @@
                                 @endauth
 
                                 @foreach ($product->comments as $comment)
-                                <div class="bg-white p-2" id="comment-{{ $comment->id }}">
+                                <div class="comment bg-white p-2" id="comment-{{ $comment->id }}">
                                     <div class="d-flex flex-row user-info">
                                         <img class="rounded-circle" src="{{ $comment->image }}" width="40">
                                         <div class="d-flex flex-column justify-content-start">
@@ -177,16 +177,16 @@
                                             <span class="date text-black-50">{{ $comment->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
-                                    <div class="mt-2">
+                                    <div style="margin-left: 5px;">
                                         <p id="comment-text-{{ $comment->id }}" class="comment-text">{{ $comment->body }}</p>
                                     </div>
 
                                     @auth
                                     @if(Auth::id() === $comment->user_id)
                                     <!-- Nút chỉnh sửa -->
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="editComment('{{ $comment->id }}', '{{ $comment->body }}')">Chỉnh sửa</button>
+                                    <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 15px;" onclick="editComment('{{ $comment->id }}', '{{ $comment->body }}')">Chỉnh sửa</button>
                                     <!-- Nút xóa -->
-                                    <form id="deleteForm-{{ $comment->id }}" action="{{ route('comments.delete', $comment) }}" method="POST" style="display:inline;">
+                                    <form id="deleteForm-{{ $comment->id }}" action="{{ route('comments.delete', $comment) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment('{{ $comment->id }}')">Xóa</button>

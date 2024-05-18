@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 
 class PasswordController extends Controller
@@ -29,11 +30,15 @@ class PasswordController extends Controller
         // Lấy giỏ hàng của người dùng hiện tại
         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
+        // Truy vấn đơn hàng
+        $orders = Order::all();
+
         return view('password', compact(
             'title',
             'users',
             'carts',
             'currentUser',
+            'orders',
         ));
     }
 
@@ -80,5 +85,5 @@ class PasswordController extends Controller
         // Redirect về trang tài khoản của người dùng với thông báo thành công
         return redirect()->route('user.password', ['id' => $currentUser->id])->with('success', 'Mật khẩu đã được thay đổi thành công!');
     }
-    
+
 }
