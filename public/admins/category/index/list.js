@@ -22,7 +22,7 @@ btn_delete.forEach(function(element){
                        if (data.code == 200){
                             that.parent().parent().remove();
                             Swal.fire({
-                                title: "Deleted!",
+                                title: "Đã xóa",
                                 text: "Xóa thành công",
                                 icon: "success"
                               });
@@ -30,9 +30,9 @@ btn_delete.forEach(function(element){
                     },
                     error: function(){
                         Swal.fire({
-                            title: "Deleted!",
+                            title: "Không xóa được",
                             text: "Không thể xóa vì còn sản phẩm trong danh mục",
-                            icon: "success"
+                            icon: "error"
                           });                    }
                 });
            

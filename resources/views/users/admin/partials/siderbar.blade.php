@@ -45,7 +45,7 @@
             <ul id="accordion-menu">
                 <li class="dropdown">
                     <a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-house"></span><span class="mtext">Home</span>
+                        <span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
                     </a>
                 </li>
 

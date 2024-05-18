@@ -74,9 +74,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:2')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/', [ManageController::class, 'index'])->name('admin.home');
-            Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-                \UniSharp\LaravelFilemanager\Lfm::routes();
-            });
+            Route::get('/statistics', [ManageController::class, 'statistics'])->name('admin.statistics');
+            // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+            //     \UniSharp\LaravelFilemanager\Lfm::routes();
+            // });
             Route::prefix('/category')->group(function () {
                 Route::get('/listcategory', [CategoryController::class, 'index'])->name('admin.category.index');
                 Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');

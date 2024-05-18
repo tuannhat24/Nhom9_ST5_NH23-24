@@ -14,7 +14,7 @@
                         <div class="full-home-banners__main-inner">
                             @foreach($sliders as $key => $slider)
                             <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
-                                <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
+                                <img src="@php $img = asset('assets/img/' . $slider->img_name); echo $img @endphp" alt="">
                             </a>
                             @endforeach
                         </div>

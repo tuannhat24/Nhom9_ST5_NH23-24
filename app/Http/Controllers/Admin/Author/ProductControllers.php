@@ -25,13 +25,6 @@ class ProductControllers extends Controller
         $this->category = $category;
         $this->product = $product;
     }
-    // public function index(){
-    //     $products = $this->product->latest()->paginate(5);
-    //     return view('users/admin/products/listproduct', [
-    //         'title' => 'DANH SÁCH SẢN PHẨM',
-    //         'products' => $products
-    //     ]);
-    // }
 
     public function index(Request $request) {
         // Lấy từ khóa tìm kiếm từ yêu cầu
@@ -74,7 +67,7 @@ class ProductControllers extends Controller
                 'cate_id' => $request->category,
                 'description' => $request->description,
                 'price' => $request->price,
-                'price_sale' => $request->price_sale,
+                'percent_discount' => $request->percent_discount,
                 'quantity_sold' => $request->qty,
             ];
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');
@@ -102,7 +95,7 @@ class ProductControllers extends Controller
         ]);
     }
 
-    public function update($id, Request $request){
+    public function update($id, ProductAddRequest $request){
         try{
             DB::beginTransaction();
             $dataProductUpdate = [
@@ -110,7 +103,7 @@ class ProductControllers extends Controller
                 'cate_id' => $request->category,
                 'description' => $request->description,
                 'price' => $request->price,
-                'price_sale' => $request->price_sale,
+                'percent_discount' => $request->percent_discount,
                 'quantity_sold' => $request->qty,
             ];
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');

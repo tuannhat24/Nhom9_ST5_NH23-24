@@ -47,6 +47,7 @@
                     <th>ID</th>
                     <th>Tên Danh Mục</th>
                     <th>Mô tả</th>
+                    <th>Hình ảnh</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -60,6 +61,7 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{!! $category->description !!}</td>
+                        <td><img class="product_img" src="{{ asset('assets/img/' . $category->image) }}"></td>
                         <td>
                             <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn-edit"><i class="fas fa-edit"></i></a>
                             <a href="" data-url="{{ route('admin.category.delete', ['id' => $category->id]) }}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>

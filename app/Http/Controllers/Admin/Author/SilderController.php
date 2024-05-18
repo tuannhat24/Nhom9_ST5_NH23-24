@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\Silder;
+use App\Models\Slider;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Log;
@@ -13,16 +13,9 @@ class SilderController extends Controller
 {
     use StorageImageTrait;
     private $slider;
-    public function __construct(Silder $slider){
+    public function __construct(Slider $slider){
         $this->slider = $slider;
     }
-    // public function index(){
-    //     $slider = $this->slider->latest()->paginate(5);
-    //     return view('users/admin/slider/index', [
-    //         'title' => 'SILDER',
-    //         'sliders' => $slider
-    //     ]);
-    // }
 
     public function index(Request $request) {
         // Lấy từ khóa tìm kiếm từ yêu cầu

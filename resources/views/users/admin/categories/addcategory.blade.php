@@ -24,7 +24,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Tên Danh Muc</label>
-                <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục" required="">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nhập tên danh mục" required="">
             </div>
             <div class="form-group">
                 <label for="category">Chọn Danh Mục Cha</label>
@@ -38,6 +38,13 @@
             <div class="form-group">
                 <label for="description">Mô Tả</label>
                 <textarea class="form-control" cols="30" rows="10" name="description" placeholder="Nhập mô tả danh mục"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="namsinh">Hình ảnh:</label>
+                <input type="file" name="img" class="form-control-file @error('image') is-invalid @enderror">
+                @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Thêm">
         </form>

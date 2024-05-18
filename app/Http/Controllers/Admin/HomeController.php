@@ -7,7 +7,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Favorite;
-use App\Models\Silder;
+use App\Models\Slider;
 
 class HomeController extends Controller
 {
@@ -33,7 +33,7 @@ class HomeController extends Controller
         $categories = Category::all();
 
         //Truy vấn danh sách slider
-        $sliders = Silder::latest()->get();
+        $sliders = Slider::latest()->get();
         if ($currentPage >= $totalPages) {
             $currentPage = $totalPages;
         }

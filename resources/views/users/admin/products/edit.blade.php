@@ -48,9 +48,9 @@
                     value="{{ $product->price }}">
             </div>
             <div class="form-group">
-                <label for="sdt">Giảm giá</label>
-                <input type="text" class="form-control" name="price_sale" placeholder="Nhập giá giảm"
-                    value="{{ $product->price_sale }}">
+                <label for="sdt">Phần trăm chiết khấu</label>
+                <input type="text" class="form-control" name="percent_discount" placeholder="Nhập giá giảm"
+                    value="{{ $product->percent_discount }}">
             </div>
             <div class="form-group">
                 <label for="soluong">Số lượng</label>

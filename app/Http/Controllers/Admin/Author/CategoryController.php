@@ -8,24 +8,28 @@ use App\Models\Category;
 use App\Components\Recusive;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Traits\StorageImageTrait;
+use App\Http\Requests\CategoryAddRequest;
 
 class CategoryController extends Controller
 {
+    use StorageImageTrait;
     private $category;
     public function __construct(Category $category)
     {
         $this->category = $category;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         // Lấy từ khóa tìm kiếm từ yêu cầu
         $keyword = $request->input('keyword', '');
-    
+
         // Nếu có từ khóa, tìm kiếm theo tên danh mục hoặc mô tả
         if (!empty($keyword)) {
             $categories = $this->category->where('name', 'LIKE', '%' . $keyword . '%')
-                                  ->orWhere('description', 'LIKE', '%' . $keyword . '%')
-                                  ->latest()->paginate(10); // Thực hiện phân trang
+                ->orWhere('description', 'LIKE', '%' . $keyword . '%')
+                ->latest()->paginate(10); // Thực hiện phân trang
         } else {
             $categories = $this->category->latest()->paginate(10); // Trường hợp không có từ khóa, trả về tất cả
         }
@@ -33,7 +37,7 @@ class CategoryController extends Controller
         // Trả về view với dữ liệu danh mục đã tìm kiếm
         return view('users/admin/categories/listcategory', compact('categories', 'keyword', 'title'));
     }
-    
+
 
     public function getCategory($parent_id)
     {
@@ -60,11 +64,13 @@ class CategoryController extends Controller
             $dataCategoryCreate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
-                'image' => $request->image ?? null,
                 'description' => $request->description,
                 'slug' => $request->slug ?? null,
-
             ];
+            $dataUploadImg = $this->storageImageTrait($request, 'img', 'category');
+            if (!empty($dataUploadImg)) {
+                $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
+            }
             $category = $this->category->create($dataCategoryCreate);
             DB::commit();
             return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được thêm thành công.');
@@ -97,6 +103,10 @@ class CategoryController extends Controller
                 'parent_id' => $request->parent_id,
                 'description' => $request->description,
             ];
+            $dataUploadImg = $this->storageImageTrait($request, 'img', 'categoty');
+            if (!empty($dataUploadImg)) {
+                $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
+            }
             $category = $this->category->find($id)->update($dataCategoryCreate);
             DB::commit();
             return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được update thành công.');
@@ -107,9 +117,8 @@ class CategoryController extends Controller
     }
     public function delete($id)
     {
-        
         try {
-          
+
             $category = $this->category->find($id);
             if (!$category) { // Kiểm tra nếu danh mục không tồn tại
                 return response()->json([
@@ -144,5 +153,5 @@ class CategoryController extends Controller
         }
     }
 
-    
+
 }

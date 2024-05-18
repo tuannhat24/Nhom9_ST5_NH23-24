@@ -15,7 +15,8 @@
             <form action="{{ route('admin.product.index') }}" method="GET">
                 <div class="form-group mb-0">
                     <i class="dw dw-search2 search-icon"></i>
-                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}" placeholder="Tìm kiếm"/>
+                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}"
+                        placeholder="Tìm kiếm" />
                 </div>
             </form>
         </div>
@@ -46,13 +47,13 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Percent Discount</th>
-                        <th scope="col">Quantity sold</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">HÌnh ảnh</th>
+                        <th scope="col">Thuộc Danh mục</th>
+                        <th scope="col">Mô tả sản phẩm</th>
+                        <th scope="col">Phần trăm chiết khấu</th>
+                        <th scope="col">Số lượng</th>
                         <th scope="col">Active</th>
 
                     </tr>
@@ -60,26 +61,7 @@
                 <tbody>
                     @if ($products->isEmpty())
                         <tr>
-<<<<<<< HEAD
                             <td colspan="4">Không có sản phẩm nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
-=======
-                            <th scope="row">{{ $productItem->id }}</th>
-                            <td>{{ $productItem->name }}</td>
-                            <td>{{ number_format($productItem->price) }}</td>
-                            <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
-                            <td>{{ optional($productItem->categories)->name }}</td>
-                            <td>{{ $productItem->description }}</td>
-                            <td>{{ number_format($productItem->percent_discount)}}%</td>
-                            <td>{{ $productItem->quantity_sold }}</td>
-                            <td>
-                                <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}" class="btn-edit"><i
-                                        class="fas fa-edit"></i></a>
-                                <a href="" class="btn-delete"
-                                    data-url="{{ route('admin.product.delete', ['id' => $productItem->id]) }}">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
->>>>>>> 8e2610b85f3cae6f7af5190ffeabe31d4351c64b
                         </tr>
                     @else
                         @foreach ($products as $productItem)
@@ -89,8 +71,8 @@
                                 <td>{{ number_format($productItem->price) }}</td>
                                 <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
                                 <td>{{ optional($productItem->categories)->name }}</td>
-                                <td>{!! $productItem->description !!}</td>
-                                <td>{{ number_format($productItem->price_sale) }}</td>
+                                <td>{{ $productItem->description }}</td>
+                                <td>{{ number_format($productItem->percent_discount) }}%</td>
                                 <td>{{ $productItem->quantity_sold }}</td>
                                 <td>
                                     <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}"
