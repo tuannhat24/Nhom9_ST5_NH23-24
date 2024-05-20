@@ -38,7 +38,7 @@ class CustomerSeeder extends Seeder
                 'name' => 'Nhat Tuan',
                 'phone' => '0333333333',
                 'address' => 'Sai Gon',
-                'email' => 'NhatTuan@gmail.com',
+                'email' => 'Tuannhat124@gmail.com',
                 'image' => 'user3.png',
                 'password' => '1234567',
                 'role' => 1,

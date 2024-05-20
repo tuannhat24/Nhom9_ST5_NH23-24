@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,12 +23,15 @@ class ProfileController extends Controller
         // Lấy giỏ hàng của người dùng hiện tại
         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
+        // Truy vấn đơn hàng
+        $orders = Order::all();
 
         return view('profile', compact(
             'title',
             'users',
             'carts',
             'currentUser',
+            'orders',
         ));
     }
 

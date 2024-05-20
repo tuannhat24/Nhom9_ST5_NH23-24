@@ -56,7 +56,7 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.product.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon"> <i class="fa-brands fa-product-hunt"></i></span><span
+                        <span class="micon"> <i class="fa-solid fa-shirt"></i></span><span
                             class="mtext">Product</span>
                     </a>
                 </li>

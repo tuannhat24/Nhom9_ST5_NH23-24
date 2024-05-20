@@ -42,7 +42,7 @@
                 <textarea class="form-control" cols="50" rows="10" name="description" required="">{{ $category->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="namsinh">Hình ảnh :</label>
+                <label for="img">Hình ảnh :</label>
                 <input type="file" name="img" class="form-control-file">
                 <div class="col-md-12 mt-2">
                     <div class="row">

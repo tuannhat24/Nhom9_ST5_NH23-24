@@ -69,7 +69,7 @@
                                 <th scope="row">{{ $productItem->id }}</th>
                                 <td>{{ $productItem->name }}</td>
                                 <td>{{ number_format($productItem->price) }}</td>
-                                <td><img class="product_img" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
+                                <td><img class="img-fluid" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
                                 <td>{{ optional($productItem->categories)->name }}</td>
                                 <td>{{ $productItem->description }}</td>
                                 <td>{{ number_format($productItem->percent_discount) }}%</td>

@@ -5,9 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Users\SignInController;
 use App\Http\Controllers\Admin\Users\SignUpController;
 use App\Http\Controllers\Admin\Users\SignOutController;
-
-use App\Http\Controllers\Admin\MainController;
-
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController;
@@ -17,7 +14,7 @@ use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
-use App\Http\Controllers\Admin\Author\SilderController;
+use App\Http\Controllers\Admin\Author\SliderController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
@@ -40,9 +37,15 @@ Route::post('/forgot_password_verify', [ForgotPasswordController::class, 'verify
 Route::get('/reset_password', [ForgotPasswordController::class, 'showResetForm'])->name('users.reset_password');
 Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword'])->name('reset_password');
 
+// Guest
+Route::get('/', [HomeController::class, 'guest'])->name('guest.home');
+Route::get('/product', [ProductController::class, 'guest'])->name('guest.product');
+Route::get('/product/category/{category}', [ProductController::class, 'guestProductsByCategory'])->name('guest.products.by.category');
+Route::get('/detail/{id}', [DetailController::class, 'guest'])->name('guest.detail');
+Route::get('/search_results', [ProductController::class, 'guestSearch'])->name('guest.product.search');
+
 
 Route::middleware(['auth'])->group(function () {
-
     Route::middleware('role:1')->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/home', [HomeController::class, 'index'])->name('user.home');
@@ -55,10 +58,12 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('user.cart.clear');
             Route::post('/cart/update/{cartId}', [CartController::class, 'updateCart'])->name('user.cart.update');
             Route::post('/cart/remove/{cartId}', [CartController::class, 'removeItem'])->name('user.cart.remove');
-            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::get('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
+            Route::post('/checkout', [CheckOutController::class, 'index'])->name('user.checkout');
             Route::post('/checkout/vnpay', [CheckOutController::class, 'vnpay'])->name('user.checkout.vnpay');
-            Route::get('/purchase', [PurchaseController::class, 'index'])->name('user.purchase');
+            Route::get('/checkout/return', [CheckOutController::class, 'vnpayReturn'])->name('user.checkout.return');
+            Route::get('/purchase', [CheckOutController::class, 'allOrders'])->name('user.purchase');
+            Route::get('/order/{order}', [CheckOutController::class, 'orderSummary'])->name('user.order');
             Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
@@ -67,17 +72,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
             Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
+            Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+            Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.delete');
         });
     });
-
 
     Route::middleware('role:2')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/', [ManageController::class, 'index'])->name('admin.home');
+            Route::get('/profile', [ManageController::class, 'user'])->name('admin.profile');
+            Route::post('/profile/update-information', [ManageController::class, 'updateÌnformation'])->name('admin.profile/updateInformation');
             Route::get('/statistics', [ManageController::class, 'statistics'])->name('admin.statistics');
-            // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-            //     \UniSharp\LaravelFilemanager\Lfm::routes();
-            // });
+            
             Route::prefix('/category')->group(function () {
                 Route::get('/listcategory', [CategoryController::class, 'index'])->name('admin.category.index');
                 Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');
@@ -94,19 +100,19 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [ProductControllers::class, 'update'])->name('admin.product.update');
                 Route::get('/delete/{id}', [ProductControllers::class, 'delete'])->name('admin.product.delete');
             });
-            Route::prefix('/silder')->group(function () {
-                Route::get('/index', [SilderController::class, 'index'])->name('admin.slider.index');
-                Route::get('/create', [SilderController::class, 'create'])->name('admin.slider.create');
-                Route::post('/store', [SilderController::class, 'store'])->name('admin.slider.store');
-                Route::get('/edit/{id}', [SilderController::class, 'edit'])->name('admin.slider.edit');
-                Route::post('/update/{id}', [SilderController::class, 'update'])->name('admin.slider.update');
-                Route::get('/delete/{id}', [SilderController::class, 'delete'])->name('admin.slider.delete');
+            Route::prefix('/slider')->group(function () {
+                Route::get('/index', [SliderController::class, 'index'])->name('admin.slider.index');
+                Route::get('/create', [SliderController::class, 'create'])->name('admin.slider.create');
+                Route::post('/store', [SliderController::class, 'store'])->name('admin.slider.store');
+                Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
+                Route::post('/update/{id}', [SliderController::class, 'update'])->name('admin.slider.update');
+                Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('admin.slider.delete');
             });
         });
     });
 
     // Kiểm tra xem người dùng nhập link khác sẽ chuyển về trang login
     Route::get('/{any}', function () {
-        return redirect()->route('users.signin');
+        return redirect()->route('user.home');
     })->where('any', '.*');
 });

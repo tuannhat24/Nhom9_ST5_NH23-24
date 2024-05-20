@@ -16,7 +16,8 @@ class ForgotPasswordController extends Controller
 {
     public function index()
     {
-        return view('users.forgot_password', ['title' => 'Quên mật khẩu']);
+        $currentUser = false;
+        return view('users.forgot_password', ['title' => 'Quên mật khẩu', 'currentUser' => $currentUser]);
     }
 
     public function sendResetLinkEmail(Request $request)
@@ -102,6 +103,6 @@ class ForgotPasswordController extends Controller
 
         DB::table('password_resets')->where('email', $request->email)->delete();
 
-        return redirect()->route('users.signin')->with('status', 'Đặt lại mật khẩu thành công.');
+        return redirect()->route('users.signin')->with('success', 'Đặt lại mật khẩu thành công.');
     }
 }

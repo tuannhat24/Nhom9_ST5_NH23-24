@@ -7,11 +7,22 @@
             <div class="grid__column">
                 <div class="container">
                     <!-- Kiểm tra và hiển thị thông báo -->
-                    @if(session('success_message'))
+                    @if(Session::has('success'))
                     <div class="alert alert-success">
-                        {{ session('success_message') }}
+                        {{ Session::get('success') }}
+                        <button class="close" onclick="closeAlert()">&times;</button>
                     </div>
                     @endif
+
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ Session::get('error') }}</li>
+                        </ul>
+                        <button class="close" onclick="closeAlert()">&times;</button>
+                    </div>
+                    @endif
+
                     <!-- content -->
                     <section class="shopping-cart">
                         <div class="container">
@@ -21,7 +32,7 @@
                                     <div class="cart-actions">
                                         @if($carts->isEmpty())
                                         <img src="{{ asset('assets/img/no-cart.webp') }}" alt="No-cart">
-                                        <a href="{{route('user.product')}}" class="button buy-now-btn">Thanh Toán</a>
+                                        <a href="{{route('user.product')}}" class="button buy-now-btn">Mua Thêm</a>
                                         @else
                                     </div>
                                     <table class="cart-table">
@@ -74,22 +85,14 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td>
-                                                    <form action="{{route('user.checkout.vnpay')}}" method="post">
-                                                        @csrf
-                                                        <input type="hidden" name="amount" value="{{ $totalPrice }}">
-                                                        <button type="submit" class="btn btn--success">Thanh toán vnpay</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td colspan="2" class="text-right">Tổng Số Lượng Sản Phẩm:</td>
                                                 <td colspan="2" id="total-quantity">{{ $totalQuantity }}</td>
                                                 <td colspan="2">Tổng Số Tiền:</td>
                                                 <td colspan="2"><strong id="total-price">{{ number_format($totalPrice) }}</strong></td>
                                                 <td>
-                                                    <form method="POST" action="{{ route('user.checkout') }}">
+                                                    <form action="{{route('user.checkout.vnpay')}}" method="post">
                                                         @csrf
+                                                        <input type="hidden" name="amount" value="{{ $totalPrice }}">
                                                         <button type="submit" class="button checkout-btn">Thanh Toán</button>
                                                     </form>
                                                 </td>

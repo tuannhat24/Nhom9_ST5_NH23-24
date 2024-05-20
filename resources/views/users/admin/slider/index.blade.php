@@ -56,7 +56,7 @@
                 <tbody>
                     @if ($sliders->isEmpty())
                         <tr>
-                            <td colspan="4">Không có slider nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
+                            <td colspan="5">Không có slider nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
                         </tr>
                     @else
                         @foreach ($sliders as $slider)
@@ -64,7 +64,7 @@
                                 <th scope="row">{{ $slider->id }}</th>
                                 <td>{{ $slider->name }}</td>
                                 <td>{!!$slider->description !!}</td>
-                                <td><img class="product_img" src="{{ $slider->img_path }}" alt=""></td>
+                                <td><img class="img-fluid" src="{{ asset('assets/img') . '/' . $slider->img_name }}" alt=""></td>
                                 <td>
                                     <a href="{{ route('admin.slider.edit', ['id' => $slider->id]) }}" class="btn-edit"><i
                                             class="fas fa-edit"></i></a>

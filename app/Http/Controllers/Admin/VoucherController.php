@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 
 class VoucherController extends Controller
@@ -21,11 +22,15 @@ class VoucherController extends Controller
         // Lấy giỏ hàng của người dùng hiện tại
         $carts = Cart::where('customer_id', $currentUser->customer_id)->get();
 
+        // Truy vấn đơn hàng
+        $orders = Order::all();
+
         return view('voucher', compact(
             'title',
             'currentUser',
             'carts',
             'currentUser',
+            'orders',
         ));
     }
 }

@@ -3,7 +3,7 @@
     height: 120px;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     background-image: linear-gradient(0, #001f3f, #000);
 }
 
@@ -309,7 +309,7 @@
     line-height: 1.8rem;
 }
 
-.header__notify-desciotion {
+.header__notify-description {
     display: block;
     font-size: 1.2rem;
     line-height: 1.6rem;
@@ -1005,6 +1005,7 @@ li.sidebar__menu-item {
 
 .manager-item {
     position: relative;
+    padding: 10px 0;
 }
 
 .manager-item:first-child::before {
@@ -1821,7 +1822,7 @@ h1 {
     width: 21px;
     height: 21px;
     cursor: pointer;
-    z-index: 25;
+    z-index: 1;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -2042,9 +2043,9 @@ h1 {
     font-weight: bold;
 }
 
+.favorite,
 .favorite_form {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -2121,7 +2122,7 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    font-size: 10px;
+    font-size: 16px;
 }
 
 .comment-section .bg-light button {
@@ -2155,6 +2156,52 @@ h1 {
     height: 5em;
 }
 
+/* CSS cho các nút trong phần bình luận */
+.comment .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.comment .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.comment .btn-outline-primary {
+    background-color: transparent;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.comment .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.comment .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+
+.comment .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Đảm bảo các nút có khoảng cách phù hợp */
+.comment-section .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
 /* Account info */
 
 .profile input[type="text"],
@@ -2173,7 +2220,7 @@ h1 {
     margin-left: 40px;
 }
 
-.profile button{
+.profile button {
     margin-bottom: 10px;
 }
 
@@ -2210,8 +2257,118 @@ h1 {
     margin-left: 40px;
 }
 
-.password button{
+.password button {
     margin-bottom: 10px;
 }
 
+/* View order */
+/* .container__order {
+    background-color: #f5f5f5;
+    margin-left: 20px;
+    padding: 0 40px;
+}
 
+.container__order .order-list {
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.container__order .order-item--header {
+    background-color: #007bff;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+} */
+
+.purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 20px;
+}
+
+.purchase-table th,
+.purchase-table td {
+    padding: 10px 2px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.purchase-table th {
+    background-color: #f8f9fa;
+}
+
+.purchase-table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.purchase-table .text-right {
+    text-align: right;
+}
+
+.purchase-table strong {
+    font-weight: bold;
+}
+
+.purchase-item td a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* order */
+.order-summary-container {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.order-summary-container h1,
+.order-summary-container h2 {
+    color: #333;
+}
+
+.order-summary-container .order-details p {
+    font-size: 1.4rem;
+    margin: 10px 0;
+}
+
+.order-summary-container .order-details p strong {
+    color: #555;
+}
+
+.order-summary-container .order-items-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-summary-container .order-items-list li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-summary-container .order-items-list li span {
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.order-summary-container .item-name {
+    flex: 2;
+}
+
+.order-summary-container .item-quantity,
+.order-summary-container .item-price {
+    flex: 1;
+    text-align: right;
+}

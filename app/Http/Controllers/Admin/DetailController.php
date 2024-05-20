@@ -54,32 +54,72 @@ class DetailController extends Controller
     {
         $user = auth()->user();
 
-        $result = Favorite::where('customer_id', $user->customer_id)
-            ->where('product_id', $id)->first();
+        $product = Product::find($id);
+
+        $favorite = Favorite::where('customer_id', $user->customer_id)
+            ->where('product_id', $id)
+            ->first();
 
         $is_fav = false;
+        $favorite_count = $product->favorite_count;
 
-        if (!$result) {
+        if (!$favorite) {
             Favorite::create([
                 'customer_id' => $user->customer_id,
                 'product_id' => $id,
                 'is_favorite' => true,
             ]);
+            $favorite_count++;
             $is_fav = true;
         } else {
-            if ($result->is_favorite) {
-                $result->update([
-                    'is_favorite' => false
+            if ($favorite->is_favorite) {
+                $favorite->update([
+                    'is_favorite' => false,
                 ]);
+                $favorite_count--;
                 $is_fav = false;
             } else {
-                $result->update([
+                $favorite->update([
                     'is_favorite' => true
                 ]);
+                $favorite_count++;
                 $is_fav = true;
             }
         }
 
-        return response(["isFav" => $is_fav], 200);
+        $product->update([
+            'favorite_count' => $favorite_count,
+        ]);
+
+        return response(["isFav" => $is_fav, "favorite_count" => $favorite_count], 200);
+    }
+
+    public function guest($id)
+    {
+        $perPage = 16; // Số sản phẩm hiển thị trên mỗi trang
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->back()->with('error', 'Sản phẩm không tồn tại');
+        }
+
+        // Truy vấn các sản phẩm liên quan
+        $relatedProducts = Product::where('cate_id', $product->cate_id)
+            ->where('id', '!=', $product->id) // Loại bỏ sản phẩm đang xem
+            ->paginate($perPage); // Sử dụng phân trang
+
+        $currentUser = false;
+
+        // Truy vấn danh sách các sản phẩm được yêu thích
+        $favoriteProductIds = Favorite::where('is_favorite', true)->pluck('product_id')->toArray();
+        $favoriteProducts = Product::whereIn('id', $favoriteProductIds)->get();
+        
+        return view('detail', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+            'title' => 'Trang chi tiết sản phẩm',
+            'currentUser' => $currentUser,
+            'favoriteProducts' => $favoriteProducts,
+        ]);
     }
 }

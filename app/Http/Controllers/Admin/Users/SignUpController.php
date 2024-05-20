@@ -17,7 +17,8 @@ class SignUpController extends Controller
 {
     public function index()
     {
-        return view('users.signup', ['title' => 'Đăng ký hệ thống']);
+        $currentUser = false;
+        return view('users.signup', ['title' => 'Đăng ký hệ thống', 'currentUser' => $currentUser]);
     }
 
     public function sendCreateLinkEmail(Request $request)

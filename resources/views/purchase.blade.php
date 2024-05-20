@@ -26,8 +26,32 @@
                 </nav>
             </div>
             <div class="grid__column-10">
-                <!-- content -->
-                <br>
+                <!-- Main content -->
+                <div class="container__order">
+                    <h1>{{ $title }}</h1>
+                    <!-- Order list -->
+                    <table class="purchase-table">
+                        <thead>
+                            <tr>
+                                <th>Mã Đơn Hàng</th>
+                                <th>Tổng Số Tiền</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($orders as $order)
+                            <tr class="purchase-item">
+                                <td>{{ $order->id }}</td>
+                                <td>{{number_format($order->total_amount) }}</td>
+                                <td>{{ $order->status }}</td>
+                                <!-- Link to view order details -->
+                                <td><a href="{{ route('user.order', ['order' => $order->id]) }}" class="btn btn--primary">Xem Chi Tiết</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

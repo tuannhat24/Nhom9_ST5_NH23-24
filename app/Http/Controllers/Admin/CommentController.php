@@ -13,36 +13,54 @@ class CommentController extends Controller
 {
     public function poComment(Request $request, Product $product)
     {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (!Auth::check()) {
-            return back()->with('error', 'Bạn phải đăng nhập để bình luận.');
+            return response()->json(['error' => 'Bạn phải đăng nhập để bình luận.'], 401);
         }
 
-        // Xác thực dữ liệu đầu vào
         $request->validate([
-            'body' => 'required|max:255', // Đặt độ dài tối đa của bình luận là 255 ký tự
+            'body' => 'required|max:255',
         ]);
 
-        // Lấy thông tin người dùng đang đăng nhập
         $user = Auth::user();
+        $imageUrl = $user->image ? asset('assets/img/' . $user->image) : asset('assets/img/User.png');
 
-        // Kiểm tra xem người dùng có hình ảnh không
-        if ($user->image) {
-            // Tạo đường dẫn đầy đủ đến hình ảnh của người dùng
-            $imageUrl = asset('assets/img/' . $user->image);
-        } else {
-            // Nếu người dùng không có hình ảnh, sử dụng hình ảnh mặc định hoặc đường dẫn tới một hình ảnh khác
-            $imageUrl = asset('assets/img/User.png');
-        }
-
-        // Tạo bình luận
         $comment = new Comment();
         $comment->body = $request->body;
         $comment->user_id = $user->id;
-        $comment->image = $imageUrl; // Lưu đường dẫn hình ảnh của người dùng
+        $comment->image = $imageUrl;
         $comment->product_id = $product->id;
         $comment->save();
 
         return back()->with('success', 'Bình luận đã được thêm.');
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        // Kiểm tra xem người dùng có quyền chỉnh sửa bình luận hay không
+        if (Auth::id() !== $comment->user_id) {
+            return response()->json(['error' => 'Bạn không có quyền chỉnh sửa bình luận này.'], 403);
+        }
+
+        // Xác thực dữ liệu đầu vào
+        $request->validate(['body' => 'required|string']);
+
+        // Cập nhật nội dung của bình luận
+        $comment->update(['body' => $request->body]);
+
+        return response()->json(['success' => 'Bình luận đã được cập nhật thành công.'], 200);
+    }
+
+    public function destroy(Comment $comment)
+    {
+        // Kiểm tra xem người dùng có quyền xóa bình luận hay không
+        if (Auth::id() !== $comment->user_id) {
+            return redirect()->back()->with('error', 'Bạn không có quyền xóa bình luận này.');
+        }
+
+        // Xóa bình luận
+        $comment->delete();
+
+        // Chuyển hướng người dùng về trang trước đó với thông báo thành công
+        return redirect()->back()->with('success', 'Bình luận đã được xóa thành công.');
     }
 }
