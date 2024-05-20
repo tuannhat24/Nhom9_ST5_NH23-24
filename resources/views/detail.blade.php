@@ -183,8 +183,6 @@
 
                                     @auth
                                     @if(Auth::id() === $comment->user_id)
-                                    <!-- Nút chỉnh sửa -->
-                                    <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 15px;" onclick="editComment('{{ $comment->id }}', '{{ $comment->body }}')">Chỉnh sửa</button>
                                     <!-- Nút xóa -->
                                     <form id="deleteForm-{{ $comment->id }}" action="{{ route('comments.delete', $comment) }}" method="POST" style="display: inline;">
                                         @csrf

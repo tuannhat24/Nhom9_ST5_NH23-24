@@ -56,14 +56,17 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.product.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon"> <i class="fa-brands fa-product-hunt"></i></span><span
-                            class="mtext">Product</span>
+                        <span class="micon"> <i class="fa-brands fa-product-hunt"></i></span><span class="mtext">Product</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.slider.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon"> <i class="fa-solid fa-sliders"></i></span><span
-                            class="mtext">Sidler</span>
+                        <span class="micon"> <i class="fa-solid fa-sliders"></i></span><span class="mtext">Slider</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.vouchers.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon"> <i class="fa-solid fa-ticket"></i></span><span class="mtext">Voucher</span>
                     </a>
                 </li>
             </ul>
