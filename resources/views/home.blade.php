@@ -14,7 +14,7 @@
                         <div class="full-home-banners__main-inner">
                             @foreach($sliders as $key => $slider)
                             <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
-                                <img src="@php $img = asset('assets/img/' . $slider->img_name); echo $img @endphp" alt="">
+                                <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
                             </a>
                             @endforeach
                         </div>
@@ -118,10 +118,7 @@
                         <!-- Nút Trước -->
                         @if ($currentPage > 1)
                         <a href="{{ route('user.home', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">
-                            < </a>
-                                @endif
-
-                                <!-- Hiển thị số trang -->
+                            < @endif <!-- Hiển thị số trang -->
                                 @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('user.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}
                         </a>
                         @endfor
@@ -226,15 +223,14 @@
                         <!-- Nút Trước -->
                         @if ($currentPage > 1)
                         <a href="{{ route('guest.home', ['page' => $currentPage - 1, 'sort' => request()->input('sort')]) }}">
+                            < @endif <!-- Hiển thị số trang -->
+                                @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('guest.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}
                         </a>
-                        @endif
+                        @endfor
 
-                        <!-- Hiển thị số trang -->
-                        @for ($i = 1; $i <= $totalPages; $i++) <a href="{{ route('guest.home', ['page' => $i, 'sort' => request()->input('sort')]) }}" class="{{ $i == $currentPage ? 'active' : '' }}">{{ $i }}</a>
-                            @endfor
-                            <!-- Nút Sau -->
-                            @if ($currentPage < $totalPages) <a href="{{ route('guest.home', ['page' => $currentPage + 1, 'sort' => request()->input('sort')]) }}"></a>
-                                @endif
+                        <!-- Nút Sau -->
+                        @if ($currentPage < $totalPages) <a href="{{ route('guest.home', ['page' => $currentPage + 1, 'sort' => request()->input('sort')]) }}"> > </a>
+                            @endif
                     </div>
                 </div>
             </div>

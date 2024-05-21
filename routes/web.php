@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
             Route::post('/password/{id}', [PasswordController::class, 'changePassword'])->name('user.password');
+            Route::get('/password/{id}', [PasswordController::class, 'index'])->name('user.password');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
             Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
@@ -84,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profile', [ManageController::class, 'user'])->name('admin.profile');
             Route::post('/profile/update-information', [ManageController::class, 'updateInformation'])->name('admin.profile/updateInformation');
             Route::get('/statistics', [ManageController::class, 'statistics'])->name('admin.statistics');
-            
+
             Route::prefix('/category')->group(function () {
                 Route::get('/listcategory', [CategoryController::class, 'index'])->name('admin.category.index');
                 Route::get('/create', [CategoryController::class, 'create'])->name('admin.category.create');
@@ -116,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/edit/{voucher}', [VoucheradminController::class, 'edit'])->name('admin.vouchers.edit');
                 Route::put('/update/{voucher}', [VoucheradminController::class, 'update'])->name('admin.vouchers.update');
                 Route::delete('/delete/{voucher}', [VoucheradminController::class, 'destroy'])->name('admin.vouchers.delete');
-            });            
+            });
         });
     });
 

@@ -5,21 +5,6 @@
 <!-- App container -->
 <div class="app__container">
     <div class="grid">
-        @if(Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-            <button class="close" onclick="closeAlert()">&times;</button>
-        </div>
-        @endif
-
-        @if(Session::has('error'))
-        <div class="alert alert-danger">
-            <ul>
-                <li>{{ Session::get('error') }}</li>
-            </ul>
-            <button class="close" onclick="closeAlert()">&times;</button>
-        </div>
-        @endif
         <div class="grid__row app__content">
             <div class="grid__column-2">
                 <nav class="manager">
@@ -41,6 +26,21 @@
                 </nav>
             </div>
             <div class="grid__column-10">
+                @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                    <button class="close" onclick="closeAlert()">&times;</button>
+                </div>
+                @endif
+
+                @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ Session::get('error') }}</li>
+                    </ul>
+                    <button class="close" onclick="closeAlert()">&times;</button>
+                </div>
+                @endif
                 <!-- content -->
                 <div class="container order-summary-container">
                     <h1>Tóm Tắt Đơn Hàng</h1>
