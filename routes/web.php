@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\CheckOutController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Admin\Author\CategoryController;
-use App\Http\Controllers\Admin\Author\ProductControllers;
+use App\Http\Controllers\Admin\Author\ProductAdminController;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SliderController;
 use App\Http\Controllers\Admin\Author\VoucheradminController;
@@ -94,13 +94,13 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
                 Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
             });
-            Route::prefix('product')->group(function () {
-                Route::get('/listproduct', [ProductControllers::class, 'index'])->name('admin.product.index');
-                Route::get('/create', [ProductControllers::class, 'create'])->name('admin.product.create');
-                Route::post('/store', [ProductControllers::class, 'store'])->name('admin.product.store');
-                Route::get('/edit/{id}', [ProductControllers::class, 'edit'])->name('admin.product.edit');
-                Route::post('/update/{id}', [ProductControllers::class, 'update'])->name('admin.product.update');
-                Route::get('/delete/{id}', [ProductControllers::class, 'delete'])->name('admin.product.delete');
+            Route::prefix('/product')->group(function () {
+                Route::get('/listproduct', [ProductAdminController::class, 'index'])->name('admin.product.index');
+                Route::get('/create', [ProductAdminController::class, 'create'])->name('admin.product.create');
+                Route::post('/store', [ProductAdminController::class, 'store'])->name('admin.product.store');
+                Route::get('/edit/{id}', [ProductAdminController::class, 'edit'])->name('admin.product.edit');
+                Route::post('/update/{id}', [ProductAdminController::class, 'update'])->name('admin.product.update');
+                Route::get('/delete/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
             });
             Route::prefix('/slider')->group(function () {
                 Route::get('/index', [SliderController::class, 'index'])->name('admin.slider.index');

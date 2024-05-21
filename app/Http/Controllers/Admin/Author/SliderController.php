@@ -90,7 +90,7 @@ class SliderController extends Controller
             if ($request->hasFile('img')) {
                 $file = $request->file('img');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $filePath = 'assets/img/' . $filename;
+                $filePath = 'assets/img/';
                 $file->move(public_path('assets/img'), $filename);
                 // Delete old image
                 if ($slider->img_name) {

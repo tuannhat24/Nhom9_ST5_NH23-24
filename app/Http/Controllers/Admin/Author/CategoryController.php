@@ -8,13 +8,12 @@ use App\Models\Category;
 use App\Components\Recusive;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Traits\StorageImageTrait;
 use App\Http\Requests\CategoryAddRequest;
 
 class CategoryController extends Controller
 {
-    use StorageImageTrait;
     private $category;
+
     public function __construct(Category $category)
     {
         $this->category = $category;
@@ -22,22 +21,19 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        // Lấy từ khóa tìm kiếm từ yêu cầu
         $keyword = $request->input('keyword', '');
 
-        // Nếu có từ khóa, tìm kiếm theo tên danh mục hoặc mô tả
         if (!empty($keyword)) {
             $categories = $this->category->where('name', 'LIKE', '%' . $keyword . '%')
                 ->orWhere('description', 'LIKE', '%' . $keyword . '%')
-                ->latest()->paginate(10); // Thực hiện phân trang
+                ->latest()->paginate(10);
         } else {
-            $categories = $this->category->latest()->paginate(10); // Trường hợp không có từ khóa, trả về tất cả
+            $categories = $this->category->latest()->paginate(10);
         }
         $title = 'DANH SÁCH CÁC DANH MỤC';
-        // Trả về view với dữ liệu danh mục đã tìm kiếm
+
         return view('users/admin/categories/listcategory', compact('categories', 'keyword', 'title'));
     }
-
 
     public function getCategory($parent_id)
     {
@@ -47,10 +43,9 @@ class CategoryController extends Controller
         return $htmlOption;
     }
 
-
     public function create()
     {
-        $htmlOption = $this->getCategory($parentId = " ");
+        $htmlOption = $this->getCategory($parentId = "");
         return view('users/admin/categories/addcategory', [
             'title' => 'THÊM DANH MỤC',
             'option' => $htmlOption
@@ -60,7 +55,6 @@ class CategoryController extends Controller
     public function store(CategoryAddRequest $request)
     {
         try {
-            Log::info('Begin store method');
             DB::beginTransaction();
             
             $dataCategoryCreate = [
@@ -69,19 +63,16 @@ class CategoryController extends Controller
                 'description' => $request->description,
                 'slug' => $request->slug ?? null,
             ];
-            Log::info('Data for creating category prepared', $dataCategoryCreate);
-    
-            $dataUploadImg = $this->storageImageTrait($request, 'img', 'category');
-            Log::info('Image upload result', ['dataUploadImg' => $dataUploadImg]);
-    
-            if (!empty($dataUploadImg)) {
-                $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
+
+            if ($request->hasFile('img')) {
+                $image = $request->file('img');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/assets/img/', $imageName);
+                $dataCategoryCreate['image'] = $imageName;
             }
-            Log::info('Final data for creating category', $dataCategoryCreate);
-    
+
             $category = $this->category->create($dataCategoryCreate);
-            Log::info('Category created', ['category' => $category]);
-    
+
             DB::commit();
             return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được thêm thành công.');
         } catch (\Exception $exception) {
@@ -90,7 +81,6 @@ class CategoryController extends Controller
             return redirect()->route('admin.category.index')->with('error', 'Thêm danh mục không thành công.');
         }
     }
-    
 
     public function edit($id)
     {
@@ -116,35 +106,36 @@ class CategoryController extends Controller
                 'parent_id' => $request->parent_id,
                 'description' => $request->description,
             ];
-            $dataUploadImg = $this->storageImageTrait($request, 'img', 'category');
-            if (!empty($dataUploadImg)) {
-                $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
+
+            if ($request->hasFile('img')) {
+                $image = $request->file('img');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/assets/img/', $imageName);
+                $dataCategoryCreate['image'] = $imageName;
             }
+
             $category->update($dataCategoryCreate);
             DB::commit();
-            return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được update thành công.');
+            return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được cập nhật thành công.');
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' . $exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' . $exception->getLine());
+            return redirect()->route('admin.category.index')->with('error', 'Cập nhật danh mục không thành công.');
         }
     }
-
 
     public function delete($id)
     {
         try {
-
             $category = $this->category->find($id);
-            if (!$category) { // Kiểm tra nếu danh mục không tồn tại
+            if (!$category) {
                 return response()->json([
                     'code' => 404,
-                    'message'
-                    => 'Danh mục không tồn tại',
+                    'message' => 'Danh mục không tồn tại',
                 ], 404);
             }
 
-            // Kiểm tra nếu danh mục có sản phẩm liên quan
-            $productCount = $category->products()->count(); // Giả định có quan hệ 'products'
+            $productCount = $category->products()->count();
             if ($productCount > 0) {
                 return response()->json([
                     'code' => 400,
@@ -152,7 +143,6 @@ class CategoryController extends Controller
                 ], 400);
             }
 
-            // Nếu không có sản phẩm liên quan, tiến hành xóa danh mục
             $category->delete();
 
             return response()->json([
