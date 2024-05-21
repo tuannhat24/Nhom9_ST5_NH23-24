@@ -10,9 +10,9 @@ btn_delete.forEach(function(element){
             title: "Bạn có chắc muốn xóa không?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#ccc",
+            confirmButtonText: "Xóa!"
           }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -22,7 +22,7 @@ btn_delete.forEach(function(element){
                        if (data.code == 200){
                             that.parent().parent().remove();
                             Swal.fire({
-                                title: "Deleted!",
+                                title: "Đã xóa!",
                                 text: "Xóa thành công",
                                 icon: "success"
                               });

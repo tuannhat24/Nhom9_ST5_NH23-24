@@ -4,7 +4,7 @@
 
 <div class="app">
     <!-- sidebar -->
-
+    
     <!-- Banner section -->
     <div class="app__banner">
         <div class="grid wide">
@@ -14,7 +14,7 @@
                         <div class="full-home-banners__main-inner">
                             @foreach($sliders as $key => $slider)
                             <a href="" class="full-home-banners__main-item {{$key == 0 ? 'active' : ''}}">
-                                <img src="@php $img = asset($slider->img_path); echo $img @endphp" alt="">
+                                <img src="{{ asset($slider->img_path . $slider->img_name) }}" alt="{{ $slider->name }}">
                             </a>
                             @endforeach
                         </div>

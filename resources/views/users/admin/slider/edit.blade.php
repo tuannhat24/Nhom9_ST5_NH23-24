@@ -35,10 +35,10 @@
 
             <div class="form-group">
                 <label for="img">Hình ảnh:</label>
-                <input type="file" name="img_path" class="form-control-file">
+                <input type="file" name="img" class="form-control-file">
                 <div class="col-md-12 mt-2">
                     <div class="row">
-                        <img class="product_img" src="{{ $slider->img_path }}" alt="">
+                        <img class="product_img" src="{{ $slider->img_path . $slider->img_name }}" alt="">
                     </div>
                 </div>
             </div>
