@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="category">Danh mục:</label>
                 <select class="form-control @error('category') is-invalid @enderror" name="category" required>
-                    <option value="">Chọn tên danh mục sản phẩm</option>
+                    <option value="" disabled selected>Chọn tên danh mục sản phẩm</option>
                     {!! $option !!}
                 </select>
                 @error('category')
@@ -76,7 +76,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <input type="submit" name="submit" class="btn btn-primary" value="THÊm">
+            <input type="submit" name="submit" class="btn btn-primary" value="THÊM">
         </form>
     </div>
 @endsection

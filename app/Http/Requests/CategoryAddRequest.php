@@ -13,7 +13,7 @@ class CategoryAddRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,24 +21,27 @@ class CategoryAddRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules():array
     {
         return [
-            'name' => 'required|string|max:255|unique',
-            'parent_id' => 'nullable',
-            'description' => 'nullable|string',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
-        ];
-
-        
+            'name' => 'required|string|max:255|unique:categories,name,' . $this->route('id'),
+            'parent_id' => 'required|integer',
+            'description' => 'required|string',
+            'img' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'slug' => 'nullable|string'
+        ];      
     }
     public function messages()
     {
         return [
-            'name.unique' => 'Tên sản phẩm đã tồn tại',
-            'image.image' => 'Tệp tải lên phải là một tệp hình ảnh',
-            'image.mimes' => 'Chỉ chấp nhận tệp hình ảnh định dạng JPEG, PNG hoặc GIF',
-            'image.max' => 'Kích thước tệp quá lớn. Vui lòng chọn một tệp nhỏ hơn 5MB',
+            'name.required' => 'Vui lòng nhập tên danh mục.',
+            'name.unique' => 'Tên danh mục đã tồn tại.',
+            'parent_id.required' => 'Vui lòng chọn danh mục cha.',
+            'parent_id.integer' => 'Danh mục cha không hợp lệ.',
+            'description.required' => 'Vui lòng nhập mô tả.',
+            'img.image' => 'Tệp tải lên phải là một tệp hình ảnh.',
+            'img.mimes' => 'Chỉ chấp nhận tệp hình ảnh định dạng JPEG, PNG, JPG, hoặc GIF.',
+            'img.max' => 'Kích thước tệp quá lớn. Vui lòng chọn một tệp nhỏ hơn 5MB.',
         ];
     }
 }

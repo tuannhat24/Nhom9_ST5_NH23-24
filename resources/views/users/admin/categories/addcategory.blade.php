@@ -41,8 +41,8 @@
             </div>
             <div class="form-group">
                 <label for="namsinh">Hình ảnh:</label>
-                <input type="file" name="img" class="form-control-file @error('image') is-invalid @enderror">
-                @error('image')
+                <input type="file" name="img" class="form-control-file @error('img') is-invalid @enderror">
+                @error('img')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

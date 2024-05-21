@@ -21,21 +21,23 @@ class ProductControllers extends Controller
     use StorageImageTrait;
     private $category;
     private $product;
-    public function __construct(Category $category, Product $product){
+    public function __construct(Category $category, Product $product)
+    {
         $this->category = $category;
         $this->product = $product;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         // Lấy từ khóa tìm kiếm từ yêu cầu
         $keyword = $request->input('keyword', '');
-    
+
         // Nếu có từ khóa, tìm kiếm theo tên danh mục hoặc mô tả
         if (!empty($keyword)) {
             $products = $this->product->where('name', 'LIKE', '%' . $keyword . '%')
-                                  ->orWhere('description', 'LIKE', '%' . $keyword . '%')
-                                //   ->orWhere('price', 'LIKE', '%' . $keyword . '%')
-                                  ->latest()->paginate(5); // Thực hiện phân trang
+                ->orWhere('description', 'LIKE', '%' . $keyword . '%')
+                //   ->orWhere('price', 'LIKE', '%' . $keyword . '%')
+                ->latest()->paginate(5); // Thực hiện phân trang
         } else {
             $products = $this->product->latest()->paginate(5); // Trường hợp không có từ khóa, trả về tất cả
         }
@@ -44,14 +46,16 @@ class ProductControllers extends Controller
         return view('users/admin/products/listproduct', compact('products', 'keyword', 'title'));
     }
 
-    public function getCategory($parent_id){
+    public function getCategory($parent_id)
+    {
         $data = $this->category->all();
         $recusive = new Recusive($data);
         $htmlOption = $recusive->categoryResusive($parent_id);
         return $htmlOption;
     }
 
-    public function create(){
+    public function create()
+    {
         $htmlOption = $this->getCategory($parentId = " ");
         return view('users/admin/products/addproduct', [
             'title' => 'THÊM SẢN PHẨM',
@@ -59,8 +63,9 @@ class ProductControllers extends Controller
         ]);
     }
 
-    public function store(ProductAddRequest $request){
-        try{
+    public function store(ProductAddRequest $request)
+    {
+        try {
             DB::beginTransaction();
             $dataProductCreate = [
                 'name' => $request->name,
@@ -71,23 +76,25 @@ class ProductControllers extends Controller
                 'quantity_sold' => $request->qty,
             ];
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');
-            if(!empty($dataUploadImg)){
+            if (!empty($dataUploadImg)) {
                 $dataProductCreate['image'] = $dataUploadImg['filedName'];
                 $dataProductCreate['image_path'] = $dataUploadImg['filedPath'];
             }
             $product = $this->product->create($dataProductCreate);
             DB::commit();
-            return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được thêm thành công.');;
-        }catch (\Exception $exception){
+            return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được thêm thành công.');
+            ;
+        } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' . $exception->getLine());
             return redirect()->route('admin.product.index')->with('error', 'Thêm sản phẩm không thành công.');
         }
     }
 
-    public function edit($id){
-       $product = $this->product->find($id);
-       $htmlOption = $this->getCategory($product->cate_id);
+    public function edit($id)
+    {
+        $product = $this->product->find($id);
+        $htmlOption = $this->getCategory($product->cate_id);
         return view('users/admin/products/edit', [
             'title' => 'Update Sản Phẩm',
             'product' => $product,
@@ -95,8 +102,9 @@ class ProductControllers extends Controller
         ]);
     }
 
-    public function update($id, ProductAddRequest $request){
-        try{
+    public function update($id, Request $request)
+    {
+        try {
             DB::beginTransaction();
             $dataProductUpdate = [
                 'name' => $request->name,
@@ -106,8 +114,10 @@ class ProductControllers extends Controller
                 'percent_discount' => $request->percent_discount,
                 'quantity_sold' => $request->qty,
             ];
+
+
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'product');
-            if(!empty($dataUploadImg)){
+            if (!empty($dataUploadImg)) {
                 $dataProductUpdate['image'] = $dataUploadImg['filedName'];
                 $dataProductUpdate['image_path'] = $dataUploadImg['filedPath'];
             }
@@ -115,21 +125,22 @@ class ProductControllers extends Controller
             DB::commit();
             return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được update thành công.');
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' .$exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . '   Liene: ' . $exception->getLine());
         }
     }
 
-    public function delete($id){
-        try{
+    public function delete($id)
+    {
+        try {
             $this->product->find($id)->delete();
             return response()->json([
                 'code' => 200,
                 'message' => 'succes'
             ], status: 200);
-        }catch (\Exception $exception){
-            Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '   Line: ' . $exception->getLine());
             return response()->json([
                 'code' => 500,
                 'message' => 'fail'

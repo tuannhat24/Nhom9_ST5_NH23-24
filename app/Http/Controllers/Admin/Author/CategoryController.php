@@ -57,31 +57,40 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CategoryAddRequest $request)
     {
         try {
+            Log::info('Begin store method');
             DB::beginTransaction();
+            
             $dataCategoryCreate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
                 'description' => $request->description,
                 'slug' => $request->slug ?? null,
             ];
+            Log::info('Data for creating category prepared', $dataCategoryCreate);
+    
             $dataUploadImg = $this->storageImageTrait($request, 'img', 'category');
+            Log::info('Image upload result', ['dataUploadImg' => $dataUploadImg]);
+    
             if (!empty($dataUploadImg)) {
                 $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
             }
+            Log::info('Final data for creating category', $dataCategoryCreate);
+    
             $category = $this->category->create($dataCategoryCreate);
+            Log::info('Category created', ['category' => $category]);
+    
             DB::commit();
             return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được thêm thành công.');
-
         } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Line: ' . $exception->getLine());
+            Log::error('Message: ' . $exception->getMessage() . ' Line: ' . $exception->getLine());
             return redirect()->route('admin.category.index')->with('error', 'Thêm danh mục không thành công.');
         }
     }
-
+    
 
     public function edit($id)
     {
@@ -94,20 +103,24 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, CategoryAddRequest $request)
     {
         try {
             DB::beginTransaction();
+            $category = $this->category->find($id);
+            if (!$category) {
+                throw new \Exception("Category not found with id: $id");
+            }
             $dataCategoryCreate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
                 'description' => $request->description,
             ];
-            $dataUploadImg = $this->storageImageTrait($request, 'img', 'categoty');
+            $dataUploadImg = $this->storageImageTrait($request, 'img', 'category');
             if (!empty($dataUploadImg)) {
                 $dataCategoryCreate['image'] = $dataUploadImg['filedName'];
             }
-            $category = $this->category->find($id)->update($dataCategoryCreate);
+            $category->update($dataCategoryCreate);
             DB::commit();
             return redirect()->route('admin.category.index')->with('success', 'Danh mục đã được update thành công.');
         } catch (\Exception $exception) {
@@ -115,6 +128,8 @@ class CategoryController extends Controller
             Log::error('Message: ' . $exception->getMessage() . '   Liene: ' . $exception->getLine());
         }
     }
+
+
     public function delete($id)
     {
         try {
@@ -152,6 +167,5 @@ class CategoryController extends Controller
             ], 500);
         }
     }
-
 
 }

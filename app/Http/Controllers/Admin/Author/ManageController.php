@@ -11,19 +11,19 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\StorageImageTrait;
 
 class ManageController extends Controller
 {
+    use StorageImageTrait;
     public function index()
     {
-        $totalProducts = Product::count();
-        return view('users/admin/home', [
-            't' => $totalProducts
-        ]);
+        return view('users/admin/home');
     }
 
     public function statistics()
     {
+        $user = Auth::user();
         // Tổng số sản phẩm
         $totalProducts = Product::count();
 
@@ -49,7 +49,8 @@ class ManageController extends Controller
             'totalCategories' => $totalCategories,
             'totalQuantitySold' => $totalQuantitySold,
             'mostFavoritedProduct' => $mostFavoritedProduct,
-            'categoryWithMostProducts' => $categoryWithMostProducts
+            'categoryWithMostProducts' => $categoryWithMostProducts,
+            'user' => $user
         ]);
     }
 
@@ -64,35 +65,54 @@ class ManageController extends Controller
     {
         try {
             $user = Auth::user(); // Lấy người dùng hiện tại đã đăng nhập
-
-            // Xác thực dữ liệu đầu vào
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-                'phone' => 'required|numeric',
-                'address' => 'required|string',
-                'password' => 'nullable|string|min:8|confirmed',
-            ]);
-
-            // Cập nhật thông tin người dùng
-            $userData = [
-                'name' => $request->name,
-                'email' => $request->email,
-                // 'phone' => $request->phone,
-                // 'address' => $request->address,
-            ];
-            $user->customer->phone = $request->phone;
-            $user->customer->address = $request->address;
-            if ($request->filled('password')) {
-                $userData['password'] = Hash::make($request->password);
+    
+            // Kiểm tra xem yêu cầu đến từ form nào
+            if ($request->hasFile('img')) {
+                // Xử lý upload hình ảnh
+                $request->validate([
+                    'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+    
+                $dataUploadImg = $this->storageImageTrait($request, 'img', 'user');
+                if (!empty($dataUploadImg)) {
+                    $user->customer->image = $dataUploadImg['filedName'];
+                    $user->customer->save();
+                }
+    
+                return redirect()->route('admin.profile')->with('success', 'Hình ảnh đã được cập nhật thành công.');
+            } else {
+                // Xác thực dữ liệu đầu vào cho các thông tin khác
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+                    'phone' => 'required|numeric',
+                    'address' => 'required|string',
+                    'password' => 'nullable|string|confirmed',
+                ]);
+    
+                // Cập nhật thông tin người dùng
+                $userData = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ];
+                $user->customer->phone = $request->phone;
+                $user->customer->address = $request->address;
+    
+                // Xử lý mật khẩu
+                if ($request->filled('password')) {
+                    $userData['password'] = Hash::make($request->password);
+                }
+    
+                $user->update($userData);
+                $user->customer->save();
+    
+                return redirect()->route('admin.profile')->with('success', 'Thông tin người dùng đã được cập nhật thành công.');
             }
-            $user->update($userData);
-            $user->customer->save();
-            return redirect()->route('admin.profile')->with('success', 'Thông tin người dùng đã được cập nhật thành công.');
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '   Line: ' .$exception->getLine());
-            return redirect()->route('admin.profile')->with('error', 'update không thành công.');
+            Log::error('Message: ' . $exception->getMessage() . ' Line: ' . $exception->getLine());
+            return redirect()->route('admin.profile')->with('error', 'Cập nhật không thành công.');
         }
     }
+    
 }

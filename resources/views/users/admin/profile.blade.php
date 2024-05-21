@@ -28,12 +28,14 @@
                 <div class="profile-photo">
                     <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i
                             class="fa fa-pencil"></i></a>
-                    <img src="{{ asset('assets/img/User.png') }}" alt="" class="avatar-photo img-fluid">
+                    <img src="{{ asset('assets/img' . '/' . $user->customer->image) }}" alt=""
+                        class="avatar-photo img-fluid">
                     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <form action="">
+                                <form action="{{ route('admin.profile/updateInformation') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="modal-body pd-5">
                                         <div class="img-container">
                                             <label for="img">Hình ảnh :</label>
@@ -106,6 +108,12 @@
                             <div class='alert alert-success alert-dismissible'>
                                 <button type='button' class='close' data-dismiss='alert'>&times;</button>
                                 {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class='alert alert-error alert-dismissible'>
+                                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                                {{ session('error') }}
                             </div>
                         @endif
                         <div class="tab-content">

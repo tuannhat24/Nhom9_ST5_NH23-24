@@ -34,8 +34,11 @@
              </div>
              <div class="form-group">
                  <label for="img">Hình Ảnh</label>
-                 <input type="file" class="form-control-img" name="img_path" placeholder="Chọn hình ảnh"
+                 <input type="file" class="form-control-img @error('img') is-invalid @enderror"" name="img" placeholder="Chọn hình ảnh"
                      required=""></input>
+                 @error('img')
+                     <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
              </div>
              <input type="submit" name="submit" class="btn btn-primary" value="Thêm">
          </form>

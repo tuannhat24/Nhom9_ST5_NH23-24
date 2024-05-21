@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/', [ManageController::class, 'index'])->name('admin.home');
             Route::get('/profile', [ManageController::class, 'user'])->name('admin.profile');
-            Route::post('/profile/update-information', [ManageController::class, 'updateÌnformation'])->name('admin.profile/updateInformation');
+            Route::post('/profile/update-information', [ManageController::class, 'updateInformation'])->name('admin.profile/updateInformation');
             Route::get('/statistics', [ManageController::class, 'statistics'])->name('admin.statistics');
             
             Route::prefix('/category')->group(function () {

@@ -1,7 +1,6 @@
 @extends('users.admin.layout.admin')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admins/category/index/list.css') }}">
-    
 @endsection
 
 @section('js')
@@ -15,7 +14,8 @@
             <form action="{{ route('admin.category.index') }}" method="GET">
                 <div class="form-group mb-0">
                     <i class="dw dw-search2 search-icon"></i>
-                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}" placeholder="Tìm kiếm"/>
+                    <input type="text" class="form-control search-input" name="keyword" value="{{ $keyword ?? '' }}"
+                        placeholder="Tìm kiếm" />
                 </div>
             </form>
         </div>
@@ -28,12 +28,21 @@
                 <h4 class="text-blue h4">{{ $title }}</h4>
             </div>
 
+            
             @if (session('success'))
                 <div class='alert alert-success alert-dismissible'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                     {{ session('success') }}
                 </div>
             @endif
+
+            @if (session('error'))
+                <div class='alert alert-error alert-dismissible'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    {{ session('error') }}
+                </div>
+            @endif
+
 
             <div class="pull-right mt-5">
                 <a href="{{ route('admin.category.create') }}" class="add_category"><i class="fa-solid fa-square-plus"></i>
@@ -51,7 +60,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            @if($categories->isEmpty())
+            @if ($categories->isEmpty())
                 <tr>
                     <td colspan="4">Không có danh mục nào khớp với từ khóa "{{ $keyword ?? '' }}".</td>
                 </tr>
@@ -63,8 +72,10 @@
                         <td>{!! $category->description !!}</td>
                         <td><img class="product_img" src="{{ asset('assets/img/' . $category->image) }}"></td>
                         <td>
-                            <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn-edit"><i class="fas fa-edit"></i></a>
-                            <a href="" data-url="{{ route('admin.category.delete', ['id' => $category->id]) }}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn-edit"><i
+                                    class="fas fa-edit"></i></a>
+                            <a href="" data-url="{{ route('admin.category.delete', ['id' => $category->id]) }}"
+                                class="btn-delete"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 @endforeach

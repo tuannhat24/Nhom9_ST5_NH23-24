@@ -8,6 +8,7 @@ use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\SliderAddRequest;
 
 class SliderController extends Controller
 {
@@ -44,14 +45,14 @@ class SliderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(SliderAddRequest $request)
     {
         try {
             $dataInsert = [
                 'name' => $request->name,
                 'description' => $request->description
             ];
-            $dataImgSlider = $this->storageImageTrait($request, 'img_path', 'slider');
+            $dataImgSlider = $this->storageImageTrait($request, 'img', 'slider');
             if (!empty($dataImgSlider)) {
                 $dataInsert['img_name'] = $dataImgSlider['filedName'];
                 $dataInsert['img_path'] = $dataImgSlider['filedPath'];
@@ -73,7 +74,7 @@ class SliderController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, SliderAddRequest $request)
     {
         try {
             DB::beginTransaction();
