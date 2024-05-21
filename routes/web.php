@@ -11,14 +11,15 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CheckOutController;
 use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Admin\Author\CategoryController;
 use App\Http\Controllers\Admin\Author\ProductControllers;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SliderController;
+use App\Http\Controllers\Admin\Author\VoucheradminController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
-use App\Http\Controllers\Admin\VoucherController;
 
 
 Route::get('/signin', [SignInController::class, 'index'])->name('users.signin');
@@ -67,13 +68,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('user.profile');
             Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('user.profile');
             Route::get('/voucher', [VoucherController::class, 'index'])->name('user.voucher');
-            Route::get('/password/{id}', [PasswordController::class, 'index'])->name('user.password');
             Route::post('/password/{id}', [PasswordController::class, 'changePassword'])->name('user.password');
             Route::get('/detail/{id}', [DetailController::class, 'detail'])->name('user.detail');
             Route::post('/detail/toggleFavorite/{id}', [DetailController::class, 'toggleFavorite'])->name('user.toggleFavorite');
             Route::post('/products/{product}/comments', [CommentController::class, 'poComment'])->name('products.comments');
             Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
             Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.delete');
+            Route::get('/vouchers', [ProfileController::class, 'showVouchers'])->name('user.vouchers');
         });
     });
 
@@ -108,6 +109,14 @@ Route::middleware(['auth'])->group(function () {
                 Route::post('/update/{id}', [SliderController::class, 'update'])->name('admin.slider.update');
                 Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('admin.slider.delete');
             });
+            Route::prefix('/voucher')->group(function () {
+                Route::get('/listvoucher', [VoucheradminController::class, 'index'])->name('admin.vouchers.index');
+                Route::get('/create', [VoucheradminController::class, 'create'])->name('admin.vouchers.create');
+                Route::post('/store', [VoucheradminController::class, 'store'])->name('admin.vouchers.store');
+                Route::get('/edit/{voucher}', [VoucheradminController::class, 'edit'])->name('admin.vouchers.edit');
+                Route::put('/update/{voucher}', [VoucheradminController::class, 'update'])->name('admin.vouchers.update');
+                Route::delete('/delete/{voucher}', [VoucheradminController::class, 'destroy'])->name('admin.vouchers.delete');
+            });            
         });
     });
 

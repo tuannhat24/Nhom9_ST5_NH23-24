@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -80,5 +81,10 @@ class ProfileController extends Controller
         } else {
             return redirect()->route('user.profile', ['id' => $currentUser->id])->with('error', 'Không có thay đổi nào được thực hiện');
         }
+    }
+    public function showVouchers()
+    {
+        $vouchers = Voucher::all();
+        return view('vouchers', compact('vouchers'));
     }
 }
