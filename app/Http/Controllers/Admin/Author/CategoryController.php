@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            
+
             $dataCategoryCreate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
@@ -67,7 +67,7 @@ class CategoryController extends Controller
             if ($request->hasFile('img')) {
                 $image = $request->file('img');
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/assets/img/', $imageName);
+                $image->move(public_path('assets/img'), $imageName);
                 $dataCategoryCreate['image'] = $imageName;
             }
 
@@ -110,7 +110,7 @@ class CategoryController extends Controller
             if ($request->hasFile('img')) {
                 $image = $request->file('img');
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/assets/img/', $imageName);
+                $image->move(public_path('assets/img'), $imageName);
                 $dataCategoryCreate['image'] = $imageName;
             }
 

@@ -116,7 +116,7 @@ class ProductAdminController extends Controller
             if ($request->hasFile('img')) {
                 $image = $request->file('img');
                 $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/assets/img/', $imageName);
+                $image->move(public_path('assets/img'), $imageName);
                 $dataProductUpdate['image'] = $imageName;
             }
 
