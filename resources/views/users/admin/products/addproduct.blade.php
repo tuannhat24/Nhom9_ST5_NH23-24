@@ -83,7 +83,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div> --}}
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="">Màu sắc</label><br>
                 @foreach($colors as $data)
                 <div class="form-check form-check-inline">
@@ -104,7 +104,7 @@
                     </label>
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="namsinh">Hình ảnh sản phẩm:</label>
                 <input type="file" name="img" class="form-control-file" required>

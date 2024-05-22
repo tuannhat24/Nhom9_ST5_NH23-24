@@ -74,8 +74,8 @@
                                 <td>{{ optional($productItem->categories)->name }}</td>
                                 <td>{{ $productItem->description }}</td>
                                 <td>{{ number_format($productItem->percent_discount) }}%</td>
-                                <td>{{ is_array($productItem->size) ? implode(', ', $productItem->size) : (is_numeric($productItem->size) ? number_format($productItem->size) : 'N/A') }}</td>
-                                <td>{{ is_array($productItem->color) ? implode(', ', $productItem->color) : (is_numeric($productItem->color) ? number_format($productItem->color) : 'N/A') }}</td>
+                                {{-- <td>{{ is_array($productItem->size) ? implode(', ', $productItem->size) : (is_numeric($productItem->size) ? number_format($productItem->size) : 'N/A') }}</td>
+                                <td>{{ is_array($productItem->color) ? implode(', ', $productItem->color) : (is_numeric($productItem->color) ? number_format($productItem->color) : 'N/A') }}</td> --}}
                                 <td>{{ $productItem->quantity_sold }}</td>
                                 <td><img class="img-fluid" src="{{ asset('assets/img/' . $productItem->image) }}"></td>                               
                                 <td>
