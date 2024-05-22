@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\Author\ProductAdminController;
 use App\Http\Controllers\Admin\Author\ManageController;
 use App\Http\Controllers\Admin\Author\SliderController;
 use App\Http\Controllers\Admin\Author\VoucheradminController;
+use App\Http\Controllers\Admin\Author\UserAdminController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\Users\ForgotPasswordController;
@@ -85,6 +86,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profile', [ManageController::class, 'user'])->name('admin.profile');
             Route::post('/profile/update-information', [ManageController::class, 'updateInformation'])->name('admin.profile/updateInformation');
             Route::get('/statistics', [ManageController::class, 'statistics'])->name('admin.statistics');
+            Route::get('/users', [UserAdminController::class, 'index'])->name('admin.users.index');
+            Route::patch('/admin/customers/{id}/lock', [UserAdminController::class, 'lock'])->name('admin.customers.lock');
+            Route::patch('/admin/customers/{id}/unlock', [UserAdminController::class, 'unlock'])->name('admin.customers.unlock');
+            
+            
+
 
             Route::prefix('/category')->group(function () {
                 Route::get('/listcategory', [CategoryController::class, 'index'])->name('admin.category.index');

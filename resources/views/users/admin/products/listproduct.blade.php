@@ -49,11 +49,13 @@
                         <th scope="col">ID</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col">Giá</th>
-                        <th scope="col">HÌnh ảnh</th>
-                        <th scope="col">Thuộc Danh mục</th>
+                        <th scope="col">Thuộc Danh Mục</th>
                         <th scope="col">Mô tả sản phẩm</th>
                         <th scope="col">Phần trăm chiết khấu</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Color</th>
                         <th scope="col">Số lượng</th>
+                        <th scope="col">HÌnh ảnh</th>
                         <th scope="col">Active</th>
 
                     </tr>
@@ -69,11 +71,13 @@
                                 <th scope="row">{{ $productItem->id }}</th>
                                 <td>{{ $productItem->name }}</td>
                                 <td>{{ number_format($productItem->price) }}</td>
-                                <td><img class="img-fluid" src="{{ asset('assets/img/' . $productItem->image) }}"></td>
                                 <td>{{ optional($productItem->categories)->name }}</td>
                                 <td>{{ $productItem->description }}</td>
                                 <td>{{ number_format($productItem->percent_discount) }}%</td>
+                                <td>{{ is_array($productItem->size) ? implode(', ', $productItem->size) : (is_numeric($productItem->size) ? number_format($productItem->size) : 'N/A') }}</td>
+                                <td>{{ is_array($productItem->color) ? implode(', ', $productItem->color) : (is_numeric($productItem->color) ? number_format($productItem->color) : 'N/A') }}</td>
                                 <td>{{ $productItem->quantity_sold }}</td>
+                                <td><img class="img-fluid" src="{{ asset('assets/img/' . $productItem->image) }}"></td>                               
                                 <td>
                                     <a href="{{ route('admin.product.edit', ['id' => $productItem->id]) }}"
                                         class="btn-edit"><i class="fas fa-edit"></i></a>

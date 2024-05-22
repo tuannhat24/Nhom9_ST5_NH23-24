@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\AttributesProduct;
 use App\Components\Recusive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +16,13 @@ class ProductAdminController extends Controller
 {
     private $category;
     private $product;
+    private $attri;
 
-    public function __construct(Category $category, Product $product)
+    public function __construct(Category $category, Product $product, AttributesProduct $attri)
     {
         $this->category = $category;
         $this->product = $product;
+        $this->attri = $attri;
     }
 
     public function index(Request $request)
@@ -50,9 +53,13 @@ class ProductAdminController extends Controller
     public function create()
     {
         $htmlOption = $this->getCategory($parentId = "");
+        $color = $this->attri::where('name', 'color')->get();
+        $size = $this->attri::where('name', 'size')->get();
         return view('users/admin/products/addproduct', [
             'title' => 'THÊM SẢN PHẨM',
-            'option' => $htmlOption
+            'option' => $htmlOption,
+            'colors' => $color,
+            'sizes' => $size
         ]);
     }
 

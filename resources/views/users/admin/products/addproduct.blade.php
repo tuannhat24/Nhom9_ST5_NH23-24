@@ -59,15 +59,51 @@
             </div>
             <div class="form-group">
                 <label for="sdt">Phần trăm chiết khấu</label>
-                <input type="text" class="form-control @error('percent_discount') is-invalid @enderror" name="percent_discount"
-                    placeholder="Nhập phần trăm chiết khấu" value="{{ old('percent_discount') }}" required>
+                <input type="text" class="form-control @error('percent_discount') is-invalid @enderror"
+                    name="percent_discount" placeholder="Nhập phần trăm chiết khấu" value="{{ old('percent_discount') }}"
+                    required>
                 @error('percent_discount')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="soluong">Số lượng</label>
-                <input type="number" class="form-control" name="qty" value="{{ old('qty') }}" required>
+                <label for="sdt">Phần trăm chiết khấu</label>
+                <input type="text" class="form-control @error('percent_discount') is-invalid @enderror"
+                    name="percent_discount" placeholder="Nhập phần trăm chiết khấu" value="{{ old('percent_discount') }}"
+                    required>
+                @error('percent_discount')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            {{-- <div class="form-group">
+                <label for="sdt">Size</label>
+                <input type="text" class="form-control @error('percent_discount') is-invalid @enderror" name="percent_discount"
+                    placeholder="Nhập phần trăm chiết khấu" value="{{ old('percent_discount') }}" required>
+                @error('percent_discount')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div> --}}
+            <div class="form-group">
+                <label for="">Màu sắc</label><br>
+                @foreach($colors as $data)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{$data->id}}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{$data->value}}
+                    </label>
+                </div>
+                @endforeach
+            </div>
+            <div class="form-group">
+                <label for="">Kích thước</label><br>
+                @foreach($sizes as $data)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{$data->id}}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{$data->value}}
+                    </label>
+                </div>
+                @endforeach
             </div>
             <div class="form-group">
                 <label for="namsinh">Hình ảnh sản phẩm:</label>

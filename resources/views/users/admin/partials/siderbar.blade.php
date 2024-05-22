@@ -71,6 +71,11 @@
                         <span class="micon"> <i class="fa-solid fa-ticket"></i></span><span class="mtext">Voucher</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.users.index') }}" class="dropdown-toggle no-arrow">
+                        <span class="micon"> <i class="fa-regular fa-circle-user"></i></span><span class="mtext">User</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

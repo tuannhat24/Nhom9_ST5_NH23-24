@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'customer_id',
+        'is_locked',
     ];
 
     public function customer()
