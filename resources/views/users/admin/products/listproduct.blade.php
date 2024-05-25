@@ -52,8 +52,6 @@
                         <th scope="col">Thuộc Danh Mục</th>
                         <th scope="col">Mô tả sản phẩm</th>
                         <th scope="col">Phần trăm chiết khấu</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Color</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">HÌnh ảnh</th>
                         <th scope="col">Active</th>

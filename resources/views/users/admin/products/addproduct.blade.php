@@ -67,13 +67,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="sdt">Phần trăm chiết khấu</label>
-                <input type="text" class="form-control @error('percent_discount') is-invalid @enderror"
-                    name="percent_discount" placeholder="Nhập phần trăm chiết khấu" value="{{ old('percent_discount') }}"
-                    required>
-                @error('percent_discount')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                <label for="soluong">Số lượng</label>
+                <input type="number" class="form-control" name="qty" value="{{ old('quantity_sold')}}" required>
             </div>
             {{-- <div class="form-group">
                 <label for="sdt">Size</label>
